@@ -1,0 +1,485 @@
+# GAS.md — Guideline + kế hoạch dự án "Đầu tư cùng Vũ"
+
+> **File DUY NHẤT cần đọc để tiếp tục dự án ở phiên làm việc mới.** Chứa: bối cảnh, mọi quyết
+> định đã chốt (kèm lý do), hiện trạng code, kế hoạch + tiến độ, quy ước làm việc.
+> Theo playbook skill `free-cms-static-site-pipeline` (dự án mẫu xevip).
+>
+> Quy tắc với file này:
+> - Đọc TOÀN BỘ trước khi viết/sửa code (cả `gas/`, `worker/`, `scripts/`, `html/`).
+> - Mục **❓ CẦN CHỐT** = chưa có quyết định của chủ dự án → KHÔNG tự code theo phỏng đoán,
+>   hỏi trước; chốt xong thì xoá dấu ❓ và ghi vào mục XIII (nhật ký quyết định).
+> - Mâu thuẫn giữa 2 chỗ trong file → dừng lại hỏi, không tự chọn.
+> - Code đổi 1 quyết định / tên field / tên biến → cập nhật file này trong CÙNG lượt sửa.
+> - Xong 1 việc trong mục XII → tick `[x]` + ghi ngày.
+>
+> Cập nhật lần cuối: 20/10/2026.
+
+---
+
+## ★ ĐỌC ĐẦU TIÊN — cách tiếp tục ở phiên mới
+
+1. Đọc hết file này (đặc biệt mục 0, XII, XIII, XIV).
+2. Load skill `free-cms-static-site-pipeline` (thư mục
+   `~/.claude/skills/free-cms-static-site-pipeline/`). Khi viết file GAS nào, đọc ĐÚNG file
+   mẫu tương ứng ở `references/samples/xevip-gas/` (`Code.js`, `index.html`, `app.html`,
+   `css.html`, `js.html`, `appsscript.json`) và `references/samples/xevip-html-admin/
+   admin-index.html`, copy gần nguyên văn, chỉ đổi phần riêng của dự án. KHÔNG tự đổi cấu
+   trúc/logic mẫu khi chưa có bằng chứng test thật là mẫu sai.
+3. Phần Worker / Email / R2 / D1: load skill `cloudflare`, `wrangler`,
+   `cloudflare-email-service`, `workers-best-practices` và tra docs Cloudflare (đừng dựa trí nhớ).
+4. Xem mục XII → làm tiếp việc `[ ]` đầu tiên của giai đoạn đang dở. Mục A trong XII là việc
+   chủ dự án phải làm — nếu bước tiếp theo bị chặn bởi mục đó thì hỏi chủ dự án.
+5. `git status` + `git log --oneline -10` để biết thay đổi gần nhất.
+
+**Chủ dự án**: huytq1 (giao tiếp tiếng Việt, xưng "tôi/bạn"). Website của khách tên **Vũ**
+(Ngô Trường Vũ). Công nghệ **GAS CMS** là do chủ dự án tự sáng tạo — KHÔNG đề xuất thay bằng
+Astro/Next/WordPress.
+
+---
+
+## 0. Phạm vi & kiến trúc
+
+Website bán khóa học video + tin tức chứng khoán + gói hội viên, domain **https://dautucungvu.com**.
+
+```
+            ┌──────────────── ADMIN (root/admin/editor) ────────────────┐
+            │ https://dautucungvu.com/admin/ (iframe) → web app GAS CMS  │
+            └─────┬──────────────────────────────┬──────────────────────┘
+ nội dung công khai│ (GitHub Contents API)         │ dữ liệu riêng tư + lệnh quản trị
+                  ▼                               ▼ (UrlFetchApp + WORKER_ADMIN_KEY)
+   GitHub PUBLIC: data/*.json             Cloudflare Worker /api/*  ── D1 (người dùng, session,
+        │ Actions: scripts/build.py              ▲                       đơn, quyền, thân bài trả
+        ▼ wrangler deploy                        │                       phí, khóa video)
+   html/ (trang tĩnh /slug/) ── cùng 1 Worker ───┘ JS gọi API          ── R2 private (video MP4)
+                                                                       ── Email Service (email)
+```
+
+| Mảnh | Vai trò | Ai dùng |
+|---|---|---|
+| **GAS CMS** (`gas/`, nhúng iframe tại `/admin/`) | Soạn bài viết, khóa học, cài đặt; duyệt đơn; quản lý người dùng site; xin link upload video | root / admin / editor |
+| **GitHub repo PUBLIC** + Actions | `data/*.json` (CHỈ nội dung công khai) → `scripts/build.py` → `html/` → deploy | GAS ghi, CI đọc |
+| **Cloudflare Worker** (`worker/`) | Phục vụ `html/` (Static Assets) + `/api/*`: tài khoản người dùng site, đơn hàng, quyền xem, nội dung trả phí, phát video, gửi email | Người dùng site, GAS |
+| **D1** | Người dùng site, session, đơn hàng, quyền, thân bài trả phí, khóa video | Chỉ Worker |
+| **R2** (bucket private) | File video bài học | Worker (phát); trình duyệt admin (upload qua presigned URL) |
+| **Cloudflare Email Service** | Email gửi người dùng site + email báo đơn mới cho Vũ | Chỉ Worker |
+
+Ranh giới cứng:
+- **Repo là PUBLIC** → `data/` và `html/` KHÔNG BAO GIỜ chứa: thân bài trả phí, khóa/đường dẫn
+  video, đơn hàng, thông tin người dùng, khóa bí mật. Những thứ đó chỉ ở D1 / R2 / Secrets.
+- **GAS không lưu đơn hàng, không lưu người dùng site** — chỉ gọi API admin của Worker.
+  Google Sheet chỉ giữ danh sách quản trị viên CMS.
+- **Không webhook thanh toán** (không có tài khoản doanh nghiệp) → admin xác nhận đơn tay.
+- **Không Telegram.** Mọi thông báo nội bộ đi qua email.
+- **Không chặn tải video** — người có quyền vẫn tải/quay màn hình được, chấp nhận. Chỉ chặn
+  người KHÔNG có quyền (Worker kiểm tra session). Không DRM, không watermark, không chặn chuột phải.
+
+### 0.1 Quy tắc URL (bắt buộc cho MỌI trang, kể cả trang mới)
+- Luôn `/slug/` = file `slug/index.html`. Link trong site LUÔN có dấu `/` cuối.
+- KHÔNG `.html` trong URL, KHÔNG `/slug` (thiếu `/`), KHÔNG `?params`, KHÔNG dùng redirect để
+  điều hướng. Mọi trạng thái (khóa, bài học, bộ lọc, chủ đề, mã CP, gói thanh toán) là 1 trang
+  tĩnh riêng; JS đọc trạng thái từ `<body data-*>`, không đọc `location.search`. Khi người dùng
+  đổi trạng thái trên trang, `history.replaceState` sang URL tĩnh tương ứng (có thật). Từ khóa
+  tìm kiếm không đưa lên URL. Neo `#...` trong trang được phép.
+- Worker giữ `html_handling` MẶC ĐỊNH (`auto-trailing-slash`) — KHÁC skill mục 7 (skill dùng
+  `"none"` cho site URL `.html`; site này dùng thư mục, đặt `"none"` thì `/slug/` không tự phục
+  vụ `index.html`). `not_found_handling = "404-page"` (cần `html/404.html`).
+
+### 0.2 Quy tắc SEO (bắt buộc cho MỌI trang)
+- Mỗi trang: `<title>`, meta description, robots, canonical tuyệt đối
+  `https://dautucungvu.com/.../`, hreflang `vi-VN`, Open Graph + Twitter card (ảnh mặc định
+  `https://dautucungvu.com/assets/img/vu.jpg` 640×640), JSON-LD `@graph` (Organization + WebSite
+  + trang + BreadcrumbList; bài viết thêm `NewsArticle` với `isAccessibleForFree` /`hasPart`
+  cho bài trả phí; khóa học thêm `Course` + `Offer` VND + `CourseInstance`; trang danh sách là
+  `CollectionPage` + `ItemList`).
+- `noindex, follow`: trang bài học (trùng nội dung trang khóa), "Khóa học của tôi", thanh toán,
+  dashboard, mã CP chưa có bài, `/admin/`.
+- `robots.txt` + `sitemap.xml` (chỉ trang index) do build sinh.
+- Nội dung chính (H1, ngày, tóm tắt / thân bài công khai) có sẵn trong HTML để bot đọc không
+  cần JS. Bài trả phí chỉ prerender tóm tắt.
+
+---
+
+## I. Đăng nhập CMS (quản trị viên)
+
+1. Luồng: gửi OTP → xác nhận → vào Admin. Không mật khẩu, không dựa session Google.
+2. Chỉ email có trong sheet `Users` (hoặc chủ script) mới được gửi OTP.
+3. Chủ script (người deploy) LUÔN là `root` ngầm định, không cần dòng trong `Users`, không hiện
+   trong UI. `requestOtp` phải tự cho phép `email === ownerEmail_()` (bẫy tự khoá — skill
+   `gas-backend-patterns.md` mục 2). Email root của Vũ: chủ dự án bổ sung sau (thêm tay vào
+   sheet `Users`, role `root`).
+4. Phân quyền 3 cấp **`root > admin > editor`** (`ROLE_RANK = { editor: 1, admin: 2, root: 3 }`,
+   biến thể "không viewer" của skill):
+
+   | Việc | editor | admin | root |
+   |---|:-:|:-:|:-:|
+   | Bài viết: tạo / sửa / xoá, upload ảnh | ✓ | ✓ | ✓ |
+   | Khóa học, bài học, upload video | | ✓ | ✓ |
+   | Cài đặt site (mục II.D) | | ✓ | ✓ |
+   | Đơn hàng: xác nhận / huỷ / kích hoạt tay | | ✓ | ✓ |
+   | Người dùng site: xem, bật/tắt VIP, gia hạn tay, đặt lại mật khẩu, khoá | | ✓ | ✓ |
+   | Quản trị viên: thêm/sửa/xoá **editor** | | ✓ | ✓ |
+   | Quản trị viên: thêm/sửa/xoá **admin** | | | ✓ |
+
+   - Dòng `root` chỉ sửa tay trong Sheet; CMS không hiển thị, không cho đụng.
+   - Không ai tự sửa/xoá chính mình (chặn ở server: `if (email === me.email) throw`).
+5. OTP 6 số, sống **10 phút**, cooldown **60 giây**, tối đa **5 lần** sai rồi phải xin mã mới.
+   Token phiên **30 ngày**, lưu `localStorage`. Dọn token hết hạn trong `verifyOtp`
+   (`purgeExpiredTokens_`), `logout` xoá token thật (skill mục 1b).
+6. Mọi hàm server gọi `requireRole_(token, need)` — không tin việc ẩn nút.
+7. OTP gửi bằng `MailApp` (quota 100 mail/ngày CHỈ dành cho OTP quản trị — mọi email khác đi
+   qua Worker / Email Service).
+
+---
+
+## II. Nội dung
+
+### II.A Bài viết (tin tức) — editor trở lên
+
+1. Field có ô nhập:
+   - **Tiêu đề** (bắt buộc).
+   - **Slug** — tự sinh từ tiêu đề (bỏ dấu, `đ→d`, chữ thường, chỉ `a-z0-9-`); sửa được trước
+     khi Lưu lần đầu; **bất biến** sau đó. URL: `/bai-viet/<slug>/`.
+   - **Tóm tắt** (bắt buộc, ≤ 300 ký tự) — mô tả SEO, đoạn trong danh sách, đoạn xem trước của
+     bài trả phí.
+   - **Ngày giờ đăng** (`YYYY-MM-DD HH:mm`, giờ VN) — mặc định lúc tạo; sửa được.
+   - **Chủ đề** — chọn nhiều, từ danh sách chủ đề tin (II.D). Server kiểm tra hợp lệ.
+   - **Mã cổ phiếu** — chọn nhiều, từ danh sách mã (II.D). Server kiểm tra hợp lệ.
+   - **Quyền xem**: `public` | `user` | `member` | `vip` (VI.4).
+   - **Ảnh bìa** (bắt buộc).
+   - **Nội dung**: TinyMCE tự host `html/vendor/tinymce/` (KHÔNG CDN — không tải được trong
+     iframe GAS). Định dạng: H2/H3, đậm/nghiêng, link, danh sách, trích dẫn, bảng. **CÓ chèn
+     ảnh trong nội dung** — nút `quickimage` mở thẳng file picker, dùng lại hàm upload ảnh.
+2. Server tự suy ra: `seo_title = title + " | Đầu tư cùng Vũ"`, `cover_alt = title`, `updated_at`.
+3. Nơi lưu:
+   - Quyền `public`: toàn bộ (cả `content_html`) vào `data/news/<slug>.json`.
+   - Quyền khác: `data/news/<slug>.json` CHỈ meta + tóm tắt; **thân bài gửi Worker**
+     (`PUT /api/admin/articles/<slug>`) lưu D1. Đổi trả phí → `public`: chuyển thân bài về repo,
+     xoá ở D1. Ngược lại: xoá thân bài khỏi repo, đẩy sang D1.
+4. Danh sách trong Admin: GAS đọc `data/posts.json` qua GitHub Contents API (luôn mới nhất).
+5. Ảnh: nén client (canvas) cạnh dài tối đa **1600px**, JPEG **0.85**, upload nền. Ảnh **riêng
+   1-1** theo bài: `html/images/news/<slug>/cover.jpg`, `html/images/news/<slug>/NN.jpg`.
+   Ảnh trong bài trả phí vẫn ở repo public (chấp nhận: chỉ là ảnh minh hoạ).
+
+### II.B Khóa học & bài học — admin trở lên
+
+1. Field khóa học:
+   - **Tên khóa** (bắt buộc), **Slug/id** (tự sinh, bất biến) → `/khoa-hoc/<id>/`.
+   - **Mô tả ngắn** (bắt buộc, ≤ 300 ký tự).
+   - **Giá** (VNĐ, số nguyên; `0` = miễn phí).
+   - **Quyền xem khi miễn phí**: `public` | `user` (chỉ khi giá = 0).
+   - **Ảnh bìa** — ❓ CẦN CHỐT: ảnh upload, hay giữ hình minh hoạ SVG như hiện tại
+     (field `art`: `candles` | `bars` | `chart` | `pie` | `towers`)?
+   - **Thứ tự hiển thị**, **Đang bán / Ẩn**.
+2. Bài học (danh sách con trong form khóa, kéo thả sắp thứ tự):
+   - **Tên bài** (bắt buộc), **Slug bài** (tự sinh, bất biến) → `/khoa-hoc/<id>/<slug-bài>/`.
+     Bài đầu tiên hiển thị tại `/khoa-hoc/<id>/`. (THAY cho URL `bai-<n>` hiện tại — số thứ tự
+     đổi khi sắp xếp lại, slug thì không. Đổi ở GĐ3.)
+   - **Thời lượng** (phút), **Học thử** (khóa có phí), **Video** (II.C).
+3. Nơi lưu: `data/courses.json` (repo) chứa field công khai, KHÔNG chứa khóa video. Khóa video ở
+   D1 theo `course_id + lesson_slug`.
+4. Xoá khóa: chặn nếu đã có người mua (Worker trả số đơn `confirmed`) — chỉ cho Ẩn. Xoá bài học:
+   xoá kèm video R2 (hỏi xác nhận).
+
+### II.C Upload & phát video
+
+1. Định dạng: **MP4 (H.264 + AAC), 720p**, ≤ **2GB/file**. Không chuyển mã server. Kiểm tra đuôi +
+   MIME ở client và server.
+2. Upload: GAS gọi `POST /api/admin/videos/upload-url` (`course_id`, `lesson_slug`) → Worker trả
+   **presigned PUT URL R2** (1 giờ) → trình duyệt admin PUT thẳng lên R2, hiện % → gọi
+   `POST /api/admin/videos/commit` để Worker ghi khóa video vào D1. Video KHÔNG qua GAS/GitHub.
+3. Bucket R2 cần CORS cho origin trang GAS (`https://*.googleusercontent.com`, method `PUT`).
+   ⚠️ Rủi ro kỹ thuật — thử ở GĐ1 trước khi làm tiếp.
+4. Phát: `<video src="/api/video/<course_id>/<lesson_slug>">`; Worker kiểm tra quyền (VI.4) rồi
+   stream từ R2, hỗ trợ `Range` (tua). Không quyền → 403.
+5. Lý do chọn R2 (không YouTube / Stream / Drive / Vimeo): xem XIII.
+
+### II.D Cài đặt site — admin trở lên
+
+Lưu chung `data/settings.json`:
+- Liên hệ: số điện thoại, link Zalo, YouTube, Facebook, Telegram (link mạng xã hội).
+- `slogan`, `offerTitle`, `offerText`, `minCapital` ("50 triệu đồng").
+- Gói hội viên: `pricePerMonth` (68.000), `months` ([1, 3, 6, 12]).
+- Tài khoản nhận tiền: `bankId` (mã VietQR), `bankName`, `accountNo`, `accountName`
+  (hiện: `TCB` / Techcombank / `4819939999` / `NGO TRUONG VU`).
+- Video hướng dẫn mở tài khoản / chuyển ID (YouTube công khai, không phải video khóa học).
+- Công ty CK (`brokers`): id, tên, ghi chú, màu, nền, `openUrl`, `refCode`, `transferUrl`,
+  `transferCode`, `openVideo`, `transferVideo`.
+- Chủ đề tin (`newsTags`): id (bất biến), label, keys (từ khóa tìm kiếm không dấu).
+- Mã cổ phiếu (`tickers`): code, name, sector, color.
+- ❓ CẦN CHỐT: chỉ số thị trường (`indices`) + giá/biến động cổ phiếu hiện là dữ liệu minh hoạ.
+  Bỏ hẳn, nhập tay trong CMS, hay API thật (nguồn nào)?
+
+---
+
+## III. Sửa nội dung
+- Slug (bài, khóa, bài học, chủ đề) bất biến sau Lưu đầu — chặn CẢ server LẪN client (skill mục 10).
+- Ảnh khi sửa dùng URL tuyệt đối `raw.githubusercontent.com/<owner>/<repo>/<branch>/<path>`
+  (skill mục 11).
+- Form tái sử dụng Tạo/Sửa: reset mọi trạng thái disabled khi mở form tạo mới.
+- Bài trả phí khi Sửa: GAS lấy thân bài từ Worker (`GET /api/admin/articles/<slug>`).
+
+## IV. Xoá nội dung
+- Bài viết: xoá `data/news/<slug>.json` + ảnh `html/images/news/<slug>/` + thân bài D1 (nếu có) +
+  gỡ khỏi `data/posts.json` (ghi SAU CÙNG). Trang `html/bai-viet/<slug>/` do build tự dọn.
+- Khóa / bài học: II.B.4. Luôn pop-up xác nhận (VII). Không thùng rác.
+
+## V. Form công khai — Liên hệ
+Không áp dụng (site không có form liên hệ; liên hệ qua Zalo / điện thoại).
+
+## VI. Người dùng site, đơn hàng, quyền xem (Worker + D1)
+
+Không chạy trên GAS. GAS chỉ là giao diện quản trị gọi API admin của Worker.
+
+1. **Tài khoản**: email + mật khẩu (≥ 8 ký tự), họ tên, số điện thoại/Zalo.
+   - Mật khẩu: PBKDF2-SHA256 (WebCrypto), salt riêng; không lưu bản gốc.
+   - Session: cookie `HttpOnly; Secure; SameSite=Lax`, 30 ngày, lưu D1; xoá khi đăng xuất / đổi
+     mật khẩu / đặt lại mật khẩu (đăng xuất mọi thiết bị).
+   - **Xác minh email** bắt buộc trước khi tạo đơn (link 24 giờ). Chưa xác minh vẫn đăng nhập,
+     xem nội dung `public` / `user`.
+   - **Quên mật khẩu**: link 30 phút, dùng 1 lần. Form luôn trả lời chung "Nếu email tồn tại,
+     chúng tôi đã gửi link".
+   - Chống dò: sai 5 lần → khoá 15 phút theo email + IP. Gửi lại email xác minh/đặt lại:
+     1 lần/phút, tối đa 5 lần/giờ. Turnstile ở đăng ký, đăng nhập, quên mật khẩu.
+2. **Đơn hàng**: loại `member` (gói N tháng) | `course` (khóa có phí).
+   - Trạng thái: `pending` → `confirmed` | `cancelled` | `expired` (pending quá **3 ngày**).
+   - Mã nội dung chuyển khoản duy nhất: `DTCV HV<n> <5 ký tự>` | `DTCV KH <5 ký tự>`.
+   - QR: VietQR theo đơn, có số tiền + nội dung
+     (`https://img.vietqr.io/image/<bankId>-<accountNo>-compact2.png?amount=&addInfo=&accountName=`,
+     ảnh 540×640, hiển thị 260×308).
+   - Người mua bấm "Tôi đã chuyển khoản" → Worker gửi **email báo đơn mới** tới
+     `ORDER_NOTIFY_EMAIL` (mã nội dung, số tiền, gói/khóa, email + SĐT người mua, link tab Đơn
+     hàng trong CMS).
+3. **Xác nhận đơn (CMS, admin+)**: lọc theo trạng thái / mã nội dung / email; nút **Xác nhận**,
+   **Huỷ** (kèm lý do), **Kích hoạt tay** (không cần đơn). Gói tính hạn **từ lúc xác nhận**; còn
+   hạn thì cộng dồn từ ngày hết hạn hiện tại.
+4. **Quyền xem**:
+   - `public`: tất cả. `user`: đã đăng nhập.
+   - `member`: hội viên còn hạn HOẶC VIP.
+   - `vip`: chỉ tài khoản đã mở / chuyển ID ≥ 50 triệu (admin bật tay).
+   - Khóa có phí: đã mua khóa đó HOẶC VIP. Bài `Học thử`: tất cả.
+   - Hội viên hết hạn tự về thành viên thường (so ngày khi kiểm tra, không cần job).
+5. **Email người dùng** (Email Service, từ `no-reply@dautucungvu.com`, tên "Đầu tư cùng Vũ",
+   reply-to = `MAIL_REPLY_TO`; mỗi email có HTML + text, tiếng Việt; chỉ email giao dịch, không
+   gửi marketing): xác minh email · đặt lại mật khẩu · thông báo đổi mật khẩu/email · đã nhận đơn
+   (kèm link mở lại QR) · đã kích hoạt · nhắc gia hạn trước 7 và 1 ngày (Cron Trigger hằng ngày)
+   · đã hết hạn.
+6. **Người dùng site trong CMS (admin+)**: tìm email/SĐT; xem gói, hạn, khóa đã mua, đơn; bật/tắt
+   VIP; gia hạn tay; gửi link đặt lại / đặt mật khẩu tạm; khoá / mở khoá.
+
+## VII. UX chung trong Admin
+- 2 pop-up riêng: XÁC NHẬN (hỏi trước) và THÔNG BÁO kết quả (1 nút Đóng, không tự ẩn). Không
+  `alert()`/`confirm()` native, không toast.
+- Mọi nút async: disable + spinner, tự phục hồi kể cả khi lỗi.
+- Lưu/Xoá xong: danh sách tự cập nhật ngay (skill mục 16).
+- Chuyển tab chỉ là hiệu ứng giao diện, không tải lại dữ liệu.
+- 1 lượt `boot` lấy đủ dữ liệu; lần sau hiện từ cache rồi làm mới nền; key cache mang hậu tố
+  `CLIENT_BUILD` do server băm từ `app.html` + `js.html` (như xevip `clientBuild_()`).
+- Giấu hạ tầng: không nhắc Apps Script / Sheet / Drive / GitHub / Cloudflare trong chữ hiển thị,
+  thông báo lỗi, comment ở file gửi xuống trình duyệt (skill mục 19). Kiểm trước deploy:
+  `grep -niE 'sheet|spreadsheet|drive|apps script|github|cloudflare' gas/*.html` phải rỗng.
+
+## VIII. Kiến trúc lưu trữ (tên cố định)
+
+**Google Sheet "Dau Tu Cung Vu CMS"** (tự tạo lần đầu): `Users`: `email`, `role`
+(`root` | `admin` | `editor`).
+
+**Repo** (`git@github-personal:tranquanghuy-rightsvn/dautucungvu.git`, PUBLIC, nhánh `master`)
+— cấu trúc ĐÍCH (sau GĐ1):
+
+| Đường dẫn | Nội dung |
+|---|---|
+| `data/posts.json` | Index mọi bài (meta) — **commit chốt** bài viết |
+| `data/news/<slug>.json` | Meta + tóm tắt (+ `content_html` nếu `public`) |
+| `data/courses.json` | Toàn bộ khóa + bài học công khai — **commit chốt** khóa học |
+| `data/settings.json` | Cài đặt site (II.D) — **commit chốt** cài đặt |
+| `html/` | Site tĩnh deploy (chỉ thứ được public) |
+| `html/images/news/<slug>/…`, `html/images/courses/<id>/…` | Ảnh do CMS ghi |
+| `html/vendor/tinymce/` | TinyMCE tự host |
+| `html/admin/index.html` | Trang nhúng iframe CMS (mẫu xevip) |
+| `templates/` | Khung trang (người sửa tay; build đọc) |
+| `scripts/build.py` | Build `data/` → `html/` (kế thừa `html/scripts/seo.py` hiện tại) |
+| `worker/` | Code Worker, `wrangler.toml`, migration D1 |
+| `gas/` | **gitignore**, deploy bằng `clasp` |
+| `GAS.md` | File này |
+
+- CI chỉ trigger khi đổi `data/posts.json`, `data/courses.json`, `data/settings.json` (file index
+  luôn ghi SAU CÙNG — skill `static-site-build.md` mục 5). CI: `python3 scripts/build.py` →
+  commit `html/` ("CI: build html from data") → `wrangler deploy`.
+- Độ trễ Lưu → lên site: ~1–3 phút. Đơn / quyền / video: tức thì (D1).
+
+**D1** (tên bảng cố định; cột chi tiết chốt khi viết migration rồi bổ sung vào đây):
+`users`, `sessions`, `email_tokens`, `orders`, `course_access`, `article_bodies`,
+`lesson_videos`, `rate_limits`. (Hạn hội viên + cờ VIP là cột trong `users`.)
+
+**R2**: bucket `dautucungvu-videos` (private), khóa `courses/<course_id>/<lesson_slug>.mp4`.
+
+**API công khai Worker**: `/api/auth/register|login|logout|verify-email|forgot|reset|change-password`,
+`/api/me`, `/api/orders` (tạo, xem của mình, báo đã chuyển khoản), `/api/content/<slug>`,
+`/api/video/<course_id>/<lesson_slug>`.
+
+**API admin Worker** (GAS gọi qua `UrlFetchApp`, header `Authorization: Bearer
+<WORKER_ADMIN_KEY>` + `X-Admin-Email`):
+`GET/PUT/DELETE /api/admin/articles/<slug>` · `POST /api/admin/videos/upload-url` ·
+`POST /api/admin/videos/commit` · `DELETE /api/admin/videos/<course>/<lesson>` ·
+`GET /api/admin/orders` · `POST /api/admin/orders/<id>/confirm|cancel` · `POST /api/admin/grant` ·
+`GET /api/admin/users` · `POST /api/admin/users/<id>/vip|extend|reset-password|lock` ·
+`GET /api/admin/courses/<id>/sales`.
+
+## IX. Checklist bug đã gặp ở dự án này
+- (Phần site tĩnh) Chrome headless `--window-size=390` hiển thị bị cắt phải → do headless có bề
+  rộng tối thiểu, KHÔNG phải lỗi CSS. Kiểm mobile bằng DevTools/Chrome MCP thật.
+- (Chưa có bug GAS/Worker — bổ sung khi gặp, kèm nguyên nhân + cách né.)
+
+## X. Cấu hình (tên biến cố định)
+
+**Script Properties (GAS)**: `GITHUB_TOKEN` (fine-grained, Contents RW repo `dautucungvu`),
+`GITHUB_OWNER` = `tranquanghuy-rightsvn`, `GITHUB_REPO` = `dautucungvu`, `GITHUB_BRANCH` =
+`master`, `WORKER_API_BASE` = `https://dautucungvu.com/api/admin`, `WORKER_ADMIN_KEY` (≥ 32 ký tự
+ngẫu nhiên, TRÙNG secret `ADMIN_KEY` của Worker), `SPREADSHEET_ID` (code tự tạo, không điền).
+
+**Worker** — secrets: `ADMIN_KEY`, `TURNSTILE_SECRET`, `R2_ACCESS_KEY_ID`, `R2_SECRET_ACCESS_KEY`.
+vars: `SITE_URL` = `https://dautucungvu.com`, `MAIL_FROM` = `no-reply@dautucungvu.com`,
+`MAIL_REPLY_TO`, `ORDER_NOTIFY_EMAIL`, `CMS_URL`, `TURNSTILE_SITE_KEY`, `R2_ACCOUNT_ID`.
+bindings: `DB` (D1), `VIDEOS` (R2), `EMAIL` (send_email), `ASSETS` (static assets).
+
+**GitHub Actions secrets**: `CLOUDFLARE_API_TOKEN`, `CLOUDFLARE_ACCOUNT_ID`.
+
+---
+
+## XI. Hiện trạng code (tới commit `0042289`, 19/10/2026)
+
+Repo hiện CHỈ có site tĩnh demo trong `html/`; chưa có `gas/`, `worker/`, `data/`, CI.
+
+```
+html/
+  index.html                       trang chủ (sửa tay)
+  khoa-hoc/ mo-tai-khoan/ tin-tuc/ premium/ thanh-toan/ dashboard/   trang gốc  slug/index.html
+  bai-viet/<slug>/  khoa-hoc/<id>/[bai-<n>/]  khoa-hoc/mien-phi|co-phi|cua-toi/
+  tin-tuc/<chủ-đề>/  tin-tuc/<mã-viết-thường>/  thanh-toan/goi-<n>-thang/  thanh-toan/<id-khóa>/
+                                   ↑ SINH bởi html/scripts/seo.py — không sửa tay (80 trang)
+  assets/css/core.css, pages.css
+  assets/js/data.js                TOÀN BỘ dữ liệu demo (site, indices, tickers, courses,
+                                   newsTags, news[có slug], brokers) — CÓ CẢ nội dung trả phí (sẽ gỡ GĐ4)
+  assets/js/ui.js                  header/footer, auth GIẢ LẬP (localStorage "dtcv-user",
+                                   "Xem thử theo vai trò"), modal, video, chart SVG, và
+                                   hàm URL: url(), articleUrl(n), courseUrl(c, lessonIdx),
+                                   courseFilterUrl(f), newsUrl(tagOrTicker), payUrl({course}|{months})
+  assets/js/pages/*.js             home, courses, account, news, article, premium, payment, dashboard
+                                   — đọc trạng thái từ document.body.dataset
+  assets/img/                      vu.jpg, vu-128.jpg, logo.svg, qr-code.jpg (QR gốc chủ site),
+                                   qr-code-card.jpg (QR cắt thẻ — dự phòng khi qrImage có giá trị)
+  scripts/seo.py                   sinh khối SEO <head> (giữa <!-- SEO --> … <!-- /SEO -->) cho
+                                   trang gốc + sinh mọi trang con + robots.txt + sitemap.xml;
+                                   đọc data.js bằng node. Chạy: python3 html/scripts/seo.py
+  scripts/article-template.html    khung trang bài viết
+  robots.txt, sitemap.xml          sinh ra
+  README.md, design.jpeg, design-crops/, 30982980-….jpeg   tài liệu/thiết kế — ĐANG bị public,
+                                   chuyển ra ngoài html/ ở GĐ1
+```
+
+- Thanh toán: `data.js` → `payment.qrImage = ""` nên dùng VietQR theo đơn; thông tin ngân hàng đã
+  điền. Đơn hiện chỉ lưu localStorage (demo).
+- Liên hệ trong `data.js` vẫn là số giả `0900 000 000` — chờ số thật (XII.A).
+- Chạy thử local: `cd html && python3 -m http.server 5173`.
+
+## XII. Kế hoạch & tiến độ
+
+### A. Việc chủ dự án cần làm / cung cấp (⏳ = chặn giai đoạn)
+- [ ] ❓ Ảnh bìa khóa học: upload hay SVG? ⏳ GĐ3
+- [ ] ❓ Chỉ số / giá cổ phiếu: bỏ, nhập tay, hay API (nguồn nào)? ⏳ GĐ3
+- [ ] Email root của Vũ. ⏳ GĐ2
+- [ ] `ORDER_NOTIFY_EMAIL` + `MAIL_REPLY_TO`. ⏳ GĐ4
+- [ ] SĐT / Zalo thật, link YouTube / Facebook / Telegram. ⏳ GĐ3
+- [ ] Link mở tài khoản, mã giới thiệu, mã môi giới từng công ty CK. ⏳ GĐ3
+- [ ] Video bài học MP4 H.264 720p, ≤ 2GB/file. ⏳ GĐ5
+- [ ] Cloudflare: thêm domain `dautucungvu.com`, đổi nameserver; kiểm
+      `dig +short dautucungvu.com NS @1.1.1.1`. ⏳ GĐ1
+- [ ] Cloudflare: API token deploy (Workers + D1 + R2) + Account ID → GitHub Actions secrets. ⏳ GĐ1
+- [ ] Cloudflare: R2 API token (ký presigned URL). ⏳ GĐ1
+- [ ] Cloudflare: bật Email Sending cho domain (SPF/DKIM/DMARC). ⏳ GĐ4
+- [ ] Cloudflare: Turnstile widget cho `dautucungvu.com`. ⏳ GĐ4
+- [ ] Google: tài khoản chủ GAS (2FA), `clasp login`. ⏳ GĐ2
+- [ ] GitHub: fine-grained token (Contents RW repo `dautucungvu`). ⏳ GĐ2
+- [ ] 2FA cho Cloudflare, GitHub, Google.
+
+### B. Giai đoạn (mỗi GĐ: chạy được trên production, test dữ liệu giả rồi dọn)
+
+**GĐ1 — Hạ tầng & thử rủi ro (≈ 2–3 ngày)**
+- [ ] Tái cấu trúc repo theo VIII: `data/` (tách từ `data.js`), `templates/`, `scripts/build.py`
+      (từ `seo.py`, đọc `data/*.json` thay vì `data.js`), đưa README/design/scripts ra khỏi `html/`.
+- [ ] `build.py` sinh luôn `html/assets/js/data.js` CHỈ chứa dữ liệu công khai (JS site vẫn chạy).
+- [ ] `worker/wrangler.toml`: assets `../html` (mặc định `html_handling`, `404-page`), D1, R2,
+      route `/api/*`; `html/404.html`.
+- [ ] GitHub Actions: trigger 3 file index → build → commit `html/` → `wrangler deploy`.
+- [ ] Thử rủi ro 1: upload file lớn từ iframe GAS lên R2 bằng presigned URL (CORS).
+- [ ] Thử rủi ro 2: phát MP4 qua Worker có `Range` (Chrome, Safari iOS).
+- Xong khi: sửa `data/` + push → site tự deploy; 2 rủi ro đã thử OK (hoặc ghi phương án thay vào đây).
+
+**GĐ2 — CMS lõi + bài viết (≈ 3–4 ngày)**
+- [ ] `gas/` từ mẫu xevip: OTP, `root > admin > editor`, quản lý quản trị viên, boot cache,
+      pop-up, spinner, giấu hạ tầng; `gas/` vào `.gitignore`.
+- [ ] Tab Bài viết đủ II.A (TinyMCE tự host, chèn ảnh, chủ đề, mã CP, quyền xem).
+- [ ] `html/admin/index.html` nhúng iframe + link thoát (skill mục 6/6a), `noindex`.
+- [ ] Chuyển 18 bài hiện có sang `data/`.
+- Xong khi: editor đăng / sửa / xoá bài → 1–3 phút lên site đúng URL + SEO.
+
+**GĐ3 — Khóa học + cài đặt (≈ 3 ngày)**
+- [ ] Tab Khóa học (chưa video), tab Cài đặt (II.B, II.D).
+- [ ] Đổi URL bài học `bai-<n>` → `<slug-bài>` (build + `ui.js courseUrl` + `courses.js`).
+- Xong khi: mọi nội dung site sửa được trong CMS, không còn sửa tay file dữ liệu.
+
+**GĐ4 — Tài khoản người dùng + đơn hàng + nội dung trả phí (≈ 5–6 ngày)**
+- [ ] Worker auth đủ VI.1 + Turnstile; migration D1.
+- [ ] Email Service: mọi mẫu VI.5 + email báo đơn; Cron nhắc gia hạn.
+- [ ] Đơn hàng + VietQR theo đơn; tab Đơn hàng + Người dùng site trong CMS.
+- [ ] Thân bài trả phí GAS ↔ D1; trang bài gọi `/api/content/<slug>`; gỡ nội dung trả phí khỏi
+      repo/`data.js`.
+- [ ] Gỡ auth giả lập (`localStorage`, "Xem thử theo vai trò") khỏi site; `ui.js` dùng `/api/me`.
+- Xong khi: repo / xem nguồn trang không còn nội dung trả phí; 1 đơn đi trọn vòng tạo → chuyển
+  khoản → email báo → xác nhận → email kích hoạt → xem được.
+
+**GĐ5 — Video (≈ 2–3 ngày)**
+- [ ] CMS tải video lên R2 kèm %, thay / xoá.
+- [ ] Worker `/api/video/...` kiểm quyền + `Range`; trình phát `<video>` mặc định.
+- [ ] Upload video thật.
+- Xong khi: có quyền xem & tua được trên PC + điện thoại; không quyền → 403.
+
+**GĐ6 — Hoàn thiện & bàn giao (≈ 2 ngày)**
+- [ ] Chạy `gotchas-and-checklist.md` của skill; kiểm SEO, tốc độ.
+- [ ] Trang Điều khoản sử dụng, Chính sách bảo mật (footer đang `#`).
+- [ ] Backup: export D1, mirror repo, export Sheet.
+- [ ] Hướng dẫn vận hành ngắn cho Vũ: duyệt đơn, bật VIP, đăng bài, tải video.
+
+Tổng ≈ 17–21 ngày làm việc, chưa tính thời gian chờ mục A.
+
+**Chi phí dự kiến**: GAS / Sheets / GitHub public + Actions = 0đ · Workers + D1 + Email Service:
+free tier lúc đầu, Workers Paid ~$5/tháng khi lớn · R2: 10GB đầu miễn phí, sau ~$0.015/GB/tháng,
+không tính băng thông xem (kiểm lại trang giá Cloudflare trước khi báo khách).
+
+## XIII. Nhật ký quyết định (đã chốt với chủ dự án — KHÔNG đề xuất lại)
+
+| Ngày | Quyết định | Lý do |
+|---|---|---|
+| 19/10 | URL luôn `/slug/` thư mục, không `.html`, không redirect | Yêu cầu chủ dự án, deploy Cloudflare |
+| 19/10 | Không dùng `?params` ở bất kỳ đâu, mọi trạng thái là trang tĩnh | Yêu cầu chủ dự án ("nói 1 lần thôi") |
+| 19/10 | Mọi trang có meta đầy đủ, canonical, JSON-LD; domain `https://dautucungvu.com` | Yêu cầu chủ dự án |
+| 19/10 | Thanh toán VietQR theo từng đơn (tự điền số tiền + nội dung), TK Techcombank 4819939999 NGO TRUONG VU | QR tĩnh bắt người mua tự gõ tiền |
+| 19/10 | Công nghệ: GAS CMS + site tĩnh + Cloudflare. KHÔNG Astro | GAS CMS là công nghệ của chủ dự án |
+| 19/10 | Không webhook thanh toán; admin xác nhận đơn tay trong CMS | Không có tài khoản doanh nghiệp |
+| 19/10 | Người dùng site đăng nhập email + mật khẩu, có xác minh email + tự đặt lại mật khẩu qua email | Muốn chuyên nghiệp; OTP GAS dính quota 100 mail/ngày |
+| 19/10 | Báo đơn mới qua email, không Telegram | Yêu cầu chủ dự án |
+| 19/10 | Repo GitHub PUBLIC | Chủ dự án chọn; Actions không giới hạn → mọi dữ liệu riêng phải ở D1/R2 |
+| 19/10 | Quản trị 3 cấp root (Vũ) > admin > editor | Yêu cầu chủ dự án (theo guideline skill) |
+| 19/10 | Video lưu R2 + Worker kiểm quyền; không YouTube, không Stream | Stream đắt; YouTube/Drive/Vimeo free không khoá được link |
+| 19/10 | Chấp nhận người có quyền tải/quay video; không DRM/watermark | "Chặn thì nó quay màn hình cũng z" |
+| 19/10 | CMS admin vẫn đăng nhập OTP (mẫu xevip) | Ít người, nằm trong quota MailApp |
+
+## XIV. Quy ước làm việc với chủ dự án
+- Tiếng Việt, ngắn gọn; nói rõ đã kiểm chứng gì / chưa kiểm chứng gì.
+- Làm xong 1 việc: commit (message tiếng Việt, kết thúc bằng dòng
+  `Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>`) rồi **push `origin master`**.
+- Test thật trước khi báo xong: chạy build, mở trang bằng Chrome headless/Chrome MCP, chụp màn
+  hình kiểm tra; với trang cần đăng nhập thì giả lập session.
+- Không sửa tay file sinh ra (trang con trong `html/`, `sitemap.xml`, `robots.txt`) — sửa nguồn
+  rồi chạy build.
+- Không thêm tính năng / field ngoài file này khi chưa hỏi.
