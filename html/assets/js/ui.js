@@ -741,7 +741,7 @@
     return '<span class="access-badge access-badge--' + level + '">' + icon(level === "user" ? "user" : level === "vip" ? "shield" : "crown") + access.label[level] + "</span>";
   }
   function articleUrl(n) {
-    return url("bai-viet/") + "?id=" + n.id;
+    return url("bai-viet/" + n.slug + "/");
   }
   function newsItem(n) {
     const tk = APP_DATA.tickers.find((t) => n.tags.includes(t.code));

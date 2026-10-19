@@ -15,7 +15,7 @@ python3 -m http.server 5173
 | Khóa học (video, miễn phí / có phí) | `/khoa-hoc/` | `khoa-hoc/index.html` |
 | Mở tài khoản / chuyển ID | `/mo-tai-khoan/` | `mo-tai-khoan/index.html` |
 | Tin tức (lọc theo mã, chủ đề, từ khóa) | `/tin-tuc/` | `tin-tuc/index.html` |
-| Đọc bài viết | `/bai-viet/?id=30` | `bai-viet/index.html` |
+| Đọc bài viết | `/bai-viet/<slug>/` | sinh từ `scripts/article-template.html` + `news` trong `data.js` |
 | Gói hội viên | `/premium/` | `premium/index.html` |
 | Thanh toán QR | `/thanh-toan/?goi=3` hoặc `?khoa=<id>` | `thanh-toan/index.html` |
 | Tổng quan (sau đăng nhập) | `/dashboard/` | `dashboard/index.html` |
@@ -35,7 +35,7 @@ Tiêu đề, mô tả, canonical, Open Graph, JSON-LD của từng trang, `robot
 | Video hướng dẫn mở tài khoản, chuyển ID | `site.videos`, hoặc riêng từng công ty: `brokers[].openVideo`, `transferVideo` |
 | Link mở tài khoản, mã giới thiệu, mã môi giới của từng công ty | `brokers[].openUrl`, `refCode`, `transferUrl`, `transferCode` |
 | Khóa học: tên, mô tả, giá, bài học, link video | `courses` (`price: 0` là miễn phí, `preview: true` cho học thử) |
-| Bài viết, thẻ (mã CP + chủ đề), quyền xem | `news` |
+| Bài viết (`slug` = đường dẫn), thẻ (mã CP + chủ đề), quyền xem | `news`, xong chạy `python3 scripts/seo.py` |
 | Danh sách chủ đề tin và từ khóa tìm kiếm | `newsTags` |
 
 Video: dán link YouTube hoặc mã video. Để trống thì trang hiện khung "Video sẽ được cập nhật sớm".
@@ -63,7 +63,8 @@ assets/
   js/ui.js          header/footer, đăng nhập & phân quyền (giả lập), hộp mở khóa, video, biểu đồ SVG
   js/pages/*.js     logic từng trang
   img/vu.jpg        ảnh đại diện (hero), vu-128.jpg (logo, favicon)
-scripts/seo.py          sinh khối SEO trong <head>, robots.txt, sitemap.xml
+scripts/seo.py          sinh khối SEO trong <head>, trang bai-viet/<slug>/, robots.txt, sitemap.xml
+scripts/article-template.html   khung trang bài viết
 ```
 
 ## Phải làm trước khi chạy thật

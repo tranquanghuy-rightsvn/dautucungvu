@@ -2,8 +2,9 @@
 (function () {
   const { icon, fmt, escapeHtml, url, access, gate, Art, newsSorted, tagLabel, isTicker, accessBadge, articleUrl } = UI;
   const D = APP_DATA;
-  const id = +new URLSearchParams(location.search).get("id");
-  const n = D.news.find((x) => x.id === id) || newsSorted()[0];
+  // Mỗi bài là một trang tĩnh bai-viet/<slug>/index.html, slug ghi ở <body data-slug>
+  const slug = document.body.dataset.slug;
+  const n = D.news.find((x) => x.slug === slug) || newsSorted()[0];
   const el = document.querySelector("[data-article]");
 
   // Bài chưa có nội dung đầy đủ thì dựng đoạn minh họa từ phần tóm tắt
