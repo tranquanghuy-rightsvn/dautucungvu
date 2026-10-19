@@ -39,11 +39,11 @@ window.APP_DATA = (function () {
     // và nội dung chuyển khoản (dịch vụ VietQR). Hoặc đặt sẵn ảnh QR của bạn
     // vào assets/img/ rồi ghi đường dẫn vào qrImage.
     payment: {
-      bankId: "", // ví dụ "MB", "VCB", "TCB", "ACB"
-      bankName: "", // ví dụ "MB Bank"
-      accountNo: "",
-      accountName: "",
-      qrImage: "", // ví dụ "assets/img/qr.png"
+      bankId: "TCB", // ví dụ "MB", "VCB", "TCB", "ACB"
+      bankName: "Techcombank", // ví dụ "MB Bank"
+      accountNo: "4819939999",
+      accountName: "NGO TRUONG VU",
+      qrImage: "assets/img/qr-code-card.jpg", // QR của chủ website, cắt từ qr-code.jpg (ưu tiên hơn QR tự sinh)
     },
     membership: {
       pricePerMonth: 68000,

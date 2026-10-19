@@ -32,7 +32,7 @@
   }
 
   function qr(amount, content) {
-    if (P.qrImage) return '<img src="' + url(P.qrImage) + '" alt="Mã QR chuyển khoản" width="260" height="260">';
+    if (P.qrImage) return '<img src="' + url(P.qrImage) + '" alt="Mã QR chuyển khoản tới ' + escapeHtml(P.accountName + " – " + P.bankName) + '" width="260" height="291" class="qr-photo">';
     if (P.bankId && P.accountNo) {
       const src = "https://img.vietqr.io/image/" + encodeURIComponent(P.bankId) + "-" + encodeURIComponent(P.accountNo) + "-compact2.png" +
         "?amount=" + amount + "&addInfo=" + encodeURIComponent(content) + "&accountName=" + encodeURIComponent(P.accountName);

@@ -2280,6 +2280,9 @@
   border: 1px solid var(--line);
   background: #fff;
 }
+.pay-qr > img.qr-photo {
+  height: auto; /* ảnh QR có sẵn không vuông: giữ đúng tỉ lệ */
+}
 .qr-missing {
   display: grid;
   place-items: center;
