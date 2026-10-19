@@ -20,7 +20,9 @@ python3 -m http.server 5173
 | Thanh toán QR | `/thanh-toan/?goi=3` hoặc `?khoa=<id>` | `thanh-toan/index.html` |
 | Tổng quan (sau đăng nhập) | `/dashboard/` | `dashboard/index.html` |
 
-Mỗi trang mở được ở cả `/slug/` và `/slug.html`. Các file `slug.html` ở thư mục gốc được sinh tự động: **sửa xong file trong thư mục thì chạy `python3 scripts/sync-pages.py`**.
+URL chuẩn của mỗi trang là `/slug/` (file `slug/index.html`). Mọi link trong site đều có dấu `/` cuối nên Cloudflare phục vụ thẳng, không phải redirect.
+
+Tiêu đề, mô tả, canonical, Open Graph, JSON-LD của từng trang, `robots.txt` và `sitemap.xml` sinh từ `scripts/seo.py` (domain `https://dautucungvu.com`). **Sửa tiêu đề / mô tả trong file đó rồi chạy `python3 scripts/seo.py`**.
 
 ## Sửa nội dung: chỉ cần `assets/js/data.js`
 
@@ -61,7 +63,7 @@ assets/
   js/ui.js          header/footer, đăng nhập & phân quyền (giả lập), hộp mở khóa, video, biểu đồ SVG
   js/pages/*.js     logic từng trang
   img/vu.jpg        ảnh đại diện (hero), vu-128.jpg (logo, favicon)
-scripts/sync-pages.py   sinh slug.html từ slug/index.html
+scripts/seo.py          sinh khối SEO trong <head>, robots.txt, sitemap.xml
 ```
 
 ## Phải làm trước khi chạy thật

@@ -6,7 +6,7 @@
   "use strict";
 
   /* ---------- URL ----------
-     Mỗi trang mở được ở cả /khoa-hoc/ (khoa-hoc/index.html) và /khoa-hoc.html.
+     Mỗi trang là slug/index.html, link luôn dạng /slug/ (có dấu / cuối).
      Gốc site suy ra từ vị trí file này (assets/js/ui.js), nên link đúng
      dù trang ở cấp thư mục nào hay site đặt trong thư mục con. */
   const ROOT = new URL("../../", document.currentScript.src);
