@@ -12,7 +12,7 @@
 > - Code đổi 1 quyết định / tên field / tên biến → cập nhật file này trong CÙNG lượt sửa.
 > - Xong 1 việc trong mục XII → tick `[x]` + ghi ngày.
 >
-> Cập nhật lần cuối: 20/10/2026.
+> Cập nhật lần cuối: 20/10/2026 (chốt ảnh tùy biến + dữ liệu thị trường API thật).
 
 ---
 
@@ -167,8 +167,8 @@ Ranh giới cứng:
    - **Mô tả ngắn** (bắt buộc, ≤ 300 ký tự).
    - **Giá** (VNĐ, số nguyên; `0` = miễn phí).
    - **Quyền xem khi miễn phí**: `public` | `user` (chỉ khi giá = 0).
-   - **Ảnh bìa** — ❓ CẦN CHỐT: ảnh upload, hay giữ hình minh hoạ SVG như hiện tại
-     (field `art`: `candles` | `bars` | `chart` | `pie` | `towers`)?
+   - **Ảnh bìa** (upload, như ảnh bài viết) → `html/images/courses/<id>/cover.jpg`. Khóa chưa
+     có ảnh thì hiển thị hình minh hoạ SVG hiện tại (field `art`) cho tới khi upload.
    - **Thứ tự hiển thị**, **Đang bán / Ẩn**.
 2. Bài học (danh sách con trong form khóa, kéo thả sắp thứ tự):
    - **Tên bài** (bắt buộc), **Slug bài** (tự sinh, bất biến) → `/khoa-hoc/<id>/<slug-bài>/`.
@@ -206,8 +206,33 @@ Lưu chung `data/settings.json`:
   `transferCode`, `openVideo`, `transferVideo`.
 - Chủ đề tin (`newsTags`): id (bất biến), label, keys (từ khóa tìm kiếm không dấu).
 - Mã cổ phiếu (`tickers`): code, name, sector, color.
-- ❓ CẦN CHỐT: chỉ số thị trường (`indices`) + giá/biến động cổ phiếu hiện là dữ liệu minh hoạ.
-  Bỏ hẳn, nhập tay trong CMS, hay API thật (nguồn nào)?
+- **Ảnh site** (mọi ảnh trên website đều tùy biến được — quyết định 20/10): ảnh chân dung
+  hero trang chủ (`hero`, hiện `assets/img/vu.jpg`), ảnh logo / avatar thương hiệu ở header,
+  footer (`brand`, hiện `assets/img/vu-128.jpg`), favicon (`favicon`), ảnh chia sẻ mạng xã hội
+  mặc định (`og`, dùng cho `og:image` các trang không có ảnh riêng). Lưu
+  `html/images/site/<key>.jpg`; build đọc đường dẫn từ `settings.json` (`images.<key>`).
+  Favicon tự resize vuông 128px; ảnh `og` khuyến nghị 1200×630. Ảnh bìa bài viết / khóa học
+  vẫn quản lý trong form riêng (II.A, II.B).
+- Chỉ số thị trường + giá cổ phiếu: KHÔNG nhập trong CMS — lấy API thật (II.E). CMS chỉ quản
+  danh sách mã hiển thị (`tickers`) và chỉ số hiển thị (`indices`: VNINDEX, VN30, HNX, UPCOM…).
+
+### II.E Dữ liệu thị trường (API thật — quyết định 20/10)
+
+- Worker lấy dữ liệu từ nguồn ngoài, cache lại, site gọi `GET /api/market` (chỉ số + giá các mã
+  trong `tickers`: giá, thay đổi, %, khối lượng, dữ liệu nến cho biểu đồ). Không gọi nguồn ngoài
+  trực tiếp từ trình duyệt (ẩn khóa, tránh CORS, tránh bị chặn vì quá nhiều request).
+- Cập nhật: Cron Trigger mỗi 1 phút trong giờ giao dịch (9:00–11:30, 13:00–15:00, T2–T6, giờ
+  VN), ngoài giờ giữ giá đóng cửa; lưu bản mới nhất vào D1 (bảng `market_snapshots`) hoặc KV.
+  Site poll `/api/market` 60 giây/lần khi trang đang mở trong giờ giao dịch.
+- Lỗi nguồn ngoài: trả bản cache gần nhất kèm thời điểm cập nhật; giao diện ghi "Cập nhật lúc
+  HH:mm". Bỏ nhãn "Dữ liệu minh hoạ" khi đã chạy thật.
+- ❓ CẦN CHỐT nguồn dữ liệu:
+  (a) **SSI FastConnect Data** — chính thức; yêu cầu tài khoản giao dịch SSI, đăng ký tại quầy /
+      qua môi giới, nhận ConsumerID + ConsumerSecret (+ PrivateKey) tạo trên iBoard; có EOD và
+      realtime. Phí: tài liệu SSI không ghi → phải hỏi SSI.
+  (b) API công khai không chính thức của các công ty CK — miễn phí nhưng không có cam kết, có thể
+      đổi / chặn bất cứ lúc nào, cần kiểm tra điều khoản sử dụng.
+  Khuyến nghị (a). Chốt xong ghi tên biến khóa vào mục X.
 
 ---
 
@@ -293,7 +318,7 @@ Không chạy trên GAS. GAS chỉ là giao diện quản trị gọi API admin 
 | `data/courses.json` | Toàn bộ khóa + bài học công khai — **commit chốt** khóa học |
 | `data/settings.json` | Cài đặt site (II.D) — **commit chốt** cài đặt |
 | `html/` | Site tĩnh deploy (chỉ thứ được public) |
-| `html/images/news/<slug>/…`, `html/images/courses/<id>/…` | Ảnh do CMS ghi |
+| `html/images/news/<slug>/…`, `html/images/courses/<id>/…`, `html/images/site/<key>.jpg` | Ảnh do CMS ghi |
 | `html/vendor/tinymce/` | TinyMCE tự host |
 | `html/admin/index.html` | Trang nhúng iframe CMS (mẫu xevip) |
 | `templates/` | Khung trang (người sửa tay; build đọc) |
@@ -309,13 +334,13 @@ Không chạy trên GAS. GAS chỉ là giao diện quản trị gọi API admin 
 
 **D1** (tên bảng cố định; cột chi tiết chốt khi viết migration rồi bổ sung vào đây):
 `users`, `sessions`, `email_tokens`, `orders`, `course_access`, `article_bodies`,
-`lesson_videos`, `rate_limits`. (Hạn hội viên + cờ VIP là cột trong `users`.)
+`lesson_videos`, `rate_limits`, `market_snapshots`. (Hạn hội viên + cờ VIP là cột trong `users`.)
 
 **R2**: bucket `dautucungvu-videos` (private), khóa `courses/<course_id>/<lesson_slug>.mp4`.
 
 **API công khai Worker**: `/api/auth/register|login|logout|verify-email|forgot|reset|change-password`,
 `/api/me`, `/api/orders` (tạo, xem của mình, báo đã chuyển khoản), `/api/content/<slug>`,
-`/api/video/<course_id>/<lesson_slug>`.
+`/api/video/<course_id>/<lesson_slug>`, `/api/market`.
 
 **API admin Worker** (GAS gọi qua `UrlFetchApp`, header `Authorization: Bearer
 <WORKER_ADMIN_KEY>` + `X-Admin-Email`):
@@ -385,17 +410,27 @@ html/
 ## XII. Kế hoạch & tiến độ
 
 ### A. Việc chủ dự án cần làm / cung cấp (⏳ = chặn giai đoạn)
-- [ ] ❓ Ảnh bìa khóa học: upload hay SVG? ⏳ GĐ3
-- [ ] ❓ Chỉ số / giá cổ phiếu: bỏ, nhập tay, hay API (nguồn nào)? ⏳ GĐ3
+- [x] Ảnh bìa khóa học + mọi ảnh site: tùy biến được trong CMS (20/10).
+- [x] Chỉ số / giá cổ phiếu: API thật (20/10).
+- [ ] ❓ Nguồn API thị trường: SSI FastConnect Data (hỏi phí SSI) hay API không chính thức (II.E). ⏳ GĐ3
+- [ ] Nếu chọn SSI FCData: đăng ký dịch vụ, tạo bộ khóa trên iBoard. ⏳ GĐ3
 - [ ] Email root của Vũ. ⏳ GĐ2
 - [ ] `ORDER_NOTIFY_EMAIL` + `MAIL_REPLY_TO`. ⏳ GĐ4
 - [ ] SĐT / Zalo thật, link YouTube / Facebook / Telegram. ⏳ GĐ3
 - [ ] Link mở tài khoản, mã giới thiệu, mã môi giới từng công ty CK. ⏳ GĐ3
 - [ ] Video bài học MP4 H.264 720p, ≤ 2GB/file. ⏳ GĐ5
-- [ ] Cloudflare: thêm domain `dautucungvu.com`, đổi nameserver; kiểm
-      `dig +short dautucungvu.com NS @1.1.1.1`. ⏳ GĐ1
-- [ ] Cloudflare: API token deploy (Workers + D1 + R2) + Account ID → GitHub Actions secrets. ⏳ GĐ1
-- [ ] Cloudflare: R2 API token (ký presigned URL). ⏳ GĐ1
+- [x] Cloudflare: thêm domain, đổi nameserver (20/10 — `dig NS @1.1.1.1` ra
+      `clay.ns.cloudflare.com`, `simone.ns.cloudflare.com`). Gán custom domain vào Worker làm ở GĐ1.
+- [ ] Cloudflare: tạo bucket R2 `dautucungvu-videos` (private). ⏳ GĐ1
+- [ ] Cloudflare: API token deploy (tên `github-actions-deploy`; quyền: Workers Scripts Edit,
+      Workers KV Storage Edit, D1 Edit, Workers R2 Storage Edit, Account Settings Read; zone
+      `dautucungvu.com`: Workers Routes Edit, Zone Read) → GitHub repo Settings → Secrets and
+      variables → Actions: `CLOUDFLARE_API_TOKEN`, `CLOUDFLARE_ACCOUNT_ID`. ⏳ GĐ1
+- [ ] Cloudflare: R2 API token (Account API token, Object Read & Write, chỉ bucket
+      `dautucungvu-videos`) → lưu tạm vào trình quản lý mật khẩu; ở GĐ1 chủ dự án tự chạy
+      `! npx wrangler secret put R2_ACCESS_KEY_ID` / `R2_SECRET_ACCESS_KEY` trong thư mục `worker/`.
+      KHÔNG dán vào chat, KHÔNG commit (repo public). ⏳ GĐ1
+- [ ] Máy local: `npx wrangler login` (OAuth, không cần token). ⏳ GĐ1
 - [ ] Cloudflare: bật Email Sending cho domain (SPF/DKIM/DMARC). ⏳ GĐ4
 - [ ] Cloudflare: Turnstile widget cho `dautucungvu.com`. ⏳ GĐ4
 - [ ] Google: tài khoản chủ GAS (2FA), `clasp login`. ⏳ GĐ2
@@ -473,6 +508,8 @@ không tính băng thông xem (kiểm lại trang giá Cloudflare trước khi b
 | 19/10 | Video lưu R2 + Worker kiểm quyền; không YouTube, không Stream | Stream đắt; YouTube/Drive/Vimeo free không khoá được link |
 | 19/10 | Chấp nhận người có quyền tải/quay video; không DRM/watermark | "Chặn thì nó quay màn hình cũng z" |
 | 19/10 | CMS admin vẫn đăng nhập OTP (mẫu xevip) | Ít người, nằm trong quota MailApp |
+| 20/10 | Mọi ảnh trên website tùy biến được trong CMS (ảnh bìa khóa upload; hero, logo, favicon, ảnh chia sẻ) | Yêu cầu chủ dự án |
+| 20/10 | Chỉ số thị trường + giá cổ phiếu lấy API thật qua Worker (nguồn còn chốt — II.E) | Yêu cầu chủ dự án |
 
 ## XIV. Quy ước làm việc với chủ dự án
 - Tiếng Việt, ngắn gọn; nói rõ đã kiểm chứng gì / chưa kiểm chứng gì.
