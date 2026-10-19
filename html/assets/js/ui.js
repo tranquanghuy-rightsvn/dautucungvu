@@ -486,7 +486,7 @@
       "</button>" +
       '<div class="dropdown" role="menu" hidden>' +
       '<a role="menuitem" href="' + url("dashboard/") + '">' + icon("home") + "Tổng quan</a>" +
-      '<a role="menuitem" href="' + url("khoa-hoc/") + '?loc=mine">' + icon("book") + "Khóa học của tôi</a>" +
+      '<a role="menuitem" href="' + courseFilterUrl("mine") + '">' + icon("book") + "Khóa học của tôi</a>" +
       '<a role="menuitem" href="' + url("premium/") + '">' + icon("crown") + "Gói hội viên</a><hr>" +
       '<button role="menuitem" type="button" data-logout>' + icon("logout") + "Đăng xuất</button>" +
       "</div></div>" +
@@ -543,8 +543,8 @@
       '<div class="footer-about"><a class="brand" href="' + url("") + '"><img src="' + url("assets/img/vu-128.jpg") + '" alt="" class="brand-photo" width="42" height="42"><span><span class="brand-name" style="color:#fff">ĐẦU TƯ CÙNG VŨ</span><span class="brand-tag" style="display:block">Đầu tư thông minh, tài chính vững vàng</span></span></a>' +
       "<p>Nền tảng học đầu tư chứng khoán cho người Việt: từ kiến thức nền tảng đến phương pháp phân tích, cùng tin tức thị trường cập nhật mỗi ngày.</p>" +
       '<div class="socials"><a href="' + C.youtube + '" aria-label="YouTube">' + icon("youtube") + '</a><a href="' + C.facebook + '" aria-label="Facebook">' + icon("facebook") + '</a><a href="' + C.telegram + '" aria-label="Telegram">' + icon("telegram") + "</a></div></div>" +
-      '<div><h2>Học tập</h2><ul><li><a href="' + url("khoa-hoc/") + '">Tất cả khóa học</a></li><li><a href="' + url("khoa-hoc/") + '?loc=free">Khóa học miễn phí</a></li><li><a href="' + url("premium/") + '">Gói hội viên</a></li></ul></div>' +
-      '<div><h2>Thị trường</h2><ul><li><a href="' + url("tin-tuc/") + '">Tin tức chứng khoán</a></li><li><a href="' + url("tin-tuc/") + '?chu-de=nhan-dinh">Nhận định thị trường</a></li><li><a href="' + url("mo-tai-khoan/") + '">Mở tài khoản / chuyển ID</a></li></ul></div>' +
+      '<div><h2>Học tập</h2><ul><li><a href="' + url("khoa-hoc/") + '">Tất cả khóa học</a></li><li><a href="' + courseFilterUrl("free") + '">Khóa học miễn phí</a></li><li><a href="' + url("premium/") + '">Gói hội viên</a></li></ul></div>' +
+      '<div><h2>Thị trường</h2><ul><li><a href="' + url("tin-tuc/") + '">Tin tức chứng khoán</a></li><li><a href="' + newsUrl("nhan-dinh") + '">Nhận định thị trường</a></li><li><a href="' + url("mo-tai-khoan/") + '">Mở tài khoản / chuyển ID</a></li></ul></div>' +
       '<div><h2>Liên hệ</h2><ul><li><a href="' + C.zalo + '" target="_blank" rel="noopener">Zalo: ' + escapeHtml(C.phone) + '</a></li><li><a href="tel:' + C.phone.replace(/\s/g, "") + '">Gọi ' + escapeHtml(C.phone) + "</a></li><li><a href=\"#\">Điều khoản sử dụng</a></li><li><a href=\"#\">Chính sách bảo mật</a></li></ul></div>" +
       "</div>" +
       '<div class="footer-bottom"><span>© 2026 Đầu tư cùng Vũ</span><p>Nội dung trên website chỉ nhằm mục đích giáo dục và tham khảo, không phải khuyến nghị mua bán chứng khoán. Số liệu thị trường hiển thị là dữ liệu minh họa.</p></div>' +
@@ -722,7 +722,7 @@
     return (
       '<article class="course-card">' +
       '<div class="course-thumb">' + courseThumb(c) + '<span class="course-kind">' + icon("play") + c.lessons.length + " video</span></div>" +
-      '<div class="course-body"><h3><a href="' + url("khoa-hoc/") + "?khoa=" + c.id + '">' + escapeHtml(c.title) + "</a></h3>" +
+      '<div class="course-body"><h3><a href="' + courseUrl(c) + '">' + escapeHtml(c.title) + "</a></h3>" +
       '<div class="course-meta"><span>' + icon("clock") + fmt.duration(mins) + "</span>" + priceTag(c) + "</div></div></article>"
     );
   }
@@ -740,8 +740,25 @@
     if (!level || level === "public") return "";
     return '<span class="access-badge access-badge--' + level + '">' + icon(level === "user" ? "user" : level === "vip" ? "shield" : "crown") + access.label[level] + "</span>";
   }
+  /* Mọi trạng thái đều là một trang tĩnh /.../slug/ (sinh bởi scripts/seo.py), không dùng ?params */
   function articleUrl(n) {
     return url("bai-viet/" + n.slug + "/");
+  }
+  // Bài 1 là trang khóa học, từ bài 2: /khoa-hoc/<id>/bai-<n>/
+  function courseUrl(c, lessonIdx) {
+    return url("khoa-hoc/" + (c.id || c) + "/" + (lessonIdx ? "bai-" + (lessonIdx + 1) + "/" : ""));
+  }
+  const COURSE_FILTER_SLUG = { all: "", free: "mien-phi/", paid: "co-phi/", mine: "cua-toi/" };
+  function courseFilterUrl(f) {
+    return url("khoa-hoc/" + (COURSE_FILTER_SLUG[f] || ""));
+  }
+  // Mã cổ phiếu viết thường (/tin-tuc/mbb/) hoặc id chủ đề (/tin-tuc/co-tuc/)
+  function newsUrl(tagOrTicker) {
+    return url("tin-tuc/" + (tagOrTicker ? tagOrTicker.toLowerCase() + "/" : ""));
+  }
+  // Gói hội viên: /thanh-toan/goi-3-thang/, khóa học: /thanh-toan/<id>/
+  function payUrl(o) {
+    return url("thanh-toan/" + (o.course ? (o.course.id || o.course) + "/" : "goi-" + o.months + "-thang/"));
   }
   function newsItem(n) {
     const tk = APP_DATA.tickers.find((t) => n.tags.includes(t.code));
@@ -799,7 +816,7 @@
       const c = o.course;
       title = "Bài học thuộc khóa “" + c.title + "”";
       text = "Mua khóa học để xem toàn bộ " + c.lessons.length + " video, hoặc mở tài khoản / chuyển ID về Đầu tư cùng Vũ với vốn từ " + S.minCapital + " để học miễn phí toàn bộ khóa học.";
-      actions = '<a class="btn btn--gold btn--sm" href="' + url("thanh-toan/") + "?khoa=" + c.id + '">Mua khóa học · ' + fmt.vnd(c.price) + "</a>" + openAcc + login;
+      actions = '<a class="btn btn--gold btn--sm" href="' + payUrl({ course: c }) + '">Mua khóa học · ' + fmt.vnd(c.price) + "</a>" + openAcc + login;
     } else if (need === "vip") {
       title = "Dành riêng cho tài khoản Đầu tư cùng Vũ";
       text = S.offerTitle + " " + S.offerText;
@@ -918,5 +935,5 @@
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", boot);
   else boot();
 
-  window.UI = { url, icon, fmt, norm, escapeHtml, store, auth, access, initials, rng, Charts, Art, toast, tabs, openLogin, setFieldError, courseCard, courseThumb, priceTag, newsItem, newsSorted, tagLabel, isTicker, accessBadge, articleUrl, video, youtubeId, gate, contactButtons };
+  window.UI = { url, icon, fmt, norm, escapeHtml, store, auth, access, initials, rng, Charts, Art, toast, tabs, openLogin, setFieldError, courseCard, courseThumb, priceTag, newsItem, newsSorted, tagLabel, isTicker, accessBadge, articleUrl, courseUrl, courseFilterUrl, newsUrl, payUrl, video, youtubeId, gate, contactButtons };
 })();

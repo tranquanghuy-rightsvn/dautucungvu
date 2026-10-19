@@ -1,15 +1,15 @@
-/* Trang thanh toán: gói hội viên (?goi=1|3|6|12) hoặc khóa học (?khoa=id)
+/* Trang thanh toán: gói hội viên (/thanh-toan/goi-<1|3|6|12>-thang/) hoặc khóa học (/thanh-toan/<id>/)
    Thanh toán bằng chuyển khoản QR, Vũ xác nhận thủ công rồi kích hoạt. */
 (function () {
-  const { icon, fmt, escapeHtml, url, auth, access, store, contactButtons, toast } = UI;
+  const { icon, fmt, escapeHtml, url, auth, access, store, contactButtons, toast, courseUrl, payUrl } = UI;
   const D = APP_DATA;
   const S = D.site;
   const P = S.payment;
-  const params = new URLSearchParams(location.search);
+  const page = document.body.dataset; // data-course / data-plan do scripts/seo.py ghi
   const root = document.querySelector("[data-payment]");
 
-  const course = D.courses.find((c) => c.id === params.get("khoa"));
-  let months = S.membership.months.includes(+params.get("goi")) ? +params.get("goi") : S.membership.months[0];
+  const course = D.courses.find((c) => c.id === page.course);
+  let months = S.membership.months.includes(+page.plan) ? +page.plan : S.membership.months[0];
   const kind = course ? "course" : "member";
   let submitted = null;
 
@@ -80,7 +80,7 @@
     const u = auth.user();
     const it = item();
     if (course && !course.price) {
-      root.innerHTML = '<div class="panel panel-pad pay-main"><h2>Khóa học miễn phí</h2><p>“' + escapeHtml(course.title) + '” không cần thanh toán.</p><a class="btn btn--navy" href="' + url("khoa-hoc/") + "?khoa=" + course.id + '">Vào học</a></div>';
+      root.innerHTML = '<div class="panel panel-pad pay-main"><h2>Khóa học miễn phí</h2><p>“' + escapeHtml(course.title) + '” không cần thanh toán.</p><a class="btn btn--navy" href="' + courseUrl(course) + '">Vào học</a></div>';
       return;
     }
     let main;
@@ -118,9 +118,7 @@
   root.addEventListener("change", (e) => {
     if (e.target.name === "months") {
       months = +e.target.value;
-      const u = new URL(location.href);
-      u.searchParams.set("goi", months);
-      history.replaceState(null, "", u);
+      history.replaceState(null, "", payUrl({ months }));
       render();
     }
   });

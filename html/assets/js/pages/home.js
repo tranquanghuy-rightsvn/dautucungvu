@@ -39,7 +39,7 @@
 
   function renderNews(topic) {
     const list = newsSorted(topic ? D.news.filter((n) => n.tags.includes(topic)) : D.news);
-    moreLink.href = url("tin-tuc/") + (topic ? "?chu-de=" + topic : "");
+    moreLink.href = UI.newsUrl(topic);
     if (!list.length) {
       newsEl.innerHTML = '<p class="empty-state">Chưa có bài viết trong mục này.</p>';
       return;

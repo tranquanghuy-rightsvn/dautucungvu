@@ -1,10 +1,14 @@
 #!/usr/bin/env python3
 """Sinh khối SEO trong <head>, trang bài viết, robots.txt và sitemap.xml.
 
-URL chuẩn: /slug/ (file slug/index.html), không có /slug.html, /slug hay ?id=.
+URL chuẩn: /slug/ (file slug/index.html), không có /slug.html, /slug hay ?params.
   - Trang thường: khối SEO nằm giữa <!-- SEO --> ... <!-- /SEO -->.
-  - Bài viết: mỗi bài trong news (assets/js/data.js) sinh ra
-    bai-viet/<slug>/index.html từ scripts/article-template.html.
+  - Từ dữ liệu trong assets/js/data.js sinh các trang tĩnh:
+      bai-viet/<slug>/              mỗi bài (khung scripts/article-template.html)
+      khoa-hoc/<id>/[bai-<n>/]      mỗi khóa, mỗi bài học; khoa-hoc/mien-phi|co-phi|cua-toi/
+      tin-tuc/<chủ đề>/, tin-tuc/<mã viết thường>/
+      thanh-toan/goi-<n>-thang/, thanh-toan/<id khóa có phí>/
+    JS đọc trạng thái từ <body data-*> của trang.
 Chạy lại sau mỗi lần sửa trang / thêm bài:  python3 scripts/seo.py  (cần node)
 Sửa tiêu đề / mô tả trang trong PAGES bên dưới, đừng sửa tay trong file HTML.
 """
@@ -198,6 +202,119 @@ for d in (ROOT / "bai-viet").iterdir():
     if d.is_dir() and d.name not in slugs:
         shutil.rmtree(d)
         print("đã xoá bài cũ:", d.name)
+
+# ---------- Trang con: mỗi trạng thái (khóa, bài học, bộ lọc, chủ đề, mã CP, gói) là /.../slug/ ----------
+def derive(base, out, title, desc, index, graph, attrs, h1=None, lead=None):
+    """Sinh out/index.html từ base/index.html: sửa đường dẫn tương đối, <head>, <body data-*>, banner."""
+    depth = out.count("/") + 1
+    src = (ROOT / base / "index.html").read_text(encoding="utf-8").replace('="../', '="' + "../" * depth)
+    src = put_head(src, head_block(page_url(out), title, desc, index, graph))
+    data_attrs = "".join(f' data-{k}="{html.escape(str(v))}"' for k, v in attrs.items())
+    src = re.sub(r"<body ([^>]*)>", lambda m: f"<body {m.group(1)}{data_attrs}>", src, count=1)
+    if h1:
+        src = re.sub(r"<h1>.*?</h1>(\s*)<p>.*?</p>",
+                     lambda m: f"<h1>{html.escape(h1)}</h1>{m.group(1)}<p>{html.escape(lead or desc)}</p>", src, count=1, flags=re.S)
+    path = ROOT / out / "index.html"
+    path.parent.mkdir(parents=True, exist_ok=True)
+    path.write_text(src, encoding="utf-8")
+    generated.setdefault(base, set()).add(out.split("/")[1])
+    if index:
+        sitemap.append((page_url(out), today, "weekly", "0.7"))
+
+
+def collection(url, title, desc, crumbs, items):
+    page = webpage(url, title, desc, "CollectionPage", crumbs)
+    page["mainEntity"] = {"@type": "ItemList", "itemListElement": [
+        {"@type": "ListItem", "position": i + 1, "url": u, "name": name} for i, (u, name) in enumerate(items)]}
+    return [ORG, WEBSITE, page, breadcrumb(url, crumbs)]
+
+
+generated = {}
+courses, news_sorted = data["courses"], sorted(data["news"], key=lambda n: n["date"], reverse=True)
+COURSES = page_url("khoa-hoc")
+
+for c in courses:
+    url = page_url("khoa-hoc/" + c["id"])
+    mins = sum(l.get("m") or 0 for l in c["lessons"])
+    title, crumbs = f"Khóa học {c['title']} | {NAME}", [("Khóa học", COURSES), (c["title"], url)]
+    course_ld = {"@type": "Course", "@id": url + "#course", "name": c["title"], "description": c["desc"],
+                 "url": url, "inLanguage": "vi-VN", "provider": {"@id": SITE + "/#organization"},
+                 "isAccessibleForFree": not c["price"],
+                 "offers": {"@type": "Offer", "price": c["price"], "priceCurrency": "VND",
+                            "category": "Paid" if c["price"] else "Free", "url": url,
+                            "availability": "https://schema.org/InStock"},
+                 "hasCourseInstance": {"@type": "CourseInstance", "courseMode": "Online",
+                                       "courseWorkload": f"PT{mins}M"},
+                 "syllabusSections": [{"@type": "Syllabus", "name": l["t"], **({"timeRequired": f"PT{l['m']}M"} if l.get("m") else {})}
+                                      for l in c["lessons"]]}
+    derive("khoa-hoc", "khoa-hoc/" + c["id"], title, c["desc"], True,
+           [ORG, WEBSITE, webpage(url, title, c["desc"], "WebPage", crumbs), course_ld, breadcrumb(url, crumbs)],
+           {"course": c["id"]}, c["title"], c["desc"])
+    for i, l in enumerate(c["lessons"][1:], start=2):
+        out = f"khoa-hoc/{c['id']}/bai-{i}"
+        lurl = page_url(out)
+        ltitle = f"Bài {i}: {l['t']} | {c['title']} | {NAME}"
+        ldesc = f"Bài {i}/{len(c['lessons'])} của khóa {c['title']}: {l['t']}."
+        lcrumbs = crumbs + [(f"Bài {i}: {l['t']}", lurl)]
+        # Trang bài học trùng nội dung với trang khóa: không index, vẫn cho bot đi theo link
+        derive("khoa-hoc", out, ltitle, ldesc, False,
+               [ORG, WEBSITE, webpage(lurl, ltitle, ldesc, "WebPage", lcrumbs), breadcrumb(lurl, lcrumbs)],
+               {"course": c["id"], "lesson": i}, c["title"], c["desc"])
+
+for f, slug, label, index, keep in [("free", "mien-phi", "Khóa học đầu tư chứng khoán miễn phí", True, lambda c: not c["price"]),
+                                    ("paid", "co-phi", "Khóa học đầu tư chứng khoán có phí", True, lambda c: c["price"]),
+                                    ("mine", "cua-toi", "Khóa học của tôi", False, lambda c: False)]:
+    url, title = page_url("khoa-hoc/" + slug), f"{label} | {NAME}"
+    items = [c for c in courses if keep(c)]
+    desc = (f"{label}: " + ", ".join(c["title"] for c in items) + ".") if items else "Khóa học bạn đã mua và tiến độ học tại Đầu tư cùng Vũ."
+    derive("khoa-hoc", "khoa-hoc/" + slug, title, desc, index,
+           collection(url, title, desc, [("Khóa học", COURSES), (label, url)],
+                      [(page_url("khoa-hoc/" + c["id"]), c["title"]) for c in items]),
+           {"filter": f}, label, desc)
+
+NEWS = page_url("tin-tuc")
+for kind, key, label, h1, title, desc in (
+        [("tag", t["id"], t["label"], t["label"], f"{t['label']} | Tin tức chứng khoán | {NAME}",
+          f"Tổng hợp tin {t['label'].lower()} mới nhất trên thị trường chứng khoán Việt Nam, cập nhật mỗi ngày tại {NAME}.")
+         for t in data["newsTags"]] +
+        [("ticker", t["code"], t["code"], f"Tin tức cổ phiếu {t['code']}", f"Tin tức cổ phiếu {t['code']} ({t['name']}) | {NAME}",
+          f"Tin tức, kết quả kinh doanh, cổ tức và phân tích cổ phiếu {t['code']} – {t['name']}, mới nhất lên đầu.")
+         for t in data["tickers"]]):
+    out = "tin-tuc/" + key.lower()
+    url = page_url(out)
+    items = [(page_url("bai-viet/" + n["slug"]), n["title"]) for n in news_sorted if key in n["tags"]]
+    # Mã chưa có bài nào thì không index (trang rỗng)
+    derive("tin-tuc", out, title, desc, bool(items),
+           collection(url, title, desc, [("Tin tức", NEWS), (label, url)], items),
+           {kind: key}, h1, desc)
+
+for m in data["site"]["membership"]["months"]:
+    title = f"Thanh toán gói hội viên {m} tháng | {NAME}"
+    desc = f"Thanh toán gói hội viên Đầu tư cùng Vũ {m} tháng bằng chuyển khoản QR."
+    url = page_url(f"thanh-toan/goi-{m}-thang")
+    derive("thanh-toan", f"thanh-toan/goi-{m}-thang", title, desc, False,
+           [ORG, WEBSITE, webpage(url, title, desc, "CheckoutPage", [])], {"plan": m})
+for c in courses:
+    if not c["price"]:
+        continue
+    title = f"Thanh toán khóa học {c['title']} | {NAME}"
+    desc = f"Thanh toán khóa học {c['title']} bằng chuyển khoản QR."
+    url = page_url("thanh-toan/" + c["id"])
+    derive("thanh-toan", "thanh-toan/" + c["id"], title, desc, False,
+           [ORG, WEBSITE, webpage(url, title, desc, "CheckoutPage", [])], {"course": c["id"]})
+
+# xoá trang con không còn trong dữ liệu (khóa / chủ đề / mã bị xoá hoặc đổi id)
+for base, names in generated.items():
+    for d in (ROOT / base).iterdir():
+        if d.is_dir() and d.name not in names:
+            shutil.rmtree(d)
+            print("đã xoá trang cũ:", f"{base}/{d.name}")
+for c in courses:  # bài học bị bớt đi
+    for d in (ROOT / "khoa-hoc" / c["id"]).glob("bai-*"):
+        if not (d.name[4:].isdigit() and 2 <= int(d.name[4:]) <= len(c["lessons"])):
+            shutil.rmtree(d)
+            print("đã xoá trang cũ:", f"khoa-hoc/{c['id']}/{d.name}")
+print("đã sinh", sum(len(v) for v in generated.values()), "nhóm trang con trong", ", ".join(generated))
 
 # ---------- sitemap.xml, robots.txt ----------
 (ROOT / "sitemap.xml").write_text(

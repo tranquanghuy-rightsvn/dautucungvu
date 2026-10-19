@@ -7,7 +7,7 @@
 
   const SIDE = [
     { href: url("dashboard/"), icon: "home", label: "Tổng quan", current: true },
-    { href: url("khoa-hoc/?loc=mine"), icon: "book", label: "Khóa học của tôi" },
+    { href: UI.courseFilterUrl("mine"), icon: "book", label: "Khóa học của tôi" },
     { href: url("tin-tuc/"), icon: "newspaper", label: "Tin tức theo dõi" },
     { href: "#danh-muc", icon: "briefcase", label: "Danh mục quan tâm" },
     { href: url("premium/"), icon: "crown", label: "Gói hội viên" },
@@ -80,7 +80,7 @@
       "</small></div>" +
       '<div class="panel kpi"><div class="kpi-label"><span style="background:var(--blue-50);color:var(--blue-500)">' + icon("play") + "</span>Khóa học có phí đã sở hữu</div>" +
       "<strong>" + D.courses.filter((c) => c.price && access.ownsCourse(c, user)).length + "/" + D.courses.filter((c) => c.price).length + "</strong>" +
-      '<small><a href="' + url("khoa-hoc/") + '?loc=paid">Xem khóa có phí</a></small></div>' +
+      '<small><a href="' + UI.courseFilterUrl("paid") + '">Xem khóa có phí</a></small></div>' +
       "</div>" +
       // Market + watchlist
       '<div class="dash-grid">' +
@@ -98,7 +98,7 @@
       watch
         .map(
           (t) =>
-            '<tr><td><a href="' + url("tin-tuc/") + '?ma=' + t.code + '">' + t.code + '</a></td><td class="num">' + fmt.price(t.price) + "</td>" +
+            '<tr><td><a href="' + UI.newsUrl(t.code) + '">' + t.code + '</a></td><td class="num">' + fmt.price(t.price) + "</td>" +
             '<td class="spark-cell">' + Charts.spark(Charts.walk(24, t.code, t.price, 0.03, t.change / 1500), { w: 64, h: 22, color: t.change >= 0 ? "#16a34a" : "#e0393e", fill: false, stroke: 1.6 }) + "</td>" +
             '<td class="num ' + fmt.cls(t.change) + '">' + fmt.pct(t.change) + "</td></tr>"
         )
@@ -108,11 +108,11 @@
       "</section></div>" +
       // Continue + news
       '<div class="dash-grid dash-grid--even">' +
-      '<section class="panel panel-pad" aria-labelledby="ct-title"><div class="card-title"><h2 id="ct-title">Học tiếp</h2><a class="link-more" href="' + url("khoa-hoc/") + '?loc=mine">Khóa của tôi</a></div>' +
+      '<section class="panel panel-pad" aria-labelledby="ct-title"><div class="card-title"><h2 id="ct-title">Học tiếp</h2><a class="link-more" href="' + UI.courseFilterUrl("mine") + '">Khóa của tôi</a></div>' +
       '<div class="continue"><div class="course-thumb">' + courseThumb(cur) + "</div>" +
       "<div><small>" + escapeHtml(cur.title) + "</small><h3>Bài " + (nextIdx + 1) + ": " + escapeHtml(nextLesson.t) + "</h3>" +
       '<div class="progress"><div class="progress-track"><i style="width:' + Math.round((curDone.length / cur.lessons.length) * 100) + '%"></i></div><span class="progress-label">' + curDone.length + "/" + cur.lessons.length + " bài</span></div></div>" +
-      '<a class="btn btn--green" href="' + url("khoa-hoc/") + "?khoa=" + cur.id + "&bai=" + (nextIdx + 1) + '">Tiếp tục học</a></div></section>' +
+      '<a class="btn btn--green" href="' + UI.courseUrl(cur, nextIdx) + '">Tiếp tục học</a></div></section>' +
       '<section class="panel panel-pad" aria-labelledby="fn-title"><div class="card-title"><h2 id="fn-title">Tin nổi bật cho bạn</h2><a class="link-more" href="' + url("tin-tuc/") + '">Tất cả</a></div>' +
       '<ul class="mini-news">' +
       feed

@@ -18,7 +18,7 @@
   }
 
   function tagLink(t) {
-    const href = url("tin-tuc/") + (isTicker(t) ? "?ma=" + t : "?chu-de=" + t);
+    const href = UI.newsUrl(t);
     return '<a class="' + (isTicker(t) ? "ticker-tag" : "badge badge--soft") + '" href="' + href + '">' + escapeHtml(tagLabel(t)) + "</a>";
   }
 
@@ -30,7 +30,7 @@
     const firstTopic = n.tags.find((t) => !isTicker(t));
     el.innerHTML =
       '<nav class="crumbs" aria-label="Đường dẫn"><a href="' + url("tin-tuc/") + '">Tin tức</a>' +
-      (firstTopic ? icon("chevronRight") + '<a href="' + url("tin-tuc/") + "?chu-de=" + firstTopic + '">' + escapeHtml(tagLabel(firstTopic)) + "</a>" : "") + "</nav>" +
+      (firstTopic ? icon("chevronRight") + '<a href="' + UI.newsUrl(firstTopic) + '">' + escapeHtml(tagLabel(firstTopic)) + "</a>" : "") + "</nav>" +
       "<h1>" + escapeHtml(n.title) + "</h1>" +
       '<p class="article-meta"><time datetime="' + n.date.replace(" ", "T") + '">' + fmt.date(n.date) + "</time>" + accessBadge(n.access) + "</p>" +
       '<div class="article-tags">' + n.tags.map(tagLink).join("") + "</div>" +

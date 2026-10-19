@@ -1,15 +1,16 @@
 /* Trang khóa học: danh sách bên trái, video bài giảng bên phải */
 (function () {
-  const { icon, fmt, norm, store, auth, access, escapeHtml, toast, url, courseThumb, priceTag, video, gate } = UI;
+  const { icon, fmt, norm, store, auth, access, escapeHtml, toast, url, courseThumb, priceTag, video, gate, courseUrl, courseFilterUrl, payUrl } = UI;
   const D = APP_DATA;
-  const params = new URLSearchParams(location.search);
+  // Trạng thái lấy từ trang tĩnh: /khoa-hoc/<id>/bai-<n>/ hoặc /khoa-hoc/mien-phi|co-phi|cua-toi/
+  const page = document.body.dataset;
   const listEl = document.querySelector("[data-course-list]");
   const detailEl = document.querySelector("[data-course-detail]");
   const searchEl = document.getElementById("course-search");
 
-  let filter = ["free", "paid", "mine"].includes(params.get("loc")) ? params.get("loc") : "all";
-  let course = D.courses.find((c) => c.id === params.get("khoa")) || D.courses[0];
-  let lessonIdx = Math.max(0, Math.min(course.lessons.length - 1, (+params.get("bai") || 1) - 1));
+  let filter = ["free", "paid", "mine"].includes(page.filter) ? page.filter : "all";
+  let course = D.courses.find((c) => c.id === page.course) || D.courses[0];
+  let lessonIdx = Math.max(0, Math.min(course.lessons.length - 1, (+page.lesson || 1) - 1));
 
   /* ----- Tiến độ: { courseId: [chỉ số bài đã học] } ----- */
   function progress() {
@@ -29,13 +30,11 @@
   const totalMin = (c) => c.lessons.reduce((a, l) => a + (l.m || 0), 0);
   const hours = fmt.duration;
 
-  function syncUrl() {
-    const u = new URL(location.href);
-    u.searchParams.set("khoa", course.id);
-    lessonIdx ? u.searchParams.set("bai", lessonIdx + 1) : u.searchParams.delete("bai");
-    filter === "all" ? u.searchParams.delete("loc") : u.searchParams.set("loc", filter);
-    history.replaceState(null, "", u);
+  // Đổi địa chỉ sang trang tĩnh tương ứng (có thật, mở lại được), chỉ khi người dùng chọn
+  function go(href) {
+    if (href !== location.pathname) history.replaceState(null, "", href);
   }
+  const syncCourse = () => go(courseUrl(course, lessonIdx));
 
   /* ----- Danh sách khóa học ----- */
   function visibleCourses() {
@@ -89,7 +88,7 @@
     if (c.price && !owned) {
       buy =
         '<div class="buy-box"><div><span class="buy-price">' + fmt.vnd(c.price) + "</span><small>Trọn bộ " + c.lessons.length + " video, học không giới hạn</small></div>" +
-        '<a class="btn btn--gold" href="' + url("thanh-toan/") + "?khoa=" + c.id + '">Mua ngay</a></div>' +
+        '<a class="btn btn--gold" href="' + payUrl({ course: c }) + '">Mua ngay</a></div>' +
         '<p class="buy-alt">' + icon("gift") + "<span>Hoặc học miễn phí khi mở tài khoản / chuyển ID về Đầu tư cùng Vũ với vốn từ " + S.minCapital + '. <a href="' + url("mo-tai-khoan/") + '">Xem cách làm</a></span></p>';
     } else if (c.price) {
       buy = '<p class="owned-note">' + icon("checkCircle") + "Bạn đã sở hữu khóa học này</p>";
@@ -145,14 +144,13 @@
   function render() {
     renderList();
     renderDetail();
-    syncUrl();
   }
 
   /* ----- Sự kiện ----- */
   const filterTabs = UI.tabs(document.querySelector("[data-course-filter]"), (v) => {
     filter = v;
     renderList();
-    syncUrl();
+    go(courseFilterUrl(v));
   });
 
   searchEl.addEventListener("input", renderList);
@@ -163,6 +161,7 @@
       course = D.courses.find((c) => c.id === pick.dataset.course);
       lessonIdx = 0;
       render();
+      syncCourse();
       // Trên mobile danh sách nằm trên: đưa người dùng tới phần video
       if (window.matchMedia("(max-width: 960px)").matches) detailEl.scrollIntoView({ behavior: "smooth", block: "start" });
       return;
@@ -171,6 +170,7 @@
     if (les) {
       lessonIdx = +les.dataset.lesson;
       render();
+      syncCourse();
       detailEl.querySelector(".player-card").scrollIntoView({ behavior: "smooth", block: "nearest" });
       return;
     }
@@ -178,6 +178,7 @@
     if (step && !step.disabled) {
       lessonIdx = Math.max(0, Math.min(course.lessons.length - 1, lessonIdx + +step.dataset.step));
       render();
+      syncCourse();
       return;
     }
     if (e.target.closest("[data-mark-done]")) {

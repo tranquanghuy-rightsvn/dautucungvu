@@ -42,7 +42,7 @@
             "<h3>" + m + " tháng</h3>" +
             '<p class="plan-price">' + fmt.vnd(total) + "</p>" +
             "<small>" + fmt.vnd(M.pricePerMonth) + " / tháng</small>" +
-            '<a class="btn ' + (m === best ? "btn--gold" : "btn--navy") + ' btn--block" href="' + url("thanh-toan/") + "?goi=" + m + '">' + (access.memberActive(u) ? "Gia hạn" : "Chọn gói") + "</a></article>"
+            '<a class="btn ' + (m === best ? "btn--gold" : "btn--navy") + ' btn--block" href="' + UI.payUrl({ months: m }) + '">' + (access.memberActive(u) ? "Gia hạn" : "Chọn gói") + "</a></article>"
           );
         })
         .join("") +

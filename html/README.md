@@ -12,15 +12,15 @@ python3 -m http.server 5173
 | Trang | URL | File gốc (sửa ở đây) |
 |---|---|---|
 | Trang chủ | `/` | `index.html` |
-| Khóa học (video, miễn phí / có phí) | `/khoa-hoc/` | `khoa-hoc/index.html` |
+| Khóa học (video, miễn phí / có phí) | `/khoa-hoc/`, `/khoa-hoc/<id>/`, `/khoa-hoc/<id>/bai-<n>/`, `/khoa-hoc/mien-phi/`, `/khoa-hoc/co-phi/`, `/khoa-hoc/cua-toi/` | `khoa-hoc/index.html` |
 | Mở tài khoản / chuyển ID | `/mo-tai-khoan/` | `mo-tai-khoan/index.html` |
-| Tin tức (lọc theo mã, chủ đề, từ khóa) | `/tin-tuc/` | `tin-tuc/index.html` |
+| Tin tức (lọc theo mã, chủ đề, từ khóa) | `/tin-tuc/`, `/tin-tuc/<chủ đề>/`, `/tin-tuc/<mã viết thường>/` | `tin-tuc/index.html` |
 | Đọc bài viết | `/bai-viet/<slug>/` | sinh từ `scripts/article-template.html` + `news` trong `data.js` |
 | Gói hội viên | `/premium/` | `premium/index.html` |
-| Thanh toán QR | `/thanh-toan/?goi=3` hoặc `?khoa=<id>` | `thanh-toan/index.html` |
+| Thanh toán QR | `/thanh-toan/goi-<n>-thang/`, `/thanh-toan/<id khóa>/` | `thanh-toan/index.html` |
 | Tổng quan (sau đăng nhập) | `/dashboard/` | `dashboard/index.html` |
 
-URL chuẩn của mỗi trang là `/slug/` (file `slug/index.html`). Mọi link trong site đều có dấu `/` cuối nên Cloudflare phục vụ thẳng, không phải redirect.
+URL chuẩn của mỗi trang là `/slug/` (file `slug/index.html`). Mọi link trong site đều có dấu `/` cuối nên Cloudflare phục vụ thẳng, không phải redirect. Không dùng `?params`: mỗi khóa, bài học, bộ lọc, chủ đề, mã CP, gói thanh toán là một trang tĩnh do `scripts/seo.py` sinh ra từ trang gốc (chỉ sửa trang gốc `slug/index.html`), JS đọc trạng thái từ `<body data-*>`.
 
 Tiêu đề, mô tả, canonical, Open Graph, JSON-LD của từng trang, `robots.txt` và `sitemap.xml` sinh từ `scripts/seo.py` (domain `https://dautucungvu.com`). **Sửa tiêu đề / mô tả trong file đó rồi chạy `python3 scripts/seo.py`**.
 

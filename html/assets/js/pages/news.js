@@ -1,15 +1,16 @@
 /* Trang tin tức: lọc theo mã cổ phiếu, chủ đề hoặc từ khóa; mới nhất lên đầu */
 (function () {
-  const { icon, fmt, norm, Charts, store, toast, escapeHtml, newsItem, newsSorted, tagLabel } = UI;
+  const { icon, fmt, norm, Charts, store, toast, escapeHtml, newsItem, newsSorted, tagLabel, newsUrl } = UI;
   const D = APP_DATA;
   const PAGE = 6;
   const FKEY = "dtcv-follow";
 
-  const params = new URLSearchParams(location.search);
+  // Trạng thái lấy từ trang tĩnh: /tin-tuc/<mã viết thường>/ hoặc /tin-tuc/<chủ đề>/
+  const page = document.body.dataset;
   const state = {
-    ticker: D.tickers.some((t) => t.code === (params.get("ma") || "").toUpperCase()) ? params.get("ma").toUpperCase() : "",
-    tag: D.newsTags.some((t) => t.id === params.get("chu-de")) ? params.get("chu-de") : "",
-    q: params.get("q") || "",
+    ticker: D.tickers.some((t) => t.code === page.ticker) ? page.ticker : "",
+    tag: D.newsTags.some((t) => t.id === page.tag) ? page.tag : "",
+    q: "",
   };
   let limit = PAGE;
   let follows = store.get(FKEY, []);
@@ -131,10 +132,9 @@
     renderTickers();
     renderQuote();
     renderNews();
-    const u = new URL(location.href);
-    [["ma", state.ticker], ["chu-de", state.tag], ["q", state.q]].forEach(([k, v]) => (v ? u.searchParams.set(k, v) : u.searchParams.delete(k)));
-    u.hash = "";
-    history.replaceState(null, "", u);
+    // Địa chỉ là trang tĩnh của mã (ưu tiên) hoặc chủ đề đang lọc; từ khóa không đưa lên URL
+    const href = newsUrl(state.ticker || state.tag);
+    if (href !== location.pathname || location.hash) history.replaceState(null, "", href);
     if (opts && opts.scroll) titleEl.scrollIntoView({ behavior: "smooth", block: "start" });
   }
 
