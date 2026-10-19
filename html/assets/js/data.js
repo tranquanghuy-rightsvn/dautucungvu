@@ -43,7 +43,7 @@ window.APP_DATA = (function () {
       bankName: "Techcombank", // ví dụ "MB Bank"
       accountNo: "4819939999",
       accountName: "NGO TRUONG VU",
-      qrImage: "assets/img/qr-code-card.jpg", // QR của chủ website, cắt từ qr-code.jpg (ưu tiên hơn QR tự sinh)
+      qrImage: "", // để trống: QR VietQR tự sinh theo từng đơn (có sẵn số tiền + nội dung). Ảnh QR tĩnh dự phòng: "assets/img/qr-code-card.jpg"
     },
     membership: {
       pricePerMonth: 68000,

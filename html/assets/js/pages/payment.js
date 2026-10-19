@@ -36,7 +36,7 @@
     if (P.bankId && P.accountNo) {
       const src = "https://img.vietqr.io/image/" + encodeURIComponent(P.bankId) + "-" + encodeURIComponent(P.accountNo) + "-compact2.png" +
         "?amount=" + amount + "&addInfo=" + encodeURIComponent(content) + "&accountName=" + encodeURIComponent(P.accountName);
-      return '<img src="' + src + '" alt="Mã QR chuyển khoản ' + fmt.vnd(amount) + '" width="260" height="260">';
+      return '<img src="' + src + '" alt="Mã QR chuyển khoản ' + fmt.vnd(amount) + '" width="260" height="308" class="qr-photo">';
     }
     return '<div class="qr-missing">' + icon("info") + "<p><b>Chưa có thông tin tài khoản nhận tiền</b><span>Điền ngân hàng, số tài khoản hoặc ảnh QR trong assets/js/data.js (mục payment).</span></p></div>";
   }
