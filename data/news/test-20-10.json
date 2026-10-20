@@ -1,0 +1,18 @@
+{
+  "id": 48,
+  "slug": "test-20-10",
+  "date": "2026-10-20 17:50",
+  "tags": [
+    "MBB",
+    "thi-truong"
+  ],
+  "access": "public",
+  "art": "chart",
+  "title": "Test \"20/10\"",
+  "excerpt": "test thôi",
+  "cover": "images/news/test-20-10/cover.jpg",
+  "cover_alt": "Test \"20/10\"",
+  "seo_title": "Test \"20/10\" | Đầu tư cùng Vũ",
+  "updated_at": "2026-10-20T10:51:58Z",
+  "content_html": "<p>đ&acirc;y l&agrave; test</p>\n<figure><img title=\"Test &quot;20/10&quot;\" src=\"/images/news/test-20-10/01.jpg\" alt=\"Test &quot;20/10&quot;\"></figure>"
+}
