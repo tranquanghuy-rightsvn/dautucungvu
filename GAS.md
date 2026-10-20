@@ -406,6 +406,10 @@ Cron `0 1 * * *` (08:00 VN, `worker/src/cron.js`): hết hạn đơn chờ, emai
   khung. Mọi khối mới có icon PHẢI tự đặt `width/height` cho svg (core.css: `.verify-bar svg`,
   `.auth-done > svg`). Hộp đăng ký cao hơn màn hình điện thoại bị cắt mất nút: `.modal` cần
   `align-items:start; overflow-y:auto` + `.modal-card { margin-block:auto }`.
+- (CMS, 20/10) Xác nhận đơn xong đơn "biến mất" -> tưởng bị xoá: tab Đơn hàng mặc định lọc "Chờ xác
+  nhận", đơn đổi sang confirmed rời bộ lọc. Đơn KHÔNG bị xoá (Worker không có DELETE orders). Sửa
+  (v6): mặc định "Tất cả" (chờ xác nhận lên đầu), ô lọc có đếm số đơn, đơn vừa xác nhận / huỷ vẫn
+  hiện tại chỗ kèm "vừa xác nhận" (`JUST_CHANGED`).
 - (CMS, 20/10) Hộp xác nhận dùng chung nút "Huỷ / Xoá" (từ mẫu) -> "Xác nhận đã nhận tiền?" mà nút
   là "Xoá": khó hiểu. `showConfirm(message, {ok, cancel, danger})` — chữ nút PHẢI nói đúng việc.
 - (Thử API local, 20/10) cookie phiên có `Secure` -> curl KHÔNG gửi lại qua `http://localhost`
