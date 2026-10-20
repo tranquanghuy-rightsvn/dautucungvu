@@ -58,6 +58,15 @@ export function canRead(level, u) {
   return RANK[role] >= (RANK[level] || 0);
 }
 
+/** Quyền xem 1 bài học (GAS.md VI.4): bài "Học thử" -> tất cả; khóa miễn phí -> theo quyền xem của
+ * khóa (public / user); khóa có phí -> đã mua khóa đó HOẶC VIP. course + lesson lấy từ catalog. */
+export async function canWatch(env, course, lesson, u) {
+  if (lesson.preview && course.price) return true;
+  if (!course.price) return canRead(course.access || "public", u);
+  if (!u) return false;
+  return !!u.vip || (await userCourseIds(env, u.id)).includes(course.id);
+}
+
 /** Đơn chờ quá 3 ngày -> expired. Gọi khi đọc danh sách đơn và trong cron. */
 export async function expirePending(env) {
   const cutoff = new Date(Date.now() - PENDING_DAYS * 86400 * 1000).toISOString();

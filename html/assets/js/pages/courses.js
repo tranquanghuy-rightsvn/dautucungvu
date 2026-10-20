@@ -98,13 +98,15 @@
 
     let player;
     if (canWatch) {
-      player = video(lesson.video, lesson.t);
+      player = video(lesson.video, lesson.t, { course: c.id, lesson: lesson.slug });
     } else if (!c.price) {
       player = '<div class="player-lock">' + gate("user") + "</div>";
     } else {
       player = '<div class="player-lock">' + gate("course", { course: c }) + "</div>";
     }
 
+    // Vẽ lại (đánh dấu đã học, đổi trạng thái đăng nhập) mà vẫn cùng bài: giữ nguyên video đang phát
+    const playing = detailEl.querySelector("video[data-lesson-video]");
     const pct = Math.round((done.length / c.lessons.length) * 100);
     detailEl.innerHTML =
       '<div class="panel panel-pad course-head">' +
@@ -139,6 +141,8 @@
         })
         .join("") +
       "</ol></div>";
+    const fresh = detailEl.querySelector("video[data-lesson-video]");
+    if (playing && fresh && fresh.getAttribute("src") === playing.getAttribute("src")) fresh.replaceWith(playing);
   }
 
   function render() {

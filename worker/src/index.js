@@ -8,6 +8,8 @@ import { handleMarket } from "./market.js";
 import { handleAccount } from "./account.js";
 import { handleAdmin } from "./admin.js";
 import { runDaily } from "./cron.js";
+import { currentUser } from "./auth.js";
+import { loadCatalog, canWatch } from "./orders.js";
 
 const SLUG = /^[a-z0-9]+(-[a-z0-9]+)*$/;
 const videoKey = (course, lesson) => `courses/${course}/${lesson}.mp4`;
@@ -32,6 +34,20 @@ async function route(request, env, ctx) {
     if (res) return res;
   }
 
+  // GET /api/video/<khóa>/<bài> — phát MP4 từ R2 (Range để tua), CHỈ khi đủ quyền (GAS.md II.C, VI.4)
+  if (parts[0] === "video" && parts.length === 3 && method === "GET") {
+    if (!SLUG.test(parts[1]) || !SLUG.test(parts[2])) throw new HttpError(400, "Đường dẫn không hợp lệ");
+    const cat = await loadCatalog(env);
+    const course = cat.courses.find((c) => c.id === parts[1]);
+    const lesson = course && (course.lessons || []).find((l) => l.slug === parts[2]);
+    if (!lesson) throw new HttpError(404, "Không tìm thấy bài học");
+    const u = await currentUser(request, env);
+    if (!(await canWatch(env, course, lesson, u))) {
+      throw new HttpError(u ? 403 : 401, u ? "Bạn chưa có quyền xem bài học này" : "Vui lòng đăng nhập để xem");
+    }
+    return streamObject(env.VIDEOS, videoKey(parts[1], parts[2]), request);
+  }
+
   // ----- Admin (GAS CMS gọi qua UrlFetchApp, header Authorization: Bearer <ADMIN_KEY>) -----
   if (parts[0] === "admin") {
     requireAdmin(request, env);
@@ -51,6 +67,19 @@ async function route(request, env, ctx) {
 
     // GET /api/admin/ping — CMS kiểm tra kết nối + khóa
     if (parts[1] === "ping" && method === "GET") return json({ ok: true });
+
+    // DELETE /api/admin/videos/<course> — xoá mọi video của khóa (khi xoá khóa học)
+    if (parts[1] === "videos" && parts.length === 3 && SLUG.test(parts[2]) && method === "DELETE") {
+      let deleted = 0;
+      let cursor;
+      do {
+        const page = await env.VIDEOS.list({ prefix: `courses/${parts[2]}/`, cursor });
+        if (page.objects.length) await env.VIDEOS.delete(page.objects.map((o) => o.key));
+        deleted += page.objects.length;
+        cursor = page.truncated ? page.cursor : undefined;
+      } while (cursor);
+      return json({ ok: true, deleted });
+    }
 
     // HEAD-like: GET /api/admin/videos/<course>/<lesson> -> { exists, size }
     // DELETE /api/admin/videos/<course>/<lesson>

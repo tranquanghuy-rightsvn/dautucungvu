@@ -975,7 +975,15 @@
     const m = String(v || "").match(/(?:youtu\.be\/|v=|embed\/|shorts\/)([\w-]{11})/);
     return m ? m[1] : /^[\w-]{11}$/.test(v || "") ? v : "";
   }
-  function video(src, title) {
+  /* src = "mp4": video bài học lưu ở kho riêng, máy chủ kiểm quyền rồi mới phát (GAS.md II.C) —
+     cần opts {course, lesson} (id khóa + slug bài). Còn lại: link / mã YouTube. */
+  function video(src, title, opts) {
+    if (src === "mp4" && opts) {
+      return (
+        '<div class="video"><video controls playsinline preload="metadata" controlslist="nodownload" data-lesson-video ' +
+        'src="/api/video/' + encodeURIComponent(opts.course) + "/" + encodeURIComponent(opts.lesson) + '" aria-label="Video: ' + escapeHtml(title || "") + '"></video></div>'
+      );
+    }
     const id = youtubeId(src);
     if (!id) {
       return '<div class="video video--empty">' + icon("play") + "<p><b>" + escapeHtml(title || "Video") + "</b><span>Video sẽ được cập nhật sớm.</span></p></div>";
@@ -1146,6 +1154,16 @@
   }
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", boot);
   else boot();
+
+  // Video bài học không phát được (hết phiên đăng nhập, chưa có quyền, mất mạng): báo rõ thay vì khung đen
+  document.addEventListener("error", (e) => {
+    const v = e.target;
+    if (!(v instanceof HTMLVideoElement) || !v.hasAttribute("data-lesson-video")) return;
+    const box = v.parentElement;
+    box.classList.add("video--empty");
+    box.innerHTML = icon("info") + "<p><b>Chưa phát được video</b><span>Hãy tải lại trang. Nếu vẫn lỗi, đăng nhập lại hoặc liên hệ Vũ qua Zalo " + escapeHtml(APP_DATA.site.contact.phone) + ".</span></p>";
+    auth.refresh();
+  }, true);
 
   window.UI = { url, api, icon, fmt, norm, escapeHtml, store, auth, access, initials, rng, Charts, Art, toast, tabs, openLogin, setFieldError, courseCard, courseThumb, priceTag, newsItem, newsSorted, tagLabel, isTicker, accessBadge, Market, marketNote, newsThumb, articleUrl, courseUrl, courseFilterUrl, newsUrl, payUrl, video, youtubeId, gate, contactButtons };
 })();

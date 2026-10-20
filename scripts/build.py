@@ -189,7 +189,10 @@ write_data_js(data)
 (ROOT / "assets/catalog.json").write_text(json.dumps({
     "membership": data["site"]["membership"],
     "payment": {k: data["site"]["payment"].get(k, "") for k in ("bankId", "bankName", "accountNo", "accountName")},
-    "courses": [{"id": c["id"], "title": c["title"], "price": c["price"]} for c in data["courses"]],
+    # access + bài học (slug, học thử) để Worker kiểm quyền phát video /api/video/<khóa>/<bài> (GAS.md II.C)
+    "courses": [{"id": c["id"], "title": c["title"], "price": c["price"], "access": c.get("access") or "public",
+                 "lessons": [{"slug": l["slug"], **({"preview": True} if l.get("preview") else {})} for l in c["lessons"]]}
+                for c in data["courses"]],
     "articles": {n["slug"]: n["access"] for n in data["news"]},
 }, ensure_ascii=False) + "\n", encoding="utf-8")
 # Danh sách mã cho Worker /api/market (GAS.md II.E) — admin sửa mã / chỉ số trong Cài đặt là tự theo
