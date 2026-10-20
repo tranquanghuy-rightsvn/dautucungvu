@@ -410,10 +410,10 @@ chưa có). Site vẫn là bản demo về chức năng:
   `payUrl({course}|{months})`. `assets/js/pages/*.js` đọc trạng thái từ `document.body.dataset`.
 - Thanh toán: VietQR theo đơn (`settings.payment.qrImage = ""`); `assets/img/qr-code-card.jpg` là
   QR tĩnh dự phòng. Đơn hiện chỉ lưu localStorage (demo).
-- `worker/`: đã chạy thử local (`wrangler dev`): trang tĩnh 200, `/khoa-hoc` → 307 `/khoa-hoc/`,
+- `worker/`: ĐÃ DEPLOY lên https://dautucungvu.com (20/10). Đã chạy thử local (`wrangler dev`): trang tĩnh 200, `/khoa-hoc` → 307 `/khoa-hoc/`,
   URL lạ → 404 + `html/404.html`, `/api/health` OK, `/api/*` lạ → 404 JSON, admin sai khóa → 401,
   presigned PUT URL R2 sinh đúng định dạng, `/api/test/video/...` Range (đầu/giữa/suffix) đúng byte.
-  CHƯA deploy (chờ mục XII.A). D1 đã tạo, ID đã điền; R2 chưa bật.
+  D1 + R2 đã tạo. CI chưa deploy được (chưa có secret `CLOUDFLARE_API_TOKEN`) — deploy tay.
 - Liên hệ trong `settings.json` vẫn là số giả `0900 000 000`.
 - Chạy thử: `cd worker && npx wrangler dev` (hoặc `cd html && python3 -m http.server`).
 
@@ -459,13 +459,20 @@ chưa có). Site vẫn là bản demo về chức năng:
       `975f2208a74d9e0b5048659725df1911`).
 - [x] Tạo D1 `dautucungvu` (20/10, APAC, id `7ed75e1e-7173-48c9-99b4-2af6cfac1c55`), điền
       `database_id` + `R2_ACCOUNT_ID` vào `wrangler.jsonc`.
-- [ ] Chủ dự án bật R2 trong dashboard (wrangler báo lỗi 10042 "Please enable R2"); rồi tạo bucket; `npx wrangler r2 bucket cors set dautucungvu-videos
+- [x] Chủ dự án bật R2 (20/10; sau khi bật cần chờ ~20 giây API mới nhận). Tạo bucket
+      `dautucungvu-videos`, đặt CORS từ `worker/r2-cors.json` (20/10).
+- [ ] Còn lại: `npx wrangler r2 bucket cors set dautucungvu-videos
       --file r2-cors.json`; đặt secret `ADMIN_KEY`, `R2_ACCESS_KEY_ID`, `R2_SECRET_ACCESS_KEY`.
-- [ ] Deploy lần đầu, gán custom domain `dautucungvu.com` (xoá bản ghi DNS cũ của apex nếu
-      trùng); kiểm `curl -sI https://dautucungvu.com/ | grep -i server` ra `cloudflare`.
+- [x] Deploy lần đầu bằng `npx wrangler deploy` (tay, từ máy local), custom domain
+      `dautucungvu.com` gán OK, `server: cloudflare`; `workers_dev` + `preview_urls` tắt;
+      `html/.assetsignore` loại `.DS_Store` (20/10). Kiểm live: trang 200, `/khoa-hoc` 307,
+      URL lạ 404 + trang 404, `/api/health` OK.
+- [ ] `www.dautucungvu.com` chưa cấu hình (hỏi chủ dự án có cần không).
 - [ ] Thử rủi ro 1: upload file lớn từ iframe GAS lên R2 bằng presigned URL (CORS).
-- [ ] Thử rủi ro 2: phát MP4 THẬT qua Worker có `Range` trên production (Chrome, Safari iOS).
-      Local đã đúng byte (20/10).
+- [x] Thử rủi ro 2 trên production (20/10): MP4 720p 60s (`courses/test/video-720p.mp4`, file
+      thử, xoá trước khi mở bán) qua `/api/test/video/test/video-720p` — full + Range đúng byte;
+      Chrome: đọc metadata, tua tới 45s, phát tiếp OK.
+- [ ] Rủi ro 2 trên Safari iOS: chủ dự án mở link trên iPhone, phát + tua.
 - Xong khi: sửa `data/` + push → site tự deploy; 2 rủi ro đã thử OK (hoặc ghi phương án thay vào đây).
 
 **GĐ2 — CMS lõi + bài viết (≈ 3–4 ngày)**

@@ -18,6 +18,9 @@
   },
 
   "routes": [{ "pattern": "dautucungvu.com", "custom_domain": true }],
+  // Chỉ phục vụ qua domain thật, không mở *.workers.dev / preview URL
+  "workers_dev": false,
+  "preview_urls": false,
 
   // D1 tạo 20/10/2026 (region APAC)
   "d1_databases": [
