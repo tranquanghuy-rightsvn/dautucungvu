@@ -432,7 +432,7 @@ chưa có). Site vẫn là bản demo về chức năng:
 - `worker/`: ĐÃ DEPLOY lên https://dautucungvu.com (20/10). Đã chạy thử local (`wrangler dev`): trang tĩnh 200, `/khoa-hoc` → 307 `/khoa-hoc/`,
   URL lạ → 404 + `html/404.html`, `/api/health` OK, `/api/*` lạ → 404 JSON, admin sai khóa → 401,
   presigned PUT URL R2 sinh đúng định dạng, `/api/test/video/...` Range (đầu/giữa/suffix) đúng byte.
-  D1 + R2 đã tạo. Deploy: Workers Builds (chờ chủ dự án cấu hình Build settings) — tạm deploy tay.
+  D1 + R2 đã tạo. Deploy: Actions build + Workers Builds (đã chạy thật 20/10).
 - Liên hệ trong `settings.json` vẫn là số giả `0900 000 000`.
 - Chạy thử: `npx wrangler dev` ở gốc repo (hoặc `cd html && python3 -m http.server`).
 
@@ -473,8 +473,11 @@ chưa có). Site vẫn là bản demo về chức năng:
 - [x] `.github/workflows/build.yml` — chỉ build + commit, deploy giao cho Workers Builds (20/10).
 - [x] `wrangler.jsonc` + `package.json` ra gốc repo; bỏ `aws4fetch`, tự ký SigV4 bằng WebCrypto
       (đối chiếu chữ ký khớp `aws4fetch`) (20/10).
-- [ ] Chủ dự án cấu hình Workers Builds: build command trống, deploy `npx wrangler deploy`, root
-      `/`, build watch paths như VIII; rồi push và kiểm `/api/health` 200 sau khi Cloudflare build.
+- [x] Chủ dự án cấu hình Workers Builds như VIII (20/10). Đã kiểm: push `75af958` → Workers Builds
+      deploy bản đúng (compat `2026-10-01`, có D1 + R2, `/api/health` 200); Actions tạo commit rỗng
+      "CI: build" `a42160f` → Workers Builds deploy tiếp OK. LƯU Ý root directory PHẢI là `/` (không
+      phải `/html`): `/html` thì không thấy `wrangler.jsonc` → Cloudflare tự deploy kiểu chỉ static,
+      mất API — đúng lỗi đã gặp.
 - [x] `npx wrangler login` (20/10, tài khoản Cloudflare `web100.vn@gmail.com`, Account ID
       `975f2208a74d9e0b5048659725df1911`).
 - [x] Tạo D1 `dautucungvu` (20/10, APAC, id `7ed75e1e-7173-48c9-99b4-2af6cfac1c55`), điền
