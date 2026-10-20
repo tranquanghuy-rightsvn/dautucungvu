@@ -14,7 +14,6 @@ on:
       - data/posts.json
       - data/courses.json
       - data/settings.json
-      - data/market-demo.json
       - scripts/**
       - templates/**
       - .github/workflows/build.yml

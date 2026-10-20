@@ -84,7 +84,7 @@
       "</div>" +
       // Market + watchlist
       '<div class="dash-grid">' +
-      '<section class="panel panel-pad" aria-labelledby="mk-title"><div class="card-title"><h2 id="mk-title">Thị trường hôm nay</h2><span class="data-note">' + icon("info") + "Dữ liệu minh họa</span></div>" +
+      '<section class="panel panel-pad" aria-labelledby="mk-title"><div class="card-title"><h2 id="mk-title">Thị trường hôm nay</h2><span class="data-note">' + icon("info") + UI.marketNote() + "</span></div>" +
       '<div class="index-tabs" role="tablist" aria-label="Chọn chỉ số">' +
       D.indices
         .map((ix, i) => {
@@ -99,7 +99,7 @@
         .map(
           (t) =>
             '<tr><td><a href="' + UI.newsUrl(t.code) + '">' + t.code + '</a></td><td class="num">' + fmt.price(t.price) + "</td>" +
-            '<td class="spark-cell">' + Charts.spark(Charts.walk(24, t.code, t.price, 0.03, t.change / 1500), { w: 64, h: 22, color: t.change >= 0 ? "#16a34a" : "#e0393e", fill: false, stroke: 1.6 }) + "</td>" +
+            '<td class="spark-cell">' + ((t.history || []).length > 1 ? Charts.spark(t.history.slice(-24), { w: 64, h: 22, color: t.change >= 0 ? "#16a34a" : "#e0393e", fill: false, stroke: 1.6 }) : "") + "</td>" +
             '<td class="num ' + fmt.cls(t.change) + '">' + fmt.pct(t.change) + "</td></tr>"
         )
         .join("") +
@@ -133,13 +133,14 @@
 
   function drawChart() {
     const ix = D.indices[indexSel];
-    const open = ix.value - ix.change;
-    const raw = Charts.walk(48, ix.code, open, 0.004, (ix.change / open) / 48);
-    // Kéo đường để điểm đầu = giá mở cửa, điểm cuối = giá hiện tại
-    const endFix = ix.value - raw[raw.length - 1];
-    const data = raw.map((v, i) => v + (endFix * i) / (raw.length - 1));
+    // Nến 5 phút của phiên gần nhất (/api/market); chưa có thì để trống
+    const data = ix.intraday || [];
     const labels = ["9:00", "10:00", "11:00", "13:00", "14:00", "14:45"];
     const el = root.querySelector("[data-dash-chart]");
+    if (data.length < 2) {
+      el.innerHTML = '<p class="data-note">' + UI.marketNote() + "</p>";
+      return;
+    }
     // Vẽ đúng bằng bề rộng thật để chữ trục giờ không bị thu nhỏ trên mobile
     const w = Math.round(el.clientWidth) || 640;
     const h = Math.round(Math.min(230, Math.max(170, w * 0.36)));
@@ -165,5 +166,6 @@
     else gate();
   }
   document.addEventListener("auth:change", boot);
+  document.addEventListener("market:update", boot);
   boot();
 })();

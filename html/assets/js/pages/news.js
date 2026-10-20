@@ -87,12 +87,13 @@
     followBtn.hidden = !t;
     if (!t) return;
     const color = t.change >= 0 ? "#16a34a" : "#e0393e";
-    const diff = t.price - t.price / (1 + t.change / 100);
+    const diff = t.price - t.ref;
+    const hist = t.history || [];
     quoteEl.innerHTML =
       '<div class="quote-logo" style="background:' + t.color + '">' + t.code + "</div>" +
       "<div><h3>" + t.code + ' <span class="badge badge--soft">' + t.sector + '</span></h3><p class="co">' + t.name + "</p>" +
-      '<div class="quote-price"><strong class="num">' + fmt.price(t.price) + '</strong><span class="num ' + fmt.cls(t.change) + '">' + fmt.pct(t.change) + " (" + (diff >= 0 ? "+" : "") + fmt.int(Math.round(diff * 1000)) + ")</span></div></div>" +
-      '<div class="quote-spark" aria-label="Diễn biến giá 3 tháng (minh họa)">' + Charts.spark(Charts.walk(60, t.code, t.price, 0.03, t.change / 1500), { w: 300, h: 64, color }) + "</div>";
+      '<div class="quote-price"><strong class="num">' + fmt.price(t.price) + '</strong><span class="num ' + fmt.cls(t.change) + '">' + fmt.pct(t.change) + (isFinite(diff) ? " (" + (diff >= 0 ? "+" : "") + fmt.int(Math.round(diff * 1000)) + ")" : "") + "</span></div></div>" +
+      '<div class="quote-spark" aria-label="Diễn biến giá 3 tháng">' + (hist.length > 1 ? Charts.spark(hist, { w: 300, h: 64, color }) : "") + "</div>";
     const on = follows.includes(t.code);
     followBtn.setAttribute("aria-pressed", on);
     followBtn.innerHTML = icon(on ? "check" : "plus") + "<span>" + (on ? "Đang theo dõi" : "Theo dõi " + t.code) + "</span>";
@@ -231,6 +232,11 @@
   });
 
   document.addEventListener("auth:change", renderNews);
+  // Giá thật về (hoặc làm mới) -> vẽ lại cột mã + thẻ giá
+  document.addEventListener("market:update", () => {
+    renderTickers();
+    renderQuote();
+  });
 
   const focusSearch = location.hash === "#tim-ma";
   apply({});

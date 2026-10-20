@@ -4,17 +4,23 @@
 import { json, requireAdmin, HttpError } from "./http.js";
 import { streamObject } from "./r2.js";
 import { presignPut } from "./presign.js";
+import { handleMarket } from "./market.js";
 
 const SLUG = /^[a-z0-9]+(-[a-z0-9]+)*$/;
 const videoKey = (course, lesson) => `courses/${course}/${lesson}.mp4`;
 
-async function route(request, env) {
+async function route(request, env, ctx) {
   const url = new URL(request.url);
   const parts = url.pathname.replace(/\/+$/, "").split("/").slice(2); // bỏ "", "api"
   const method = request.method;
 
   if (parts[0] === "health" && method === "GET") {
     return json({ ok: true, time: new Date().toISOString() });
+  }
+
+  // GET /api/market — chỉ số + giá cổ phiếu thật (GAS.md II.E)
+  if (parts[0] === "market" && parts.length === 1 && method === "GET") {
+    return handleMarket(request, env, ctx);
   }
 
   // ----- Admin (GAS CMS gọi qua UrlFetchApp, header Authorization: Bearer <ADMIN_KEY>) -----
@@ -112,11 +118,11 @@ async function route(request, env) {
 }
 
 export default {
-  async fetch(request, env) {
+  async fetch(request, env, ctx) {
     const url = new URL(request.url);
     if (!url.pathname.startsWith("/api/")) return env.ASSETS.fetch(request);
     try {
-      return await route(request, env);
+      return await route(request, env, ctx);
     } catch (err) {
       if (err instanceof HttpError) return json({ error: err.message }, err.status);
       console.error(err);

@@ -6,7 +6,7 @@ Toàn bộ quyết định, kiến trúc, kế hoạch và tiến độ nằm tr
 
 ```
 data/                 NGUỒN DỮ LIỆU công khai (CMS ghi) — posts.json, news/<slug>.json,
-                      courses.json, settings.json, market-demo.json (minh hoạ, bỏ ở GĐ3)
+                      courses.json, settings.json (giá / chỉ số KHÔNG ở đây — /api/market)
 templates/            khung trang sinh tự động (article.html)
 scripts/build.py      data/ -> html/ (data.js, trang con, SEO, sitemap, robots)
 html/                 site tĩnh được deploy (chỉ thứ được public)

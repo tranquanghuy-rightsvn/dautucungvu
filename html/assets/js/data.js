@@ -43,24 +43,16 @@ window.APP_DATA = {
   },
   "indices": [
     {
-      "code": "VN-Index",
-      "value": 1281.45,
-      "change": 12.36
+      "code": "VN-Index"
     },
     {
-      "code": "VN30",
-      "value": 1342.21,
-      "change": 15.82
+      "code": "VN30"
     },
     {
-      "code": "HNX",
-      "value": 246.8,
-      "change": 2.14
+      "code": "HNX"
     },
     {
-      "code": "UPCoM",
-      "value": 95.12,
-      "change": -0.18
+      "code": "UPCoM"
     }
   ],
   "tickers": [
@@ -68,89 +60,67 @@ window.APP_DATA = {
       "code": "MBB",
       "name": "Ngân hàng TMCP Quân Đội",
       "sector": "Ngân hàng",
-      "color": "#1e3a8a",
-      "price": 24.8,
-      "change": 1.3
+      "color": "#1e3a8a"
     },
     {
       "code": "SSI",
       "name": "CTCP Chứng khoán SSI",
       "sector": "Chứng khoán",
-      "color": "#d71920",
-      "price": 32.1,
-      "change": 1.2
+      "color": "#d71920"
     },
     {
       "code": "VCB",
       "name": "Ngân hàng TMCP Ngoại thương Việt Nam",
       "sector": "Ngân hàng",
-      "color": "#0f7a3d",
-      "price": 92.4,
-      "change": 0.4
+      "color": "#0f7a3d"
     },
     {
       "code": "VNM",
       "name": "CTCP Sữa Việt Nam",
       "sector": "Thực phẩm",
-      "color": "#1d4ed8",
-      "price": 72.5,
-      "change": 0.5
+      "color": "#1d4ed8"
     },
     {
       "code": "FPT",
       "name": "CTCP FPT",
       "sector": "Công nghệ",
-      "color": "#f37021",
-      "price": 142,
-      "change": 0.7
+      "color": "#f37021"
     },
     {
       "code": "HPG",
       "name": "CTCP Tập đoàn Hòa Phát",
       "sector": "Thép",
-      "color": "#b91c1c",
-      "price": 27.3,
-      "change": -0.4
+      "color": "#b91c1c"
     },
     {
       "code": "TCB",
       "name": "Ngân hàng TMCP Kỹ thương Việt Nam",
       "sector": "Ngân hàng",
-      "color": "#dc2626",
-      "price": 23.9,
-      "change": 0.8
+      "color": "#dc2626"
     },
     {
       "code": "VIC",
       "name": "Tập đoàn Vingroup",
       "sector": "Bất động sản",
-      "color": "#9f1239",
-      "price": 44.2,
-      "change": -1.1
+      "color": "#9f1239"
     },
     {
       "code": "VHM",
       "name": "CTCP Vinhomes",
       "sector": "Bất động sản",
-      "color": "#be123c",
-      "price": 41.5,
-      "change": 0
+      "color": "#be123c"
     },
     {
       "code": "STB",
       "name": "Ngân hàng TMCP Sài Gòn Thương Tín",
       "sector": "Ngân hàng",
-      "color": "#1e40af",
-      "price": 31.2,
-      "change": 1.6
+      "color": "#1e40af"
     },
     {
       "code": "REE",
       "name": "CTCP Cơ điện lạnh",
       "sector": "Điện",
-      "color": "#0369a1",
-      "price": 68,
-      "change": -0.8
+      "color": "#0369a1"
     }
   ],
   "courses": [

@@ -80,11 +80,13 @@
   /* ---------- Format helpers (vi-VN) ---------- */
   const nf2 = new Intl.NumberFormat("vi-VN", { minimumFractionDigits: 2, maximumFractionDigits: 2 });
   const nf0 = new Intl.NumberFormat("vi-VN");
+  // Số thị trường có thể chưa tải xong (/api/market) -> hiện "—" thay vì NaN
+  const ok = (v) => typeof v === "number" && isFinite(v);
   const fmt = {
-    price: (v) => nf0.format(Math.round(v * 1000)), // 24.8 -> "24.800"
-    index: (v) => nf2.format(v),
-    pct: (v) => (v > 0 ? "+" : "") + nf2.format(v) + "%",
-    change: (v) => (v > 0 ? "+" : "") + nf2.format(v),
+    price: (v) => (ok(v) ? nf0.format(Math.round(v * 1000)) : "—"), // 24.8 -> "24.800"
+    index: (v) => (ok(v) ? nf2.format(v) : "—"),
+    pct: (v) => (ok(v) ? (v > 0 ? "+" : "") + nf2.format(v) + "%" : "—"),
+    change: (v) => (ok(v) ? (v > 0 ? "+" : "") + nf2.format(v) : "—"),
     cls: (v) => (v > 0 ? "up" : v < 0 ? "down" : "flat"),
     int: (v) => nf0.format(v),
     vnd: (v) => nf0.format(v) + "đ", // 68000 -> "68.000đ"
@@ -551,6 +553,42 @@
       "</div>";
   }
 
+  /* ---------- Thị trường: dữ liệu thật từ /api/market (GAS.md II.E) ----------
+     Gộp vào APP_DATA.indices / tickers (value, change, intraday / price, change %, history) rồi
+     bắn sự kiện "market:update" để từng trang tự vẽ lại. Trong giờ giao dịch làm mới mỗi 60s
+     khi trang đang mở. Lỗi mạng -> giữ số cũ (hoặc "—"), không làm hỏng trang. */
+  const Market = { ready: false, updatedAt: null, stale: false, live: false };
+  function marketNote() {
+    if (!Market.ready) return "Đang tải dữ liệu...";
+    const d = new Date(Market.updatedAt);
+    const hm = isNaN(d) ? "" : d.toLocaleTimeString("vi-VN", { hour: "2-digit", minute: "2-digit", timeZone: "Asia/Ho_Chi_Minh" });
+    return "Cập nhật lúc " + hm + (Market.stale ? " (chưa lấy được số mới)" : "");
+  }
+  function applyMarket(m) {
+    const ix = {}, tk = {};
+    (m.indices || []).forEach((i) => (ix[i.code] = i));
+    (m.tickers || []).forEach((t) => (tk[t.code] = t));
+    APP_DATA.indices.forEach((i) => Object.assign(i, ix[i.code] || {}));
+    APP_DATA.tickers.forEach((t) => Object.assign(t, tk[t.code] || {}));
+    Object.assign(Market, { ready: true, updatedAt: m.updated_at, stale: !!m.stale, live: !!m.live });
+    renderMarketStrip();
+    document.dispatchEvent(new CustomEvent("market:update"));
+  }
+  function loadMarket() {
+    if (IS_FILE) return Promise.resolve();
+    return fetch(url("api/market"), { headers: { accept: "application/json" } })
+      .then((r) => (r.ok ? r.json() : Promise.reject(new Error("HTTP " + r.status))))
+      .then(applyMarket)
+      .catch((e) => console.warn("[market] không tải được dữ liệu thị trường:", e));
+  }
+  function startMarket() {
+    if (!window.APP_DATA || !APP_DATA.indices) return;
+    loadMarket();
+    setInterval(() => {
+      if (Market.live && document.visibilityState === "visible") loadMarket();
+    }, 60000);
+  }
+
   function renderMarketStrip() {
     const el = document.querySelector("[data-market-strip]");
     if (!el || !window.APP_DATA) return;
@@ -564,7 +602,7 @@
             '<span class="num ' + fmt.cls(i.change) + '"><span class="abs">' + fmt.change(i.change) + ' </span><span class="pct">' + fmt.pct((i.change / (i.value - i.change)) * 100) + "</span></span></span>"
         )
         .join("") +
-      '<span class="demo-note">Dữ liệu minh họa</span></div>';
+      '<span class="demo-note">' + marketNote() + "</span></div>";
   }
 
   /* ---------- Login modal ---------- */
@@ -927,6 +965,7 @@
     renderHeader();
     renderFooter();
     renderMarketStrip();
+    startMarket();
     // Static [data-icon] placeholders in page markup
     document.querySelectorAll("[data-icon]").forEach((el) => {
       el.innerHTML = icon(el.dataset.icon);
@@ -940,5 +979,5 @@
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", boot);
   else boot();
 
-  window.UI = { url, icon, fmt, norm, escapeHtml, store, auth, access, initials, rng, Charts, Art, toast, tabs, openLogin, setFieldError, courseCard, courseThumb, priceTag, newsItem, newsSorted, tagLabel, isTicker, accessBadge, newsThumb, articleUrl, courseUrl, courseFilterUrl, newsUrl, payUrl, video, youtubeId, gate, contactButtons };
+  window.UI = { url, icon, fmt, norm, escapeHtml, store, auth, access, initials, rng, Charts, Art, toast, tabs, openLogin, setFieldError, courseCard, courseThumb, priceTag, newsItem, newsSorted, tagLabel, isTicker, accessBadge, Market, marketNote, newsThumb, articleUrl, courseUrl, courseFilterUrl, newsUrl, payUrl, video, youtubeId, gate, contactButtons };
 })();

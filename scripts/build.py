@@ -136,15 +136,13 @@ def read_json(rel):
 def load_data():
     """Gộp data/*.json thành đúng cấu trúc window.APP_DATA mà JS trên site đang dùng."""
     settings = read_json("settings.json")
-    demo = read_json("market-demo.json")  # TODO GĐ3: thay bằng /api/market (GAS.md II.E)
-    idx_demo = {i["code"]: i for i in demo["indices"]}
-    tk_demo = {t["code"]: t for t in demo["tickers"]}
+    # Giá / chỉ số KHÔNG nằm trong data.js: trình duyệt tải số thật từ /api/market (GAS.md II.E)
     news = [read_json(f"news/{p['slug']}.json") for p in read_json("posts.json")]
     site = {k: v for k, v in settings.items() if k not in ("brokers", "newsTags", "indices", "tickers")}
     return {
         "site": site,
-        "indices": [{**idx_demo.get(i["code"], {}), **i} for i in settings["indices"]],
-        "tickers": [{**t, **{k: v for k, v in tk_demo.get(t["code"], {}).items() if k != "code"}} for t in settings["tickers"]],
+        "indices": settings["indices"],
+        "tickers": settings["tickers"],
         "courses": read_json("courses.json"),
         "newsTags": settings["newsTags"],
         "news": news,
@@ -165,6 +163,11 @@ def write_data_js(data):
 
 data = load_data()
 write_data_js(data)
+# Danh sách mã cho Worker /api/market (GAS.md II.E) — admin sửa mã / chỉ số trong Cài đặt là tự theo
+(ROOT / "assets/market-symbols.json").write_text(json.dumps({
+    "tickers": [t["code"] for t in data["tickers"]],
+    "indices": [i["code"] for i in data["indices"]],
+}, ensure_ascii=False) + "\n", encoding="utf-8")
 
 # ---------- Trang thường ----------
 sitemap = []
