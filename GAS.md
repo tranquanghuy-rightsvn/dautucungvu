@@ -388,7 +388,14 @@ Không chạy trên GAS. GAS chỉ là giao diện quản trị gọi API admin 
   commit). Cách né: `wrangler.jsonc` + `package.json` ở GỐC repo, cấu hình Build như VIII.
   Kiểm nhanh sau deploy: `curl https://dautucungvu.com/api/health` phải 200;
   `gh api repos/tranquanghuy-rightsvn/dautucungvu/commits/<sha>/check-runs` xem build của commit.
-- (Chưa có bug GAS/Worker — bổ sung khi gặp, kèm nguyên nhân + cách né.)
+- (GAS, 20/10) `clasp create` ghi đè `appsscript.json` mặc định -> phải khôi phục trước `push`.
+- (GAS, 20/10) Lần Lưu đầu không có commit nào (kể cả ảnh bìa) dù CMS đọc được danh sách bài ->
+  ghi vào kho thất bại; chủ dự án sửa cấu hình token xong thì chạy. Nghi: GitHub fine-grained
+  token để Contents = Read-only (mặc định). Kiểm: token phải Contents **Read and write**, đúng repo.
+- (GAS, 20/10) TinyMCE mặc định lưu tiếng Việt thành entity (`&acirc;`) -> thêm
+  `entity_encoding: "raw"`.
+- (Khác mẫu xevip, cố ý) `slugify_` / `slugify` thay ký tự lạ bằng `-` (xevip: xoá đi) để khớp
+  slug 18 bài cũ ("16/10" -> "16-10"). 2 hàm server/client PHẢI giống nhau.
 
 ## X. Cấu hình (tên biến cố định)
 
@@ -517,11 +524,23 @@ chưa có). Site vẫn là bản demo về chức năng:
 - Xong khi: sửa `data/` + push → site tự deploy; 2 rủi ro đã thử OK (hoặc ghi phương án thay vào đây).
 
 **GĐ2 — CMS lõi + bài viết (≈ 3–4 ngày)**
-- [ ] `gas/` từ mẫu xevip: OTP, `root > admin > editor`, quản lý quản trị viên, boot cache,
-      pop-up, spinner, giấu hạ tầng; `gas/` vào `.gitignore`.
-- [ ] Tab Bài viết đủ II.A (TinyMCE tự host, chèn ảnh, chủ đề, mã CP, quyền xem).
-- [ ] `html/admin/index.html` nhúng iframe + link thoát (skill mục 6/6a), `noindex`.
-- [ ] Chuyển 18 bài hiện có sang `data/`.
+- [x] `gas/` từ mẫu xevip: OTP, `root > admin > editor` (admin chỉ quản lý editor, root quản lý
+      admin), boot cache, pop-up, spinner, giấu hạ tầng; `gas/` gitignore (20/10).
+- [x] Tab Bài viết đủ II.A (TinyMCE 6.8.5 tự host `html/vendor/tinymce/`, nút chèn ảnh nhanh,
+      chủ đề, mã CP, quyền xem, `entity_encoding: "raw"`) (20/10).
+- [x] `html/admin/index.html` nhúng iframe + link thoát, `noindex` (meta + `html/_headers`
+      X-Robots-Tag), robots.txt KHÔNG khai /admin/ (20/10).
+- [x] 18 bài cũ đã ở `data/` từ GĐ1 (chưa có ảnh bìa -> site dùng hình SVG `art`; mở sửa trong CMS
+      thì bắt buộc tải ảnh bìa).
+- [x] Worker API admin thân bài trả phí `/api/admin/articles/<slug>` + D1 `article_bodies`
+      (migration 0001 đã áp remote) (20/10).
+- [x] Thử thật (20/10): bài `test-20-10` (public, ảnh bìa + 1 ảnh trong bài, tiêu đề có `"` và `/`):
+      commit đúng thứ tự cover -> 01.jpg -> data/news -> posts.json -> CI build; 3 commit trung gian
+      KHÔNG deploy, chỉ "CI: build" deploy (1 lần/thao tác); ảnh lưu `/images/news/<slug>/01.jpg`;
+      trang live đúng (title, canonical, og:image = ảnh bìa, sitemap, ảnh bìa ở /tin-tuc/).
+- [ ] Còn thử: bài TRẢ PHÍ (thân bài phải ở D1, KHÔNG có trong `data/news/*.json`), xoá bài (xoá
+      kèm ảnh), F5 giữ đăng nhập (Chrome + Safari), tab Kiểm tra hệ thống + upload video lớn từ
+      trang GAS (rủi ro 1 phần trình duyệt), thêm/xoá editor.
 - Xong khi: editor đăng / sửa / xoá bài → 1–3 phút lên site đúng URL + SEO.
 
 **GĐ3 — Khóa học + cài đặt (≈ 3 ngày)**
