@@ -8,8 +8,8 @@ window.APP_DATA = {
     "offerText": "với số vốn từ 50 triệu đồng – Miễn phí toàn bộ khóa học & tin tức độc quyền!",
     "minCapital": "50 triệu đồng",
     "contact": {
-      "phone": "0900 000 000",
-      "zalo": "https://zalo.me/0900000000",
+      "phone": "0982277493",
+      "zalo": "https://zalo.me/0982277493",
       "facebook": "#",
       "youtube": "#",
       "telegram": "#"
@@ -342,7 +342,7 @@ window.APP_DATA = {
       "label": "Thị trường",
       "keys": [
         "thi truong",
-        "vn-index",
+        "vn index",
         "vnindex",
         "phien"
       ]
