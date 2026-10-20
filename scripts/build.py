@@ -279,7 +279,8 @@ for n in data["news"]:
     sitemap.append((url, n["date"][:10], "monthly", "0.6"))
 print("đã sinh", len(data["news"]), "bài viết trong bai-viet/")
 
-# xoá trang của bài đã bị xoá / đổi slug
+# xoá trang của bài đã bị xoá / đổi slug (chưa có bài nào thì git không giữ thư mục rỗng)
+(ROOT / "bai-viet").mkdir(exist_ok=True)
 for d in (ROOT / "bai-viet").iterdir():
     if d.is_dir() and d.name not in slugs:
         shutil.rmtree(d)
