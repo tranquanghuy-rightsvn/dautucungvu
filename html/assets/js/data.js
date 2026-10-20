@@ -689,7 +689,7 @@ window.APP_DATA = {
       "cover": "images/news/bai-tra-tien/cover.jpg",
       "cover_alt": "bài trả tiền",
       "seo_title": "bài trả tiền | Đầu tư cùng Vũ",
-      "updated_at": "2026-10-20T10:54:07Z"
+      "updated_at": "2026-10-20T10:56:12Z"
     }
   ],
   "brokers": [
