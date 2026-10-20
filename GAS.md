@@ -187,15 +187,25 @@ Ranh giới cứng:
 
 ### II.C Upload & phát video
 
-1. Định dạng: **MP4 (H.264 + AAC), 720p**, ≤ **2GB/file**. Không chuyển mã server. Kiểm tra đuôi +
-   MIME ở client và server.
-2. Upload: GAS gọi `POST /api/admin/videos/upload-url` (`course_id`, `lesson_slug`) → Worker trả
-   **presigned PUT URL R2** (1 giờ) → trình duyệt admin PUT thẳng lên R2, hiện % → gọi
-   `POST /api/admin/videos/commit` để Worker ghi khóa video vào D1. Video KHÔNG qua GAS/GitHub.
+1. Định dạng: **CHỈ MP4** (H.264 + AAC, nên 720p), ≤ **2GB/file** (chốt 20/10, không nhận .mov).
+   Không chuyển mã server. CMS kiểm đuôi `.mp4` + MIME `video/mp4`, đọc thử file trong trình duyệt:
+   không có hình (thường HEVC từ iPhone) → hỏi lại trước khi tải; lấy thời lượng điền số phút nếu bài
+   chưa có.
+2. Upload (chỉ bài học ĐÃ LƯU — slug bất biến là tên file): nút **Tải video / Thay / Xoá** ở cột
+   Video của bảng bài học. GAS `getLessonVideoUploadUrl` → Worker `POST /api/admin/videos/upload-url`
+   trả **presigned PUT URL R2** (1 giờ) → trình duyệt admin PUT thẳng lên R2 (XHR, hiện %) → GAS
+   `setLessonVideo` kiểm R2 đã có file rồi ghi cờ `lesson.video = "mp4"` vào `data/courses.json`
+   (commit ngay, không cần bấm Lưu khóa học). KHÔNG có bảng D1 cho video: khóa R2 suy ra từ
+   `courses/<course_id>/<lesson_slug>.mp4`. Xoá video: R2 delete + cờ `""`. Xoá bài học (Lưu khóa) →
+   xoá video của bài; xoá khóa → `DELETE /api/admin/videos/<course_id>` (mọi file của khóa).
+   Video KHÔNG qua GAS/GitHub.
 3. Bucket R2 cần CORS cho origin trang GAS (`https://*.googleusercontent.com`, method `PUT`).
    ⚠️ Rủi ro kỹ thuật — thử ở GĐ1 trước khi làm tiếp.
-4. Phát: `<video src="/api/video/<course_id>/<lesson_slug>">`; Worker kiểm tra quyền (VI.4) rồi
-   stream từ R2, hỗ trợ `Range` (tua). Không quyền → 403.
+4. Phát: `<video controls playsinline preload="metadata" src="/api/video/<course_id>/<lesson_slug>">`
+   (`UI.video("mp4", title, {course, lesson})`); Worker đọc `assets/catalog.json` (courses có `access`
+   + `lessons[{slug, preview}]`), kiểm quyền (`canWatch` trong `orders.js`, VI.4) rồi stream từ R2,
+   hỗ trợ `Range` (tua). Chưa đăng nhập → 401, không quyền → 403, bài không có → 404. Lỗi phát → hộp
+   "Chưa phát được video". Vẽ lại trang (đánh dấu đã học…) giữ nguyên video đang phát.
 5. Lý do chọn R2 (không YouTube / Stream / Drive / Vimeo): xem XIII.
 
 ### II.D Cài đặt site — admin trở lên
@@ -366,7 +376,7 @@ email_verified_at, vip, member_until 'YYYY-MM-DD' giờ VN — còn hạn tới 
 reminded), `sessions` (SHA-256 token, 30 ngày), `email_tokens` (verify 24h / reset 30 phút, 1 lần),
 `orders` (code `DTCV HV<n> XXXXX` | `DTCV KH XXXXX` | `TAY …` kích hoạt tay; status pending /
 confirmed / cancelled / expired; paid_reported_at, confirmed_by), `course_access`, `rate_limits`.
-`lesson_videos` (GĐ5) chưa có.
+Video KHÔNG có bảng D1 (II.C.2).
 
 **R2**: bucket `dautucungvu-videos` (private), khóa `courses/<course_id>/<lesson_slug>.mp4`.
 
@@ -376,12 +386,12 @@ Origin đúng site — chống CSRF cùng cookie `dtcv_session` HttpOnly; Secure
 (register/login/forgot qua Turnstile) · `GET|POST /api/orders` (xem / tạo — giá tính lại từ
 `assets/catalog.json`, cần đã xác minh email, đơn pending cùng gói thì trả lại đơn cũ) ·
 `POST /api/orders/paid {code}` (báo đã chuyển -> email Vũ 1 lần) · `GET /api/content/<slug>` ·
-`GET /api/market` · (GĐ5) `/api/video/...`. Link trong email: `/tai-khoan/xac-minh-email/#<mã>`,
+`GET /api/market` · `GET /api/video/<khóa>/<bài>` (II.C.4). Link trong email: `/tai-khoan/xac-minh-email/#<mã>`,
 `/tai-khoan/dat-lai-mat-khau/#<mã>` (mã sau `#`: không lên máy chủ / log; trang xoá khỏi URL ngay).
 
 **API admin Worker** (`worker/src/admin.js` + `index.js`; GAS gọi qua `UrlFetchApp`, header
 `Authorization: Bearer <WORKER_ADMIN_KEY>` + `X-Admin-Email`): `GET /ping` ·
-`GET|PUT|DELETE /articles/<slug>` · `POST /videos/upload-url` · `GET|DELETE /videos/<course>/<lesson>` ·
+`GET|PUT|DELETE /articles/<slug>` · `POST /videos/upload-url` · `GET|DELETE /videos/<course>/<lesson>` · `DELETE /videos/<course>` ·
 `GET /orders` (500 gần nhất) · `POST /orders/<id>/confirm|cancel` · `POST /grant` (kích hoạt tay) ·
 `GET /users` · `POST /users/<id>/vip|extend|set-until|send-reset|lock|revoke-course` ·
 `GET /courses/<id>/sales` (số người sở hữu — chặn xoá khóa). Tiền tố đều là `/api/admin`.
@@ -460,7 +470,7 @@ Workers Builds, Cloudflare tự quản token build).
 
 ---
 
-## XI. Hiện trạng code (20/10/2026, GĐ1–GĐ4 xong phần code — tiếp theo GĐ5 video)
+## XI. Hiện trạng code (20/10/2026, GĐ1–GĐ5 xong phần code — tiếp theo GĐ6 hoàn thiện)
 
 Cấu trúc repo đã theo mục VIII (trừ `gas/`, `html/admin/`, `html/vendor/`, `worker/migrations/`
 chưa có). Site vẫn là bản demo về chức năng:
@@ -495,7 +505,7 @@ chưa có). Site vẫn là bản demo về chức năng:
 - [ ] `ORDER_NOTIFY_EMAIL` + `MAIL_REPLY_TO`. ⏳ GĐ4
 - [ ] SĐT / Zalo thật, link YouTube / Facebook / Telegram. ⏳ GĐ3
 - [ ] Link mở tài khoản, mã giới thiệu, mã môi giới từng công ty CK. ⏳ GĐ3
-- [ ] Video bài học MP4 H.264 720p, ≤ 2GB/file. ⏳ GĐ5
+- [ ] Video bài học MP4 H.264 720p, ≤ 2GB/file — Vũ tự tải trong CMS (tab Khóa học → cột Video).
 - [x] Cloudflare: thêm domain, đổi nameserver (20/10 — `dig NS @1.1.1.1` ra
       `clay.ns.cloudflare.com`, `simone.ns.cloudflare.com`). Gán custom domain vào Worker làm ở GĐ1.
 - [ ] Cloudflare: tạo bucket R2 `dautucungvu-videos` (private). ⏳ GĐ1
@@ -640,9 +650,11 @@ chưa có). Site vẫn là bản demo về chức năng:
   khoản → email báo → xác nhận → email kích hoạt → xem được.
 
 **GĐ5 — Video (≈ 2–3 ngày)**
-- [ ] CMS tải video lên R2 kèm %, thay / xoá.
-- [ ] Worker `/api/video/...` kiểm quyền + `Range`; trình phát `<video>` mặc định.
-- [ ] Upload video thật.
+- [x] CMS tải video lên R2 kèm %, thay / xoá (CMS @7, 20/10).
+- [x] Worker `/api/video/...` kiểm quyền + `Range`; trình phát `<video>` mặc định (20/10). Đã thử
+      production: bài có phí chưa đăng nhập 401, bài học thử qua quyền, khóa miễn phí 200 + Range 206
+      đúng byte (file thử đặt tạm rồi xoá). CHƯA thử: đăng nhập nhưng chưa mua → 403 (logic đơn giản).
+- [ ] Upload video thật từ CMS (chủ dự án) + xem trên PC + iPhone; thử 1 file 200MB+.
 - Xong khi: có quyền xem & tua được trên PC + điện thoại; không quyền → 403.
 
 **GĐ6 — Hoàn thiện & bàn giao (≈ 2 ngày)**
@@ -679,7 +691,8 @@ trong account. (Tra 20/10/2026 — kiểm lại trang giá Cloudflare trước k
 | 20/10 | Mọi ảnh trên website tùy biến được trong CMS (ảnh bìa khóa upload; hero, logo, favicon, ảnh chia sẻ) | Yêu cầu chủ dự án |
 | 20/10 | Chỉ số thị trường + giá cổ phiếu lấy API thật qua Worker | Yêu cầu chủ dự án |
 | 20/10 | Nguồn dữ liệu thị trường: API công khai không chính thức (VPS + DNSE), không SSI FCData | Miễn phí; chấp nhận rủi ro nguồn đổi/chặn (có dự phòng D1) |
-| 20/10 | Video: tạm chỉ nhận MP4 (H.264 + AAC); chưa chốt có cho .mov không — hỏi lại ở GĐ5 | .mov từ iPhone thường là HEVC, nhiều trình duyệt không phát |
+| 20/10 | Video: CHỈ nhận MP4 (H.264 + AAC), không .mov (chủ dự án chốt "mp4 làm đi") | .mov từ iPhone thường là HEVC, nhiều trình duyệt không phát |
+| 20/10 | Video: không bảng D1, cờ `lesson.video = "mp4"` trong courses.json, khóa R2 suy từ slug | Slug bài bất biến; bớt 1 nơi lưu phải đồng bộ |
 | 20/10 | Deploy: GitHub Actions build + commit `html/`, Cloudflare Workers Builds nối Git tự deploy; KHÔNG dùng `CLOUDFLARE_API_TOKEN`; KHÔNG build trên Cloudflare | Yêu cầu chủ dự án ("build github action rồi ánh xạ lên cloudflare"). RIÊNG dự án này (dự án đặc biệt) — KHÔNG đưa vào skill, các dự án GAS khác giữ cách cũ |
 
 ## XIV. Quy ước làm việc với chủ dự án
