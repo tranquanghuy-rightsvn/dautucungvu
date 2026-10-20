@@ -487,9 +487,11 @@ html/
 
 Tổng ≈ 17–21 ngày làm việc, chưa tính thời gian chờ mục A.
 
-**Chi phí dự kiến**: GAS / Sheets / GitHub public + Actions = 0đ · Workers + D1 + Email Service:
-free tier lúc đầu, Workers Paid ~$5/tháng khi lớn · R2: 10GB đầu miễn phí, sau ~$0.015/GB/tháng,
-không tính băng thông xem (kiểm lại trang giá Cloudflare trước khi báo khách).
+**Chi phí dự kiến**: GAS / Sheets / GitHub public + Actions = 0đ · **Workers Paid $5/tháng là BẮT
+BUỘC** (Email Sending chỉ có ở gói Paid; gói đã gồm 10 triệu request Worker, 3.000 email/tháng —
+vượt $0.35/1.000 email, D1 25 tỷ row đọc / 50 triệu row ghi) · R2: 10GB đầu miễn phí, sau
+~$0.015/GB/tháng, không tính băng thông xem. Gói Paid tính theo ACCOUNT, dùng chung cho mọi site
+trong account. (Tra 20/10/2026 — kiểm lại trang giá Cloudflare trước khi báo khách.)
 
 ## XIII. Nhật ký quyết định (đã chốt với chủ dự án — KHÔNG đề xuất lại)
 
