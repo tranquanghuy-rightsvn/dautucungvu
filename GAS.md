@@ -655,7 +655,9 @@ chưa có). Site vẫn là bản demo về chức năng:
 - [x] Worker `/api/video/...` kiểm quyền + `Range`; trình phát `<video>` mặc định (20/10). Đã thử
       production: bài có phí chưa đăng nhập 401, bài học thử qua quyền, khóa miễn phí 200 + Range 206
       đúng byte (file thử đặt tạm rồi xoá). CHƯA thử: đăng nhập nhưng chưa mua → 403 (logic đơn giản).
-- [ ] Upload video thật từ CMS (chủ dự án) + xem trên PC + iPhone; thử 1 file 200MB+.
+- [x] Upload video thật từ CMS (chủ dự án, 20/10: bài nhap-mon-chung-khoan/chung-khoan-la-gi-vi-sao-nen-dau-tu)
+      + xem trên Safari macOS OK.
+- [ ] Còn: xem trên iPhone (Safari iOS); thử 1 file 200MB+.
 - Xong khi: có quyền xem & tua được trên PC + điện thoại; không quyền → 403.
 
 **GĐ6 — Hoàn thiện & bàn giao (≈ 2 ngày)**
