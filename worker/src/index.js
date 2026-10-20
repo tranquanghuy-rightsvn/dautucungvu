@@ -118,14 +118,8 @@ async function route(request, env, ctx) {
     }
   }
 
-  // ----- Route thử rủi ro GĐ1 (tắt bằng ENABLE_TEST_ROUTES = "0") -----
+  // ----- Chẩn đoán nguồn dữ liệu thị trường (tắt mặc định; bật tạm bằng ENABLE_TEST_ROUTES = "1") -----
   if (parts[0] === "test" && env.ENABLE_TEST_ROUTES === "1") {
-    // GET /api/test/video/<course>/<lesson> — phát MP4 từ R2 có Range, CHƯA kiểm quyền
-    if (parts[1] === "video" && parts.length === 4 && method === "GET") {
-      if (!SLUG.test(parts[2]) || !SLUG.test(parts[3])) throw new HttpError(400, "Đường dẫn không hợp lệ");
-      return streamObject(env.VIDEOS, videoKey(parts[2], parts[3]), request);
-    }
-
     // GET /api/test/market-sources — gọi thử từng nguồn dữ liệu thị trường TỪ máy chủ Cloudflare
     if (parts[1] === "market-sources" && method === "GET") {
       const now = Math.floor(Date.now() / 1000);
@@ -148,33 +142,6 @@ async function route(request, env, ctx) {
         }
       }));
       return json(out);
-    }
-
-    // GET /api/test/presign-check — Worker tự ký link, PUT thử file nhỏ qua link đó, kiểm file vào
-    // bucket, thử preflight CORS như trang GAS, rồi xoá. Chỉ trả kết quả, KHÔNG trả khóa / link.
-    if (parts[1] === "presign-check" && method === "GET") {
-      const key = videoKey("test", "presign-check");
-      const url = await presignPut(env, key, 300);
-      const put = await fetch(url, { method: "PUT", body: "ok " + Date.now(), headers: { "content-type": "video/mp4" } });
-      const putBody = put.ok ? "" : (await put.text()).slice(0, 300);
-      const stored = await env.VIDEOS.head(key);
-      const preflight = await fetch(url, {
-        method: "OPTIONS",
-        headers: {
-          origin: "https://n-test-0lu-script.googleusercontent.com",
-          "access-control-request-method": "PUT",
-          "access-control-request-headers": "content-type",
-        },
-      });
-      await env.VIDEOS.delete(key);
-      return json({
-        put_status: put.status,
-        put_error: putBody,
-        stored_in_bucket: !!stored,
-        cors_status: preflight.status,
-        cors_allow_origin: preflight.headers.get("access-control-allow-origin"),
-        cors_allow_methods: preflight.headers.get("access-control-allow-methods"),
-      });
     }
   }
 

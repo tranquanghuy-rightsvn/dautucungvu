@@ -1620,6 +1620,10 @@ main > .section:last-child {
   font-size: var(--fs-sm);
   text-align: center;
 }
+.auth-note a {
+  color: var(--blue-500);
+  text-decoration: underline;
+}
 .auth-done {
   display: flex;
   gap: 10px;

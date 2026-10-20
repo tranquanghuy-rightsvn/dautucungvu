@@ -4,7 +4,8 @@
 import { json, HttpError } from "./http.js";
 import { normEmail, issueEmailToken, destroyOtherSessions } from "./auth.js";
 import { sendMail, mails } from "./mail.js";
-import { expirePending, grant, userCourseIds, memberActive } from "./orders.js";
+import { expirePending, grant, userCourseIds, memberActive, todayVN } from "./orders.js";
+import { backupD1 } from "./cron.js";
 
 async function body(request) {
   return (await request.json().catch(() => null)) || {};
@@ -120,6 +121,18 @@ export async function handleAdmin(request, env, parts) {
     if (parts[3] === "revoke-course") {
       await env.DB.prepare("DELETE FROM course_access WHERE user_id = ? AND course_id = ?").bind(id, String(b.course_id || "")).run();
       return json({ ok: true, courses: await userCourseIds(env, id) });
+    }
+  }
+
+  // POST /api/admin/backup -> sao lưu ngay (ngoài lịch thứ Hai hằng tuần); GET -> danh sách bản sao lưu
+  if (parts[1] === "backup" && parts.length === 2) {
+    if (method === "POST") {
+      await backupD1(env, todayVN());
+      return json({ ok: true });
+    }
+    if (method === "GET") {
+      const { objects } = await env.VIDEOS.list({ prefix: "backups/d1/" });
+      return json({ backups: objects.map((o) => ({ key: o.key, size: o.size, uploaded: o.uploaded })) });
     }
   }
 

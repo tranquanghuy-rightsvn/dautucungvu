@@ -1,5 +1,5 @@
 /* =========================================================
-   Shared UI: icons, formatting, auth (mock), header/footer,
+   Shared UI: icons, formatting, auth, header/footer,
    modal, toast, chart + illustration generators.
    ========================================================= */
 (function () {
@@ -569,9 +569,9 @@
       '<div class="socials"><a href="' + C.youtube + '" aria-label="YouTube">' + icon("youtube") + '</a><a href="' + C.facebook + '" aria-label="Facebook">' + icon("facebook") + '</a><a href="' + C.telegram + '" aria-label="Telegram">' + icon("telegram") + "</a></div></div>" +
       '<div><h2>Học tập</h2><ul><li><a href="' + url("khoa-hoc/") + '">Tất cả khóa học</a></li><li><a href="' + courseFilterUrl("free") + '">Khóa học miễn phí</a></li><li><a href="' + url("premium/") + '">Gói hội viên</a></li></ul></div>' +
       '<div><h2>Thị trường</h2><ul><li><a href="' + url("tin-tuc/") + '">Tin tức chứng khoán</a></li><li><a href="' + newsUrl("nhan-dinh") + '">Nhận định thị trường</a></li><li><a href="' + url("mo-tai-khoan/") + '">Mở tài khoản / chuyển ID</a></li></ul></div>' +
-      '<div><h2>Liên hệ</h2><ul><li><a href="' + C.zalo + '" target="_blank" rel="noopener">Zalo: ' + escapeHtml(C.phone) + '</a></li><li><a href="tel:' + C.phone.replace(/\s/g, "") + '">Gọi ' + escapeHtml(C.phone) + "</a></li><li><a href=\"#\">Điều khoản sử dụng</a></li><li><a href=\"#\">Chính sách bảo mật</a></li></ul></div>" +
+      '<div><h2>Liên hệ</h2><ul><li><a href="' + C.zalo + '" target="_blank" rel="noopener">Zalo: ' + escapeHtml(C.phone) + '</a></li><li><a href="tel:' + C.phone.replace(/\s/g, "") + '">Gọi ' + escapeHtml(C.phone) + "</a></li><li><a href=\"" + url("dieu-khoan-su-dung/") + "\">Điều khoản sử dụng</a></li><li><a href=\"" + url("chinh-sach-bao-mat/") + "\">Chính sách bảo mật</a></li></ul></div>" +
       "</div>" +
-      '<div class="footer-bottom"><span>© 2026 Đầu tư cùng Vũ</span><p>Nội dung trên website chỉ nhằm mục đích giáo dục và tham khảo, không phải khuyến nghị mua bán chứng khoán. Số liệu thị trường hiển thị là dữ liệu minh họa.</p></div>' +
+      '<div class="footer-bottom"><span>© 2026 Đầu tư cùng Vũ</span><p>Nội dung trên website chỉ nhằm mục đích giáo dục và tham khảo, không phải khuyến nghị mua bán chứng khoán. Số liệu thị trường lấy từ nguồn công khai, có thể chậm hoặc chưa chính xác.</p></div>' +
       "</div>";
   }
 
@@ -698,7 +698,7 @@
       field("reg-pass", "Mật khẩu (ít nhất 8 ký tự)", 'name="password" type="password" autocomplete="new-password" required minlength="8"') +
       '<div data-ts class="ts-box"></div><p class="form-error" data-form-error aria-live="polite"></p>' +
       '<button class="btn btn--green btn--lg btn--block" type="submit">Tạo tài khoản miễn phí</button>' +
-      '<p class="auth-note">Sau khi đăng ký, kiểm tra email để xác minh tài khoản.</p>' +
+      '<p class="auth-note">Sau khi đăng ký, kiểm tra email để xác minh tài khoản. Bấm tạo tài khoản là bạn đồng ý với <a href="' + url("dieu-khoan-su-dung/") + '" target="_blank">Điều khoản sử dụng</a> và <a href="' + url("chinh-sach-bao-mat/") + '" target="_blank">Chính sách bảo mật</a>.</p>' +
       "</form>" +
       // Quên mật khẩu
       '<form novalidate data-auth-form="forgot" hidden>' +

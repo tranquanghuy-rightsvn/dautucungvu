@@ -2584,3 +2584,16 @@
 .orders-table th {
   white-space: nowrap;
 }
+
+/* ---------- Điều khoản sử dụng, Chính sách bảo mật ---------- */
+.legal {
+  max-width: 820px;
+  margin-inline: auto;
+}
+.legal.article-body {
+  margin-top: 0;
+  font-size: 1rem;
+}
+.legal h2:first-of-type {
+  margin-top: 22px;
+}

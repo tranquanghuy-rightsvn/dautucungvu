@@ -30,14 +30,10 @@
       .then(render);
   }
 
-  // Bài chưa có nội dung đầy đủ thì dựng đoạn minh họa từ phần tóm tắt
+  // Bài chưa có nội dung đầy đủ thì chỉ hiện phần tóm tắt (không tự chèn câu chữ)
   function paragraphs() {
     if (n.body && n.body.length) return n.body;
-    return [
-      n.excerpt,
-      "Diễn biến này phản ánh xu hướng chung của nhóm ngành trong những phiên gần đây. Nhà đầu tư nên theo dõi thêm thanh khoản, dòng tiền khối ngoại và các mốc công bố thông tin sắp tới trước khi ra quyết định.",
-      "Ở góc nhìn trung hạn, yếu tố quan trọng nhất vẫn là chất lượng lợi nhuận và khả năng duy trì tăng trưởng. Đầu tư cùng Vũ sẽ tiếp tục cập nhật khi có số liệu mới.",
-    ];
+    return [n.excerpt];
   }
 
   function tagLink(t) {

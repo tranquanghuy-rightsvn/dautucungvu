@@ -243,7 +243,8 @@ Lưu chung `data/settings.json`:
   VN-Index, VN30, HNX, UPCoM (bảng `INDEX_MAP`). TCBS bị chặn bot, KHÔNG dùng.
 - ⚠️ Gọi từ máy chủ Cloudflare: VPS chập chờn (colo SIN treo, HKG lúc được lúc không; endpoint
   chỉ số `getlistindexdetail` treo hẳn) dù gọi từ máy thường vẫn chạy; DNSE ổn định. Kiểm nguồn:
-  `GET /api/test/market-sources` (bật khi `ENABLE_TEST_ROUTES = "1"`).
+  `GET /api/test/market-sources` (route chẩn đoán DUY NHẤT còn lại; chỉ chạy khi tạm đặt
+  `ENABLE_TEST_ROUTES = "1"`, mặc định `"0"` từ GĐ6).
 - KHÔNG dùng Cron: làm mới khi có người xem. Từng phần lưu D1 `market_snapshots` (quotes: 30s trong
   phiên / 5 phút ngoài phiên; intraday: 2 / 30 phút; history: 6 giờ), cả response cache edge
   (30s / 5 phút). Nguồn lỗi -> trả bản D1 gần nhất + `stale: true`. Mọi `fetch` có timeout.
@@ -457,8 +458,8 @@ ngẫu nhiên, TRÙNG secret `ADMIN_KEY` của Worker), `SPREADSHEET_ID` (code t
 **Worker** (`wrangler.jsonc` ở gốc repo, tên Worker `dautucungvu`, custom domain `dautucungvu.com`)
 — secrets: `ADMIN_KEY`, `TURNSTILE_SECRET`, `R2_ACCESS_KEY_ID`, `R2_SECRET_ACCESS_KEY`.
 vars: `SITE_URL` = `https://dautucungvu.com`, `R2_BUCKET` = `dautucungvu-videos`, `R2_ACCOUNT_ID`
-(32 ký tự hex), `ENABLE_TEST_ROUTES` (`"1"` chỉ khi thử — bật `/api/test/*`; đặt `"0"` trước khi mở
-bán), `MAIL_FROM` = `thongbao@dautucungvu.com`, `MAIL_REPLY_TO` = `lienhe@dautucungvu.com` (cả hai
+(32 ký tự hex), `ENABLE_TEST_ROUTES` = `"0"` (GĐ6 đã gỡ `/api/test/video` + `presign-check`; chỉ còn
+`/api/test/market-sources`, bật tạm `"1"` khi cần chẩn đoán), `MAIL_FROM` = `thongbao@dautucungvu.com`, `MAIL_REPLY_TO` = `lienhe@dautucungvu.com` (cả hai
 chuyển tiếp về Gmail Vũ), `ORDER_NOTIFY_EMAIL` = `truongvutienphuoc@gmail.com` (email Vũ, chốt 20/10), `CMS_URL` = `https://dautucungvu.com/admin/`,
 `TURNSTILE_SITE_KEY` = `0x4AAAAAAFdoZBmQ_HkuKLVd` (công khai; cũng hard-code trong `html/assets/js/ui.js`).
 Secret `TURNSTILE_SECRET` đã đặt 20/10 (chưa đặt thì Worker bỏ qua Turnstile).
@@ -658,10 +659,29 @@ chưa có). Site vẫn là bản demo về chức năng:
 - Xong khi: có quyền xem & tua được trên PC + điện thoại; không quyền → 403.
 
 **GĐ6 — Hoàn thiện & bàn giao (≈ 2 ngày)**
-- [ ] Chạy `gotchas-and-checklist.md` của skill; kiểm SEO, tốc độ.
-- [ ] Trang Điều khoản sử dụng, Chính sách bảo mật (footer đang `#`).
-- [ ] Backup: export D1, mirror repo, export Sheet.
-- [ ] Hướng dẫn vận hành ngắn cho Vũ: duyệt đơn, bật VIP, đăng bài, tải video.
+- [x] Rà `gotchas-and-checklist.md` (20/10): không lộ tên hạ tầng trong file CMS / site; build
+      idempotent; `CLIENT_BUILD` tự băm; footer bỏ câu "số liệu minh họa"; trang bài viết KHÔNG còn tự
+      chèn 2 đoạn văn bịa khi bài thiếu nội dung (chỉ hiện tóm tắt).
+- [x] Trang `/dieu-khoan-su-dung/` + `/chinh-sach-bao-mat/` (HTML tĩnh viết tay, head do build sinh,
+      có trong sitemap; footer + form đăng ký có link "đồng ý điều khoản"). ⚠️ Mục **Hoàn tiền** (không
+      hoàn sau kích hoạt, trừ lỗi phía site / chuyển thừa, báo trong 7 ngày) là bản nháp — CHỜ VŨ
+      DUYỆT. Chính sách bảo mật nêu tên bên thứ ba (Cloudflare, VietQR, YouTube, Google Fonts) — trang
+      công khai về dữ liệu cá nhân phải nói thật, khác quy tắc giấu hạ tầng trong CMS.
+- [x] Gỡ route thử `/api/test/video`, `/api/test/presign-check`, phần "tải video thử" trong CMS;
+      xoá R2 `courses/test/*.mp4`; `ENABLE_TEST_ROUTES` = `"0"` (20/10).
+- [x] Sao lưu (20/10): (1) D1 Time Travel 30 ngày có sẵn (gói Paid) — `npx wrangler d1 time-travel
+      restore dautucungvu --timestamp=<ISO>`; (2) Cron thứ Hai ghi `backups/d1/<ngày>.json` (bảng
+      users, orders, course_access, article_bodies) vào bucket R2 private, giữ 12 bản; admin
+      `POST|GET /api/admin/backup`, CMS tab Kiểm tra hệ thống có nút Sao lưu ngay / xem danh sách;
+      (3) tải về máy: `npx wrangler d1 export dautucungvu --remote --output <file>.sql` (có dữ liệu cá
+      nhân — KHÔNG để trong repo); (4) `data/` + ảnh có lịch sử git; (5) video: Vũ giữ file gốc (R2
+      không có bản sao). Khôi phục từ JSON: chưa có script, viết khi cần (INSERT theo từng bảng).
+- [x] Hướng dẫn vận hành cho Vũ: tab **Hướng dẫn** trong CMS (mọi vai trò): duyệt đơn, VIP, hỗ
+      trợ khách, đăng bài, khóa học + video (cách quay iPhone ra MP4), cài đặt, phân quyền, sao lưu.
+      CMS @8.
+- [ ] ⚠️ TRƯỚC KHI MỞ BÁN: 18 bài tin tức + 5 khóa học hiện có là DỮ LIỆU MẪU từ bản demo (tin bịa
+      kiểu "MBB lợi nhuận tăng 18%", giá khóa tự đặt, không có video). Chờ Vũ quyết: xoá hết / sửa
+      thành nội dung thật. Không tự xoá.
 
 Tổng ≈ 17–21 ngày làm việc, chưa tính thời gian chờ mục A.
 
