@@ -428,7 +428,7 @@ Workers Builds, Cloudflare tự quản token build).
 
 ---
 
-## XI. Hiện trạng code (20/10/2026, đang làm GĐ1)
+## XI. Hiện trạng code (20/10/2026, GĐ1 + GĐ2 xong — tiếp theo GĐ3)
 
 Cấu trúc repo đã theo mục VIII (trừ `gas/`, `html/admin/`, `html/vendor/`, `worker/migrations/`
 chưa có). Site vẫn là bản demo về chức năng:
@@ -538,9 +538,17 @@ chưa có). Site vẫn là bản demo về chức năng:
       commit đúng thứ tự cover -> 01.jpg -> data/news -> posts.json -> CI build; 3 commit trung gian
       KHÔNG deploy, chỉ "CI: build" deploy (1 lần/thao tác); ảnh lưu `/images/news/<slug>/01.jpg`;
       trang live đúng (title, canonical, og:image = ảnh bìa, sitemap, ảnh bìa ở /tin-tuc/).
-- [ ] Còn thử: bài TRẢ PHÍ (thân bài phải ở D1, KHÔNG có trong `data/news/*.json`), xoá bài (xoá
-      kèm ảnh), F5 giữ đăng nhập (Chrome + Safari), tab Kiểm tra hệ thống + upload video lớn từ
-      trang GAS (rủi ro 1 phần trình duyệt), thêm/xoá editor.
+- [x] Bài TRẢ PHÍ `bai-tra-tien` (member) (20/10): thân bài chỉ ở D1 (`updated_by` =
+      web100.vn@gmail.com), `data/news/*.json` + lịch sử git + HTML + data.js KHÔNG có; trang live chỉ
+      tóm tắt + hộp khoá, JSON-LD `isAccessibleForFree: false`. Sửa thân bài -> chỉ D1 đổi, website
+      không đổi (đúng thiết kế, hiện cho hội viên ở GĐ4).
+- [x] Xoá 2 bài (20/10): xoá data/news + ảnh + thân bài D1 + gỡ khỏi posts.json; sau CI trang + ảnh
+      404, sitemap sạch.
+- [x] Tab Kiểm tra hệ thống OK (WORKER_ADMIN_KEY khớp ADMIN_KEY) + tải file MP4 ~18MB từ trang GAS
+      lên R2 thành công (rủi ro 1 phần trình duyệt) (20/10, chủ dự án thử). File thử
+      `courses/test/upload-check.mp4` còn trong R2 — xoá bằng nút "Xoá file thử".
+- [ ] Còn thử khi tiện: file video LỚN (200MB+) từ trang GAS, F5 giữ đăng nhập trên Safari,
+      thêm/xoá 1 editor.
 - Xong khi: editor đăng / sửa / xoá bài → 1–3 phút lên site đúng URL + SEO.
 
 **GĐ3 — Khóa học + cài đặt (≈ 3 ngày)**
