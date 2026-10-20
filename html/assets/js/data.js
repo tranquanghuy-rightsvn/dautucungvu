@@ -134,15 +134,15 @@ window.APP_DATA = {
       "order": 1,
       "lessons": [
         {
-          "slug": "ba-san-hose-hnx-upcom",
-          "t": "Ba sàn HOSE, HNX, UPCoM",
-          "m": 10,
-          "video": ""
-        },
-        {
           "slug": "chung-khoan-la-gi-vi-sao-nen-dau-tu",
           "t": "Chứng khoán là gì, vì sao nên đầu tư",
           "m": 12,
+          "video": ""
+        },
+        {
+          "slug": "ba-san-hose-hnx-upcom",
+          "t": "Ba sàn HOSE, HNX, UPCoM",
+          "m": 10,
           "video": ""
         },
         {
