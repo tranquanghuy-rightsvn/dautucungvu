@@ -392,6 +392,9 @@ Không chạy trên GAS. GAS chỉ là giao diện quản trị gọi API admin 
   commit). Cách né: `wrangler.jsonc` + `package.json` ở GỐC repo, cấu hình Build như VIII.
   Kiểm nhanh sau deploy: `curl https://dautucungvu.com/api/health` phải 200;
   `gh api repos/tranquanghuy-rightsvn/dautucungvu/commits/<sha>/check-runs` xem build của commit.
+- (Máy dev, 20/10) `dig` trên máy này BỊ MẠNG CAN THIỆP: trả rỗng cả bản ghi A đang có, 8.8.8.8
+  timeout -> từng kết luận nhầm "chưa có bản ghi email". Kiểm DNS bằng DoH:
+  `curl -s -H "accept: application/dns-json" "https://cloudflare-dns.com/dns-query?name=<tên>&type=TXT"`.
 - (GAS, 20/10) `clasp create` ghi đè `appsscript.json` mặc định -> phải khôi phục trước `push`.
 - (GAS, 20/10) Lần Lưu đầu không có commit nào (kể cả ảnh bìa) dù CMS đọc được danh sách bài ->
   ghi vào kho thất bại; chủ dự án sửa cấu hình token xong thì chạy. Nghi: GitHub fine-grained
@@ -479,7 +482,11 @@ chưa có). Site vẫn là bản demo về chức năng:
       từ `~` với `--name dautucungvu`. ADMIN_KEY = `openssl rand -hex 32`, chủ dự án giữ (dùng lại
       cho Script Property `WORKER_ADMIN_KEY` ở GĐ2).
 - [x] Máy local: `npx wrangler login` (20/10).
-- [ ] Cloudflare: bật Email Sending cho domain (SPF/DKIM/DMARC). ⏳ GĐ4
+- [x] Cloudflare: bật Email Sending cho `dautucungvu.com` (20/10, `npx wrangler email sending enable`).
+      Zone tự có 6 bản ghi: 3 MX + SPF `cf-bounce.dautucungvu.com`, DKIM `cf-bounce._domainkey`,
+      DMARC `_dmarc` `p=reject`. Trang Overview "Healthy", hạn mức **200 email/ngày** (domain mới).
+      ⚠️ DMARC p=reject: sau này gửi mail @dautucungvu.com từ dịch vụ khác (Zoho, Google Workspace…)
+      PHẢI thêm SPF/DKIM của dịch vụ đó, không thì bị chặn. Domain gốc không có MX (chưa nhận mail).
 - [ ] Cloudflare: Turnstile widget cho `dautucungvu.com`. ⏳ GĐ4
 - [x] Google: bật Apps Script API + `clasp login` (20/10, `@google/clasp` 3.4.1 qua `npx`; tài
       khoản Google dùng chung cho nhiều CMS khách — chủ script = root ngầm định của CMS này).
