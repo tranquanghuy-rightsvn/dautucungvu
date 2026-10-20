@@ -656,6 +656,23 @@ window.APP_DATA = {
       "art": "chart",
       "title": "Cập nhật biểu đồ kỹ thuật MBB: xu hướng tăng vẫn được duy trì",
       "excerpt": "Giá giữ vững trên đường MA50, thanh khoản cải thiện. Vùng hỗ trợ gần nhất quanh 23.500 đồng."
+    },
+    {
+      "id": 48,
+      "slug": "test-20-10",
+      "date": "2026-10-20 17:50",
+      "tags": [
+        "MBB",
+        "thi-truong"
+      ],
+      "access": "public",
+      "art": "chart",
+      "title": "Test \"20/10\"",
+      "excerpt": "test thôi",
+      "cover": "images/news/test-20-10/cover.jpg",
+      "cover_alt": "Test \"20/10\"",
+      "seo_title": "Test \"20/10\" | Đầu tư cùng Vũ",
+      "updated_at": "2026-10-20T10:51:58Z"
     }
   ],
   "brokers": [
