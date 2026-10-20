@@ -392,6 +392,16 @@ Không chạy trên GAS. GAS chỉ là giao diện quản trị gọi API admin 
 
 ## X. Cấu hình (tên biến cố định)
 
+**Project GAS** (tạo 20/10/2026 bằng `clasp create`, tài khoản Google dùng chung của chủ dự án):
+- Script ID: `1jQeEdB1_IOMp8UjuqzGaJS6XLOur-LW8TCpu6FuITKvns_kLNc5QxV8S`
+  (editor: https://script.google.com/d/1jQeEdB1_IOMp8UjuqzGaJS6XLOur-LW8TCpu6FuITKvns_kLNc5QxV8S/edit)
+- Deployment ID (web app, GIỮ NGUYÊN — cập nhật bằng `npx @google/clasp push` rồi `npx @google/clasp update-deployment <id>`
+  (clasp 3.x — tạo version mới cho ĐÚNG deployment này), KHÔNG `create-deployment` lần nữa): `AKfycbzN5CVc1MaIAm0FdOE6Ezd1Yud1Rki561DnuFbwwmNd6xlgap8yGlG8MeWmJeWmoaO8SQ`
+- URL `/exec` (= `CMS_URL` trong `html/admin/index.html`):
+  `https://script.google.com/macros/s/AKfycbzN5CVc1MaIAm0FdOE6Ezd1Yud1Rki561DnuFbwwmNd6xlgap8yGlG8MeWmJeWmoaO8SQ/exec`
+- ⚠️ `clasp create` GHI ĐÈ `appsscript.json` bằng bản mặc định (timezone New York, mất khối
+  `webapp`) — đã gặp 20/10; luôn kiểm lại file này trước `clasp push`.
+
 **Script Properties (GAS)**: `GITHUB_TOKEN` (fine-grained, Contents RW repo `dautucungvu`),
 `GITHUB_OWNER` = `tranquanghuy-rightsvn`, `GITHUB_REPO` = `dautucungvu`, `GITHUB_BRANCH` =
 `master`, `WORKER_API_BASE` = `https://dautucungvu.com/api/admin`, `WORKER_ADMIN_KEY` (≥ 32 ký tự
