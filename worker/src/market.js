@@ -2,8 +2,10 @@
      - VPS bgapidatafeed  : giá khớp / tham chiếu cổ phiếu (gần realtime)
      - DNSE chart-api     : điểm chỉ số (nến ngày), nến 5 phút chỉ số (diễn biến trong phiên),
                             nến ngày cổ phiếu (biểu đồ 3 tháng)
-   ⚠️ Endpoint chỉ số của VPS (getlistindexdetail) TREO khi gọi từ máy chủ Cloudflare (đo 20/10,
-   colo HKG) dù gọi từ máy thường vẫn chạy -> điểm chỉ số lấy từ DNSE. Mọi lần gọi có timeout.
+   ⚠️ VPS CHẬP CHỜN khi gọi từ máy chủ Cloudflare (đo 20/10: colo SIN treo, HKG lúc được lúc
+   không; endpoint chỉ số getlistindexdetail treo hẳn) dù gọi từ máy thường vẫn chạy. DNSE luôn
+   trả ~0,2–0,5s. Nên: chỉ số lấy từ DNSE; giá cổ phiếu thử VPS (timeout 3s), lỗi thì lấy DNSE
+   (nến ngày: giá = nến cuối, tham chiếu = nến kế cuối). Mọi lần gọi đều có timeout.
    Nguồn không cam kết, có thể đổi / chặn bất cứ lúc nào -> mỗi phần lưu bản gần nhất vào D1
    (market_snapshots), nguồn lỗi thì trả bản cũ kèm stale = true, website ghi "Cập nhật lúc HH:mm".
    Danh sách mã lấy từ /assets/market-symbols.json (build sinh từ data/settings.json). */
@@ -28,10 +30,10 @@ function isTradingHours(now = new Date()) {
   return day >= 1 && day <= 5 && mins >= 9 * 60 && mins <= 15 * 60 + 5;
 }
 
-async function getJson(url) {
+async function getJson(url, timeoutMs = FETCH_TIMEOUT_MS) {
   const res = await fetch(url, {
     headers: { accept: "application/json", "user-agent": "Mozilla/5.0 (dautucungvu.com)" },
-    signal: AbortSignal.timeout(FETCH_TIMEOUT_MS), // nguồn treo -> lỗi nhanh, dùng bản lưu D1
+    signal: AbortSignal.timeout(timeoutMs), // nguồn treo -> lỗi nhanh, dùng nguồn khác / bản lưu D1
   });
   if (!res.ok) throw new Error(url.split("?")[0] + " -> " + res.status);
   return res.json();
@@ -40,18 +42,39 @@ async function getJson(url) {
 const num = (v) => (v === null || v === undefined || v === "" ? NaN : Number(v));
 const round = (v, d) => Math.round(v * 10 ** d) / 10 ** d;
 
+/** Giá cổ phiếu từ VPS (gần realtime, có giá tham chiếu chuẩn của sàn). */
+async function vpsStocks(codes) {
+  const stocks = await getJson(VPS + "/getliststockdata/" + codes.join(","), 3000);
+  return stocks.map((s) => {
+    const ref = num(s.r);
+    const last = num(s.lastPrice) > 0 ? num(s.lastPrice) : ref; // chưa khớp lệnh nào -> giá tham chiếu
+    return { code: s.sym, price: last, ref, change: ref ? round(((last - ref) / ref) * 100, 2) : 0, volume: num(s.lot) || 0, source: "vps" };
+  });
+}
+
+/** Dự phòng: giá từ nến ngày DNSE (nến cuối = phiên hiện tại / gần nhất, kế cuối = phiên trước). */
+async function dnseStocks(codes, to) {
+  return Promise.all(codes.map(async (code) => {
+    const d = await getJson(`${DNSE}/stock?from=${to - 10 * 86400}&to=${to}&symbol=${code}&resolution=1D`);
+    const c = (d.c || []).map(Number), v = d.v || [];
+    if (c.length < 2) return null;
+    const price = round(c[c.length - 1], 2), ref = round(c[c.length - 2], 2);
+    return { code, price, ref, change: round(((price - ref) / ref) * 100, 2), volume: Number(v[v.length - 1]) || 0, source: "dnse" };
+  })).then((list) => list.filter(Boolean));
+}
+
 async function fetchQuotes(symbols) {
   const to = Math.floor(Date.now() / 1000);
-  const [stocks, indexBars] = await Promise.all([
-    symbols.tickers.length ? getJson(VPS + "/getliststockdata/" + symbols.tickers.join(",")) : [],
+  const [tickers, indexBars] = await Promise.all([
+    symbols.tickers.length
+      ? vpsStocks(symbols.tickers).catch((err) => {
+          console.warn("market: VPS lỗi, dùng DNSE", String(err));
+          return dnseStocks(symbols.tickers, to);
+        })
+      : [],
     // Nến ngày 10 ngày gần nhất: nến cuối = phiên hiện tại / gần nhất, nến kế cuối = phiên trước
     Promise.all(symbols.indices.map((c) => fetchBars("index", INDEX_MAP[c].dnse, "1D", to - 10 * 86400, to))),
   ]);
-  const tickers = stocks.map((s) => {
-    const ref = num(s.r);
-    const last = num(s.lastPrice) > 0 ? num(s.lastPrice) : ref; // chưa khớp lệnh nào -> giá tham chiếu
-    return { code: s.sym, price: last, ref, change: ref ? round(((last - ref) / ref) * 100, 2) : 0, volume: num(s.lot) || 0 };
-  });
   const indices = symbols.indices.map((code, i) => {
     const c = indexBars[i];
     if (c.length < 2) return { code };
