@@ -452,10 +452,12 @@ chưa có). Site vẫn là bản demo về chức năng:
       `clay.ns.cloudflare.com`, `simone.ns.cloudflare.com`). Gán custom domain vào Worker làm ở GĐ1.
 - [ ] Cloudflare: tạo bucket R2 `dautucungvu-videos` (private). ⏳ GĐ1
 - [x] ~~API token deploy cho GitHub Actions~~ — KHÔNG cần nữa (deploy qua Workers Builds, 20/10).
-- [ ] Cloudflare: R2 API token (Account API token, Object Read & Write, chỉ bucket
-      `dautucungvu-videos`) → lưu tạm vào trình quản lý mật khẩu; ở GĐ1 chủ dự án tự chạy
-      `! npx wrangler secret put R2_ACCESS_KEY_ID` / `R2_SECRET_ACCESS_KEY` trong thư mục `worker/`.
-      KHÔNG dán vào chat, KHÔNG commit (repo public). ⏳ GĐ1
+- [x] R2 API token (Account token, Object Read & Write, chỉ bucket `dautucungvu-videos`) + secret
+      `R2_ACCESS_KEY_ID`, `R2_SECRET_ACCESS_KEY`, `ADMIN_KEY` đã đặt (20/10, `npx wrangler secret
+      list` thấy đủ 3). Chủ dự án tự chạy trong Terminal riêng (KHÔNG qua `!` / chat): Terminal
+      macOS cần quyền Desktop (System Settings → Privacy & Security → Files and Folders), hoặc chạy
+      từ `~` với `--name dautucungvu`. ADMIN_KEY = `openssl rand -hex 32`, chủ dự án giữ (dùng lại
+      cho Script Property `WORKER_ADMIN_KEY` ở GĐ2).
 - [x] Máy local: `npx wrangler login` (20/10).
 - [ ] Cloudflare: bật Email Sending cho domain (SPF/DKIM/DMARC). ⏳ GĐ4
 - [ ] Cloudflare: Turnstile widget cho `dautucungvu.com`. ⏳ GĐ4
@@ -491,7 +493,11 @@ chưa có). Site vẫn là bản demo về chức năng:
       `html/.assetsignore` loại `.DS_Store` (20/10). Kiểm live: trang 200, `/khoa-hoc` 307,
       URL lạ 404 + trang 404, `/api/health` OK.
 - [ ] `www.dautucungvu.com` chưa cấu hình (hỏi chủ dự án có cần không).
-- [ ] Thử rủi ro 1: upload file lớn từ iframe GAS lên R2 bằng presigned URL (CORS).
+- [x] Rủi ro 1 — phần server (20/10): `/api/test/presign-check` trên production: R2 nhận PUT qua
+      link ký bằng `presign.js` (200, file vào bucket), preflight CORS với origin
+      `https://n-test-0lu-script.googleusercontent.com` → 204, cho phép PUT.
+- [ ] Rủi ro 1 — phần trình duyệt: upload file lớn THẬT từ trang GAS (iframe) — làm khi dựng CMS
+      ở đầu GĐ2 (cần `clasp login`).
 - [x] Thử rủi ro 2 trên production (20/10): MP4 720p 60s (`courses/test/video-720p.mp4`, file
       thử, xoá trước khi mở bán) qua `/api/test/video/test/video-720p` — full + Range đúng byte;
       Chrome: đọc metadata, tua tới 45s, phát tiếp OK.
