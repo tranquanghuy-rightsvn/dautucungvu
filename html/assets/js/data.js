@@ -673,6 +673,23 @@ window.APP_DATA = {
       "cover_alt": "Test \"20/10\"",
       "seo_title": "Test \"20/10\" | Đầu tư cùng Vũ",
       "updated_at": "2026-10-20T10:51:58Z"
+    },
+    {
+      "id": 49,
+      "slug": "bai-tra-tien",
+      "date": "2026-10-20 17:53",
+      "tags": [
+        "MBB",
+        "thi-truong"
+      ],
+      "access": "member",
+      "art": "chart",
+      "title": "bài trả tiền",
+      "excerpt": "trả tiền mới xe đc",
+      "cover": "images/news/bai-tra-tien/cover.jpg",
+      "cover_alt": "bài trả tiền",
+      "seo_title": "bài trả tiền | Đầu tư cùng Vũ",
+      "updated_at": "2026-10-20T10:54:07Z"
     }
   ],
   "brokers": [
