@@ -137,7 +137,7 @@ window.APP_DATA = {
           "slug": "chung-khoan-la-gi-vi-sao-nen-dau-tu",
           "t": "Chứng khoán là gì, vì sao nên đầu tư",
           "m": 12,
-          "video": ""
+          "video": "mp4"
         },
         {
           "slug": "ba-san-hose-hnx-upcom",
