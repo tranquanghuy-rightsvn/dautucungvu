@@ -177,8 +177,8 @@ Ranh giới cứng:
    - **Thứ tự hiển thị**, **Đang bán / Ẩn**.
 2. Bài học (danh sách con trong form khóa, kéo thả sắp thứ tự):
    - **Tên bài** (bắt buộc), **Slug bài** (tự sinh, bất biến) → `/khoa-hoc/<id>/<slug-bài>/`.
-     Bài đầu tiên hiển thị tại `/khoa-hoc/<id>/`. (THAY cho URL `bai-<n>` hiện tại — số thứ tự
-     đổi khi sắp xếp lại, slug thì không. Đổi ở GĐ3.)
+     Bài đầu tiên hiển thị tại `/khoa-hoc/<id>/`. (Đã thay URL `bai-<n>` ngày 20/10 — số thứ tự
+     đổi khi sắp xếp lại, slug thì không. Trang bài học `noindex`, `<body data-lesson="<số thứ tự>">`.)
    - **Thời lượng** (phút), **Học thử** (khóa có phí), **Video** (II.C).
 3. Nơi lưu: `data/courses.json` (repo) chứa field công khai, KHÔNG chứa khóa video. Khóa video ở
    D1 theo `course_id + lesson_slug`.
@@ -327,7 +327,8 @@ Không chạy trên GAS. GAS chỉ là giao diện quản trị gọi API admin 
 | `data/settings.json` | Cài đặt site (II.D) — **commit chốt** cài đặt |
 | `data/market-demo.json` | Giá / chỉ số MINH HOẠ (không qua CMS) — xoá ở GĐ3 khi có `/api/market` |
 | `html/` | Site tĩnh deploy (chỉ thứ được public) |
-| `html/images/news/<slug>/…`, `html/images/courses/<id>/…`, `html/images/site/<key>.jpg` | Ảnh do CMS ghi |
+| `html/images/news/<slug>/…`, `html/images/courses/<id>/cover.jpg`, `html/images/site/<hero\|brand\|favicon\|og>.jpg` | Ảnh do CMS ghi |
+| `html/assets/market-symbols.json` | **SINH** bởi build: danh sách mã + chỉ số cho Worker `/api/market` |
 | `html/vendor/tinymce/` | TinyMCE tự host |
 | `html/admin/index.html` | Trang nhúng iframe CMS (mẫu xevip) |
 | `html/assets/js/data.js` | **SINH** bởi build từ `data/` (đúng cấu trúc `window.APP_DATA` cũ) — không sửa tay |
@@ -556,8 +557,21 @@ chưa có). Site vẫn là bản demo về chức năng:
 **GĐ3 — Khóa học + cài đặt (≈ 3 ngày)**
 - [x] Dữ liệu thị trường thật `/api/market` + site hiển thị (II.E) — chạy trên production 20/10
       (VN-Index 1.691,97; HPG 21.100 +2,68%); D1 migration 0002 đã áp remote.
-- [ ] Tab Khóa học (chưa video), tab Cài đặt (II.B, II.D).
-- [ ] Đổi URL bài học `bai-<n>` → `<slug-bài>` (build + `ui.js courseUrl` + `courses.js`).
+- [x] Tab Khóa học (chưa video): tên, URL (bất biến), mô tả ≤300, giá, quyền xem khi miễn phí, thứ
+      tự, Ẩn, ảnh bìa `html/images/courses/<id>/cover.jpg`, bài học (tên, URL bất biến khi đã lưu,
+      phút, học thử, kéo lên/xuống, xoá) — `saveCourse`/`deleteCourse`/`uploadCourseCover`;
+      id cấm trùng `mien-phi|co-phi|cua-toi`. Khóa Ẩn không lên site (build lọc) (20/10, CMS v3).
+- [x] Tab Cài đặt: liên hệ, slogan/ưu đãi, gói hội viên, tài khoản nhận tiền, ảnh site (hero, logo,
+      favicon, ảnh chia sẻ -> `html/images/site/<key>.jpg`), video hướng dẫn, công ty CK, chủ đề tin
+      (id bất biến; đang được bài dùng thì cấm xoá), mã CP (đang được bài dùng thì cấm xoá), chỉ số
+      — `saveSettings`/`uploadSiteImage` (20/10, CMS v3).
+- [x] URL bài học `bai-<n>` -> `<slug-bài>`: data/courses.json đã thêm `slug` + `order`, build sinh
+      trang + dọn thư mục cũ, `ui.js courseUrl` theo slug (20/10).
+- [x] Ảnh site theo Cài đặt: build vá favicon mọi trang (đường dẫn tuyệt đối), ảnh hero trang chủ,
+      og:image mặc định + logo JSON-LD; `ui.js brandImg()` cho logo header/footer (20/10).
+- [ ] Chủ dự án thử trong CMS: sửa 1 khóa (tải ảnh bìa, thêm/xếp/xoá bài), tạo + xoá 1 khóa thử,
+      lưu Cài đặt (đổi SĐT thật, thêm 1 mã CP), tải ảnh logo / favicon.
+- [ ] TODO GĐ4: chặn xoá khóa đã có người mua (`deleteCourse`).
 - Xong khi: mọi nội dung site sửa được trong CMS, không còn sửa tay file dữ liệu.
 
 **GĐ4 — Tài khoản người dùng + đơn hàng + nội dung trả phí (≈ 5–6 ngày)**
