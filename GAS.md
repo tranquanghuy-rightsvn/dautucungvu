@@ -404,6 +404,14 @@ Cron `0 1 * * *` (08:00 VN, `worker/src/cron.js`): hết hạn đơn chờ, emai
   đơn), trong khi lời gọi nằm giữa `js.html`, trước các `const`/`let` khai báo bên dưới (TDZ). Chỉ lộ
   khi máy đã cache danh sách đơn. Vá: lời gọi khởi động đặt ở CUỐI `js.html` (CMS @9). Thêm hằng /
   biến toàn cục mới: không bao giờ đặt khởi động lên trên chúng.
+  Rà toàn bộ (20/10): bản cũ còn 3 chỗ cùng loại (`ACCESS_LABELS`, `JUST_CHANGED`, `ORDER_STATUS`) —
+  hết cùng lần vá. **Trước mỗi lần deploy CMS / site / Worker: `bash scripts/lint/check.sh`** (ESLint:
+  gán lại const, biến không tồn tại, trùng khai báo; `scripts/lint/tdz.cjs`: lần theo chuỗi gọi hàm từ
+  code chạy lúc nạp, báo const/let dùng trước khi khởi tạo — ESLint không bắt được). Cần eslint +
+  acorn + globals ở `../node_modules` (thư mục cha của repo).
+- (CMS, 20/10) Bỏ tab "Kiểm tra hệ thống" (danh sách cấu hình OK vô dụng với người dùng — chủ dự án);
+  thay bằng tab **Sao lưu dữ liệu** (root). Hàm `systemCheck` đã xoá; Worker `/api/admin/ping` còn
+  nhưng không ai gọi. CMS @10.
 - (Phần site tĩnh) Chrome headless `--window-size=390` hiển thị bị cắt phải → do headless có bề
   rộng tối thiểu, KHÔNG phải lỗi CSS. Kiểm mobile bằng DevTools/Chrome MCP thật.
 - (Worker, 20/10) `Content-Range: bytes NaN-NaN/...` khi phát video → `R2Object.range` LUÔN có
@@ -679,7 +687,7 @@ chưa có). Site vẫn là bản demo về chức năng:
 - [x] Sao lưu (20/10): (1) D1 Time Travel 30 ngày có sẵn (gói Paid) — `npx wrangler d1 time-travel
       restore dautucungvu --timestamp=<ISO>`; (2) Cron thứ Hai ghi `backups/d1/<ngày>.json` (bảng
       users, orders, course_access, article_bodies) vào bucket R2 private, giữ 12 bản; admin
-      `POST|GET /api/admin/backup`, CMS tab Kiểm tra hệ thống có nút Sao lưu ngay / xem danh sách;
+      `POST|GET /api/admin/backup`, CMS tab **Sao lưu dữ liệu** (root) có nút Sao lưu ngay + danh sách;
       (3) tải về máy: `npx wrangler d1 export dautucungvu --remote --output <file>.sql` (có dữ liệu cá
       nhân — KHÔNG để trong repo); (4) `data/` + ảnh có lịch sử git; (5) video: Vũ giữ file gốc (R2
       không có bản sao). Khôi phục từ JSON: chưa có script, viết khi cần (INSERT theo từng bảng).

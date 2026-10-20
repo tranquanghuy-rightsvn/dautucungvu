@@ -5,3 +5,4 @@ gas/
 node_modules/
 .wrangler/
 .dev.vars
+scripts/lint/.js-check/
