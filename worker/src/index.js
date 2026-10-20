@@ -91,7 +91,8 @@ async function route(request, env, ctx) {
       const now = Math.floor(Date.now() / 1000);
       const urls = {
         vps_stock: "https://bgapidatafeed.vps.com.vn/getliststockdata/MBB,SSI",
-        vps_index: "https://bgapidatafeed.vps.com.vn/getlistindexdetail/10,11",
+        vps_stock_11: "https://bgapidatafeed.vps.com.vn/getliststockdata/MBB,SSI,VCB,VNM,FPT,HPG,TCB,VIC,VHM,STB,REE",
+        dnse_index_1d: `https://services.entrade.com.vn/chart-api/v2/ohlcs/index?from=${now - 10 * 86400}&to=${now}&symbol=VNINDEX&resolution=1D`,
         dnse_index: `https://services.entrade.com.vn/chart-api/v2/ohlcs/index?from=${now - 3 * 86400}&to=${now}&symbol=VNINDEX&resolution=5`,
         dnse_stock: `https://services.entrade.com.vn/chart-api/v2/ohlcs/stock?from=${now - 100 * 86400}&to=${now}&symbol=MBB&resolution=1D`,
       };
