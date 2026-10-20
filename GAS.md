@@ -360,23 +360,32 @@ Không chạy trên GAS. GAS chỉ là giao diện quản trị gọi API admin 
   3. Deploy tay (khi cần): `npx wrangler deploy` ở gốc repo.
 - Độ trễ Lưu → lên site: ~1–3 phút. Đơn / quyền / video: tức thì (D1).
 
-**D1** (tên bảng cố định; cột chi tiết chốt khi viết migration rồi bổ sung vào đây):
-`users`, `sessions`, `email_tokens`, `orders`, `course_access`, `article_bodies`,
-`lesson_videos`, `rate_limits`, `market_snapshots`. (Hạn hội viên + cờ VIP là cột trong `users`.)
+**D1** (migration ở `worker/migrations/`, đã áp remote 0001–0003): `article_bodies` (thân bài trả
+phí), `market_snapshots`, `users` (email chữ thường, name, phone, pass_hash `pbkdf2$100000$salt$hash`,
+email_verified_at, vip, member_until 'YYYY-MM-DD' giờ VN — còn hạn tới hết ngày đó, locked,
+reminded), `sessions` (SHA-256 token, 30 ngày), `email_tokens` (verify 24h / reset 30 phút, 1 lần),
+`orders` (code `DTCV HV<n> XXXXX` | `DTCV KH XXXXX` | `TAY …` kích hoạt tay; status pending /
+confirmed / cancelled / expired; paid_reported_at, confirmed_by), `course_access`, `rate_limits`.
+`lesson_videos` (GĐ5) chưa có.
 
 **R2**: bucket `dautucungvu-videos` (private), khóa `courses/<course_id>/<lesson_slug>.mp4`.
 
-**API công khai Worker**: `/api/auth/register|login|logout|verify-email|forgot|reset|change-password`,
-`/api/me`, `/api/orders` (tạo, xem của mình, báo đã chuyển khoản), `/api/content/<slug>`,
-`/api/video/<course_id>/<lesson_slug>`, `/api/market`.
+**API công khai Worker** (`worker/src/account.js`; POST bắt buộc `content-type: application/json` +
+Origin đúng site — chống CSRF cùng cookie `dtcv_session` HttpOnly; Secure; SameSite=Lax):
+`GET /api/me` · `POST /api/auth/register|login|logout|resend-verify|verify|forgot|reset|change-password`
+(register/login/forgot qua Turnstile) · `GET|POST /api/orders` (xem / tạo — giá tính lại từ
+`assets/catalog.json`, cần đã xác minh email, đơn pending cùng gói thì trả lại đơn cũ) ·
+`POST /api/orders/paid {code}` (báo đã chuyển -> email Vũ 1 lần) · `GET /api/content/<slug>` ·
+`GET /api/market` · (GĐ5) `/api/video/...`. Link trong email: `/tai-khoan/xac-minh-email/#<mã>`,
+`/tai-khoan/dat-lai-mat-khau/#<mã>` (mã sau `#`: không lên máy chủ / log; trang xoá khỏi URL ngay).
 
-**API admin Worker** (GAS gọi qua `UrlFetchApp`, header `Authorization: Bearer
-<WORKER_ADMIN_KEY>` + `X-Admin-Email`):
-`GET/PUT/DELETE /api/admin/articles/<slug>` · `POST /api/admin/videos/upload-url` ·
-`POST /api/admin/videos/commit` · `DELETE /api/admin/videos/<course>/<lesson>` ·
-`GET /api/admin/orders` · `POST /api/admin/orders/<id>/confirm|cancel` · `POST /api/admin/grant` ·
-`GET /api/admin/users` · `POST /api/admin/users/<id>/vip|extend|reset-password|lock` ·
-`GET /api/admin/courses/<id>/sales`.
+**API admin Worker** (`worker/src/admin.js` + `index.js`; GAS gọi qua `UrlFetchApp`, header
+`Authorization: Bearer <WORKER_ADMIN_KEY>` + `X-Admin-Email`): `GET /ping` ·
+`GET|PUT|DELETE /articles/<slug>` · `POST /videos/upload-url` · `GET|DELETE /videos/<course>/<lesson>` ·
+`GET /orders` (500 gần nhất) · `POST /orders/<id>/confirm|cancel` · `POST /grant` (kích hoạt tay) ·
+`GET /users` · `POST /users/<id>/vip|extend|set-until|send-reset|lock|revoke-course` ·
+`GET /courses/<id>/sales` (số người sở hữu — chặn xoá khóa). Tiền tố đều là `/api/admin`.
+Cron `0 1 * * *` (08:00 VN, `worker/src/cron.js`): hết hạn đơn chờ, email nhắc 7 / 1 ngày, báo hết hạn.
 
 ## IX. Checklist bug đã gặp ở dự án này
 - (Phần site tĩnh) Chrome headless `--window-size=390` hiển thị bị cắt phải → do headless có bề
@@ -392,6 +401,9 @@ Không chạy trên GAS. GAS chỉ là giao diện quản trị gọi API admin 
   commit). Cách né: `wrangler.jsonc` + `package.json` ở GỐC repo, cấu hình Build như VIII.
   Kiểm nhanh sau deploy: `curl https://dautucungvu.com/api/health` phải 200;
   `gh api repos/tranquanghuy-rightsvn/dautucungvu/commits/<sha>/check-runs` xem build của commit.
+- (Thử API local, 20/10) cookie phiên có `Secure` -> curl KHÔNG gửi lại qua `http://localhost`
+  (trình duyệt thì có) -> tưởng lỗi "Vui lòng đăng nhập". Chạy `npx wrangler dev --local-protocol
+  https` + `curl -k`. Trong zsh, biến chứa nhiều tham số curl không tự tách -> viết script bash.
 - (Máy dev, 20/10) `dig` trên máy này BỊ MẠNG CAN THIỆP: trả rỗng cả bản ghi A đang có, 8.8.8.8
   timeout -> từng kết luận nhầm "chưa có bản ghi email". Kiểm DNS bằng DoH:
   `curl -s -H "accept: application/dns-json" "https://cloudflare-dns.com/dns-query?name=<tên>&type=TXT"`.
@@ -424,9 +436,11 @@ ngẫu nhiên, TRÙNG secret `ADMIN_KEY` của Worker), `SPREADSHEET_ID` (code t
 **Worker** (`wrangler.jsonc` ở gốc repo, tên Worker `dautucungvu`, custom domain `dautucungvu.com`)
 — secrets: `ADMIN_KEY`, `TURNSTILE_SECRET`, `R2_ACCESS_KEY_ID`, `R2_SECRET_ACCESS_KEY`.
 vars: `SITE_URL` = `https://dautucungvu.com`, `R2_BUCKET` = `dautucungvu-videos`, `R2_ACCOUNT_ID`
-(32 ký tự hex), `ENABLE_TEST_ROUTES` (`"1"` chỉ khi thử GĐ1 — bật `/api/test/*`; đặt `"0"` trước
-khi mở bán), `MAIL_FROM` = `no-reply@dautucungvu.com`, `MAIL_REPLY_TO`, `ORDER_NOTIFY_EMAIL`,
-`CMS_URL`, `TURNSTILE_SITE_KEY`.
+(32 ký tự hex), `ENABLE_TEST_ROUTES` (`"1"` chỉ khi thử — bật `/api/test/*`; đặt `"0"` trước khi mở
+bán), `MAIL_FROM` = `no-reply@dautucungvu.com`, `MAIL_REPLY_TO` = `ORDER_NOTIFY_EMAIL` =
+`truongvutienphuoc@gmail.com` (email Vũ, chốt 20/10), `CMS_URL` = `https://dautucungvu.com/admin/`,
+`TURNSTILE_SITE_KEY` = `0x4AAAAAAFdoZBmQ_HkuKLVd` (công khai; cũng hard-code trong `html/assets/js/ui.js`).
+Secret `TURNSTILE_SECRET` đã đặt 20/10 (chưa đặt thì Worker bỏ qua Turnstile).
 bindings: `DB` (D1 `dautucungvu`), `VIDEOS` (R2), `EMAIL` (send_email), `ASSETS` (static assets).
 Chạy local: `.dev.vars` ở gốc repo (gitignore) chứa `ADMIN_KEY=...` cho `wrangler dev`.
 
@@ -435,7 +449,7 @@ Workers Builds, Cloudflare tự quản token build).
 
 ---
 
-## XI. Hiện trạng code (20/10/2026, GĐ1 + GĐ2 xong — tiếp theo GĐ3)
+## XI. Hiện trạng code (20/10/2026, GĐ1–GĐ4 xong phần code — tiếp theo GĐ5 video)
 
 Cấu trúc repo đã theo mục VIII (trừ `gas/`, `html/admin/`, `html/vendor/`, `worker/migrations/`
 chưa có). Site vẫn là bản demo về chức năng:
@@ -448,16 +462,16 @@ chưa có). Site vẫn là bản demo về chức năng:
 - Trang con hiện có: `bai-viet/<slug>/`, `khoa-hoc/<id>/[bai-<n>/]` (đổi sang slug bài ở GĐ3),
   `khoa-hoc/mien-phi|co-phi|cua-toi/`, `tin-tuc/<chủ-đề>/`, `tin-tuc/<mã-viết-thường>/`,
   `thanh-toan/goi-<n>-thang/`, `thanh-toan/<id-khóa>/`.
-- `assets/js/ui.js`: auth GIẢ LẬP (`localStorage` "dtcv-user", "Xem thử theo vai trò"), hàm URL
+- `assets/js/ui.js`: auth THẬT qua `/api/me` (GĐ4; bỏ "dtcv-user" giả lập), `UI.api()`, hàm URL
   `url()`, `articleUrl(n)`, `courseUrl(c, lessonIdx)`, `courseFilterUrl(f)`, `newsUrl(x)`,
   `payUrl({course}|{months})`. `assets/js/pages/*.js` đọc trạng thái từ `document.body.dataset`.
-- Thanh toán: VietQR theo đơn (`settings.payment.qrImage = ""`); `assets/img/qr-code-card.jpg` là
-  QR tĩnh dự phòng. Đơn hiện chỉ lưu localStorage (demo).
+- Thanh toán: đơn tạo trên máy chủ (D1), VietQR theo đơn (`settings.payment.qrImage = ""`);
+  `assets/img/qr-code-card.jpg` là QR tĩnh dự phòng.
 - `worker/`: ĐÃ DEPLOY lên https://dautucungvu.com (20/10). Đã chạy thử local (`wrangler dev`): trang tĩnh 200, `/khoa-hoc` → 307 `/khoa-hoc/`,
   URL lạ → 404 + `html/404.html`, `/api/health` OK, `/api/*` lạ → 404 JSON, admin sai khóa → 401,
   presigned PUT URL R2 sinh đúng định dạng, `/api/test/video/...` Range (đầu/giữa/suffix) đúng byte.
   D1 + R2 đã tạo. Deploy: Actions build + Workers Builds (đã chạy thật 20/10).
-- Liên hệ trong `settings.json` vẫn là số giả `0900 000 000`.
+- Liên hệ trong `settings.json`: 0982277493 (chủ dự án sửa qua CMS 20/10).
 - Chạy thử: `npx wrangler dev` ở gốc repo (hoặc `cd html && python3 -m http.server`).
 
 ## XII. Kế hoạch & tiến độ
@@ -582,12 +596,19 @@ chưa có). Site vẫn là bản demo về chức năng:
 - Xong khi: mọi nội dung site sửa được trong CMS, không còn sửa tay file dữ liệu.
 
 **GĐ4 — Tài khoản người dùng + đơn hàng + nội dung trả phí (≈ 5–6 ngày)**
-- [ ] Worker auth đủ VI.1 + Turnstile; migration D1.
-- [ ] Email Service: mọi mẫu VI.5 + email báo đơn; Cron nhắc gia hạn.
-- [ ] Đơn hàng + VietQR theo đơn; tab Đơn hàng + Người dùng site trong CMS.
-- [ ] Thân bài trả phí GAS ↔ D1; trang bài gọi `/api/content/<slug>`; gỡ nội dung trả phí khỏi
-      repo/`data.js`.
-- [ ] Gỡ auth giả lập (`localStorage`, "Xem thử theo vai trò") khỏi site; `ui.js` dùng `/api/me`.
+- [x] Worker auth đủ VI.1 + Turnstile; migration 0003 (đã áp remote) (20/10).
+- [x] Email Service: mọi mẫu VI.5 (`worker/src/mail.js`) + email báo đơn cho Vũ; Cron nhắc gia hạn (20/10).
+- [x] Đơn hàng VietQR trên máy chủ (`payment.js` mới: nút "Tạo mã QR" -> đơn thật); tab Đơn hàng
+      + Người dùng website trong CMS (v4); xoá khóa đã có người sở hữu bị chặn (20/10).
+- [x] Thân bài trả phí GAS ↔ D1 (GĐ2) + trang bài gọi `/api/content/<slug>` khi đủ quyền (20/10).
+- [x] Gỡ auth giả lập: `ui.js` dùng `/api/me` (cache `dtcv-me` chỉ để vẽ nhanh), hộp Đăng nhập /
+      Đăng ký / Quên mật khẩu, dải nhắc xác minh email; dashboard: đơn thật + đổi mật khẩu (20/10).
+- [x] Thử local bằng Chrome headless (CDP): đăng ký -> dải xác minh -> tạo đơn 204.000đ + QR ->
+      báo chuyển -> admin xác nhận -> hội viên tới 19/01/2027 -> dashboard -> bài hội viên thấy thân
+      bài -> đăng xuất bị khoá. Production: khách bị chặn content/orders, đăng ký thiếu Turnstile bị chặn.
+- [ ] Chủ dự án thử THẬT trên production: đăng ký bằng email thật (nhận email xác minh), quên mật
+      khẩu, tạo đơn + báo chuyển (Vũ nhận email báo đơn), xác nhận trong CMS tab Đơn hàng (người mua
+      nhận email kích hoạt), bật VIP / gia hạn trong tab Người dùng website.
 - Xong khi: repo / xem nguồn trang không còn nội dung trả phí; 1 đơn đi trọn vòng tạo → chuyển
   khoản → email báo → xác nhận → email kích hoạt → xem được.
 
