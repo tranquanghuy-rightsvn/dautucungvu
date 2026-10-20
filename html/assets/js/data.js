@@ -129,19 +129,20 @@ window.APP_DATA = {
       "title": "Nhập môn chứng khoán",
       "desc": "Những điều cần biết trước khi đặt lệnh đầu tiên: thị trường vận hành ra sao, đọc bảng giá, các loại lệnh và phí.",
       "price": 0,
-      "access": "public",
       "art": "candles",
+      "cover": "images/courses/nhap-mon-chung-khoan/cover.jpg",
+      "order": 1,
       "lessons": [
-        {
-          "slug": "chung-khoan-la-gi-vi-sao-nen-dau-tu",
-          "t": "Chứng khoán là gì, vì sao nên đầu tư",
-          "m": 12,
-          "video": ""
-        },
         {
           "slug": "ba-san-hose-hnx-upcom",
           "t": "Ba sàn HOSE, HNX, UPCoM",
           "m": 10,
+          "video": ""
+        },
+        {
+          "slug": "chung-khoan-la-gi-vi-sao-nen-dau-tu",
+          "t": "Chứng khoán là gì, vì sao nên đầu tư",
+          "m": 12,
           "video": ""
         },
         {
@@ -163,7 +164,7 @@ window.APP_DATA = {
           "video": ""
         }
       ],
-      "order": 1
+      "access": "public"
     },
     {
       "id": "doc-bao-cao-tai-chinh",
