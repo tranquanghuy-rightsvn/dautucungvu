@@ -370,6 +370,11 @@ Không chạy trên GAS. GAS chỉ là giao diện quản trị gọi API admin 
 - (Worker, 20/10) `Content-Range: bytes NaN-NaN/...` khi phát video → `R2Object.range` LUÔN có
   đủ khóa `offset`/`length`/`suffix` (giá trị `undefined` nếu không dùng), nên `"suffix" in
   obj.range` luôn đúng. Cách né: kiểm `obj.range.suffix !== undefined` (đã sửa trong `r2.js`).
+- (Deploy, 20/10) Sau khi deploy, `/api/*` bỗng trả 404 rỗng, trang tĩnh vẫn 200 → có bản Worker
+  KHÁC được tải lên từ ngoài repo (`wrangler versions view` ra `Source: Unknown (version_upload)`,
+  compatibility date lạ, không binding D1/R2). Cách né: CHỈ deploy từ repo (`worker/`, CI hoặc
+  `npx wrangler deploy`); không sửa code / "Deploy" / kết nối Git cho Worker `dautucungvu` trên
+  dashboard. Kiểm nhanh: `npx wrangler deployments list` + `curl https://dautucungvu.com/api/health`.
 - (Chưa có bug GAS/Worker — bổ sung khi gặp, kèm nguyên nhân + cách né.)
 
 ## X. Cấu hình (tên biến cố định)
