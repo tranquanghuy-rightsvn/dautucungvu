@@ -5,6 +5,9 @@ import { json, requireAdmin, HttpError } from "./http.js";
 import { streamObject } from "./r2.js";
 import { presignPut } from "./presign.js";
 import { handleMarket } from "./market.js";
+import { handleAccount } from "./account.js";
+import { handleAdmin } from "./admin.js";
+import { runDaily } from "./cron.js";
 
 const SLUG = /^[a-z0-9]+(-[a-z0-9]+)*$/;
 const videoKey = (course, lesson) => `courses/${course}/${lesson}.mp4`;
@@ -23,9 +26,17 @@ async function route(request, env, ctx) {
     return handleMarket(request, env, ctx);
   }
 
+  // ----- Người dùng website: /api/me, /api/auth/*, /api/orders, /api/content/<slug> (GAS.md VI) -----
+  if (["me", "auth", "orders", "content"].includes(parts[0])) {
+    const res = await handleAccount(request, env, parts);
+    if (res) return res;
+  }
+
   // ----- Admin (GAS CMS gọi qua UrlFetchApp, header Authorization: Bearer <ADMIN_KEY>) -----
   if (parts[0] === "admin") {
     requireAdmin(request, env);
+    const adminRes = await handleAdmin(request, env, parts);
+    if (adminRes) return adminRes;
 
     // POST /api/admin/videos/upload-url  { course_id, lesson_slug } -> { url, key, expires_in }
     if (parts[1] === "videos" && parts[2] === "upload-url" && method === "POST") {
@@ -152,5 +163,10 @@ export default {
       console.error(err);
       return json({ error: "Lỗi máy chủ" }, 500);
     }
+  },
+
+  // Cron hằng ngày (wrangler.jsonc triggers.crons): hết hạn đơn chờ, email nhắc gia hạn
+  async scheduled(event, env, ctx) {
+    ctx.waitUntil(runDaily(env));
   },
 };

@@ -29,6 +29,10 @@
     { "binding": "DB", "database_name": "dautucungvu", "database_id": "7ed75e1e-7173-48c9-99b4-2af6cfac1c55", "migrations_dir": "worker/migrations" }
   ],
   "r2_buckets": [{ "binding": "VIDEOS", "bucket_name": "dautucungvu-videos" }],
+  // Email giao dịch (Cloudflare Email Service — domain đã bật Email Sending, GAS.md VI.5)
+  "send_email": [{ "name": "EMAIL" }],
+  // 08:00 giờ VN: hết hạn đơn chờ + email nhắc gia hạn (worker/src/cron.js)
+  "triggers": { "crons": ["0 1 * * *"] },
 
   "vars": {
     "SITE_URL": "https://dautucungvu.com",
@@ -36,7 +40,13 @@
     // Account ID không phải bí mật (dùng ký presigned URL R2)
     "R2_ACCOUNT_ID": "975f2208a74d9e0b5048659725df1911",
     // "1" chỉ trong giai đoạn thử rủi ro GĐ1; về "0" trước khi mở bán
-    "ENABLE_TEST_ROUTES": "1"
+    "ENABLE_TEST_ROUTES": "1",
+    "MAIL_FROM": "no-reply@dautucungvu.com",
+    "MAIL_REPLY_TO": "truongvutienphuoc@gmail.com",
+    "ORDER_NOTIFY_EMAIL": "truongvutienphuoc@gmail.com",
+    "CMS_URL": "https://dautucungvu.com/admin/",
+    // Khóa CÔNG KHAI của Turnstile (secret là TURNSTILE_SECRET, đặt bằng wrangler secret)
+    "TURNSTILE_SITE_KEY": "0x4AAAAAAFdoZBmQ_HkuKLVd"
   },
 
   "observability": { "enabled": true }

@@ -2554,3 +2554,33 @@
     grid-column: 1 / -1;
   }
 }
+
+/* ---------- Dashboard: tài khoản + đơn hàng (GĐ4) ---------- */
+.acc-info {
+  display: grid;
+  grid-template-columns: 120px minmax(0, 1fr);
+  gap: 8px 12px;
+  margin: 8px 0 18px;
+  font-size: var(--fs-sm);
+}
+.acc-info dt {
+  color: var(--muted);
+}
+.acc-info dd {
+  margin: 0;
+  word-break: break-word;
+}
+.acc-pass h3 {
+  margin-bottom: 8px;
+  font-size: var(--fs-md);
+}
+.acc-pass .field {
+  margin-bottom: 10px;
+}
+.table-scroll {
+  overflow-x: auto;
+}
+.orders-table td,
+.orders-table th {
+  white-space: nowrap;
+}

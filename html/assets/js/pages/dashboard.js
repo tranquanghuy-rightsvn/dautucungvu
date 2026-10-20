@@ -1,6 +1,6 @@
 /* Dashboard (sau khi đăng nhập) */
 (function () {
-  const { icon, fmt, Charts, Art, store, auth, escapeHtml, url, access, newsSorted, articleUrl, courseThumb } = UI;
+  const { icon, fmt, Charts, Art, store, auth, api, toast, escapeHtml, url, access, newsSorted, articleUrl, courseThumb } = UI;
   const D = APP_DATA;
   const root = document.querySelector("[data-dashboard]");
   let indexSel = 0;
@@ -20,7 +20,7 @@
       "<h1>Đăng nhập để xem trang tổng quan</h1>" +
       "<p>Theo dõi tiến độ học, danh mục cổ phiếu quan tâm và tin tức của bạn ở cùng một nơi.</p>" +
       '<div class="actions"><button class="btn btn--navy btn--lg" type="button" data-login>Đăng nhập</button>' +
-      '<button class="btn btn--outline" type="button" data-demo-login="vip">Xem bằng tài khoản demo</button></div></div></div>';
+      '<button class="btn btn--outline" type="button" data-login="register">Tạo tài khoản miễn phí</button></div></div></div>';
   }
 
   function greeting() {
@@ -32,7 +32,8 @@
     let progress = store.get("dtcv-progress", {});
     if (!progress || Array.isArray(progress)) progress = {};
     const follows = store.get("dtcv-follow", []);
-    const orders = store.get("dtcv-orders", []).filter((o) => o.status === "pending");
+    // Đơn thật từ máy chủ (/api/orders); null = đang tải
+    const orders = (myOrders || []).filter((o) => o.status === "pending");
     const role = access.role(user);
     const myCourses = D.courses.filter((c) => access.ownsCourse(c, user));
     const totalLessons = myCourses.reduce((a, c) => a + c.lessons.length, 0);
@@ -122,6 +123,7 @@
         })
         .join("") +
       "</ul></section></div>" +
+      accountPanel(user) +
       "</div></div>";
 
     drawChart();
@@ -160,10 +162,72 @@
   }
   let chartRO = null;
 
+  /* ----- Tài khoản: thông tin, lịch sử đơn, đổi mật khẩu (GAS.md VI) ----- */
+  const STATUS = { pending: "Chờ xác nhận", confirmed: "Đã kích hoạt", cancelled: "Đã huỷ", expired: "Quá hạn" };
+  let myOrders = null;
+  let ordersFor = null;
+
+  function accountPanel(user) {
+    const rows = (myOrders || []).map((o) =>
+      "<tr><td>" + escapeHtml(o.code) + "</td><td>" + escapeHtml(o.title) + '</td><td class="num">' + fmt.vnd(o.amount) + "</td><td>" +
+      escapeHtml(STATUS[o.status] || o.status) + (o.status === "pending" && o.paid_reported_at ? " (đã báo chuyển khoản)" : "") + "</td><td>" +
+      fmt.date(String(o.created_at).slice(0, 10)) + "</td></tr>").join("");
+    return (
+      '<div class="dash-grid dash-grid--even" id="tai-khoan">' +
+      '<section class="panel panel-pad" aria-labelledby="acc-title"><div class="card-title"><h2 id="acc-title">Tài khoản</h2></div>' +
+      '<dl class="acc-info"><dt>Họ tên</dt><dd>' + escapeHtml(user.name) + "</dd><dt>Email</dt><dd>" + escapeHtml(user.email) +
+      (user.verified ? ' <span class="badge badge--green">Đã xác minh</span>' : ' <span class="badge badge--soft">Chưa xác minh</span> <button class="link-btn" type="button" data-resend-verify>Gửi lại email</button>') +
+      "</dd><dt>Số điện thoại</dt><dd>" + escapeHtml(user.phone || "—") + "</dd></dl>" +
+      '<form class="acc-pass" data-change-pass novalidate><h3>Đổi mật khẩu</h3>' +
+      '<div class="field"><label for="cp-cur">Mật khẩu hiện tại</label><input class="input" id="cp-cur" name="current" type="password" autocomplete="current-password" required></div>' +
+      '<div class="field"><label for="cp-new">Mật khẩu mới (ít nhất 8 ký tự)</label><input class="input" id="cp-new" name="password" type="password" autocomplete="new-password" required minlength="8"></div>' +
+      '<button class="btn btn--navy btn--sm" type="submit">Đổi mật khẩu</button></form></section>' +
+      '<section class="panel panel-pad" aria-labelledby="ord-title"><div class="card-title"><h2 id="ord-title">Đơn hàng của bạn</h2><a class="link-more" href="' + url("premium/") + '">Mua gói</a></div>' +
+      (myOrders === null ? '<p class="data-note">Đang tải...</p>'
+        : rows ? '<div class="table-scroll"><table class="watch-table orders-table"><thead><tr><th>Mã</th><th>Nội dung</th><th>Số tiền</th><th>Trạng thái</th><th>Ngày</th></tr></thead><tbody>' + rows + "</tbody></table></div>"
+        : '<p class="data-note">Chưa có đơn nào.</p>') +
+      "</section></div>"
+    );
+  }
+
+  function loadOrders(u) {
+    if (ordersFor === u.email) return;
+    ordersFor = u.email;
+    api("orders").then((r) => {
+      myOrders = r.orders;
+      boot();
+    }).catch((e) => {
+      myOrders = [];
+      if (e.status === 401) auth.refresh();
+    });
+  }
+
+  root.addEventListener("submit", (e) => {
+    const f = e.target.closest("[data-change-pass]");
+    if (!f) return;
+    e.preventDefault();
+    if (f.password.value.length < 8) return toast("Mật khẩu mới cần ít nhất 8 ký tự.", "info");
+    const btn = f.querySelector("button");
+    btn.disabled = true;
+    api("auth/change-password", { body: { current: f.current.value, password: f.password.value } })
+      .then(() => {
+        f.reset();
+        toast("Đã đổi mật khẩu. Các thiết bị khác đã được đăng xuất.");
+      })
+      .catch((err) => toast(err.message, "info"))
+      .finally(() => (btn.disabled = false));
+  });
+
   function boot() {
     const u = auth.user();
-    if (u) render(u);
-    else gate();
+    if (u) {
+      render(u);
+      loadOrders(u);
+    } else {
+      myOrders = null;
+      ordersFor = null;
+      gate();
+    }
   }
   document.addEventListener("auth:change", boot);
   document.addEventListener("market:update", boot);

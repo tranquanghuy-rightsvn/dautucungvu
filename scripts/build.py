@@ -53,6 +53,10 @@ PAGES = [
     ("thanh-toan", "Thanh toán | Đầu tư cùng Vũ",
      "Thanh toán gói hội viên và khóa học Đầu tư cùng Vũ bằng chuyển khoản QR.",
      "CheckoutPage", False),
+    ("tai-khoan/xac-minh-email", "Xác minh email | Đầu tư cùng Vũ",
+     "Xác minh email tài khoản Đầu tư cùng Vũ.", "WebPage", False),
+    ("tai-khoan/dat-lai-mat-khau", "Đặt lại mật khẩu | Đầu tư cùng Vũ",
+     "Đặt lại mật khẩu tài khoản Đầu tư cùng Vũ.", "WebPage", False),
     ("dashboard", "Tổng quan | Đầu tư cùng Vũ",
      "Trang tổng quan tài khoản thành viên Đầu tư cùng Vũ: khóa học, hội viên và đơn thanh toán.",
      "ProfilePage", False),
@@ -180,6 +184,14 @@ def write_data_js(data):
 
 data = load_data()
 write_data_js(data)
+# Danh mục giá + quyền xem cho Worker (tạo đơn, /api/content) — Worker KHÔNG tin số tiền từ
+# trình duyệt mà tính lại từ file này (GAS.md VI.2). Chỉ chứa thông tin công khai.
+(ROOT / "assets/catalog.json").write_text(json.dumps({
+    "membership": data["site"]["membership"],
+    "payment": {k: data["site"]["payment"].get(k, "") for k in ("bankId", "bankName", "accountNo", "accountName")},
+    "courses": [{"id": c["id"], "title": c["title"], "price": c["price"]} for c in data["courses"]],
+    "articles": {n["slug"]: n["access"] for n in data["news"]},
+}, ensure_ascii=False) + "\n", encoding="utf-8")
 # Danh sách mã cho Worker /api/market (GAS.md II.E) — admin sửa mã / chỉ số trong Cài đặt là tự theo
 (ROOT / "assets/market-symbols.json").write_text(json.dumps({
     "tickers": [t["code"] for t in data["tickers"]],

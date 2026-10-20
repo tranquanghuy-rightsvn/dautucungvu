@@ -133,35 +133,57 @@
     },
   };
 
-  /* ---------- Auth (mock, client-side only) ---------- */
-  const AUTH_KEY = "dtcv-user";
+  /* ---------- Gọi API của website (/api/*) ---------- */
+  // Lỗi -> Error có .status và lời nhắn tiếng Việt từ máy chủ.
+  function api(path, opts) {
+    const o = opts || {};
+    const init = { method: o.method || (o.body ? "POST" : "GET"), credentials: "same-origin", headers: { accept: "application/json" } };
+    if (o.body) {
+      init.headers["content-type"] = "application/json";
+      init.body = JSON.stringify(o.body);
+    }
+    return fetch(url("api/" + path), init).then((r) =>
+      r.json().catch(() => ({})).then((data) => {
+        if (r.ok) return data;
+        const err = new Error(data.error || "Có lỗi xảy ra (mã " + r.status + "), thử lại sau.");
+        err.status = r.status;
+        throw err;
+      })
+    );
+  }
+
+  /* ---------- Tài khoản (thật — GAS.md VI) ----------
+     Máy chủ giữ phiên đăng nhập bằng cookie HttpOnly; trình duyệt chỉ cache bản sao /api/me để
+     vẽ nhanh lần đầu. Đây KHÔNG phải nơi phân quyền thật — nội dung trả phí / video do máy chủ
+     kiểm quyền rồi mới trả. */
+  const ME_KEY = "dtcv-me";
+  store.remove("dtcv-user"); // tài khoản giả lập của bản demo cũ
+  let ME = store.get(ME_KEY, null);
   const auth = {
     user() {
-      return store.get(AUTH_KEY, null);
+      return ME;
     },
-    login(user) {
-      store.set(AUTH_KEY, user);
-      document.dispatchEvent(new CustomEvent("auth:change", { detail: user }));
+    set(u) {
+      const changed = JSON.stringify(u || null) !== JSON.stringify(ME || null);
+      ME = u || null;
+      ME ? store.set(ME_KEY, ME) : store.remove(ME_KEY);
+      if (changed) document.dispatchEvent(new CustomEvent("auth:change", { detail: ME }));
+      return ME;
+    },
+    refresh() {
+      if (IS_FILE) return Promise.resolve(ME);
+      return api("me").then((r) => auth.set(r.user)).catch((e) => console.warn("[auth] không tải được tài khoản:", e));
+    },
+    login(email, password, turnstile) {
+      return api("auth/login", { body: { email, password, turnstile } }).then((r) => auth.set(r.user));
+    },
+    register(data) {
+      return api("auth/register", { body: data }).then((r) => auth.set(r.user));
     },
     logout() {
-      store.remove(AUTH_KEY);
-      document.dispatchEvent(new CustomEvent("auth:change", { detail: null }));
-    },
-    // Tài khoản xem thử theo từng vai trò (chỉ để demo phân quyền)
-    demoUser(role) {
-      const base = { email: "demo@dautucungvu.vn", vip: false, memberUntil: null, courses: [] };
-      const inDays = (d) => { const t = new Date(Date.now() + d * 864e5); return t.toISOString().slice(0, 10); };
-      if (role === "member") return Object.assign(base, { name: "Hội viên Demo", memberUntil: inDays(25) });
-      if (role === "buyer") return Object.assign(base, { name: "Học viên Demo", courses: ["doc-bao-cao-tai-chinh"] });
-      if (role === "vip") return Object.assign(base, { name: "Nguyễn Văn A", vip: true });
-      return Object.assign(base, { name: "Thành viên Demo" });
+      return api("auth/logout", { body: {} }).catch(() => {}).then(() => auth.set(null));
     },
   };
-  // Dữ liệu cũ dùng premium:true -> coi là tài khoản 50 triệu
-  (function migrate() {
-    const u = store.get(AUTH_KEY, null);
-    if (u && "premium" in u && !("vip" in u)) store.set(AUTH_KEY, Object.assign({ vip: !!u.premium, memberUntil: null, courses: [] }, u));
-  })();
 
   /* ---------- Phân quyền ----------
      Vai trò: guest < user < member < vip.
@@ -605,7 +627,46 @@
       '<span class="demo-note">' + marketNote() + "</span></div>";
   }
 
-  /* ---------- Login modal ---------- */
+  /* ---------- Hộp Đăng nhập / Đăng ký / Quên mật khẩu (Turnstile chống bot) ---------- */
+  const TURNSTILE_SITE_KEY = "0x4AAAAAAFdoZBmQ_HkuKLVd"; // khóa CÔNG KHAI (GAS.md X)
+  let turnstileLoading = null;
+  const tsWidgets = {};
+  function loadTurnstile() {
+    if (window.turnstile) return Promise.resolve();
+    if (!turnstileLoading) {
+      turnstileLoading = new Promise((resolve, reject) => {
+        const sc = document.createElement("script");
+        sc.src = "https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit";
+        sc.async = true;
+        sc.onload = resolve;
+        sc.onerror = () => reject(new Error("Không tải được bước xác nhận chống robot"));
+        document.head.appendChild(sc);
+      });
+    }
+    return turnstileLoading;
+  }
+  function mountTurnstile(form) {
+    const box = form.querySelector("[data-ts]");
+    if (!box || box.dataset.ready) return;
+    box.dataset.ready = "1";
+    loadTurnstile()
+      .then(() => {
+        tsWidgets[form.dataset.authForm] = window.turnstile.render(box, { sitekey: TURNSTILE_SITE_KEY, language: "vi", size: "flexible" });
+      })
+      .catch((e) => console.warn("[turnstile]", e));
+  }
+  function turnstileToken(form) {
+    const id = tsWidgets[form.dataset.authForm];
+    return id !== undefined && window.turnstile ? window.turnstile.getResponse(id) || "" : "";
+  }
+  function resetTurnstile(form) {
+    const id = tsWidgets[form.dataset.authForm];
+    if (id !== undefined && window.turnstile) window.turnstile.reset(id);
+  }
+
+  function field(id, label, attrs) {
+    return '<div class="field"><label for="' + id + '">' + label + '</label><input class="input" id="' + id + '" ' + attrs + '><span class="field-error" aria-live="polite"></span></div>';
+  }
   function ensureLoginModal() {
     let m = document.getElementById("login-modal");
     if (m) return m;
@@ -616,20 +677,50 @@
     m.innerHTML =
       '<div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="login-title">' +
       '<button class="icon-btn modal-close" type="button" aria-label="Đóng" data-modal-close>' + icon("x") + "</button>" +
-      '<h2 id="login-title">Đăng nhập</h2><p>Tiếp tục khóa học và theo dõi các mã bạn quan tâm.</p>' +
-      '<form novalidate data-login-form>' +
-      '<div class="field"><label for="login-email">Email hoặc số điện thoại</label><input class="input" id="login-email" name="email" autocomplete="username" required><span class="field-error" aria-live="polite"></span></div>' +
-      '<div class="field"><label for="login-pass">Mật khẩu</label><input class="input" id="login-pass" name="password" type="password" autocomplete="current-password" required minlength="6"><span class="field-error" aria-live="polite"></span></div>' +
+      '<h2 id="login-title">Tài khoản</h2>' +
+      '<div class="tabs tabs--line auth-tabs" role="tablist">' +
+      '<button class="tab" type="button" role="tab" data-auth-tab="login" aria-selected="true">Đăng nhập</button>' +
+      '<button class="tab" type="button" role="tab" data-auth-tab="register" aria-selected="false">Đăng ký</button>' +
+      "</div>" +
+      // Đăng nhập
+      '<form novalidate data-auth-form="login">' +
+      field("login-email", "Email", 'name="email" type="email" autocomplete="username" required') +
+      field("login-pass", "Mật khẩu", 'name="password" type="password" autocomplete="current-password" required') +
+      '<div data-ts class="ts-box"></div><p class="form-error" data-form-error aria-live="polite"></p>' +
       '<button class="btn btn--navy btn--lg btn--block" type="submit">Đăng nhập</button>' +
-      '<div class="demo-roles"><p>Xem thử theo vai trò (demo phân quyền)</p><div>' +
-      '<button class="btn btn--outline btn--sm" type="button" data-demo-login="user">Thành viên</button>' +
-      '<button class="btn btn--outline btn--sm" type="button" data-demo-login="member">Hội viên</button>' +
-      '<button class="btn btn--outline btn--sm" type="button" data-demo-login="buyer">Đã mua khóa</button>' +
-      '<button class="btn btn--outline btn--sm" type="button" data-demo-login="vip">Tài khoản 50tr</button>' +
-      "</div></div>" +
-      "</form></div>";
+      '<p class="auth-alt"><button class="link-btn" type="button" data-auth-tab="forgot">Quên mật khẩu?</button></p>' +
+      "</form>" +
+      // Đăng ký
+      '<form novalidate data-auth-form="register" hidden>' +
+      field("reg-name", "Họ tên", 'name="name" autocomplete="name" required maxlength="80"') +
+      field("reg-email", "Email", 'name="email" type="email" autocomplete="email" required') +
+      field("reg-phone", "Số điện thoại / Zalo", 'name="phone" type="tel" autocomplete="tel" required') +
+      field("reg-pass", "Mật khẩu (ít nhất 8 ký tự)", 'name="password" type="password" autocomplete="new-password" required minlength="8"') +
+      '<div data-ts class="ts-box"></div><p class="form-error" data-form-error aria-live="polite"></p>' +
+      '<button class="btn btn--green btn--lg btn--block" type="submit">Tạo tài khoản miễn phí</button>' +
+      '<p class="auth-note">Sau khi đăng ký, kiểm tra email để xác minh tài khoản.</p>' +
+      "</form>" +
+      // Quên mật khẩu
+      '<form novalidate data-auth-form="forgot" hidden>' +
+      "<p>Nhập email đã đăng ký, chúng tôi sẽ gửi liên kết đặt lại mật khẩu (hiệu lực 30 phút).</p>" +
+      field("forgot-email", "Email", 'name="email" type="email" autocomplete="email" required') +
+      '<div data-ts class="ts-box"></div><p class="form-error" data-form-error aria-live="polite"></p>' +
+      '<button class="btn btn--navy btn--lg btn--block" type="submit">Gửi liên kết đặt lại</button>' +
+      '<p class="auth-alt"><button class="link-btn" type="button" data-auth-tab="login">← Quay lại đăng nhập</button></p>' +
+      "</form>" +
+      "</div>";
     document.body.appendChild(m);
     return m;
+  }
+  function showAuthTab(name) {
+    const m = ensureLoginModal();
+    m.querySelectorAll("[data-auth-form]").forEach((f) => (f.hidden = f.dataset.authForm !== name));
+    m.querySelectorAll(".auth-tabs [data-auth-tab]").forEach((b) => b.setAttribute("aria-selected", b.dataset.authTab === name ? "true" : "false"));
+    document.getElementById("login-title").textContent = name === "register" ? "Tạo tài khoản" : name === "forgot" ? "Quên mật khẩu" : "Đăng nhập";
+    const f = m.querySelector('[data-auth-form="' + name + '"]');
+    mountTurnstile(f);
+    const first = f.querySelector("input");
+    setTimeout(() => first && first.focus(), 50);
   }
 
   let lastFocus = null;
@@ -645,9 +736,10 @@
     m.setAttribute("aria-hidden", "true");
     if (lastFocus) lastFocus.focus();
   }
-  function openLogin() {
+  function openLogin(tab) {
     closeDrawer();
     openModal(ensureLoginModal());
+    showAuthTab(tab || "login");
   }
 
   function setFieldError(input, msg) {
@@ -656,28 +748,80 @@
     if (err) err.textContent = msg || "";
   }
 
-  function handleLoginSubmit(form) {
-    const email = form.email, pass = form.password;
-    let ok = true;
-    if (!email.value.trim()) {
-      setFieldError(email, "Nhập email hoặc số điện thoại.");
-      ok = false;
-    } else setFieldError(email, "");
-    if (pass.value.length < 6) {
-      setFieldError(pass, "Mật khẩu cần ít nhất 6 ký tự.");
-      ok = false;
-    } else setFieldError(pass, "");
-    if (!ok) return;
-    const raw = email.value.trim().split("@")[0];
-    const name = raw.length > 1 ? raw.charAt(0).toUpperCase() + raw.slice(1) : "Nhà đầu tư";
-    finishLogin({ name: name, email: email.value.trim(), vip: false, memberUntil: null, courses: [] });
+  function formError(form, msg) {
+    const el = form.querySelector("[data-form-error]");
+    if (el) el.textContent = msg || "";
+  }
+  function setBusy(form, busy) {
+    const b = form.querySelector('button[type="submit"]');
+    if (b) {
+      b.disabled = busy;
+      b.classList.toggle("is-loading", busy);
+    }
   }
 
-  function finishLogin(user) {
-    auth.login(user);
+  function handleAuthSubmit(form) {
+    const kind = form.dataset.authForm;
+    const v = (n) => (form[n] ? form[n].value.trim() : "");
+    let ok = true;
+    const need = (n, cond, msg) => {
+      if (!form[n]) return;
+      if (!cond) { setFieldError(form[n], msg); ok = false; } else setFieldError(form[n], "");
+    };
+    need("email", /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v("email")), "Nhập email hợp lệ.");
+    if (kind !== "forgot") need("password", form.password.value.length >= (kind === "register" ? 8 : 1), kind === "register" ? "Mật khẩu cần ít nhất 8 ký tự." : "Nhập mật khẩu.");
+    if (kind === "register") {
+      need("name", v("name").length >= 2, "Nhập họ tên.");
+      need("phone", /^\+?\d{9,15}$/.test(v("phone").replace(/[\s.-]/g, "")), "Nhập số điện thoại / Zalo.");
+    }
+    if (!ok) return;
+    formError(form, "");
+    setBusy(form, true);
+    const ts = turnstileToken(form);
+    let job;
+    if (kind === "login") job = auth.login(v("email"), form.password.value, ts).then((u) => finishAuth("Chào " + u.name + "!"));
+    else if (kind === "register") {
+      job = auth.register({ name: v("name"), email: v("email"), phone: v("phone"), password: form.password.value, turnstile: ts })
+        .then(() => finishAuth("Đã tạo tài khoản. Kiểm tra email " + v("email") + " để xác minh."));
+    } else {
+      job = api("auth/forgot", { body: { email: v("email"), turnstile: ts } }).then((r) => {
+        form.innerHTML = '<p class="auth-done">' + icon("checkCircle") + escapeHtml(r.message) + '</p><p class="auth-alt"><button class="link-btn" type="button" data-auth-tab="login">← Quay lại đăng nhập</button></p>';
+      });
+    }
+    job.catch((e) => {
+      formError(form, e.message);
+      resetTurnstile(form);
+    }).finally(() => setBusy(form, false));
+  }
+
+  function finishAuth(message) {
     const m = document.getElementById("login-modal");
-    if (m) closeModal(m);
-    toast("Đăng nhập thành công. Chào " + user.name + "!");
+    if (m) {
+      closeModal(m);
+      m.remove(); // vẽ lại sạch lần sau (xoá mật khẩu đã gõ, widget chống robot dùng 1 lần)
+      Object.keys(tsWidgets).forEach((k) => delete tsWidgets[k]);
+    }
+    toast(message);
+  }
+
+  /* Dải nhắc xác minh email (đăng nhập rồi nhưng chưa bấm link trong email) */
+  function renderVerifyBar() {
+    let bar = document.getElementById("verify-bar");
+    const u = auth.user();
+    if (!u || u.verified) {
+      if (bar) bar.remove();
+      return;
+    }
+    if (!bar) {
+      bar = document.createElement("div");
+      bar.id = "verify-bar";
+      bar.className = "verify-bar";
+      const header = document.querySelector("[data-site-header]");
+      header && header.insertAdjacentElement("afterend", bar);
+    }
+    bar.innerHTML = '<div class="container">' + icon("info") + "<span>Kiểm tra hộp thư <b>" + escapeHtml(u.email) +
+      "</b> và bấm liên kết để xác minh tài khoản (cần để mua gói / khóa học).</span>" +
+      '<button class="btn btn--outline btn--sm" type="button" data-resend-verify>Gửi lại email</button></div>';
   }
 
   /* ---------- Drawer ---------- */
@@ -895,20 +1039,29 @@
       location.href = u.href;
       return;
     }
-    if (t.closest("[data-login]")) {
+    const lg = t.closest("[data-login]");
+    if (lg) {
       e.preventDefault();
-      openLogin();
+      openLogin(lg.dataset.login || "login");
+      return;
+    }
+    const tab = t.closest("[data-auth-tab]");
+    if (tab) {
+      showAuthTab(tab.dataset.authTab);
       return;
     }
     if (t.closest("[data-logout]")) {
-      auth.logout();
       closeDrawer();
-      toast("Bạn đã đăng xuất.");
+      auth.logout().then(() => toast("Bạn đã đăng xuất."));
       return;
     }
-    const demo = t.closest("[data-demo-login]");
-    if (demo) {
-      finishLogin(auth.demoUser(demo.dataset.demoLogin));
+    const rv = t.closest("[data-resend-verify]");
+    if (rv) {
+      rv.disabled = true;
+      api("auth/resend-verify", { body: {} })
+        .then((r) => toast(r.already ? "Email đã được xác minh." : "Đã gửi lại email xác minh."))
+        .catch((err) => toast(err.message, "info"))
+        .finally(() => (rv.disabled = false));
       return;
     }
     const cp = t.closest("[data-copy]");
@@ -950,9 +1103,9 @@
   });
 
   document.addEventListener("submit", (e) => {
-    if (e.target.matches("[data-login-form]")) {
+    if (e.target.matches("[data-auth-form]")) {
       e.preventDefault();
-      handleLoginSubmit(e.target);
+      handleAuthSubmit(e.target);
     }
   });
 
@@ -968,7 +1121,10 @@
     });
   });
 
-  document.addEventListener("auth:change", renderHeader);
+  document.addEventListener("auth:change", () => {
+    renderHeader();
+    renderVerifyBar();
+  });
 
   /* ---------- Boot ---------- */
   function boot() {
@@ -976,6 +1132,8 @@
     renderFooter();
     renderMarketStrip();
     startMarket();
+    renderVerifyBar();
+    auth.refresh(); // đồng bộ phiên đăng nhập thật; đổi thì bắn auth:change để trang vẽ lại
     // Static [data-icon] placeholders in page markup
     document.querySelectorAll("[data-icon]").forEach((el) => {
       el.innerHTML = icon(el.dataset.icon);
@@ -989,5 +1147,5 @@
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", boot);
   else boot();
 
-  window.UI = { url, icon, fmt, norm, escapeHtml, store, auth, access, initials, rng, Charts, Art, toast, tabs, openLogin, setFieldError, courseCard, courseThumb, priceTag, newsItem, newsSorted, tagLabel, isTicker, accessBadge, Market, marketNote, newsThumb, articleUrl, courseUrl, courseFilterUrl, newsUrl, payUrl, video, youtubeId, gate, contactButtons };
+  window.UI = { url, api, icon, fmt, norm, escapeHtml, store, auth, access, initials, rng, Charts, Art, toast, tabs, openLogin, setFieldError, courseCard, courseThumb, priceTag, newsItem, newsSorted, tagLabel, isTicker, accessBadge, Market, marketNote, newsThumb, articleUrl, courseUrl, courseFilterUrl, newsUrl, payUrl, video, youtubeId, gate, contactButtons };
 })();

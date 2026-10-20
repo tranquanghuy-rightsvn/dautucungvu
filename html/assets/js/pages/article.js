@@ -10,6 +10,25 @@
   // lại trang. Bài trả phí chỉ có tóm tắt ở đây (thân bài nằm ở máy chủ, GAS.md II.A.3).
   const prebuilt = el.querySelector("[data-article-body]");
   const bodyHtml = prebuilt ? prebuilt.innerHTML : "";
+  // Bài trả phí: thân bài lấy từ máy chủ (/api/content/<slug>), máy chủ tự kiểm quyền.
+  // null = chưa tải; "" = đang tải / lỗi; còn lại = HTML thân bài.
+  let paidHtml = null;
+  let paidFor = null;
+  function loadPaid() {
+    const who = (UI.auth.user() || {}).email || "";
+    if (paidFor === who) return;
+    paidFor = who;
+    paidHtml = "";
+    UI.api("content/" + n.slug)
+      .then((r) => (paidHtml = r.content_html || "<p>(Bài chưa có nội dung đầy đủ.)</p>"))
+      .catch((e) => {
+        paidHtml = null;
+        // Phiên trên máy đã cũ (máy chủ báo chưa đăng nhập / không đủ quyền) -> đồng bộ lại
+        if (e.status === 401 || e.status === 403) UI.auth.refresh();
+        else UI.toast(e.message, "info");
+      })
+      .then(render);
+  }
 
   // Bài chưa có nội dung đầy đủ thì dựng đoạn minh họa từ phần tóm tắt
   function paragraphs() {
@@ -29,6 +48,7 @@
   function render() {
     document.title = n.title + " | Đầu tư cùng Vũ";
     const can = access.can(n.access);
+    if (can && n.access !== "public" && paidHtml === null) setTimeout(loadPaid, 0);
     const ps = paragraphs();
     const firstTopic = n.tags.find((t) => !isTicker(t));
     el.innerHTML =
@@ -38,7 +58,11 @@
       '<p class="article-meta"><time datetime="' + n.date.replace(" ", "T") + '">' + fmt.date(n.date) + "</time>" + accessBadge(n.access) + "</p>" +
       '<div class="article-tags">' + n.tags.map(tagLink).join("") + "</div>" +
       '<div class="article-cover">' + UI.newsThumb(n) + "</div>" +
-      (can
+      (can && n.access !== "public"
+        ? paidHtml
+          ? '<div class="article-body" data-article-body>' + paidHtml + "</div>"
+          : '<div class="article-body is-teaser" data-article-body>' + bodyHtml + '</div><p class="data-note">' + icon("clock") + "Đang tải nội dung đầy đủ...</p>"
+        : can
         ? '<div class="article-body" data-article-body>' + (bodyHtml || ps.map((p) => "<p>" + escapeHtml(p) + "</p>").join("")) + "</div>"
         : '<div class="article-body is-teaser" data-article-body><p>' + escapeHtml(ps[0]) + "</p></div>" + gate(n.access)) +
       '<p class="article-note">' + icon("info") + "<span>Nội dung chỉ nhằm mục đích tham khảo, không phải khuyến nghị mua bán chứng khoán.</span></p>";
