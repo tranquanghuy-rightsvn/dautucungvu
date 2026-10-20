@@ -12,7 +12,7 @@
 > - Code đổi 1 quyết định / tên field / tên biến → cập nhật file này trong CÙNG lượt sửa.
 > - Xong 1 việc trong mục XII → tick `[x]` + ghi ngày.
 >
-> Cập nhật lần cuối: 20/10/2026 (chốt ảnh tùy biến + dữ liệu thị trường API thật).
+> Cập nhật lần cuối: 20/10/2026 (bắt đầu GĐ1: tái cấu trúc repo, worker/, CI).
 
 ---
 
@@ -82,7 +82,12 @@ Ranh giới cứng:
   tìm kiếm không đưa lên URL. Neo `#...` trong trang được phép.
 - Worker giữ `html_handling` MẶC ĐỊNH (`auto-trailing-slash`) — KHÁC skill mục 7 (skill dùng
   `"none"` cho site URL `.html`; site này dùng thư mục, đặt `"none"` thì `/slug/` không tự phục
-  vụ `index.html`). `not_found_handling = "404-page"` (cần `html/404.html`).
+  vụ `index.html`). `not_found_handling = "404-page"` (`html/404.html`, mọi link trong file đó
+  dùng đường dẫn tuyệt đối `/...` vì nó được trả ở mọi URL lạ).
+- BẮT BUỘC `run_worker_first = ["/api/*"]` trong `worker/wrangler.jsonc`: theo docs Cloudflare,
+  có `not_found_handling` mà không có dòng này thì `/api/*` có thể nhận trang 404 thay vì chạy Worker.
+- Gõ `/slug` (thiếu `/`) thì Cloudflare tự trả 307 sang `/slug/` — hành vi nền tảng, link nội bộ
+  luôn có `/` nên không bao giờ gặp.
 
 ### 0.2 Quy tắc SEO (bắt buộc cho MỌI trang)
 - Mỗi trang: `<title>`, meta description, robots, canonical tuyệt đối
@@ -317,19 +322,28 @@ Không chạy trên GAS. GAS chỉ là giao diện quản trị gọi API admin 
 | `data/news/<slug>.json` | Meta + tóm tắt (+ `content_html` nếu `public`) |
 | `data/courses.json` | Toàn bộ khóa + bài học công khai — **commit chốt** khóa học |
 | `data/settings.json` | Cài đặt site (II.D) — **commit chốt** cài đặt |
+| `data/market-demo.json` | Giá / chỉ số MINH HOẠ (không qua CMS) — xoá ở GĐ3 khi có `/api/market` |
 | `html/` | Site tĩnh deploy (chỉ thứ được public) |
 | `html/images/news/<slug>/…`, `html/images/courses/<id>/…`, `html/images/site/<key>.jpg` | Ảnh do CMS ghi |
 | `html/vendor/tinymce/` | TinyMCE tự host |
 | `html/admin/index.html` | Trang nhúng iframe CMS (mẫu xevip) |
-| `templates/` | Khung trang (người sửa tay; build đọc) |
-| `scripts/build.py` | Build `data/` → `html/` (kế thừa `html/scripts/seo.py` hiện tại) |
-| `worker/` | Code Worker, `wrangler.toml`, migration D1 |
+| `html/assets/js/data.js` | **SINH** bởi build từ `data/` (đúng cấu trúc `window.APP_DATA` cũ) — không sửa tay |
+| `html/404.html` | Trang 404 (sửa tay) |
+| `templates/article.html` | Khung trang bài viết (người sửa tay; build đọc) |
+| `scripts/build.py` | Build `data/` → `html/`: `data.js`, khối SEO trang gốc, mọi trang con, `sitemap.xml`, `robots.txt`. Chỉ cần Python 3 |
+| `worker/` | `wrangler.jsonc`, `src/` (`index.js` router, `http.js`, `r2.js` phát video có Range, `presign.js` link upload R2), `migrations/` (D1), `r2-cors.json` |
+| `docs/design/` | Ảnh thiết kế gốc (không deploy) |
+| `.github/workflows/deploy.yml` | CI build + deploy |
 | `gas/` | **gitignore**, deploy bằng `clasp` |
 | `GAS.md` | File này |
 
-- CI chỉ trigger khi đổi `data/posts.json`, `data/courses.json`, `data/settings.json` (file index
-  luôn ghi SAU CÙNG — skill `static-site-build.md` mục 5). CI: `python3 scripts/build.py` →
-  commit `html/` ("CI: build html from data") → `wrangler deploy`.
+- CI (`.github/workflows/deploy.yml`) trigger khi đổi 4 file index `data/posts.json`,
+  `data/courses.json`, `data/settings.json`, `data/market-demo.json` (file index luôn ghi SAU CÙNG —
+  skill `static-site-build.md` mục 5) hoặc code (`scripts/`, `templates/`, `worker/`, `html/` trừ
+  `html/images/**`). KHÔNG trigger theo `data/news/**` / `html/images/**` (CMS ghi các file đó
+  trước file index). CI: `python3 scripts/build.py` → commit `html/` ("CI: build html from
+  data") → `npm ci` + `npx wrangler deploy` trong `worker/`. Chưa có secret Cloudflare thì bỏ qua
+  bước deploy (cảnh báo, không lỗi).
 - Độ trễ Lưu → lên site: ~1–3 phút. Đơn / quyền / video: tức thì (D1).
 
 **D1** (tên bảng cố định; cột chi tiết chốt khi viết migration rồi bổ sung vào đây):
@@ -353,6 +367,9 @@ Không chạy trên GAS. GAS chỉ là giao diện quản trị gọi API admin 
 ## IX. Checklist bug đã gặp ở dự án này
 - (Phần site tĩnh) Chrome headless `--window-size=390` hiển thị bị cắt phải → do headless có bề
   rộng tối thiểu, KHÔNG phải lỗi CSS. Kiểm mobile bằng DevTools/Chrome MCP thật.
+- (Worker, 20/10) `Content-Range: bytes NaN-NaN/...` khi phát video → `R2Object.range` LUÔN có
+  đủ khóa `offset`/`length`/`suffix` (giá trị `undefined` nếu không dùng), nên `"suffix" in
+  obj.range` luôn đúng. Cách né: kiểm `obj.range.suffix !== undefined` (đã sửa trong `r2.js`).
 - (Chưa có bug GAS/Worker — bổ sung khi gặp, kèm nguyên nhân + cách né.)
 
 ## X. Cấu hình (tên biến cố định)
@@ -362,50 +379,43 @@ Không chạy trên GAS. GAS chỉ là giao diện quản trị gọi API admin 
 `master`, `WORKER_API_BASE` = `https://dautucungvu.com/api/admin`, `WORKER_ADMIN_KEY` (≥ 32 ký tự
 ngẫu nhiên, TRÙNG secret `ADMIN_KEY` của Worker), `SPREADSHEET_ID` (code tự tạo, không điền).
 
-**Worker** — secrets: `ADMIN_KEY`, `TURNSTILE_SECRET`, `R2_ACCESS_KEY_ID`, `R2_SECRET_ACCESS_KEY`.
-vars: `SITE_URL` = `https://dautucungvu.com`, `MAIL_FROM` = `no-reply@dautucungvu.com`,
-`MAIL_REPLY_TO`, `ORDER_NOTIFY_EMAIL`, `CMS_URL`, `TURNSTILE_SITE_KEY`, `R2_ACCOUNT_ID`.
-bindings: `DB` (D1), `VIDEOS` (R2), `EMAIL` (send_email), `ASSETS` (static assets).
+**Worker** (`worker/wrangler.jsonc`, tên Worker `dautucungvu`, custom domain `dautucungvu.com`)
+— secrets: `ADMIN_KEY`, `TURNSTILE_SECRET`, `R2_ACCESS_KEY_ID`, `R2_SECRET_ACCESS_KEY`.
+vars: `SITE_URL` = `https://dautucungvu.com`, `R2_BUCKET` = `dautucungvu-videos`, `R2_ACCOUNT_ID`
+(32 ký tự hex), `ENABLE_TEST_ROUTES` (`"1"` chỉ khi thử GĐ1 — bật `/api/test/*`; đặt `"0"` trước
+khi mở bán), `MAIL_FROM` = `no-reply@dautucungvu.com`, `MAIL_REPLY_TO`, `ORDER_NOTIFY_EMAIL`,
+`CMS_URL`, `TURNSTILE_SITE_KEY`.
+bindings: `DB` (D1 `dautucungvu`), `VIDEOS` (R2), `EMAIL` (send_email), `ASSETS` (static assets).
+Chạy local: `worker/.dev.vars` (gitignore) chứa `ADMIN_KEY=...` cho `wrangler dev`.
 
 **GitHub Actions secrets**: `CLOUDFLARE_API_TOKEN`, `CLOUDFLARE_ACCOUNT_ID`.
 
 ---
 
-## XI. Hiện trạng code (tới commit `0042289`, 19/10/2026)
+## XI. Hiện trạng code (20/10/2026, đang làm GĐ1)
 
-Repo hiện CHỈ có site tĩnh demo trong `html/`; chưa có `gas/`, `worker/`, `data/`, CI.
+Cấu trúc repo đã theo mục VIII (trừ `gas/`, `html/admin/`, `html/vendor/`, `worker/migrations/`
+chưa có). Site vẫn là bản demo về chức năng:
 
-```
-html/
-  index.html                       trang chủ (sửa tay)
-  khoa-hoc/ mo-tai-khoan/ tin-tuc/ premium/ thanh-toan/ dashboard/   trang gốc  slug/index.html
-  bai-viet/<slug>/  khoa-hoc/<id>/[bai-<n>/]  khoa-hoc/mien-phi|co-phi|cua-toi/
-  tin-tuc/<chủ-đề>/  tin-tuc/<mã-viết-thường>/  thanh-toan/goi-<n>-thang/  thanh-toan/<id-khóa>/
-                                   ↑ SINH bởi html/scripts/seo.py — không sửa tay (80 trang)
-  assets/css/core.css, pages.css
-  assets/js/data.js                TOÀN BỘ dữ liệu demo (site, indices, tickers, courses,
-                                   newsTags, news[có slug], brokers) — CÓ CẢ nội dung trả phí (sẽ gỡ GĐ4)
-  assets/js/ui.js                  header/footer, auth GIẢ LẬP (localStorage "dtcv-user",
-                                   "Xem thử theo vai trò"), modal, video, chart SVG, và
-                                   hàm URL: url(), articleUrl(n), courseUrl(c, lessonIdx),
-                                   courseFilterUrl(f), newsUrl(tagOrTicker), payUrl({course}|{months})
-  assets/js/pages/*.js             home, courses, account, news, article, premium, payment, dashboard
-                                   — đọc trạng thái từ document.body.dataset
-  assets/img/                      vu.jpg, vu-128.jpg, logo.svg, qr-code.jpg (QR gốc chủ site),
-                                   qr-code-card.jpg (QR cắt thẻ — dự phòng khi qrImage có giá trị)
-  scripts/seo.py                   sinh khối SEO <head> (giữa <!-- SEO --> … <!-- /SEO -->) cho
-                                   trang gốc + sinh mọi trang con + robots.txt + sitemap.xml;
-                                   đọc data.js bằng node. Chạy: python3 html/scripts/seo.py
-  scripts/article-template.html    khung trang bài viết
-  robots.txt, sitemap.xml          sinh ra
-  README.md, design.jpeg, design-crops/, 30982980-….jpeg   tài liệu/thiết kế — ĐANG bị public,
-                                   chuyển ra ngoài html/ ở GĐ1
-```
-
-- Thanh toán: `data.js` → `payment.qrImage = ""` nên dùng VietQR theo đơn; thông tin ngân hàng đã
-  điền. Đơn hiện chỉ lưu localStorage (demo).
-- Liên hệ trong `data.js` vẫn là số giả `0900 000 000` — chờ số thật (XII.A).
-- Chạy thử local: `cd html && python3 -m http.server 5173`.
+- `data/` tách từ `data.js` cũ (đã kiểm: `window.APP_DATA` build ra giống hệt bản cũ ở cả 7 nhóm
+  site/indices/tickers/courses/newsTags/news/brokers; `settings.json` có thêm `images`).
+- `scripts/build.py` (trước là `html/scripts/seo.py`) sinh `html/assets/js/data.js` + 80 trang con
+  + SEO + sitemap/robots. Trang gốc `html/<slug>/index.html` và `html/index.html` vẫn sửa tay
+  (build chỉ thay khối `<!-- SEO -->`).
+- Trang con hiện có: `bai-viet/<slug>/`, `khoa-hoc/<id>/[bai-<n>/]` (đổi sang slug bài ở GĐ3),
+  `khoa-hoc/mien-phi|co-phi|cua-toi/`, `tin-tuc/<chủ-đề>/`, `tin-tuc/<mã-viết-thường>/`,
+  `thanh-toan/goi-<n>-thang/`, `thanh-toan/<id-khóa>/`.
+- `assets/js/ui.js`: auth GIẢ LẬP (`localStorage` "dtcv-user", "Xem thử theo vai trò"), hàm URL
+  `url()`, `articleUrl(n)`, `courseUrl(c, lessonIdx)`, `courseFilterUrl(f)`, `newsUrl(x)`,
+  `payUrl({course}|{months})`. `assets/js/pages/*.js` đọc trạng thái từ `document.body.dataset`.
+- Thanh toán: VietQR theo đơn (`settings.payment.qrImage = ""`); `assets/img/qr-code-card.jpg` là
+  QR tĩnh dự phòng. Đơn hiện chỉ lưu localStorage (demo).
+- `worker/`: đã chạy thử local (`wrangler dev`): trang tĩnh 200, `/khoa-hoc` → 307 `/khoa-hoc/`,
+  URL lạ → 404 + `html/404.html`, `/api/health` OK, `/api/*` lạ → 404 JSON, admin sai khóa → 401,
+  presigned PUT URL R2 sinh đúng định dạng, `/api/test/video/...` Range (đầu/giữa/suffix) đúng byte.
+  CHƯA deploy (chờ mục XII.A). `database_id` D1 và `R2_ACCOUNT_ID` đang là `TODO_...`.
+- Liên hệ trong `settings.json` vẫn là số giả `0900 000 000`.
+- Chạy thử: `cd worker && npx wrangler dev` (hoặc `cd html && python3 -m http.server`).
 
 ## XII. Kế hoạch & tiến độ
 
@@ -440,14 +450,19 @@ html/
 ### B. Giai đoạn (mỗi GĐ: chạy được trên production, test dữ liệu giả rồi dọn)
 
 **GĐ1 — Hạ tầng & thử rủi ro (≈ 2–3 ngày)**
-- [ ] Tái cấu trúc repo theo VIII: `data/` (tách từ `data.js`), `templates/`, `scripts/build.py`
-      (từ `seo.py`, đọc `data/*.json` thay vì `data.js`), đưa README/design/scripts ra khỏi `html/`.
-- [ ] `build.py` sinh luôn `html/assets/js/data.js` CHỈ chứa dữ liệu công khai (JS site vẫn chạy).
-- [ ] `worker/wrangler.toml`: assets `../html` (mặc định `html_handling`, `404-page`), D1, R2,
-      route `/api/*`; `html/404.html`.
-- [ ] GitHub Actions: trigger 3 file index → build → commit `html/` → `wrangler deploy`.
+- [x] Tái cấu trúc repo theo VIII: `data/`, `templates/`, `scripts/build.py`, `docs/design/`;
+      README/design/scripts ra khỏi `html/` (20/10).
+- [x] `build.py` sinh `html/assets/js/data.js` từ `data/` (20/10, kiểm giống hệt bản cũ).
+- [x] `worker/wrangler.jsonc` + `src/` + `html/404.html`; chạy thử local OK (20/10).
+- [x] `.github/workflows/deploy.yml` (20/10; chưa chạy thật — chờ secret).
+- [ ] Tạo D1 `dautucungvu` (`npx wrangler d1 create dautucungvu`), điền `database_id`; điền
+      `R2_ACCOUNT_ID`; tạo bucket nếu chưa có; `npx wrangler r2 bucket cors set dautucungvu-videos
+      --file r2-cors.json`; đặt secret `ADMIN_KEY`, `R2_ACCESS_KEY_ID`, `R2_SECRET_ACCESS_KEY`.
+- [ ] Deploy lần đầu, gán custom domain `dautucungvu.com` (xoá bản ghi DNS cũ của apex nếu
+      trùng); kiểm `curl -sI https://dautucungvu.com/ | grep -i server` ra `cloudflare`.
 - [ ] Thử rủi ro 1: upload file lớn từ iframe GAS lên R2 bằng presigned URL (CORS).
-- [ ] Thử rủi ro 2: phát MP4 qua Worker có `Range` (Chrome, Safari iOS).
+- [ ] Thử rủi ro 2: phát MP4 THẬT qua Worker có `Range` trên production (Chrome, Safari iOS).
+      Local đã đúng byte (20/10).
 - Xong khi: sửa `data/` + push → site tự deploy; 2 rủi ro đã thử OK (hoặc ghi phương án thay vào đây).
 
 **GĐ2 — CMS lõi + bài viết (≈ 3–4 ngày)**

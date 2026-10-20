@@ -1,0 +1,182 @@
+[
+  {
+    "id": "nhap-mon-chung-khoan",
+    "title": "Nhập môn chứng khoán",
+    "desc": "Những điều cần biết trước khi đặt lệnh đầu tiên: thị trường vận hành ra sao, đọc bảng giá, các loại lệnh và phí.",
+    "price": 0,
+    "access": "public",
+    "art": "candles",
+    "lessons": [
+      {
+        "t": "Chứng khoán là gì, vì sao nên đầu tư",
+        "m": 12,
+        "video": ""
+      },
+      {
+        "t": "Ba sàn HOSE, HNX, UPCoM",
+        "m": 10,
+        "video": ""
+      },
+      {
+        "t": "Đọc bảng giá điện tử",
+        "m": 15,
+        "video": ""
+      },
+      {
+        "t": "Các loại lệnh LO, ATO, ATC, MP",
+        "m": 14,
+        "video": ""
+      },
+      {
+        "t": "Phí, thuế và chu kỳ thanh toán T+2",
+        "m": 11,
+        "video": ""
+      }
+    ]
+  },
+  {
+    "id": "doc-bao-cao-tai-chinh",
+    "title": "Đọc hiểu báo cáo tài chính",
+    "desc": "Đọc 3 báo cáo cốt lõi, nhận ra doanh nghiệp làm ăn thật hay chỉ đẹp trên giấy, kèm ví dụ từ doanh nghiệp niêm yết.",
+    "price": 499000,
+    "art": "bars",
+    "lessons": [
+      {
+        "t": "Tổng quan 3 báo cáo tài chính",
+        "m": 16,
+        "video": "",
+        "preview": true
+      },
+      {
+        "t": "Bảng cân đối kế toán",
+        "m": 20,
+        "video": ""
+      },
+      {
+        "t": "Báo cáo kết quả kinh doanh",
+        "m": 18,
+        "video": ""
+      },
+      {
+        "t": "Lưu chuyển tiền tệ: tiền thật nằm ở đâu",
+        "m": 19,
+        "video": ""
+      },
+      {
+        "t": "Các chỉ số ROE, ROA, biên lợi nhuận",
+        "m": 17,
+        "video": ""
+      },
+      {
+        "t": "Dấu hiệu cảnh báo trong BCTC",
+        "m": 15,
+        "video": ""
+      }
+    ]
+  },
+  {
+    "id": "phan-tich-ky-thuat",
+    "title": "Phân tích kỹ thuật thực chiến",
+    "desc": "Xu hướng, hỗ trợ kháng cự, khối lượng và cách đặt điểm mua, điểm cắt lỗ có kỷ luật.",
+    "price": 699000,
+    "art": "chart",
+    "lessons": [
+      {
+        "t": "Biểu đồ nến và xu hướng",
+        "m": 18,
+        "video": "",
+        "preview": true
+      },
+      {
+        "t": "Hỗ trợ, kháng cự và vùng giá",
+        "m": 20,
+        "video": ""
+      },
+      {
+        "t": "Khối lượng giao dịch nói gì",
+        "m": 16,
+        "video": ""
+      },
+      {
+        "t": "Đường trung bình động MA",
+        "m": 17,
+        "video": ""
+      },
+      {
+        "t": "RSI, MACD dùng đúng cách",
+        "m": 21,
+        "video": ""
+      },
+      {
+        "t": "Điểm mua, cắt lỗ và quản lý lệnh",
+        "m": 22,
+        "video": ""
+      },
+      {
+        "t": "Thực hành trên biểu đồ thật",
+        "m": 30,
+        "video": ""
+      }
+    ]
+  },
+  {
+    "id": "dau-tu-co-tuc",
+    "title": "Đầu tư cổ phiếu cổ tức",
+    "desc": "Chọn doanh nghiệp trả cổ tức đều, hiểu ngày chốt quyền và xây dòng tiền thụ động dài hạn.",
+    "price": 0,
+    "access": "user",
+    "art": "pie",
+    "lessons": [
+      {
+        "t": "Cổ tức tiền mặt và cổ tức cổ phiếu",
+        "m": 12,
+        "video": ""
+      },
+      {
+        "t": "Ngày giao dịch không hưởng quyền",
+        "m": 10,
+        "video": ""
+      },
+      {
+        "t": "Lọc cổ phiếu cổ tức bền vững",
+        "m": 16,
+        "video": ""
+      }
+    ]
+  },
+  {
+    "id": "quan-tri-von",
+    "title": "Quản trị vốn và tâm lý giao dịch",
+    "desc": "Phân bổ tỷ trọng, dùng margin an toàn và giữ kỷ luật khi thị trường biến động mạnh.",
+    "price": 399000,
+    "art": "towers",
+    "lessons": [
+      {
+        "t": "Xác định khẩu vị rủi ro",
+        "m": 14,
+        "video": "",
+        "preview": true
+      },
+      {
+        "t": "Phân bổ tỷ trọng danh mục",
+        "m": 16,
+        "video": ""
+      },
+      {
+        "t": "Margin: dùng thế nào cho an toàn",
+        "m": 15,
+        "video": ""
+      },
+      {
+        "t": "Tâm lý FOMO và cắt lỗ",
+        "m": 18,
+        "video": ""
+      },
+      {
+        "t": "Nhật ký giao dịch",
+        "m": 10,
+        "video": ""
+      }
+    ]
+  }
+]

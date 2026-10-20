@@ -1,0 +1,73 @@
+# Build data/ -> html/ rồi deploy Worker (GAS.md mục VIII).
+# CMS ghi data/news/*.json và html/images/** TRƯỚC, ghi file index (posts/courses/settings) SAU
+# CÙNG -> chỉ các file index mới kích hoạt build, tránh build giữa chừng một thao tác.
+# Commit "CI: build" bằng GITHUB_TOKEN không tự kích hoạt lại workflow (không lặp vô hạn).
+name: Build & deploy
+
+on:
+  push:
+    branches: [master]
+    paths:
+      - data/posts.json
+      - data/courses.json
+      - data/settings.json
+      - data/market-demo.json
+      - scripts/**
+      - templates/**
+      - worker/**
+      - html/**
+      - "!html/images/**"
+      - .github/workflows/deploy.yml
+  workflow_dispatch:
+
+concurrency:
+  group: deploy
+  cancel-in-progress: false
+
+permissions:
+  contents: write
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    env:
+      CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+      CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Build html/ từ data/
+        run: python3 scripts/build.py
+
+      - name: Commit html/ nếu có thay đổi
+        run: |
+          if [ -n "$(git status --porcelain html)" ]; then
+            git config user.name "github-actions[bot]"
+            git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+            git add html
+            git commit -m "CI: build html from data"
+            git pull --rebase origin master
+            git push origin HEAD:master
+          fi
+
+      - uses: actions/setup-node@v4
+        if: env.CLOUDFLARE_API_TOKEN != ''
+        with:
+          node-version: "22"
+          cache: npm
+          cache-dependency-path: worker/package-lock.json
+
+      - name: Deploy Worker
+        if: env.CLOUDFLARE_API_TOKEN != ''
+        working-directory: worker
+        run: |
+          npm ci --no-audit --no-fund
+          npx wrangler deploy
+
+      - name: Chưa có token Cloudflare
+        if: env.CLOUDFLARE_API_TOKEN == ''
+        run: echo "::warning::Chưa đặt secret CLOUDFLARE_API_TOKEN / CLOUDFLARE_ACCOUNT_ID — bỏ qua deploy."

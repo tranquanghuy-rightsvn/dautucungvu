@@ -1,0 +1,286 @@
+{
+  "name": "Đầu tư cùng Vũ",
+  "slogan": "Đầu tư thông minh – Tài chính vững vàng – Tự do tài chính",
+  "offerTitle": "Mở tài khoản hoặc chuyển ID về ĐẦU TƯ CÙNG VŨ",
+  "offerText": "với số vốn từ 50 triệu đồng – Miễn phí toàn bộ khóa học & tin tức độc quyền!",
+  "minCapital": "50 triệu đồng",
+  "contact": {
+    "phone": "0900 000 000",
+    "zalo": "https://zalo.me/0900000000",
+    "facebook": "#",
+    "youtube": "#",
+    "telegram": "#"
+  },
+  "payment": {
+    "bankId": "TCB",
+    "bankName": "Techcombank",
+    "accountNo": "4819939999",
+    "accountName": "NGO TRUONG VU",
+    "qrImage": ""
+  },
+  "membership": {
+    "pricePerMonth": 68000,
+    "months": [
+      1,
+      3,
+      6,
+      12
+    ]
+  },
+  "videos": {
+    "openAccount": "",
+    "transferId": ""
+  },
+  "images": {
+    "hero": "assets/img/vu.jpg",
+    "brand": "assets/img/vu-128.jpg",
+    "favicon": "assets/img/vu-128.jpg",
+    "og": "assets/img/vu.jpg"
+  },
+  "brokers": [
+    {
+      "id": "vps",
+      "name": "VPS",
+      "note": "Phí giao dịch thấp",
+      "color": "#e21b23",
+      "bg": "#fff4f0",
+      "openUrl": "https://www.vps.com.vn",
+      "refCode": "",
+      "transferUrl": "",
+      "transferCode": "",
+      "openVideo": "",
+      "transferVideo": ""
+    },
+    {
+      "id": "ssi",
+      "name": "SSI",
+      "note": "Đội ngũ uy tín",
+      "color": "#d71920",
+      "bg": "#fff1f1",
+      "openUrl": "https://www.ssi.com.vn",
+      "refCode": "",
+      "transferUrl": "",
+      "transferCode": "",
+      "openVideo": "",
+      "transferVideo": ""
+    },
+    {
+      "id": "mbs",
+      "name": "MBS",
+      "note": "Nền tảng mạnh",
+      "color": "#1e3a8a",
+      "bg": "#eef3ff",
+      "openUrl": "https://mbs.com.vn",
+      "refCode": "",
+      "transferUrl": "",
+      "transferCode": "",
+      "openVideo": "",
+      "transferVideo": ""
+    },
+    {
+      "id": "tcbs",
+      "name": "TCBS",
+      "note": "Nhiều ưu đãi",
+      "color": "#e3262e",
+      "bg": "#fff1f1",
+      "openUrl": "https://www.tcbs.com.vn",
+      "refCode": "",
+      "transferUrl": "",
+      "transferCode": "",
+      "openVideo": "",
+      "transferVideo": ""
+    },
+    {
+      "id": "hsc",
+      "name": "HSC",
+      "note": "Hỗ trợ tốt",
+      "color": "#0b3c8c",
+      "bg": "#eef3ff",
+      "openUrl": "https://www.hsc.com.vn",
+      "refCode": "",
+      "transferUrl": "",
+      "transferCode": "",
+      "openVideo": "",
+      "transferVideo": ""
+    },
+    {
+      "id": "kis",
+      "name": "KIS",
+      "note": "Dịch vụ chuyên nghiệp",
+      "color": "#0f4c81",
+      "bg": "#eef6ff",
+      "openUrl": "https://www.kisvn.vn",
+      "refCode": "",
+      "transferUrl": "",
+      "transferCode": "",
+      "openVideo": "",
+      "transferVideo": ""
+    }
+  ],
+  "newsTags": [
+    {
+      "id": "thi-truong",
+      "label": "Thị trường",
+      "keys": [
+        "thi truong",
+        "vn-index",
+        "vnindex",
+        "phien"
+      ]
+    },
+    {
+      "id": "nhan-dinh",
+      "label": "Nhận định thị trường",
+      "keys": [
+        "nhan dinh",
+        "chien luoc",
+        "kich ban",
+        "du bao"
+      ]
+    },
+    {
+      "id": "doanh-nghiep",
+      "label": "Doanh nghiệp",
+      "keys": [
+        "doanh nghiep",
+        "cong ty"
+      ]
+    },
+    {
+      "id": "vi-mo",
+      "label": "Vĩ mô",
+      "keys": [
+        "vi mo",
+        "lai suat",
+        "lam phat",
+        "ty gia",
+        "gdp",
+        "cpi"
+      ]
+    },
+    {
+      "id": "quoc-te",
+      "label": "Quốc tế",
+      "keys": [
+        "quoc te",
+        "the gioi",
+        "fed",
+        "my",
+        "trung quoc"
+      ]
+    },
+    {
+      "id": "co-tuc",
+      "label": "Cổ tức",
+      "keys": [
+        "co tuc",
+        "chot quyen",
+        "chia co tuc"
+      ]
+    },
+    {
+      "id": "bctc",
+      "label": "Kết quả kinh doanh - BCTC",
+      "keys": [
+        "bctc",
+        "bao cao tai chinh",
+        "kqkd",
+        "ket qua kinh doanh",
+        "loi nhuan",
+        "doanh thu"
+      ]
+    },
+    {
+      "id": "khoi-ngoai",
+      "label": "Khối ngoại",
+      "keys": [
+        "khoi ngoai",
+        "nuoc ngoai",
+        "ngoai mua",
+        "ngoai ban"
+      ]
+    }
+  ],
+  "indices": [
+    {
+      "code": "VN-Index"
+    },
+    {
+      "code": "VN30"
+    },
+    {
+      "code": "HNX"
+    },
+    {
+      "code": "UPCoM"
+    }
+  ],
+  "tickers": [
+    {
+      "code": "MBB",
+      "name": "Ngân hàng TMCP Quân Đội",
+      "sector": "Ngân hàng",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "SSI",
+      "name": "CTCP Chứng khoán SSI",
+      "sector": "Chứng khoán",
+      "color": "#d71920"
+    },
+    {
+      "code": "VCB",
+      "name": "Ngân hàng TMCP Ngoại thương Việt Nam",
+      "sector": "Ngân hàng",
+      "color": "#0f7a3d"
+    },
+    {
+      "code": "VNM",
+      "name": "CTCP Sữa Việt Nam",
+      "sector": "Thực phẩm",
+      "color": "#1d4ed8"
+    },
+    {
+      "code": "FPT",
+      "name": "CTCP FPT",
+      "sector": "Công nghệ",
+      "color": "#f37021"
+    },
+    {
+      "code": "HPG",
+      "name": "CTCP Tập đoàn Hòa Phát",
+      "sector": "Thép",
+      "color": "#b91c1c"
+    },
+    {
+      "code": "TCB",
+      "name": "Ngân hàng TMCP Kỹ thương Việt Nam",
+      "sector": "Ngân hàng",
+      "color": "#dc2626"
+    },
+    {
+      "code": "VIC",
+      "name": "Tập đoàn Vingroup",
+      "sector": "Bất động sản",
+      "color": "#9f1239"
+    },
+    {
+      "code": "VHM",
+      "name": "CTCP Vinhomes",
+      "sector": "Bất động sản",
+      "color": "#be123c"
+    },
+    {
+      "code": "STB",
+      "name": "Ngân hàng TMCP Sài Gòn Thương Tín",
+      "sector": "Ngân hàng",
+      "color": "#1e40af"
+    },
+    {
+      "code": "REE",
+      "name": "CTCP Cơ điện lạnh",
+      "sector": "Điện",
+      "color": "#0369a1"
+    }
+  ]
+}

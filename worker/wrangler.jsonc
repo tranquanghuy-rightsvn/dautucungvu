@@ -1,0 +1,38 @@
+// Worker "dautucungvu": phục vụ site tĩnh html/ + API /api/* (GAS.md mục 0, VIII, X).
+// Khóa bí mật KHÔNG để ở đây (repo public) — đặt bằng `npx wrangler secret put <TÊN>`.
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "dautucungvu",
+  "main": "src/index.js",
+  "compatibility_date": "2026-10-01",
+
+  "assets": {
+    "directory": "../html",
+    "binding": "ASSETS",
+    // Giữ MẶC ĐỊNH "auto-trailing-slash" để /slug/ tự phục vụ slug/index.html (GAS.md 0.1)
+    "html_handling": "auto-trailing-slash",
+    "not_found_handling": "404-page",
+    // Bắt buộc: không có dòng này thì request /api/* không khớp file tĩnh có thể bị trả trang 404
+    // thay vì chạy Worker (not_found_handling xử lý trước).
+    "run_worker_first": ["/api/*"]
+  },
+
+  "routes": [{ "pattern": "dautucungvu.com", "custom_domain": true }],
+
+  // Điền database_id sau khi chạy: npx wrangler d1 create dautucungvu
+  "d1_databases": [
+    { "binding": "DB", "database_name": "dautucungvu", "database_id": "TODO_D1_DATABASE_ID", "migrations_dir": "migrations" }
+  ],
+  "r2_buckets": [{ "binding": "VIDEOS", "bucket_name": "dautucungvu-videos" }],
+
+  "vars": {
+    "SITE_URL": "https://dautucungvu.com",
+    "R2_BUCKET": "dautucungvu-videos",
+    // Account ID không phải bí mật, nhưng điền khi đã có (dùng ký presigned URL R2)
+    "R2_ACCOUNT_ID": "TODO_ACCOUNT_ID",
+    // "1" chỉ trong giai đoạn thử rủi ro GĐ1; về "0" trước khi mở bán
+    "ENABLE_TEST_ROUTES": "1"
+  },
+
+  "observability": { "enabled": true }
+}

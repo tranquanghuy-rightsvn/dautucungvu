@@ -1,15 +1,16 @@
 #!/usr/bin/env python3
-"""Sinh khối SEO trong <head>, trang bài viết, robots.txt và sitemap.xml.
+"""Build site tĩnh html/ từ data/*.json (nguồn chân lý do CMS ghi) — xem GAS.md mục VIII.
 
 URL chuẩn: /slug/ (file slug/index.html), không có /slug.html, /slug hay ?params.
+  - html/assets/js/data.js: SINH từ data/ (CHỈ dữ liệu công khai), JS trên site đọc file này.
   - Trang thường: khối SEO nằm giữa <!-- SEO --> ... <!-- /SEO -->.
-  - Từ dữ liệu trong assets/js/data.js sinh các trang tĩnh:
-      bai-viet/<slug>/              mỗi bài (khung scripts/article-template.html)
+  - Sinh các trang tĩnh:
+      bai-viet/<slug>/              mỗi bài (khung templates/article.html)
       khoa-hoc/<id>/[bai-<n>/]      mỗi khóa, mỗi bài học; khoa-hoc/mien-phi|co-phi|cua-toi/
       tin-tuc/<chủ đề>/, tin-tuc/<mã viết thường>/
       thanh-toan/goi-<n>-thang/, thanh-toan/<id khóa có phí>/
     JS đọc trạng thái từ <body data-*> của trang.
-Chạy lại sau mỗi lần sửa trang / thêm bài:  python3 scripts/seo.py  (cần node)
+Chạy (từ gốc repo, chỉ cần Python 3, không dependency):  python3 scripts/build.py
 Sửa tiêu đề / mô tả trang trong PAGES bên dưới, đừng sửa tay trong file HTML.
 """
 import datetime
@@ -18,14 +19,15 @@ import json
 import pathlib
 import re
 import shutil
-import subprocess
 
-ROOT = pathlib.Path(__file__).resolve().parent.parent
+REPO = pathlib.Path(__file__).resolve().parent.parent
+ROOT = REPO / "html"  # thư mục site được deploy
+DATA = REPO / "data"
 SITE = "https://dautucungvu.com"
 NAME = "Đầu tư cùng Vũ"
 IMAGE = SITE + "/assets/img/vu.jpg"
 LOGO = SITE + "/assets/img/vu-128.jpg"
-TEMPLATE = ROOT / "scripts" / "article-template.html"
+TEMPLATE = REPO / "templates" / "article.html"
 
 # slug, title, description, loại trang schema.org, có index không
 PAGES = [
@@ -125,12 +127,39 @@ def put_head(src, block):
     return re.sub(r'(<meta name="viewport"[^>]*>\n)', lambda m: m.group(1) + block + "\n", src, count=1)
 
 
-def load_data():
-    js = "global.window={};require(%s);process.stdout.write(JSON.stringify(window.APP_DATA))"
-    out = subprocess.run(["node", "-e", js % json.dumps(str(ROOT / "assets/js/data.js"))],
-                         check=True, capture_output=True, text=True).stdout
-    return json.loads(out)
+def read_json(rel):
+    return json.loads((DATA / rel).read_text(encoding="utf-8"))
 
+
+def load_data():
+    """Gộp data/*.json thành đúng cấu trúc window.APP_DATA mà JS trên site đang dùng."""
+    settings = read_json("settings.json")
+    demo = read_json("market-demo.json")  # TODO GĐ3: thay bằng /api/market (GAS.md II.E)
+    idx_demo = {i["code"]: i for i in demo["indices"]}
+    tk_demo = {t["code"]: t for t in demo["tickers"]}
+    news = [read_json(f"news/{p['slug']}.json") for p in read_json("posts.json")]
+    site = {k: v for k, v in settings.items() if k not in ("brokers", "newsTags", "indices", "tickers")}
+    return {
+        "site": site,
+        "indices": [{**idx_demo.get(i["code"], {}), **i} for i in settings["indices"]],
+        "tickers": [{**t, **{k: v for k, v in tk_demo.get(t["code"], {}).items() if k != "code"}} for t in settings["tickers"]],
+        "courses": read_json("courses.json"),
+        "newsTags": settings["newsTags"],
+        "news": news,
+        "brokers": settings["brokers"],
+    }
+
+
+def write_data_js(data):
+    js = ("/* TỰ SINH bởi scripts/build.py từ data/*.json — KHÔNG sửa tay, sửa trong CMS.\n"
+          "   Chỉ chứa dữ liệu công khai (repo + site đều public). */\n"
+          "window.APP_DATA = " + json.dumps(data, ensure_ascii=False, indent=2) + ";\n")
+    (ROOT / "assets/js/data.js").write_text(js, encoding="utf-8")
+    print("đã sinh assets/js/data.js")
+
+
+data = load_data()
+write_data_js(data)
 
 # ---------- Trang thường ----------
 sitemap = []
@@ -148,13 +177,12 @@ for slug, title, desc, kind, index in PAGES:
         sitemap.append((url, today, "daily" if slug in ("", "tin-tuc") else "weekly", "1.0" if not slug else "0.8"))
 
 # ---------- Bài viết: bai-viet/<slug>/index.html ----------
-data = load_data()
 tag_labels = {t["id"]: t["label"] for t in data["newsTags"]}
 slugs = [n.get("slug") for n in data["news"]]
 bad = [n["id"] for n in data["news"] if not re.fullmatch(r"[a-z0-9]+(-[a-z0-9]+)*", n.get("slug") or "")]
 dup = {s for s in slugs if slugs.count(s) > 1}
 if bad or dup:
-    raise SystemExit(f"slug bài viết sai (id {bad}) hoặc trùng ({sorted(dup)}), sửa trong assets/js/data.js")
+    raise SystemExit(f"slug bài viết sai (id {bad}) hoặc trùng ({sorted(dup)}), sửa trong data/")
 
 template = TEMPLATE.read_text(encoding="utf-8").replace('="../', '="../../')
 for n in data["news"]:
@@ -326,6 +354,6 @@ print("đã sinh", sum(len(v) for v in generated.values()), "nhóm trang con tro
     + "</urlset>\n", encoding="utf-8")
 (ROOT / "robots.txt").write_text(
     "User-agent: *\nAllow: /\n"
-    "Disallow: /scripts/\nDisallow: /design-crops/\n\n"
+    "Disallow: /api/\nDisallow: /admin/\n\n"
     f"Sitemap: {SITE}/sitemap.xml\n", encoding="utf-8")
 print("đã sinh sitemap.xml, robots.txt")
