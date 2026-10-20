@@ -85,8 +85,11 @@ def dump(graph):
     return json.dumps(data, ensure_ascii=False, indent=2).replace("</", "<\\/")
 
 
-def head_block(url, title, desc, index, graph, og_type="website", extra=()):
+def head_block(url, title, desc, index, graph, og_type="website", extra=(), image=IMAGE):
     t, d = html.escape(title), html.escape(desc)
+    # Ảnh mặc định (vu.jpg) biết kích thước 640x640; ảnh bìa bài viết thì không khai kích thước
+    size = ['<meta property="og:image:width" content="640">',
+            '<meta property="og:image:height" content="640">'] if image == IMAGE else []
     lines = [
         "<!-- SEO (sinh bởi scripts/seo.py) -->",
         f"<title>{t}</title>",
@@ -101,15 +104,14 @@ def head_block(url, title, desc, index, graph, og_type="website", extra=()):
         f'<meta property="og:title" content="{t}">',
         f'<meta property="og:description" content="{d}">',
         f'<meta property="og:url" content="{url}">',
-        f'<meta property="og:image" content="{IMAGE}">',
-        '<meta property="og:image:width" content="640">',
-        '<meta property="og:image:height" content="640">',
-        f'<meta property="og:image:alt" content="{NAME}">',
+        f'<meta property="og:image" content="{image}">',
+        *size,
+        f'<meta property="og:image:alt" content="{t if image != IMAGE else NAME}">',
         *extra,
         '<meta name="twitter:card" content="summary_large_image">',
         f'<meta name="twitter:title" content="{t}">',
         f'<meta name="twitter:description" content="{d}">',
-        f'<meta name="twitter:image" content="{IMAGE}">',
+        f'<meta name="twitter:image" content="{image}">',
         '<script type="application/ld+json">',
         dump(graph),
         "</script>",
@@ -151,6 +153,9 @@ def load_data():
 
 
 def write_data_js(data):
+    # Thân bài (content_html) đã có sẵn trong trang bai-viet/<slug>/ — không nhồi vào data.js
+    # vốn được tải ở MỌI trang (danh sách tin chỉ cần meta + tóm tắt).
+    data = {**data, "news": [{k: v for k, v in n.items() if k != "content_html"} for n in data["news"]]}
     js = ("/* TỰ SINH bởi scripts/build.py từ data/*.json — KHÔNG sửa tay, sửa trong CMS.\n"
           "   Chỉ chứa dữ liệu công khai (repo + site đều public). */\n"
           "window.APP_DATA = " + json.dumps(data, ensure_ascii=False, indent=2) + ";\n")
@@ -191,10 +196,12 @@ for n in data["news"]:
     desc = n["excerpt"]
     published = n["date"].replace(" ", "T") + ":00+07:00"
     free = n["access"] == "public"
+    # Ảnh bìa do CMS tải lên (html/images/news/<slug>/cover.jpg); bài cũ chưa có thì dùng ảnh mặc định
+    image = SITE + "/" + n["cover"] if n.get("cover") else IMAGE
     topic = next((t for t in n["tags"] if t in tag_labels), None)
     crumbs = [("Tin tức", page_url("tin-tuc")), (n["title"], url)]
     article = {"@type": "NewsArticle", "@id": url + "#article", "headline": n["title"][:110],
-               "description": desc, "image": [IMAGE], "datePublished": published,
+               "description": desc, "image": [image], "datePublished": published,
                "dateModified": published, "inLanguage": "vi-VN",
                "author": {"@id": SITE + "/#organization"}, "publisher": {"@id": SITE + "/#organization"},
                "mainEntityOfPage": {"@id": url + "#webpage"},
@@ -209,13 +216,19 @@ for n in data["news"]:
     extra = [f'<meta property="article:published_time" content="{published}">',
              f'<meta property="article:section" content="{html.escape(tag_labels.get(topic, "Tin tức"))}">',
              *(f'<meta property="article:tag" content="{html.escape(tag_labels.get(t, t))}">' for t in n["tags"])]
-    src = put_head(template, head_block(url, title, desc, True, graph, "article", extra))
-    # Nội dung có sẵn trong HTML cho công cụ tìm kiếm; article.js vẽ lại đầy đủ theo quyền xem
-    paras = (n.get("body") or [n["excerpt"]]) if free else [n["excerpt"]]
+    src = put_head(template, head_block(url, title, desc, True, graph, "article", extra, image))
+    # Nội dung có sẵn trong HTML (bot đọc được không cần JS). article.js GIỮ NGUYÊN khối
+    # [data-article-body] này khi vẽ lại trang. Bài trả phí chỉ có tóm tắt — thân bài nằm ở
+    # máy chủ, KHÔNG BAO GIỜ vào repo / HTML tĩnh (GAS.md mục 0, II.A.3).
+    if free and n.get("content_html"):
+        body_html = n["content_html"]
+    else:
+        paras = (n.get("body") or [n["excerpt"]]) if free else [n["excerpt"]]
+        body_html = "".join(f"<p>{html.escape(p)}</p>" for p in paras)
     body = ('<nav class="crumbs" aria-label="Đường dẫn"><a href="../../tin-tuc/">Tin tức</a></nav>'
             f'<h1>{html.escape(n["title"])}</h1>'
             f'<p class="article-meta"><time datetime="{n["date"].replace(" ", "T")}">{n["date"][8:10]}/{n["date"][5:7]}/{n["date"][:4]}</time></p>'
-            f'<div class="article-body{"" if free else " is-teaser"}">' + "".join(f"<p>{html.escape(p)}</p>" for p in paras) + "</div>")
+            f'<div class="article-body{"" if free else " is-teaser"}" data-article-body>{body_html}</div>')
     src = src.replace('<body data-page="news">', f'<body data-page="news" data-slug="{n["slug"]}">', 1)
     src = src.replace('<article class="article" data-article aria-live="polite"></article>',
                       f'<article class="article" data-article aria-live="polite">{body}</article>', 1)
@@ -354,6 +367,8 @@ print("đã sinh", sum(len(v) for v in generated.values()), "nhóm trang con tro
     + "</urlset>\n", encoding="utf-8")
 (ROOT / "robots.txt").write_text(
     "User-agent: *\nAllow: /\n"
-    "Disallow: /api/\nDisallow: /admin/\n\n"
+    # KHÔNG khai /admin/ ở đây: robots.txt công khai, khai ra là tự lộ đường dẫn quản trị, và
+    # chặn crawl thì Google không đọc được noindex (skill static-site-build.md mục 6b).
+    "Disallow: /api/\n\n"
     f"Sitemap: {SITE}/sitemap.xml\n", encoding="utf-8")
 print("đã sinh sitemap.xml, robots.txt")

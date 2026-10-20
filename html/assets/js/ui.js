@@ -741,6 +741,12 @@
     return '<span class="access-badge access-badge--' + level + '">' + icon(level === "user" ? "user" : level === "vip" ? "shield" : "crown") + access.label[level] + "</span>";
   }
   /* Mọi trạng thái đều là một trang tĩnh /.../slug/ (sinh bởi scripts/seo.py), không dùng ?params */
+  // Ảnh bìa do CMS tải lên; bài chưa có ảnh thì vẽ hình minh hoạ như cũ
+  function newsThumb(n) {
+    if (n.cover) return '<img src="' + url(n.cover) + '" alt="' + escapeHtml(n.title) + '" loading="lazy">';
+    const tk = APP_DATA.tickers.find((t) => n.tags.includes(t.code));
+    return Art.thumb(n.art, "n" + n.id, tk && tk.color);
+  }
   function articleUrl(n) {
     return url("bai-viet/" + n.slug + "/");
   }
@@ -761,10 +767,9 @@
     return url("thanh-toan/" + (o.course ? (o.course.id || o.course) + "/" : "goi-" + o.months + "-thang/"));
   }
   function newsItem(n) {
-    const tk = APP_DATA.tickers.find((t) => n.tags.includes(t.code));
     return (
       '<article class="news-item">' +
-      '<div class="news-thumb">' + Art.thumb(n.art, "n" + n.id, tk && tk.color) + "</div>" +
+      '<div class="news-thumb">' + newsThumb(n) + "</div>" +
       '<div><h3><a href="' + articleUrl(n) + '">' + escapeHtml(n.title) + "</a></h3>" +
       '<p class="news-date"><time datetime="' + n.date.replace(" ", "T") + '">' + fmt.date(n.date) + "</time>" + accessBadge(n.access) + "</p>" +
       '<p class="news-excerpt">' + escapeHtml(n.excerpt) + "</p>" +
@@ -935,5 +940,5 @@
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", boot);
   else boot();
 
-  window.UI = { url, icon, fmt, norm, escapeHtml, store, auth, access, initials, rng, Charts, Art, toast, tabs, openLogin, setFieldError, courseCard, courseThumb, priceTag, newsItem, newsSorted, tagLabel, isTicker, accessBadge, articleUrl, courseUrl, courseFilterUrl, newsUrl, payUrl, video, youtubeId, gate, contactButtons };
+  window.UI = { url, icon, fmt, norm, escapeHtml, store, auth, access, initials, rng, Charts, Art, toast, tabs, openLogin, setFieldError, courseCard, courseThumb, priceTag, newsItem, newsSorted, tagLabel, isTicker, accessBadge, newsThumb, articleUrl, courseUrl, courseFilterUrl, newsUrl, payUrl, video, youtubeId, gate, contactButtons };
 })();

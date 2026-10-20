@@ -118,7 +118,7 @@
       feed
         .map((n) => {
           const tk = D.tickers.find((t) => n.tags.includes(t.code));
-          return '<li><a href="' + articleUrl(n) + '"><span class="thumb">' + Art.thumb(n.art, "n" + n.id, tk && tk.color) + "</span><span>" + (tk ? '<span class="ticker-tag">' + tk.code + "</span>" : "") + escapeHtml(n.title) + "<time>" + fmt.date(n.date) + "</time></span></a></li>";
+          return '<li><a href="' + articleUrl(n) + '"><span class="thumb">' + UI.newsThumb(n) + "</span><span>" + (tk ? '<span class="ticker-tag">' + tk.code + "</span>" : "") + escapeHtml(n.title) + "<time>" + fmt.date(n.date) + "</time></span></a></li>";
         })
         .join("") +
       "</ul></section></div>" +

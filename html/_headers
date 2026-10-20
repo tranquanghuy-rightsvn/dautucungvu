@@ -1,0 +1,5 @@
+# Trang quản trị: không index (lớp mạnh nhất, phủ mọi file con). KHÔNG khai trong robots.txt —
+# xem skill static-site-build.md mục 6b.
+/admin/*
+  X-Robots-Tag: noindex, nofollow, noarchive, nosnippet, noimageindex
+  Referrer-Policy: no-referrer

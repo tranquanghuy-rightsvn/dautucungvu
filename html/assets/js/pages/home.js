@@ -45,10 +45,9 @@
       return;
     }
     const [lead, ...rest] = list;
-    const tk = D.tickers.find((t) => lead.tags.includes(t.code));
     newsEl.innerHTML =
       '<article class="panel news-feature">' +
-      '<div class="news-thumb">' + Art.thumb(lead.art, "n" + lead.id, tk && tk.color) + "</div>" +
+      '<div class="news-thumb">' + UI.newsThumb(lead) + "</div>" +
       '<div><p class="news-date"><span class="badge badge--green">Mới nhất</span>' + accessBadge(lead.access) + "</p>" +
       '<h3><a href="' + articleUrl(lead) + '">' + escapeHtml(lead.title) + "</a></h3>" +
       '<p class="news-excerpt">' + escapeHtml(lead.excerpt) + '</p><p class="news-date"><time>' + fmt.date(lead.date) + "</time></p></div></article>" +

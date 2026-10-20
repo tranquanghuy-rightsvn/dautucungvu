@@ -31,6 +31,45 @@ async function route(request, env) {
       const expiresIn = 3600;
       return json({ url: await presignPut(env, key, expiresIn), key, expires_in: expiresIn });
     }
+
+    // GET /api/admin/ping — CMS kiểm tra kết nối + khóa
+    if (parts[1] === "ping" && method === "GET") return json({ ok: true });
+
+    // HEAD-like: GET /api/admin/videos/<course>/<lesson> -> { exists, size }
+    // DELETE /api/admin/videos/<course>/<lesson>
+    if (parts[1] === "videos" && parts.length === 4 && SLUG.test(parts[2]) && SLUG.test(parts[3])) {
+      const key = videoKey(parts[2], parts[3]);
+      if (method === "GET") {
+        const obj = await env.VIDEOS.head(key);
+        return json({ exists: !!obj, size: obj ? obj.size : 0 });
+      }
+      if (method === "DELETE") {
+        await env.VIDEOS.delete(key);
+        return json({ ok: true });
+      }
+    }
+
+    // Thân bài trả phí (GAS.md II.A.3): GET / PUT { content_html } / DELETE /api/admin/articles/<slug>
+    if (parts[1] === "articles" && parts.length === 3 && SLUG.test(parts[2])) {
+      const slug = parts[2];
+      if (method === "GET") {
+        const row = await env.DB.prepare("SELECT content_html, updated_at FROM article_bodies WHERE slug = ?").bind(slug).first();
+        return json(row ? { exists: true, ...row } : { exists: false, content_html: "" });
+      }
+      if (method === "PUT") {
+        const body = await request.json().catch(() => null);
+        if (!body || typeof body.content_html !== "string") throw new HttpError(400, "Thiếu content_html");
+        await env.DB.prepare(
+          "INSERT INTO article_bodies (slug, content_html, updated_at, updated_by) VALUES (?1, ?2, ?3, ?4) " +
+            "ON CONFLICT(slug) DO UPDATE SET content_html = ?2, updated_at = ?3, updated_by = ?4"
+        ).bind(slug, body.content_html, new Date().toISOString(), request.headers.get("x-admin-email") || null).run();
+        return json({ ok: true });
+      }
+      if (method === "DELETE") {
+        await env.DB.prepare("DELETE FROM article_bodies WHERE slug = ?").bind(slug).run();
+        return json({ ok: true });
+      }
+    }
   }
 
   // ----- Route thử rủi ro GĐ1 (tắt bằng ENABLE_TEST_ROUTES = "0") -----
