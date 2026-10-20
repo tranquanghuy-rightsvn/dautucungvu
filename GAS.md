@@ -12,7 +12,7 @@
 > - Code đổi 1 quyết định / tên field / tên biến → cập nhật file này trong CÙNG lượt sửa.
 > - Xong 1 việc trong mục XII → tick `[x]` + ghi ngày.
 >
-> Cập nhật lần cuối: 20/10/2026 (bắt đầu GĐ1: tái cấu trúc repo, worker/, CI).
+> Cập nhật lần cuối: 20/10/2026 (GĐ1: deploy = Actions build + Workers Builds nối Git, không token).
 
 ---
 
@@ -84,7 +84,7 @@ Ranh giới cứng:
   `"none"` cho site URL `.html`; site này dùng thư mục, đặt `"none"` thì `/slug/` không tự phục
   vụ `index.html`). `not_found_handling = "404-page"` (`html/404.html`, mọi link trong file đó
   dùng đường dẫn tuyệt đối `/...` vì nó được trả ở mọi URL lạ).
-- BẮT BUỘC `run_worker_first = ["/api/*"]` trong `worker/wrangler.jsonc`: theo docs Cloudflare,
+- BẮT BUỘC `run_worker_first = ["/api/*"]` trong `wrangler.jsonc`: theo docs Cloudflare,
   có `not_found_handling` mà không có dòng này thì `/api/*` có thể nhận trang 404 thay vì chạy Worker.
 - Gõ `/slug` (thiếu `/`) thì Cloudflare tự trả 307 sang `/slug/` — hành vi nền tảng, link nội bộ
   luôn có `/` nên không bao giờ gặp.
@@ -331,19 +331,29 @@ Không chạy trên GAS. GAS chỉ là giao diện quản trị gọi API admin 
 | `html/404.html` | Trang 404 (sửa tay) |
 | `templates/article.html` | Khung trang bài viết (người sửa tay; build đọc) |
 | `scripts/build.py` | Build `data/` → `html/`: `data.js`, khối SEO trang gốc, mọi trang con, `sitemap.xml`, `robots.txt`. Chỉ cần Python 3 |
-| `worker/` | `wrangler.jsonc`, `src/` (`index.js` router, `http.js`, `r2.js` phát video có Range, `presign.js` link upload R2), `migrations/` (D1), `r2-cors.json` |
+| `wrangler.jsonc`, `package.json` | Cấu hình Worker + wrangler — ở GỐC repo (Workers Builds chạy `npx wrangler deploy` tại gốc) |
+| `worker/` | `src/` (`index.js` router, `http.js`, `r2.js` phát video có Range, `presign.js` ký link upload R2 bằng WebCrypto — KHÔNG dùng thư viện ngoài), `migrations/` (D1), `r2-cors.json` |
 | `docs/design/` | Ảnh thiết kế gốc (không deploy) |
-| `.github/workflows/deploy.yml` | CI build + deploy |
+| `.github/workflows/build.yml` | CI build `data/` → `html/` + commit (KHÔNG deploy) |
 | `gas/` | **gitignore**, deploy bằng `clasp` |
 | `GAS.md` | File này |
 
-- CI (`.github/workflows/deploy.yml`) trigger khi đổi 4 file index `data/posts.json`,
-  `data/courses.json`, `data/settings.json`, `data/market-demo.json` (file index luôn ghi SAU CÙNG —
-  skill `static-site-build.md` mục 5) hoặc code (`scripts/`, `templates/`, `worker/`, `html/` trừ
-  `html/images/**`). KHÔNG trigger theo `data/news/**` / `html/images/**` (CMS ghi các file đó
-  trước file index). CI: `python3 scripts/build.py` → commit `html/` ("CI: build html from
-  data") → `npm ci` + `npx wrangler deploy` trong `worker/`. Chưa có secret Cloudflare thì bỏ qua
-  bước deploy (cảnh báo, không lỗi).
+- **Deploy = GitHub Actions build + Cloudflare Workers Builds nối Git (quyết định 20/10 — KHÔNG
+  dùng `CLOUDFLARE_API_TOKEN`).** Khác các dự án GAS khác trên máy (luatdong, countrytales,
+  tretrucvn dùng Actions + `wrangler-action` + token); giống kiểu smart_report / smartcontent.
+  1. `.github/workflows/build.yml` chạy khi đổi file index `data/posts.json`, `data/courses.json`,
+     `data/settings.json`, `data/market-demo.json` (commit CHỐT của mọi thao tác CMS — skill
+     `static-site-build.md` mục 5) hoặc `scripts/**`, `templates/**`. Nó `python3
+     scripts/build.py` → commit `html/` ("CI: build html from data", LUÔN commit kể cả rỗng để
+     làm tín hiệu deploy) → push (bị từ chối thì lấy bản mới build lại, tối đa 5 lần).
+  2. Workers Builds (Worker `dautucungvu` → Settings → Build): root directory `/`, build command
+     TRỐNG, deploy command `npx wrangler deploy`, **build watch paths**: include `html/*`,
+     `worker/*`, `wrangler.jsonc`, `package.json`, `package-lock.json`; exclude `html/images/*`.
+     Nhờ watch paths, commit trung gian của CMS (ảnh `html/images/*`, `data/**`) KHÔNG deploy —
+     chỉ commit "CI: build" (đụng `html/`, hoặc rỗng: Cloudflare luôn build push 0 file) mới
+     deploy → 1 thao tác Lưu = 1 lần deploy, không lộ trạng thái dở dang. Sửa tay `html/` /
+     `worker/` rồi push thì Workers Builds deploy trực tiếp.
+  3. Deploy tay (khi cần): `npx wrangler deploy` ở gốc repo.
 - Độ trễ Lưu → lên site: ~1–3 phút. Đơn / quyền / video: tức thì (D1).
 
 **D1** (tên bảng cố định; cột chi tiết chốt khi viết migration rồi bổ sung vào đây):
@@ -370,11 +380,14 @@ Không chạy trên GAS. GAS chỉ là giao diện quản trị gọi API admin 
 - (Worker, 20/10) `Content-Range: bytes NaN-NaN/...` khi phát video → `R2Object.range` LUÔN có
   đủ khóa `offset`/`length`/`suffix` (giá trị `undefined` nếu không dùng), nên `"suffix" in
   obj.range` luôn đúng. Cách né: kiểm `obj.range.suffix !== undefined` (đã sửa trong `r2.js`).
-- (Deploy, 20/10) Sau khi deploy, `/api/*` bỗng trả 404 rỗng, trang tĩnh vẫn 200 → có bản Worker
-  KHÁC được tải lên từ ngoài repo (`wrangler versions view` ra `Source: Unknown (version_upload)`,
-  compatibility date lạ, không binding D1/R2). Cách né: CHỈ deploy từ repo (`worker/`, CI hoặc
-  `npx wrangler deploy`); không sửa code / "Deploy" / kết nối Git cho Worker `dautucungvu` trên
-  dashboard. Kiểm nhanh: `npx wrangler deployments list` + `curl https://dautucungvu.com/api/health`.
+- (Deploy, 20/10) Sau mỗi lần push, `/api/*` bỗng trả 404 rỗng, trang tĩnh vẫn 200 → Workers
+  Builds (Worker đã nối Git từ 19/10) tự deploy theo cấu hình MẶC ĐỊNH: lúc đó `wrangler.jsonc`
+  nằm trong `worker/`, gốc repo không có config → Cloudflare tự cấu hình "chỉ static assets" (không
+  code Worker, không D1/R2, compatibility date lạ) đè lên bản deploy tay. KHÔNG phải bị hack
+  (GitHub check runs ghi "Cloudflare Workers and Pages: Workers Builds: dautucungvu" cho từng
+  commit). Cách né: `wrangler.jsonc` + `package.json` ở GỐC repo, cấu hình Build như VIII.
+  Kiểm nhanh sau deploy: `curl https://dautucungvu.com/api/health` phải 200;
+  `gh api repos/tranquanghuy-rightsvn/dautucungvu/commits/<sha>/check-runs` xem build của commit.
 - (Chưa có bug GAS/Worker — bổ sung khi gặp, kèm nguyên nhân + cách né.)
 
 ## X. Cấu hình (tên biến cố định)
@@ -384,16 +397,17 @@ Không chạy trên GAS. GAS chỉ là giao diện quản trị gọi API admin 
 `master`, `WORKER_API_BASE` = `https://dautucungvu.com/api/admin`, `WORKER_ADMIN_KEY` (≥ 32 ký tự
 ngẫu nhiên, TRÙNG secret `ADMIN_KEY` của Worker), `SPREADSHEET_ID` (code tự tạo, không điền).
 
-**Worker** (`worker/wrangler.jsonc`, tên Worker `dautucungvu`, custom domain `dautucungvu.com`)
+**Worker** (`wrangler.jsonc` ở gốc repo, tên Worker `dautucungvu`, custom domain `dautucungvu.com`)
 — secrets: `ADMIN_KEY`, `TURNSTILE_SECRET`, `R2_ACCESS_KEY_ID`, `R2_SECRET_ACCESS_KEY`.
 vars: `SITE_URL` = `https://dautucungvu.com`, `R2_BUCKET` = `dautucungvu-videos`, `R2_ACCOUNT_ID`
 (32 ký tự hex), `ENABLE_TEST_ROUTES` (`"1"` chỉ khi thử GĐ1 — bật `/api/test/*`; đặt `"0"` trước
 khi mở bán), `MAIL_FROM` = `no-reply@dautucungvu.com`, `MAIL_REPLY_TO`, `ORDER_NOTIFY_EMAIL`,
 `CMS_URL`, `TURNSTILE_SITE_KEY`.
 bindings: `DB` (D1 `dautucungvu`), `VIDEOS` (R2), `EMAIL` (send_email), `ASSETS` (static assets).
-Chạy local: `worker/.dev.vars` (gitignore) chứa `ADMIN_KEY=...` cho `wrangler dev`.
+Chạy local: `.dev.vars` ở gốc repo (gitignore) chứa `ADMIN_KEY=...` cho `wrangler dev`.
 
-**GitHub Actions secrets**: `CLOUDFLARE_API_TOKEN`, `CLOUDFLARE_ACCOUNT_ID`.
+**GitHub Actions secrets**: KHÔNG cần (Actions chỉ build + commit bằng `GITHUB_TOKEN`; deploy do
+Workers Builds, Cloudflare tự quản token build).
 
 ---
 
@@ -418,9 +432,9 @@ chưa có). Site vẫn là bản demo về chức năng:
 - `worker/`: ĐÃ DEPLOY lên https://dautucungvu.com (20/10). Đã chạy thử local (`wrangler dev`): trang tĩnh 200, `/khoa-hoc` → 307 `/khoa-hoc/`,
   URL lạ → 404 + `html/404.html`, `/api/health` OK, `/api/*` lạ → 404 JSON, admin sai khóa → 401,
   presigned PUT URL R2 sinh đúng định dạng, `/api/test/video/...` Range (đầu/giữa/suffix) đúng byte.
-  D1 + R2 đã tạo. CI chưa deploy được (chưa có secret `CLOUDFLARE_API_TOKEN`) — deploy tay.
+  D1 + R2 đã tạo. Deploy: Workers Builds (chờ chủ dự án cấu hình Build settings) — tạm deploy tay.
 - Liên hệ trong `settings.json` vẫn là số giả `0900 000 000`.
-- Chạy thử: `cd worker && npx wrangler dev` (hoặc `cd html && python3 -m http.server`).
+- Chạy thử: `npx wrangler dev` ở gốc repo (hoặc `cd html && python3 -m http.server`).
 
 ## XII. Kế hoạch & tiến độ
 
@@ -437,15 +451,12 @@ chưa có). Site vẫn là bản demo về chức năng:
 - [x] Cloudflare: thêm domain, đổi nameserver (20/10 — `dig NS @1.1.1.1` ra
       `clay.ns.cloudflare.com`, `simone.ns.cloudflare.com`). Gán custom domain vào Worker làm ở GĐ1.
 - [ ] Cloudflare: tạo bucket R2 `dautucungvu-videos` (private). ⏳ GĐ1
-- [ ] Cloudflare: API token deploy (tên `github-actions-deploy`; quyền: Workers Scripts Edit,
-      Workers KV Storage Edit, D1 Edit, Workers R2 Storage Edit, Account Settings Read; zone
-      `dautucungvu.com`: Workers Routes Edit, Zone Read) → GitHub repo Settings → Secrets and
-      variables → Actions: `CLOUDFLARE_API_TOKEN`, `CLOUDFLARE_ACCOUNT_ID`. ⏳ GĐ1
+- [x] ~~API token deploy cho GitHub Actions~~ — KHÔNG cần nữa (deploy qua Workers Builds, 20/10).
 - [ ] Cloudflare: R2 API token (Account API token, Object Read & Write, chỉ bucket
       `dautucungvu-videos`) → lưu tạm vào trình quản lý mật khẩu; ở GĐ1 chủ dự án tự chạy
       `! npx wrangler secret put R2_ACCESS_KEY_ID` / `R2_SECRET_ACCESS_KEY` trong thư mục `worker/`.
       KHÔNG dán vào chat, KHÔNG commit (repo public). ⏳ GĐ1
-- [ ] Máy local: `npx wrangler login` (OAuth, không cần token). ⏳ GĐ1
+- [x] Máy local: `npx wrangler login` (20/10).
 - [ ] Cloudflare: bật Email Sending cho domain (SPF/DKIM/DMARC). ⏳ GĐ4
 - [ ] Cloudflare: Turnstile widget cho `dautucungvu.com`. ⏳ GĐ4
 - [ ] Google: tài khoản chủ GAS (2FA), `clasp login`. ⏳ GĐ2
@@ -458,8 +469,12 @@ chưa có). Site vẫn là bản demo về chức năng:
 - [x] Tái cấu trúc repo theo VIII: `data/`, `templates/`, `scripts/build.py`, `docs/design/`;
       README/design/scripts ra khỏi `html/` (20/10).
 - [x] `build.py` sinh `html/assets/js/data.js` từ `data/` (20/10, kiểm giống hệt bản cũ).
-- [x] `worker/wrangler.jsonc` + `src/` + `html/404.html`; chạy thử local OK (20/10).
-- [x] `.github/workflows/deploy.yml` (20/10; chưa chạy thật — chờ secret).
+- [x] `wrangler.jsonc` + `worker/src/` + `html/404.html`; chạy thử local OK (20/10).
+- [x] `.github/workflows/build.yml` — chỉ build + commit, deploy giao cho Workers Builds (20/10).
+- [x] `wrangler.jsonc` + `package.json` ra gốc repo; bỏ `aws4fetch`, tự ký SigV4 bằng WebCrypto
+      (đối chiếu chữ ký khớp `aws4fetch`) (20/10).
+- [ ] Chủ dự án cấu hình Workers Builds: build command trống, deploy `npx wrangler deploy`, root
+      `/`, build watch paths như VIII; rồi push và kiểm `/api/health` 200 sau khi Cloudflare build.
 - [x] `npx wrangler login` (20/10, tài khoản Cloudflare `web100.vn@gmail.com`, Account ID
       `975f2208a74d9e0b5048659725df1911`).
 - [x] Tạo D1 `dautucungvu` (20/10, APAC, id `7ed75e1e-7173-48c9-99b4-2af6cfac1c55`), điền
@@ -542,6 +557,7 @@ trong account. (Tra 20/10/2026 — kiểm lại trang giá Cloudflare trước k
 | 19/10 | CMS admin vẫn đăng nhập OTP (mẫu xevip) | Ít người, nằm trong quota MailApp |
 | 20/10 | Mọi ảnh trên website tùy biến được trong CMS (ảnh bìa khóa upload; hero, logo, favicon, ảnh chia sẻ) | Yêu cầu chủ dự án |
 | 20/10 | Chỉ số thị trường + giá cổ phiếu lấy API thật qua Worker (nguồn còn chốt — II.E) | Yêu cầu chủ dự án |
+| 20/10 | Deploy: GitHub Actions build + commit `html/`, Cloudflare Workers Builds nối Git tự deploy; KHÔNG dùng `CLOUDFLARE_API_TOKEN`; KHÔNG build trên Cloudflare | Yêu cầu chủ dự án ("build github action rồi ánh xạ lên cloudflare"), áp dụng cho các dự án khác |
 
 ## XIV. Quy ước làm việc với chủ dự án
 - Tiếng Việt, ngắn gọn; nói rõ đã kiểm chứng gì / chưa kiểm chứng gì.

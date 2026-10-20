@@ -1,0 +1,62 @@
+# Build data/ -> html/ rồi commit html/ vào repo (GAS.md mục VIII). KHÔNG deploy ở đây:
+# Cloudflare Workers Builds nối với repo, thấy commit đụng html/ / worker/ là tự deploy
+# (không cần CLOUDFLARE_API_TOKEN).
+#
+# Chỉ chạy ở file index (commit CHỐT của mọi thao tác CMS: ảnh -> data/news/*.json -> index),
+# không theo cả data/** -> không build trạng thái dở dang (skill static-site-build.md mục 5).
+# Commit "CI: build" bằng GITHUB_TOKEN không tự kích hoạt lại workflow này.
+name: Build html
+
+on:
+  push:
+    branches: [master]
+    paths:
+      - data/posts.json
+      - data/courses.json
+      - data/settings.json
+      - data/market-demo.json
+      - scripts/**
+      - templates/**
+      - .github/workflows/build.yml
+  workflow_dispatch:
+
+concurrency:
+  group: build-html
+  cancel-in-progress: false
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: master
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      # Luôn tạo 1 commit "CI: build" (kể cả khi html/ không đổi, vd chỉ thay ảnh trùng tên):
+      # đó là tín hiệu để Workers Builds deploy. Commit rỗng (0 file) Cloudflare luôn build.
+      # Push bị từ chối (CMS vừa ghi thêm commit) -> lấy bản mới, build lại (thử tối đa 5 lần).
+      - name: Build, commit, push
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          for i in 1 2 3 4 5; do
+            python3 scripts/build.py
+            git add html
+            git commit --allow-empty -q -m "CI: build html from data"
+            if git push origin HEAD:master; then
+              echo "Push thành công (lần $i)."
+              exit 0
+            fi
+            echo "Push bị từ chối (có commit mới trên master) — lấy bản mới, build lại (lần $i)..."
+            git fetch -q origin master
+            git reset -q --hard origin/master
+          done
+          echo "::error::Push thất bại sau 5 lần thử."
+          exit 1

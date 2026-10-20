@@ -2,3 +2,6 @@
 .DS_Store
 .env*
 gas/
+node_modules/
+.wrangler/
+.dev.vars

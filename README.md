@@ -10,20 +10,24 @@ data/                 NGUỒN DỮ LIỆU công khai (CMS ghi) — posts.json, n
 templates/            khung trang sinh tự động (article.html)
 scripts/build.py      data/ -> html/ (data.js, trang con, SEO, sitemap, robots)
 html/                 site tĩnh được deploy (chỉ thứ được public)
-worker/               Cloudflare Worker: phục vụ html/ + API /api/*
+worker/               code Cloudflare Worker (src/), migrations D1, r2-cors.json
+wrangler.jsonc        cấu hình Worker (ở GỐC repo — Workers Builds đọc ở đây)
 docs/design/          ảnh thiết kế gốc (không deploy)
 gas/                  CMS Google Apps Script (gitignore, deploy bằng clasp)
-.github/workflows/    build + deploy khi data/ đổi
+.github/workflows/    build.yml: build data/ -> html/, commit html/ (KHÔNG deploy)
 ```
 
 ## Lệnh
 
 ```bash
-python3 scripts/build.py              # build html/ từ data/
-cd worker && npm install              # lần đầu
-cd worker && npx wrangler dev         # chạy site + API ở http://localhost:8787
-cd worker && npx wrangler deploy      # deploy tay (bình thường CI tự làm)
+python3 scripts/build.py      # build html/ từ data/
+npm install                   # lần đầu (chỉ có wrangler)
+npx wrangler dev              # chạy site + API ở http://localhost:8787 (.dev.vars: ADMIN_KEY=...)
+npx wrangler deploy           # deploy tay — bình thường Workers Builds tự deploy khi push
 ```
+
+Deploy: GitHub Actions build + commit `html/` → Cloudflare Workers Builds (nối Git, không
+token) thấy commit đụng `html/` / `worker/` là tự `npx wrangler deploy`. Chi tiết GAS.md VIII.
 
 Không sửa tay: `html/assets/js/data.js`, các trang con trong `html/` (bai-viet/<slug>/,
 khoa-hoc/<id>/..., tin-tuc/<...>/, thanh-toan/<...>/), `html/sitemap.xml`, `html/robots.txt` —
