@@ -557,7 +557,7 @@ trong account. (Tra 20/10/2026 — kiểm lại trang giá Cloudflare trước k
 | 19/10 | CMS admin vẫn đăng nhập OTP (mẫu xevip) | Ít người, nằm trong quota MailApp |
 | 20/10 | Mọi ảnh trên website tùy biến được trong CMS (ảnh bìa khóa upload; hero, logo, favicon, ảnh chia sẻ) | Yêu cầu chủ dự án |
 | 20/10 | Chỉ số thị trường + giá cổ phiếu lấy API thật qua Worker (nguồn còn chốt — II.E) | Yêu cầu chủ dự án |
-| 20/10 | Deploy: GitHub Actions build + commit `html/`, Cloudflare Workers Builds nối Git tự deploy; KHÔNG dùng `CLOUDFLARE_API_TOKEN`; KHÔNG build trên Cloudflare | Yêu cầu chủ dự án ("build github action rồi ánh xạ lên cloudflare"), áp dụng cho các dự án khác |
+| 20/10 | Deploy: GitHub Actions build + commit `html/`, Cloudflare Workers Builds nối Git tự deploy; KHÔNG dùng `CLOUDFLARE_API_TOKEN`; KHÔNG build trên Cloudflare | Yêu cầu chủ dự án ("build github action rồi ánh xạ lên cloudflare"). RIÊNG dự án này (dự án đặc biệt) — KHÔNG đưa vào skill, các dự án GAS khác giữ cách cũ |
 
 ## XIV. Quy ước làm việc với chủ dự án
 - Tiếng Việt, ngắn gọn; nói rõ đã kiểm chứng gì / chưa kiểm chứng gì.
