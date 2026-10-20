@@ -1,6 +1,9 @@
 /* Dữ liệu thị trường thật (GAS.md II.E — nguồn API công khai KHÔNG chính thức, chốt 20/10):
-     - VPS bgapidatafeed  : giá khớp / tham chiếu cổ phiếu + điểm chỉ số (gần realtime)
-     - DNSE chart-api     : nến 5 phút của chỉ số (diễn biến trong phiên) + nến ngày cổ phiếu
+     - VPS bgapidatafeed  : giá khớp / tham chiếu cổ phiếu (gần realtime)
+     - DNSE chart-api     : điểm chỉ số (nến ngày), nến 5 phút chỉ số (diễn biến trong phiên),
+                            nến ngày cổ phiếu (biểu đồ 3 tháng)
+   ⚠️ Endpoint chỉ số của VPS (getlistindexdetail) TREO khi gọi từ máy chủ Cloudflare (đo 20/10,
+   colo HKG) dù gọi từ máy thường vẫn chạy -> điểm chỉ số lấy từ DNSE. Mọi lần gọi có timeout.
    Nguồn không cam kết, có thể đổi / chặn bất cứ lúc nào -> mỗi phần lưu bản gần nhất vào D1
    (market_snapshots), nguồn lỗi thì trả bản cũ kèm stale = true, website ghi "Cập nhật lúc HH:mm".
    Danh sách mã lấy từ /assets/market-symbols.json (build sinh từ data/settings.json). */
@@ -9,11 +12,12 @@ const VPS = "https://bgapidatafeed.vps.com.vn";
 const DNSE = "https://services.entrade.com.vn/chart-api/v2/ohlcs";
 // Mã chỉ số trên site (settings.indices[].code) -> mã của 2 nguồn. Chỉ số khác không hỗ trợ.
 const INDEX_MAP = {
-  "VN-Index": { vps: "10", dnse: "VNINDEX" },
-  VN30: { vps: "11", dnse: "VN30" },
-  HNX: { vps: "02", dnse: "HNX" },
-  UPCoM: { vps: "03", dnse: "UPCOM" },
+  "VN-Index": { dnse: "VNINDEX" },
+  VN30: { dnse: "VN30" },
+  HNX: { dnse: "HNX" },
+  UPCoM: { dnse: "UPCOM" },
 };
+const FETCH_TIMEOUT_MS = 8000;
 const HISTORY_DAYS = 100; // ~65 phiên -> biểu đồ 3 tháng
 
 /** 9:00–15:00 thứ 2–6 giờ Việt Nam (UTC+7). */
@@ -25,7 +29,10 @@ function isTradingHours(now = new Date()) {
 }
 
 async function getJson(url) {
-  const res = await fetch(url, { headers: { accept: "application/json", "user-agent": "Mozilla/5.0 (dautucungvu.com)" } });
+  const res = await fetch(url, {
+    headers: { accept: "application/json", "user-agent": "Mozilla/5.0 (dautucungvu.com)" },
+    signal: AbortSignal.timeout(FETCH_TIMEOUT_MS), // nguồn treo -> lỗi nhanh, dùng bản lưu D1
+  });
   if (!res.ok) throw new Error(url.split("?")[0] + " -> " + res.status);
   return res.json();
 }
@@ -34,21 +41,22 @@ const num = (v) => (v === null || v === undefined || v === "" ? NaN : Number(v))
 const round = (v, d) => Math.round(v * 10 ** d) / 10 ** d;
 
 async function fetchQuotes(symbols) {
-  const [stocks, indexes] = await Promise.all([
+  const to = Math.floor(Date.now() / 1000);
+  const [stocks, indexBars] = await Promise.all([
     symbols.tickers.length ? getJson(VPS + "/getliststockdata/" + symbols.tickers.join(",")) : [],
-    getJson(VPS + "/getlistindexdetail/" + symbols.indices.map((c) => INDEX_MAP[c].vps).join(",")),
+    // Nến ngày 10 ngày gần nhất: nến cuối = phiên hiện tại / gần nhất, nến kế cuối = phiên trước
+    Promise.all(symbols.indices.map((c) => fetchBars("index", INDEX_MAP[c].dnse, "1D", to - 10 * 86400, to))),
   ]);
   const tickers = stocks.map((s) => {
     const ref = num(s.r);
     const last = num(s.lastPrice) > 0 ? num(s.lastPrice) : ref; // chưa khớp lệnh nào -> giá tham chiếu
     return { code: s.sym, price: last, ref, change: ref ? round(((last - ref) / ref) * 100, 2) : 0, volume: num(s.lot) || 0 };
   });
-  const byVps = Object.fromEntries(indexes.map((x) => [String(x.mc), x]));
-  const indices = symbols.indices.map((code) => {
-    const x = byVps[INDEX_MAP[code].vps];
-    if (!x) return { code };
-    const value = num(x.cIndex), open = num(x.oIndex);
-    return { code, value, change: round(value - open, 2), time: x.time || "" };
+  const indices = symbols.indices.map((code, i) => {
+    const c = indexBars[i];
+    if (c.length < 2) return { code };
+    const value = c[c.length - 1], prev = c[c.length - 2];
+    return { code, value, change: round(value - prev, 2) };
   });
   return { tickers, indices };
 }
