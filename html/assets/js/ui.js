@@ -503,7 +503,7 @@
     el.className = "site-header";
     el.innerHTML =
       '<div class="container">' +
-      '<a class="brand" href="' + url("") + '" aria-label="Đầu tư cùng Vũ, về trang chủ"><img src="' + url("assets/img/vu-128.jpg") + '" alt="" class="brand-photo" width="42" height="42">' +
+      '<a class="brand" href="' + url("") + '" aria-label="Đầu tư cùng Vũ, về trang chủ"><img src="' + brandImg() + '" alt="" class="brand-photo" width="42" height="42">' +
       '<span><span class="brand-name">ĐẦU TƯ CÙNG VŨ</span><span class="brand-tag">Đầu tư thông minh, tài chính vững vàng</span></span></a>' +
       '<nav class="main-nav" aria-label="Điều hướng chính"><ul>' + navLinks(page) + "</ul></nav>" +
       '<div class="header-actions">' + headerActions() + "</div></div>";
@@ -522,7 +522,7 @@
     const u = auth.user();
     d.innerHTML =
       '<div class="drawer-panel" role="dialog" aria-modal="true" aria-label="Menu">' +
-      '<div class="drawer-head"><a class="brand" href="' + url("") + '"><img src="' + url("assets/img/vu-128.jpg") + '" alt="" class="brand-photo" width="36" height="36"><span class="brand-name">ĐẦU TƯ CÙNG VŨ</span></a>' +
+      '<div class="drawer-head"><a class="brand" href="' + url("") + '"><img src="' + brandImg() + '" alt="" class="brand-photo" width="36" height="36"><span class="brand-name">ĐẦU TƯ CÙNG VŨ</span></a>' +
       '<button class="icon-btn" type="button" aria-label="Đóng menu" data-drawer-close>' + icon("x") + "</button></div>" +
       "<nav aria-label='Menu di động'>" +
       NAV.map((n) => '<a href="' + n.href + '"' + (n.id === page ? ' aria-current="page"' : "") + ">" + n.label + icon("chevronRight", 'width="18" height="18"') + "</a>").join("") +
@@ -542,7 +542,7 @@
     const C = APP_DATA.site.contact;
     el.innerHTML =
       '<div class="container"><div class="footer-top">' +
-      '<div class="footer-about"><a class="brand" href="' + url("") + '"><img src="' + url("assets/img/vu-128.jpg") + '" alt="" class="brand-photo" width="42" height="42"><span><span class="brand-name" style="color:#fff">ĐẦU TƯ CÙNG VŨ</span><span class="brand-tag" style="display:block">Đầu tư thông minh, tài chính vững vàng</span></span></a>' +
+      '<div class="footer-about"><a class="brand" href="' + url("") + '"><img src="' + brandImg() + '" alt="" class="brand-photo" width="42" height="42"><span><span class="brand-name" style="color:#fff">ĐẦU TƯ CÙNG VŨ</span><span class="brand-tag" style="display:block">Đầu tư thông minh, tài chính vững vàng</span></span></a>' +
       "<p>Nền tảng học đầu tư chứng khoán cho người Việt: từ kiến thức nền tảng đến phương pháp phân tích, cùng tin tức thị trường cập nhật mỗi ngày.</p>" +
       '<div class="socials"><a href="' + C.youtube + '" aria-label="YouTube">' + icon("youtube") + '</a><a href="' + C.facebook + '" aria-label="Facebook">' + icon("facebook") + '</a><a href="' + C.telegram + '" aria-label="Telegram">' + icon("telegram") + "</a></div></div>" +
       '<div><h2>Học tập</h2><ul><li><a href="' + url("khoa-hoc/") + '">Tất cả khóa học</a></li><li><a href="' + courseFilterUrl("free") + '">Khóa học miễn phí</a></li><li><a href="' + url("premium/") + '">Gói hội viên</a></li></ul></div>' +
@@ -749,8 +749,15 @@
   }
 
   /* ---------- Shared components ---------- */
+  // Logo / avatar thương hiệu: ảnh trong Cài đặt (CMS), mặc định ảnh gốc
+  function brandImg() {
+    const im = window.APP_DATA && APP_DATA.site.images;
+    return url((im && im.brand) || "assets/img/vu-128.jpg");
+  }
+  // Ảnh bìa khóa (CMS); khóa chưa có ảnh thì vẽ hình minh hoạ như cũ
   function courseThumb(c) {
-    return c.thumb ? '<img src="' + url(c.thumb) + '" alt="" loading="lazy">' : Art.thumb(c.art, c.id);
+    const src = c.cover || c.thumb;
+    return src ? '<img src="' + url(src) + '" alt="' + escapeHtml(c.title) + '" loading="lazy">' : Art.thumb(c.art, c.id);
   }
   function priceTag(c) {
     return c.price ? '<span class="price">' + fmt.vnd(c.price) + "</span>" : '<span class="price price--free">Miễn phí</span>';
@@ -789,8 +796,11 @@
     return url("bai-viet/" + n.slug + "/");
   }
   // Bài 1 là trang khóa học, từ bài 2: /khoa-hoc/<id>/bai-<n>/
+  // Bài 1 ở trang khóa; bài sau: /khoa-hoc/<id>/<slug-bài>/ (slug bất biến — GAS.md II.B)
   function courseUrl(c, lessonIdx) {
-    return url("khoa-hoc/" + (c.id || c) + "/" + (lessonIdx ? "bai-" + (lessonIdx + 1) + "/" : ""));
+    const course = typeof c === "string" ? APP_DATA.courses.find((x) => x.id === c) : c;
+    const lesson = lessonIdx && course && course.lessons[lessonIdx];
+    return url("khoa-hoc/" + (course ? course.id : c) + "/" + (lesson && lesson.slug ? lesson.slug + "/" : ""));
   }
   const COURSE_FILTER_SLUG = { all: "", free: "mien-phi/", paid: "co-phi/", mine: "cua-toi/" };
   function courseFilterUrl(f) {

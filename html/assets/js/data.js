@@ -133,31 +133,37 @@ window.APP_DATA = {
       "art": "candles",
       "lessons": [
         {
+          "slug": "chung-khoan-la-gi-vi-sao-nen-dau-tu",
           "t": "Chứng khoán là gì, vì sao nên đầu tư",
           "m": 12,
           "video": ""
         },
         {
+          "slug": "ba-san-hose-hnx-upcom",
           "t": "Ba sàn HOSE, HNX, UPCoM",
           "m": 10,
           "video": ""
         },
         {
+          "slug": "doc-bang-gia-dien-tu",
           "t": "Đọc bảng giá điện tử",
           "m": 15,
           "video": ""
         },
         {
+          "slug": "cac-loai-lenh-lo-ato-atc-mp",
           "t": "Các loại lệnh LO, ATO, ATC, MP",
           "m": 14,
           "video": ""
         },
         {
+          "slug": "phi-thue-va-chu-ky-thanh-toan-t-2",
           "t": "Phí, thuế và chu kỳ thanh toán T+2",
           "m": 11,
           "video": ""
         }
-      ]
+      ],
+      "order": 1
     },
     {
       "id": "doc-bao-cao-tai-chinh",
@@ -167,37 +173,44 @@ window.APP_DATA = {
       "art": "bars",
       "lessons": [
         {
+          "slug": "tong-quan-3-bao-cao-tai-chinh",
           "t": "Tổng quan 3 báo cáo tài chính",
           "m": 16,
           "video": "",
           "preview": true
         },
         {
+          "slug": "bang-can-doi-ke-toan",
           "t": "Bảng cân đối kế toán",
           "m": 20,
           "video": ""
         },
         {
+          "slug": "bao-cao-ket-qua-kinh-doanh",
           "t": "Báo cáo kết quả kinh doanh",
           "m": 18,
           "video": ""
         },
         {
+          "slug": "luu-chuyen-tien-te-tien-that-nam-o-dau",
           "t": "Lưu chuyển tiền tệ: tiền thật nằm ở đâu",
           "m": 19,
           "video": ""
         },
         {
+          "slug": "cac-chi-so-roe-roa-bien-loi-nhuan",
           "t": "Các chỉ số ROE, ROA, biên lợi nhuận",
           "m": 17,
           "video": ""
         },
         {
+          "slug": "dau-hieu-canh-bao-trong-bctc",
           "t": "Dấu hiệu cảnh báo trong BCTC",
           "m": 15,
           "video": ""
         }
-      ]
+      ],
+      "order": 2
     },
     {
       "id": "phan-tich-ky-thuat",
@@ -207,42 +220,50 @@ window.APP_DATA = {
       "art": "chart",
       "lessons": [
         {
+          "slug": "bieu-do-nen-va-xu-huong",
           "t": "Biểu đồ nến và xu hướng",
           "m": 18,
           "video": "",
           "preview": true
         },
         {
+          "slug": "ho-tro-khang-cu-va-vung-gia",
           "t": "Hỗ trợ, kháng cự và vùng giá",
           "m": 20,
           "video": ""
         },
         {
+          "slug": "khoi-luong-giao-dich-noi-gi",
           "t": "Khối lượng giao dịch nói gì",
           "m": 16,
           "video": ""
         },
         {
+          "slug": "duong-trung-binh-dong-ma",
           "t": "Đường trung bình động MA",
           "m": 17,
           "video": ""
         },
         {
+          "slug": "rsi-macd-dung-dung-cach",
           "t": "RSI, MACD dùng đúng cách",
           "m": 21,
           "video": ""
         },
         {
+          "slug": "diem-mua-cat-lo-va-quan-ly-lenh",
           "t": "Điểm mua, cắt lỗ và quản lý lệnh",
           "m": 22,
           "video": ""
         },
         {
+          "slug": "thuc-hanh-tren-bieu-do-that",
           "t": "Thực hành trên biểu đồ thật",
           "m": 30,
           "video": ""
         }
-      ]
+      ],
+      "order": 3
     },
     {
       "id": "dau-tu-co-tuc",
@@ -253,21 +274,25 @@ window.APP_DATA = {
       "art": "pie",
       "lessons": [
         {
+          "slug": "co-tuc-tien-mat-va-co-tuc-co-phieu",
           "t": "Cổ tức tiền mặt và cổ tức cổ phiếu",
           "m": 12,
           "video": ""
         },
         {
+          "slug": "ngay-giao-dich-khong-huong-quyen",
           "t": "Ngày giao dịch không hưởng quyền",
           "m": 10,
           "video": ""
         },
         {
+          "slug": "loc-co-phieu-co-tuc-ben-vung",
           "t": "Lọc cổ phiếu cổ tức bền vững",
           "m": 16,
           "video": ""
         }
-      ]
+      ],
+      "order": 4
     },
     {
       "id": "quan-tri-von",
@@ -277,32 +302,38 @@ window.APP_DATA = {
       "art": "towers",
       "lessons": [
         {
+          "slug": "xac-dinh-khau-vi-rui-ro",
           "t": "Xác định khẩu vị rủi ro",
           "m": 14,
           "video": "",
           "preview": true
         },
         {
+          "slug": "phan-bo-ty-trong-danh-muc",
           "t": "Phân bổ tỷ trọng danh mục",
           "m": 16,
           "video": ""
         },
         {
+          "slug": "margin-dung-the-nao-cho-an-toan",
           "t": "Margin: dùng thế nào cho an toàn",
           "m": 15,
           "video": ""
         },
         {
+          "slug": "tam-ly-fomo-va-cat-lo",
           "t": "Tâm lý FOMO và cắt lỗ",
           "m": 18,
           "video": ""
         },
         {
+          "slug": "nhat-ky-giao-dich",
           "t": "Nhật ký giao dịch",
           "m": 10,
           "video": ""
         }
-      ]
+      ],
+      "order": 5
     }
   ],
   "newsTags": [

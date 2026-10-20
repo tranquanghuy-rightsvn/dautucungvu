@@ -6,7 +6,7 @@ URL chuẩn: /slug/ (file slug/index.html), không có /slug.html, /slug hay ?pa
   - Trang thường: khối SEO nằm giữa <!-- SEO --> ... <!-- /SEO -->.
   - Sinh các trang tĩnh:
       bai-viet/<slug>/              mỗi bài (khung templates/article.html)
-      khoa-hoc/<id>/[bai-<n>/]      mỗi khóa, mỗi bài học; khoa-hoc/mien-phi|co-phi|cua-toi/
+      khoa-hoc/<id>/[<slug-bài>/]   mỗi khóa (bài 1 ở trang khóa), mỗi bài học; khoa-hoc/mien-phi|co-phi|cua-toi/
       tin-tuc/<chủ đề>/, tin-tuc/<mã viết thường>/
       thanh-toan/goi-<n>-thang/, thanh-toan/<id khóa có phí>/
     JS đọc trạng thái từ <body data-*> của trang.
@@ -25,8 +25,12 @@ ROOT = REPO / "html"  # thư mục site được deploy
 DATA = REPO / "data"
 SITE = "https://dautucungvu.com"
 NAME = "Đầu tư cùng Vũ"
-IMAGE = SITE + "/assets/img/vu.jpg"
-LOGO = SITE + "/assets/img/vu-128.jpg"
+# Ảnh site tuỳ biến trong CMS (Cài đặt -> Ảnh site, GAS.md II.D): og = ảnh chia sẻ mặc định,
+# brand = logo (JSON-LD Organization), favicon, hero (ảnh chân dung trang chủ)
+SITE_IMAGES = json.loads((DATA / "settings.json").read_text(encoding="utf-8")).get("images", {})
+DEFAULT_OG = "assets/img/vu.jpg"  # ảnh gốc, biết kích thước 640x640
+IMAGE = SITE + "/" + SITE_IMAGES.get("og", DEFAULT_OG)
+LOGO = SITE + "/" + SITE_IMAGES.get("brand", "assets/img/vu-128.jpg")
 TEMPLATE = REPO / "templates" / "article.html"
 
 # slug, title, description, loại trang schema.org, có index không
@@ -89,7 +93,7 @@ def head_block(url, title, desc, index, graph, og_type="website", extra=(), imag
     t, d = html.escape(title), html.escape(desc)
     # Ảnh mặc định (vu.jpg) biết kích thước 640x640; ảnh bìa bài viết thì không khai kích thước
     size = ['<meta property="og:image:width" content="640">',
-            '<meta property="og:image:height" content="640">'] if image == IMAGE else []
+            '<meta property="og:image:height" content="640">'] if image.endswith("/" + DEFAULT_OG) else []
     lines = [
         "<!-- SEO (sinh bởi scripts/seo.py) -->",
         f"<title>{t}</title>",
@@ -120,6 +124,18 @@ def head_block(url, title, desc, index, graph, og_type="website", extra=(), imag
     return "\n".join("  " + l for l in lines)
 
 
+def patch_images(src):
+    """Favicon (mọi trang, đường dẫn tuyệt đối) + ảnh chân dung trang chủ theo Cài đặt."""
+    fav = SITE_IMAGES.get("favicon")
+    if fav:
+        src = re.sub(r'<link rel="icon" href="[^"]*" type="image/[a-z+]+">',
+                     f'<link rel="icon" href="/{fav}" type="image/jpeg">', src)
+    hero = SITE_IMAGES.get("hero")
+    if hero:
+        src = re.sub(r'(<figure class="hero-portrait">\s*<img src=")[^"]*(")', lambda m: m.group(1) + hero + m.group(2), src)
+    return src
+
+
 def put_head(src, block):
     if "<!-- SEO" in src:
         return re.sub(r"  <!-- SEO.*?<!-- /SEO -->", lambda _: block, src, flags=re.S)
@@ -143,7 +159,8 @@ def load_data():
         "site": site,
         "indices": settings["indices"],
         "tickers": settings["tickers"],
-        "courses": read_json("courses.json"),
+        # Khóa đang Ẩn (CMS) không lên site: không trang, không sitemap, không data.js
+        "courses": [c for c in read_json("courses.json") if not c.get("hidden")],
         "newsTags": settings["newsTags"],
         "news": news,
         "brokers": settings["brokers"],
@@ -179,7 +196,7 @@ for slug, title, desc, kind, index in PAGES:
     if crumbs:
         graph.append(breadcrumb(url, crumbs))
     path = ROOT / slug / "index.html" if slug else ROOT / "index.html"
-    path.write_text(put_head(path.read_text(encoding="utf-8"), head_block(url, title, desc, index, graph)), encoding="utf-8")
+    path.write_text(patch_images(put_head(path.read_text(encoding="utf-8"), head_block(url, title, desc, index, graph))), encoding="utf-8")
     print("SEO:", path.relative_to(ROOT))
     if index:
         sitemap.append((url, today, "daily" if slug in ("", "tin-tuc") else "weekly", "1.0" if not slug else "0.8"))
@@ -192,7 +209,7 @@ dup = {s for s in slugs if slugs.count(s) > 1}
 if bad or dup:
     raise SystemExit(f"slug bài viết sai (id {bad}) hoặc trùng ({sorted(dup)}), sửa trong data/")
 
-template = TEMPLATE.read_text(encoding="utf-8").replace('="../', '="../../')
+template = patch_images(TEMPLATE.read_text(encoding="utf-8").replace('="../', '="../../'))
 for n in data["news"]:
     url = page_url("bai-viet/" + n["slug"])
     title = n["title"] + " | " + NAME
@@ -295,7 +312,8 @@ for c in courses:
            [ORG, WEBSITE, webpage(url, title, c["desc"], "WebPage", crumbs), course_ld, breadcrumb(url, crumbs)],
            {"course": c["id"]}, c["title"], c["desc"])
     for i, l in enumerate(c["lessons"][1:], start=2):
-        out = f"khoa-hoc/{c['id']}/bai-{i}"
+        # URL bài học theo slug (bất biến), không theo số thứ tự (đổi khi sắp xếp lại) — GAS.md II.B
+        out = f"khoa-hoc/{c['id']}/{l['slug']}"
         lurl = page_url(out)
         ltitle = f"Bài {i}: {l['t']} | {c['title']} | {NAME}"
         ldesc = f"Bài {i}/{len(c['lessons'])} của khóa {c['title']}: {l['t']}."
@@ -353,9 +371,10 @@ for base, names in generated.items():
         if d.is_dir() and d.name not in names:
             shutil.rmtree(d)
             print("đã xoá trang cũ:", f"{base}/{d.name}")
-for c in courses:  # bài học bị bớt đi
-    for d in (ROOT / "khoa-hoc" / c["id"]).glob("bai-*"):
-        if not (d.name[4:].isdigit() and 2 <= int(d.name[4:]) <= len(c["lessons"])):
+for c in courses:  # bài học bị xoá / URL kiểu cũ bai-<n>
+    keep = {l["slug"] for l in c["lessons"][1:]}
+    for d in (ROOT / "khoa-hoc" / c["id"]).iterdir():
+        if d.is_dir() and d.name not in keep:
             shutil.rmtree(d)
             print("đã xoá trang cũ:", f"khoa-hoc/{c['id']}/{d.name}")
 print("đã sinh", sum(len(v) for v in generated.values()), "nhóm trang con trong", ", ".join(generated))
