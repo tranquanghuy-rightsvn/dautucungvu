@@ -679,9 +679,11 @@ chưa có). Site vẫn là bản demo về chức năng:
 - [x] Hướng dẫn vận hành cho Vũ: tab **Hướng dẫn** trong CMS (mọi vai trò): duyệt đơn, VIP, hỗ
       trợ khách, đăng bài, khóa học + video (cách quay iPhone ra MP4), cài đặt, phân quyền, sao lưu.
       CMS @8.
-- [ ] ⚠️ TRƯỚC KHI MỞ BÁN: 18 bài tin tức + 5 khóa học hiện có là DỮ LIỆU MẪU từ bản demo (tin bịa
-      kiểu "MBB lợi nhuận tăng 18%", giá khóa tự đặt, không có video). Chờ Vũ quyết: xoá hết / sửa
-      thành nội dung thật. Không tự xoá.
+- [x] Xoá 18 bài tin tức MẪU từ bản demo (20/10, chủ dự án yêu cầu): `data/news/` trống,
+      `posts.json` = `[]`, build tự xoá `html/bai-viet/*`; D1 `article_bodies` vốn trống. Trang chủ /
+      tin tức hiện "Chưa có bài viết", không lỗi JS.
+- [ ] ⚠️ Còn dữ liệu mẫu chờ Vũ quyết: 5 khóa học (giá tự đặt, chưa có video) và dải số liệu trang
+      chủ "100+ bài học video · 50+ tin tức mỗi ngày · 1.000+ nhà đầu tư" (con số chưa có thật).
 
 Tổng ≈ 17–21 ngày làm việc, chưa tính thời gian chờ mục A.
 
