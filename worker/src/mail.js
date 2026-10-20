@@ -37,7 +37,7 @@ export async function sendMail(env, to, subject, content) {
   try {
     await env.EMAIL.send({
       to,
-      from: { email: env.MAIL_FROM || "no-reply@dautucungvu.com", name: "Đầu tư cùng Vũ" },
+      from: { email: env.MAIL_FROM || "thongbao@dautucungvu.com", name: "Đầu tư cùng Vũ" },
       ...(env.MAIL_REPLY_TO ? { replyTo: env.MAIL_REPLY_TO } : {}),
       subject,
       html: content.html,

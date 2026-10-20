@@ -291,7 +291,7 @@ Không chạy trên GAS. GAS chỉ là giao diện quản trị gọi API admin 
    - `vip`: chỉ tài khoản đã mở / chuyển ID ≥ 50 triệu (admin bật tay).
    - Khóa có phí: đã mua khóa đó HOẶC VIP. Bài `Học thử`: tất cả.
    - Hội viên hết hạn tự về thành viên thường (so ngày khi kiểm tra, không cần job).
-5. **Email người dùng** (Email Service, từ `no-reply@dautucungvu.com`, tên "Đầu tư cùng Vũ",
+5. **Email người dùng** (Email Service, từ `thongbao@dautucungvu.com`, tên "Đầu tư cùng Vũ",
    reply-to = `MAIL_REPLY_TO`; mỗi email có HTML + text, tiếng Việt; chỉ email giao dịch, không
    gửi marketing): xác minh email · đặt lại mật khẩu · thông báo đổi mật khẩu/email · đã nhận đơn
    (kèm link mở lại QR) · đã kích hoạt · nhắc gia hạn trước 7 và 1 ngày (Cron Trigger hằng ngày)
@@ -448,8 +448,8 @@ ngẫu nhiên, TRÙNG secret `ADMIN_KEY` của Worker), `SPREADSHEET_ID` (code t
 — secrets: `ADMIN_KEY`, `TURNSTILE_SECRET`, `R2_ACCESS_KEY_ID`, `R2_SECRET_ACCESS_KEY`.
 vars: `SITE_URL` = `https://dautucungvu.com`, `R2_BUCKET` = `dautucungvu-videos`, `R2_ACCOUNT_ID`
 (32 ký tự hex), `ENABLE_TEST_ROUTES` (`"1"` chỉ khi thử — bật `/api/test/*`; đặt `"0"` trước khi mở
-bán), `MAIL_FROM` = `no-reply@dautucungvu.com`, `MAIL_REPLY_TO` = `ORDER_NOTIFY_EMAIL` =
-`truongvutienphuoc@gmail.com` (email Vũ, chốt 20/10), `CMS_URL` = `https://dautucungvu.com/admin/`,
+bán), `MAIL_FROM` = `thongbao@dautucungvu.com`, `MAIL_REPLY_TO` = `lienhe@dautucungvu.com` (cả hai
+chuyển tiếp về Gmail Vũ), `ORDER_NOTIFY_EMAIL` = `truongvutienphuoc@gmail.com` (email Vũ, chốt 20/10), `CMS_URL` = `https://dautucungvu.com/admin/`,
 `TURNSTILE_SITE_KEY` = `0x4AAAAAAFdoZBmQ_HkuKLVd` (công khai; cũng hard-code trong `html/assets/js/ui.js`).
 Secret `TURNSTILE_SECRET` đã đặt 20/10 (chưa đặt thì Worker bỏ qua Turnstile).
 bindings: `DB` (D1 `dautucungvu`), `VIDEOS` (R2), `EMAIL` (send_email), `ASSETS` (static assets).
@@ -507,20 +507,22 @@ chưa có). Site vẫn là bản demo về chức năng:
       từ `~` với `--name dautucungvu`. ADMIN_KEY = `openssl rand -hex 32`, chủ dự án giữ (dùng lại
       cho Script Property `WORKER_ADMIN_KEY` ở GĐ2).
 - [x] Máy local: `npx wrangler login` (20/10).
-- [ ] (HOÃN theo ý chủ dự án) Vũ bấm email xác nhận của Cloudflare gửi tới
-      truongvutienphuoc@gmail.com (destination Email Routing, id c3a1c47872c44b5c8ad09dba286d656b;
-      hết hạn thì gửi lại: `npx wrangler email routing addresses create truongvutienphuoc@gmail.com`).
-      Xác nhận xong mới làm: (1) `npx wrangler email routing rules create dautucungvu.com --name
-      "lienhe -> Vu" --match-type literal --match-field to --match-value lienhe@dautucungvu.com
-      --action-type forward --action-value truongvutienphuoc@gmail.com` (và tương tự `thongbao@`);
-      (2) `wrangler.jsonc`: `MAIL_FROM` = `thongbao@dautucungvu.com`, `MAIL_REPLY_TO` =
-      `lienhe@dautucungvu.com`; (3) gửi thử tới lienhe@. KHÔNG đổi (2) trước (1) — thư trả lời sẽ bị
-      trả về. Lý do: email đang vào thư rác dù SPF/DKIM/DMARC đều PASS (domain mới).
+- [x] Địa chỉ email của site (20/10): Vũ đã xác nhận destination truongvutienphuoc@gmail.com
+      (Email Routing, id c3a1c47872c44b5c8ad09dba286d656b). Rule chuyển tiếp (literal, to → forward
+      về Gmail Vũ): `lienhe@dautucungvu.com` (id f207608415dc499b856fbd3c0749b81b) và
+      `thongbao@dautucungvu.com` (id 994e6577122a410b81c7fe558f7f490e); catch-all TẮT. Thêm địa
+      chỉ mới: `npx wrangler email routing rules create dautucungvu.com --name "<x> -> Vu"
+      --match-type literal --match-field to --match-value <x>@dautucungvu.com --action-type forward
+      --action-value truongvutienphuoc@gmail.com`. `wrangler.jsonc`: `MAIL_FROM` =
+      `thongbao@dautucungvu.com`, `MAIL_REPLY_TO` = `lienhe@dautucungvu.com` (khách bấm Trả lời →
+      về Gmail Vũ). Thử gửi: `npx wrangler email sending send --from thongbao@dautucungvu.com --to
+      lienhe@dautucungvu.com --subject ... --text ...`. Lý do đổi: email vào thư rác dù
+      SPF/DKIM/DMARC PASS (domain mới; địa chỉ gửi có thật + nhận được thư trả lời giúp uy tín).
 - [ ] (Tuỳ chọn) Google Postmaster Tools cho dautucungvu.com: chủ dự án tự thêm TXT
       `google-site-verification=...` trong Cloudflare DNS (wrangler OAuth không có quyền ghi DNS).
 - [x] Email Routing đã BẬT (20/10): domain gốc có MX route1/2/3.mx.cloudflare.net + SPF
       `v=spf1 include:_spf.mx.cloudflare.net ~all` + DKIM `cf2024-1._domainkey`. Chưa có rule
-      chuyển tiếp nào (chờ xác nhận ở trên).
+      chuyển tiếp: lienhe@, thongbao@ (xem trên).
 - [x] Cloudflare: bật Email Sending cho `dautucungvu.com` (20/10, `npx wrangler email sending enable`).
       Zone tự có 6 bản ghi: 3 MX + SPF `cf-bounce.dautucungvu.com`, DKIM `cf-bounce._domainkey`,
       DMARC `_dmarc` `p=reject`. Trang Overview "Healthy", hạn mức **200 email/ngày** (domain mới).
