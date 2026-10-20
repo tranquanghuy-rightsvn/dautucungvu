@@ -413,7 +413,7 @@ chưa có). Site vẫn là bản demo về chức năng:
 - `worker/`: đã chạy thử local (`wrangler dev`): trang tĩnh 200, `/khoa-hoc` → 307 `/khoa-hoc/`,
   URL lạ → 404 + `html/404.html`, `/api/health` OK, `/api/*` lạ → 404 JSON, admin sai khóa → 401,
   presigned PUT URL R2 sinh đúng định dạng, `/api/test/video/...` Range (đầu/giữa/suffix) đúng byte.
-  CHƯA deploy (chờ mục XII.A). `database_id` D1 và `R2_ACCOUNT_ID` đang là `TODO_...`.
+  CHƯA deploy (chờ mục XII.A). D1 đã tạo, ID đã điền; R2 chưa bật.
 - Liên hệ trong `settings.json` vẫn là số giả `0900 000 000`.
 - Chạy thử: `cd worker && npx wrangler dev` (hoặc `cd html && python3 -m http.server`).
 
@@ -455,8 +455,11 @@ chưa có). Site vẫn là bản demo về chức năng:
 - [x] `build.py` sinh `html/assets/js/data.js` từ `data/` (20/10, kiểm giống hệt bản cũ).
 - [x] `worker/wrangler.jsonc` + `src/` + `html/404.html`; chạy thử local OK (20/10).
 - [x] `.github/workflows/deploy.yml` (20/10; chưa chạy thật — chờ secret).
-- [ ] Tạo D1 `dautucungvu` (`npx wrangler d1 create dautucungvu`), điền `database_id`; điền
-      `R2_ACCOUNT_ID`; tạo bucket nếu chưa có; `npx wrangler r2 bucket cors set dautucungvu-videos
+- [x] `npx wrangler login` (20/10, tài khoản Cloudflare `web100.vn@gmail.com`, Account ID
+      `975f2208a74d9e0b5048659725df1911`).
+- [x] Tạo D1 `dautucungvu` (20/10, APAC, id `7ed75e1e-7173-48c9-99b4-2af6cfac1c55`), điền
+      `database_id` + `R2_ACCOUNT_ID` vào `wrangler.jsonc`.
+- [ ] Chủ dự án bật R2 trong dashboard (wrangler báo lỗi 10042 "Please enable R2"); rồi tạo bucket; `npx wrangler r2 bucket cors set dautucungvu-videos
       --file r2-cors.json`; đặt secret `ADMIN_KEY`, `R2_ACCESS_KEY_ID`, `R2_SECRET_ACCESS_KEY`.
 - [ ] Deploy lần đầu, gán custom domain `dautucungvu.com` (xoá bản ghi DNS cũ của apex nếu
       trùng); kiểm `curl -sI https://dautucungvu.com/ | grep -i server` ra `cloudflare`.

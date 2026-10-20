@@ -19,17 +19,17 @@
 
   "routes": [{ "pattern": "dautucungvu.com", "custom_domain": true }],
 
-  // Điền database_id sau khi chạy: npx wrangler d1 create dautucungvu
+  // D1 tạo 20/10/2026 (region APAC)
   "d1_databases": [
-    { "binding": "DB", "database_name": "dautucungvu", "database_id": "TODO_D1_DATABASE_ID", "migrations_dir": "migrations" }
+    { "binding": "DB", "database_name": "dautucungvu", "database_id": "7ed75e1e-7173-48c9-99b4-2af6cfac1c55", "migrations_dir": "migrations" }
   ],
   "r2_buckets": [{ "binding": "VIDEOS", "bucket_name": "dautucungvu-videos" }],
 
   "vars": {
     "SITE_URL": "https://dautucungvu.com",
     "R2_BUCKET": "dautucungvu-videos",
-    // Account ID không phải bí mật, nhưng điền khi đã có (dùng ký presigned URL R2)
-    "R2_ACCOUNT_ID": "TODO_ACCOUNT_ID",
+    // Account ID không phải bí mật (dùng ký presigned URL R2)
+    "R2_ACCOUNT_ID": "975f2208a74d9e0b5048659725df1911",
     // "1" chỉ trong giai đoạn thử rủi ro GĐ1; về "0" trước khi mở bán
     "ENABLE_TEST_ROUTES": "1"
   },
