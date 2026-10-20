@@ -86,6 +86,29 @@ async function route(request, env, ctx) {
       return streamObject(env.VIDEOS, videoKey(parts[2], parts[3]), request);
     }
 
+    // GET /api/test/market-sources — gọi thử từng nguồn dữ liệu thị trường TỪ máy chủ Cloudflare
+    if (parts[1] === "market-sources" && method === "GET") {
+      const now = Math.floor(Date.now() / 1000);
+      const urls = {
+        vps_stock: "https://bgapidatafeed.vps.com.vn/getliststockdata/MBB,SSI",
+        vps_index: "https://bgapidatafeed.vps.com.vn/getlistindexdetail/10,11",
+        dnse_index: `https://services.entrade.com.vn/chart-api/v2/ohlcs/index?from=${now - 3 * 86400}&to=${now}&symbol=VNINDEX&resolution=5`,
+        dnse_stock: `https://services.entrade.com.vn/chart-api/v2/ohlcs/stock?from=${now - 100 * 86400}&to=${now}&symbol=MBB&resolution=1D`,
+      };
+      const out = { colo: request.cf && request.cf.colo };
+      await Promise.all(Object.entries(urls).map(async ([k, u]) => {
+        const t0 = Date.now();
+        try {
+          const r = await fetch(u, { headers: { accept: "application/json", "user-agent": "Mozilla/5.0 (dautucungvu.com)" }, signal: AbortSignal.timeout(8000) });
+          const text = await r.text();
+          out[k] = { status: r.status, ms: Date.now() - t0, head: text.slice(0, 80) };
+        } catch (e) {
+          out[k] = { error: String(e), ms: Date.now() - t0 };
+        }
+      }));
+      return json(out);
+    }
+
     // GET /api/test/presign-check — Worker tự ký link, PUT thử file nhỏ qua link đó, kiểm file vào
     // bucket, thử preflight CORS như trang GAS, rồi xoá. Chỉ trả kết quả, KHÔNG trả khóa / link.
     if (parts[1] === "presign-check" && method === "GET") {
