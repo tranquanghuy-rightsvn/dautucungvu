@@ -503,6 +503,20 @@ chưa có). Site vẫn là bản demo về chức năng:
       từ `~` với `--name dautucungvu`. ADMIN_KEY = `openssl rand -hex 32`, chủ dự án giữ (dùng lại
       cho Script Property `WORKER_ADMIN_KEY` ở GĐ2).
 - [x] Máy local: `npx wrangler login` (20/10).
+- [ ] (HOÃN theo ý chủ dự án) Vũ bấm email xác nhận của Cloudflare gửi tới
+      truongvutienphuoc@gmail.com (destination Email Routing, id c3a1c47872c44b5c8ad09dba286d656b;
+      hết hạn thì gửi lại: `npx wrangler email routing addresses create truongvutienphuoc@gmail.com`).
+      Xác nhận xong mới làm: (1) `npx wrangler email routing rules create dautucungvu.com --name
+      "lienhe -> Vu" --match-type literal --match-field to --match-value lienhe@dautucungvu.com
+      --action-type forward --action-value truongvutienphuoc@gmail.com` (và tương tự `thongbao@`);
+      (2) `wrangler.jsonc`: `MAIL_FROM` = `thongbao@dautucungvu.com`, `MAIL_REPLY_TO` =
+      `lienhe@dautucungvu.com`; (3) gửi thử tới lienhe@. KHÔNG đổi (2) trước (1) — thư trả lời sẽ bị
+      trả về. Lý do: email đang vào thư rác dù SPF/DKIM/DMARC đều PASS (domain mới).
+- [ ] (Tuỳ chọn) Google Postmaster Tools cho dautucungvu.com: chủ dự án tự thêm TXT
+      `google-site-verification=...` trong Cloudflare DNS (wrangler OAuth không có quyền ghi DNS).
+- [x] Email Routing đã BẬT (20/10): domain gốc có MX route1/2/3.mx.cloudflare.net + SPF
+      `v=spf1 include:_spf.mx.cloudflare.net ~all` + DKIM `cf2024-1._domainkey`. Chưa có rule
+      chuyển tiếp nào (chờ xác nhận ở trên).
 - [x] Cloudflare: bật Email Sending cho `dautucungvu.com` (20/10, `npx wrangler email sending enable`).
       Zone tự có 6 bản ghi: 3 MX + SPF `cf-bounce.dautucungvu.com`, DKIM `cf-bounce._domainkey`,
       DMARC `_dmarc` `p=reject`. Trang Overview "Healthy", hạn mức **200 email/ngày** (domain mới).
