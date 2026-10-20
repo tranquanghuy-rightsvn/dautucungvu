@@ -401,6 +401,13 @@ Cron `0 1 * * *` (08:00 VN, `worker/src/cron.js`): hết hạn đơn chờ, emai
   commit). Cách né: `wrangler.jsonc` + `package.json` ở GỐC repo, cấu hình Build như VIII.
   Kiểm nhanh sau deploy: `curl https://dautucungvu.com/api/health` phải 200;
   `gh api repos/tranquanghuy-rightsvn/dautucungvu/commits/<sha>/check-runs` xem build của commit.
+- (Site, 20/10) Icon to "tổ bố" ở dải nhắc xác minh email / khung "đã xong": CSS gốc chỉ có
+  `svg { max-width:100% }`, `UI.icon()` không gắn kích thước -> svg trong khối MỚI phình bằng cả
+  khung. Mọi khối mới có icon PHẢI tự đặt `width/height` cho svg (core.css: `.verify-bar svg`,
+  `.auth-done > svg`). Hộp đăng ký cao hơn màn hình điện thoại bị cắt mất nút: `.modal` cần
+  `align-items:start; overflow-y:auto` + `.modal-card { margin-block:auto }`.
+- (CMS, 20/10) Hộp xác nhận dùng chung nút "Huỷ / Xoá" (từ mẫu) -> "Xác nhận đã nhận tiền?" mà nút
+  là "Xoá": khó hiểu. `showConfirm(message, {ok, cancel, danger})` — chữ nút PHẢI nói đúng việc.
 - (Thử API local, 20/10) cookie phiên có `Secure` -> curl KHÔNG gửi lại qua `http://localhost`
   (trình duyệt thì có) -> tưởng lỗi "Vui lòng đăng nhập". Chạy `npx wrangler dev --local-protocol
   https` + `curl -k`. Trong zsh, biến chứa nhiều tham số curl không tự tách -> viết script bash.

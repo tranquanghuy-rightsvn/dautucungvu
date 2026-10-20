@@ -1227,6 +1227,43 @@ button {
 .modal.is-open .modal-card {
   transform: none;
 }
+/* Form cao hơn màn hình (đăng ký + chống robot, nhất là điện thoại) -> cuộn được, không bị cắt mất
+   nút: căn đầu + margin auto (vẫn căn giữa khi đủ chỗ) */
+.modal {
+  align-items: start;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+}
+.modal .modal-card {
+  margin-block: auto;
+}
+.modal-card .field {
+  gap: 4px;
+  margin-bottom: 12px;
+}
+.modal-card .input {
+  min-height: 42px;
+  padding: 8px 12px;
+}
+/* Dòng báo lỗi chỉ chiếm chỗ khi CÓ lỗi -> form đăng ký gọn, thấy nút trên điện thoại */
+.modal-card .field-error:empty,
+.modal-card .form-error:empty {
+  display: none;
+}
+.modal-card .ts-box:empty {
+  display: none;
+}
+.modal-card .auth-tabs {
+  margin: 8px 0 12px;
+}
+@media (max-width: 480px) {
+  .modal {
+    padding: 12px;
+  }
+  .modal-card {
+    padding: 22px 18px;
+  }
+}
 .modal-card h2 {
   font-size: var(--fs-xl);
   font-weight: 800;
@@ -1588,6 +1625,28 @@ main > .section:last-child {
   background: var(--green-50);
   color: var(--green-600);
 }
+.auth-done p {
+  margin-top: 4px;
+  color: var(--text-2);
+}
+/* svg gốc của site chỉ có max-width:100% (không có kích thước) -> icon trong các khối mới PHẢI tự
+   đặt cỡ, không thì phình bằng cả khung (lỗi đã gặp 20/10) */
+.auth-done > svg,
+.verify-bar svg,
+.token-box .data-note svg {
+  flex: none;
+  width: 20px;
+  height: 20px;
+}
+.token-box .data-note {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+.token-box .row,
+.token-box > button + button {
+  margin-left: 6px;
+}
 .link-btn {
   border: 0;
   background: none;
@@ -1609,6 +1668,9 @@ main > .section:last-child {
   flex-wrap: wrap;
   padding-top: 8px;
   padding-bottom: 8px;
+}
+.verify-bar svg {
+  color: var(--gold-500);
 }
 .verify-bar .container > span {
   flex: 1;
