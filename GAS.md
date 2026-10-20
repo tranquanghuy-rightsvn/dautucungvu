@@ -399,6 +399,11 @@ Origin đúng site — chống CSRF cùng cookie `dtcv_session` HttpOnly; Secure
 Cron `0 1 * * *` (08:00 VN, `worker/src/cron.js`): hết hạn đơn chờ, email nhắc 7 / 1 ngày, báo hết hạn.
 
 ## IX. Checklist bug đã gặp ở dự án này
+- (CMS, 20/10) F5 trang quản trị báo `ReferenceError: Cannot access 'ORDER_SORT' before
+  initialization` → `bootApp()` chạy ĐỒNG BỘ ngay khi có boot cache (vẽ luôn bảng đơn hàng từ cache
+  đơn), trong khi lời gọi nằm giữa `js.html`, trước các `const`/`let` khai báo bên dưới (TDZ). Chỉ lộ
+  khi máy đã cache danh sách đơn. Vá: lời gọi khởi động đặt ở CUỐI `js.html` (CMS @9). Thêm hằng /
+  biến toàn cục mới: không bao giờ đặt khởi động lên trên chúng.
 - (Phần site tĩnh) Chrome headless `--window-size=390` hiển thị bị cắt phải → do headless có bề
   rộng tối thiểu, KHÔNG phải lỗi CSS. Kiểm mobile bằng DevTools/Chrome MCP thật.
 - (Worker, 20/10) `Content-Range: bytes NaN-NaN/...` khi phát video → `R2Object.range` LUÔN có
