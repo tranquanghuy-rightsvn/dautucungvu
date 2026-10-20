@@ -221,23 +221,26 @@ Lưu chung `data/settings.json`:
 - Chỉ số thị trường + giá cổ phiếu: KHÔNG nhập trong CMS — lấy API thật (II.E). CMS chỉ quản
   danh sách mã hiển thị (`tickers`) và chỉ số hiển thị (`indices`: VNINDEX, VN30, HNX, UPCOM…).
 
-### II.E Dữ liệu thị trường (API thật — quyết định 20/10)
+### II.E Dữ liệu thị trường (API thật — nguồn chốt 20/10: API công khai KHÔNG chính thức)
 
-- Worker lấy dữ liệu từ nguồn ngoài, cache lại, site gọi `GET /api/market` (chỉ số + giá các mã
-  trong `tickers`: giá, thay đổi, %, khối lượng, dữ liệu nến cho biểu đồ). Không gọi nguồn ngoài
-  trực tiếp từ trình duyệt (ẩn khóa, tránh CORS, tránh bị chặn vì quá nhiều request).
-- Cập nhật: Cron Trigger mỗi 1 phút trong giờ giao dịch (9:00–11:30, 13:00–15:00, T2–T6, giờ
-  VN), ngoài giờ giữ giá đóng cửa; lưu bản mới nhất vào D1 (bảng `market_snapshots`) hoặc KV.
-  Site poll `/api/market` 60 giây/lần khi trang đang mở trong giờ giao dịch.
-- Lỗi nguồn ngoài: trả bản cache gần nhất kèm thời điểm cập nhật; giao diện ghi "Cập nhật lúc
-  HH:mm". Bỏ nhãn "Dữ liệu minh hoạ" khi đã chạy thật.
-- ❓ CẦN CHỐT nguồn dữ liệu:
-  (a) **SSI FastConnect Data** — chính thức; yêu cầu tài khoản giao dịch SSI, đăng ký tại quầy /
-      qua môi giới, nhận ConsumerID + ConsumerSecret (+ PrivateKey) tạo trên iBoard; có EOD và
-      realtime. Phí: tài liệu SSI không ghi → phải hỏi SSI.
-  (b) API công khai không chính thức của các công ty CK — miễn phí nhưng không có cam kết, có thể
-      đổi / chặn bất cứ lúc nào, cần kiểm tra điều khoản sử dụng.
-  Khuyến nghị (a). Chốt xong ghi tên biến khóa vào mục X.
+- Worker `GET /api/market` (`worker/src/market.js`) trả `{updated_at, live, stale, indices[{code,
+  value, change, intraday[]}], tickers[{code, price, ref, change(%), volume, source, history[]}]}`.
+  Giá cổ phiếu theo NGHÌN đồng (19.65 = 19.650đ), `change` của mã là %, của chỉ số là điểm.
+- Nguồn: **VPS** `bgapidatafeed.vps.com.vn/getliststockdata/<mã,...>` (giá khớp + tham chiếu, timeout
+  3s) và **DNSE** `services.entrade.com.vn/chart-api/v2/ohlcs/{index|stock}` (điểm chỉ số = nến
+  ngày cuối, thay đổi = so nến kế cuối; nến 5 phút cho biểu đồ trong phiên; nến ngày 100 ngày cho
+  biểu đồ 3 tháng). VPS lỗi -> giá cổ phiếu lấy từ DNSE (đã đối chiếu: khớp VPS). Mã chỉ số hỗ trợ:
+  VN-Index, VN30, HNX, UPCoM (bảng `INDEX_MAP`). TCBS bị chặn bot, KHÔNG dùng.
+- ⚠️ Gọi từ máy chủ Cloudflare: VPS chập chờn (colo SIN treo, HKG lúc được lúc không; endpoint
+  chỉ số `getlistindexdetail` treo hẳn) dù gọi từ máy thường vẫn chạy; DNSE ổn định. Kiểm nguồn:
+  `GET /api/test/market-sources` (bật khi `ENABLE_TEST_ROUTES = "1"`).
+- KHÔNG dùng Cron: làm mới khi có người xem. Từng phần lưu D1 `market_snapshots` (quotes: 30s trong
+  phiên / 5 phút ngoài phiên; intraday: 2 / 30 phút; history: 6 giờ), cả response cache edge
+  (30s / 5 phút). Nguồn lỗi -> trả bản D1 gần nhất + `stale: true`. Mọi `fetch` có timeout.
+- Danh sách mã: build sinh `html/assets/market-symbols.json` từ `settings.tickers` / `indices`.
+- Site: `ui.js` tải `/api/market`, gộp vào `APP_DATA.indices/tickers`, bắn sự kiện `market:update`
+  (news.js, dashboard.js vẽ lại), làm mới mỗi 60s trong giờ giao dịch; nhãn "Cập nhật lúc HH:mm"
+  (thêm "(chưa lấy được số mới)" khi stale). Chưa có số -> hiện "—". `data/market-demo.json` đã xoá.
 
 ---
 
@@ -458,8 +461,7 @@ chưa có). Site vẫn là bản demo về chức năng:
 ### A. Việc chủ dự án cần làm / cung cấp (⏳ = chặn giai đoạn)
 - [x] Ảnh bìa khóa học + mọi ảnh site: tùy biến được trong CMS (20/10).
 - [x] Chỉ số / giá cổ phiếu: API thật (20/10).
-- [ ] ❓ Nguồn API thị trường: SSI FastConnect Data (hỏi phí SSI) hay API không chính thức (II.E). ⏳ GĐ3
-- [ ] Nếu chọn SSI FCData: đăng ký dịch vụ, tạo bộ khóa trên iBoard. ⏳ GĐ3
+- [x] Nguồn API thị trường: API công khai không chính thức (VPS + DNSE) (20/10).
 - [ ] Email root của Vũ. ⏳ GĐ2
 - [ ] `ORDER_NOTIFY_EMAIL` + `MAIL_REPLY_TO`. ⏳ GĐ4
 - [ ] SĐT / Zalo thật, link YouTube / Facebook / Telegram. ⏳ GĐ3
@@ -552,6 +554,8 @@ chưa có). Site vẫn là bản demo về chức năng:
 - Xong khi: editor đăng / sửa / xoá bài → 1–3 phút lên site đúng URL + SEO.
 
 **GĐ3 — Khóa học + cài đặt (≈ 3 ngày)**
+- [x] Dữ liệu thị trường thật `/api/market` + site hiển thị (II.E) — chạy trên production 20/10
+      (VN-Index 1.691,97; HPG 21.100 +2,68%); D1 migration 0002 đã áp remote.
 - [ ] Tab Khóa học (chưa video), tab Cài đặt (II.B, II.D).
 - [ ] Đổi URL bài học `bai-<n>` → `<slug-bài>` (build + `ui.js courseUrl` + `courses.js`).
 - Xong khi: mọi nội dung site sửa được trong CMS, không còn sửa tay file dữ liệu.
@@ -604,7 +608,9 @@ trong account. (Tra 20/10/2026 — kiểm lại trang giá Cloudflare trước k
 | 19/10 | Chấp nhận người có quyền tải/quay video; không DRM/watermark | "Chặn thì nó quay màn hình cũng z" |
 | 19/10 | CMS admin vẫn đăng nhập OTP (mẫu xevip) | Ít người, nằm trong quota MailApp |
 | 20/10 | Mọi ảnh trên website tùy biến được trong CMS (ảnh bìa khóa upload; hero, logo, favicon, ảnh chia sẻ) | Yêu cầu chủ dự án |
-| 20/10 | Chỉ số thị trường + giá cổ phiếu lấy API thật qua Worker (nguồn còn chốt — II.E) | Yêu cầu chủ dự án |
+| 20/10 | Chỉ số thị trường + giá cổ phiếu lấy API thật qua Worker | Yêu cầu chủ dự án |
+| 20/10 | Nguồn dữ liệu thị trường: API công khai không chính thức (VPS + DNSE), không SSI FCData | Miễn phí; chấp nhận rủi ro nguồn đổi/chặn (có dự phòng D1) |
+| 20/10 | Video: tạm chỉ nhận MP4 (H.264 + AAC); chưa chốt có cho .mov không — hỏi lại ở GĐ5 | .mov từ iPhone thường là HEVC, nhiều trình duyệt không phát |
 | 20/10 | Deploy: GitHub Actions build + commit `html/`, Cloudflare Workers Builds nối Git tự deploy; KHÔNG dùng `CLOUDFLARE_API_TOKEN`; KHÔNG build trên Cloudflare | Yêu cầu chủ dự án ("build github action rồi ánh xạ lên cloudflare"). RIÊNG dự án này (dự án đặc biệt) — KHÔNG đưa vào skill, các dự án GAS khác giữ cách cũ |
 
 ## XIV. Quy ước làm việc với chủ dự án
