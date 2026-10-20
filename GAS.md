@@ -461,7 +461,8 @@ chưa có). Site vẫn là bản demo về chức năng:
 - [x] Máy local: `npx wrangler login` (20/10).
 - [ ] Cloudflare: bật Email Sending cho domain (SPF/DKIM/DMARC). ⏳ GĐ4
 - [ ] Cloudflare: Turnstile widget cho `dautucungvu.com`. ⏳ GĐ4
-- [ ] Google: tài khoản chủ GAS (2FA), `clasp login`. ⏳ GĐ2
+- [x] Google: bật Apps Script API + `clasp login` (20/10, `@google/clasp` 3.4.1 qua `npx`; tài
+      khoản Google dùng chung cho nhiều CMS khách — chủ script = root ngầm định của CMS này).
 - [ ] GitHub: fine-grained token (Contents RW repo `dautucungvu`). ⏳ GĐ2
 - [ ] 2FA cho Cloudflare, GitHub, Google.
 
@@ -492,7 +493,7 @@ chưa có). Site vẫn là bản demo về chức năng:
       `dautucungvu.com` gán OK, `server: cloudflare`; `workers_dev` + `preview_urls` tắt;
       `html/.assetsignore` loại `.DS_Store` (20/10). Kiểm live: trang 200, `/khoa-hoc` 307,
       URL lạ 404 + trang 404, `/api/health` OK.
-- [ ] `www.dautucungvu.com` chưa cấu hình (hỏi chủ dự án có cần không).
+- [x] `www.dautucungvu.com` (20/10, chủ dự án cấu hình trên Cloudflare): 301 → `https://dautucungvu.com/<cùng đường dẫn>`.
 - [x] Rủi ro 1 — phần server (20/10): `/api/test/presign-check` trên production: R2 nhận PUT qua
       link ký bằng `presign.js` (200, file vào bucket), preflight CORS với origin
       `https://n-test-0lu-script.googleusercontent.com` → 204, cho phép PUT.
@@ -501,7 +502,8 @@ chưa có). Site vẫn là bản demo về chức năng:
 - [x] Thử rủi ro 2 trên production (20/10): MP4 720p 60s (`courses/test/video-720p.mp4`, file
       thử, xoá trước khi mở bán) qua `/api/test/video/test/video-720p` — full + Range đúng byte;
       Chrome: đọc metadata, tua tới 45s, phát tiếp OK.
-- [ ] Rủi ro 2 trên Safari iOS: chủ dự án mở link trên iPhone, phát + tua.
+- [ ] Rủi ro 2 trên máy chủ dự án (PC + Safari iOS): mở
+      https://dautucungvu.com/api/test/video/test/video-720p, phát + tua — chủ dự án kiểm sau.
 - Xong khi: sửa `data/` + push → site tự deploy; 2 rủi ro đã thử OK (hoặc ghi phương án thay vào đây).
 
 **GĐ2 — CMS lõi + bài viết (≈ 3–4 ngày)**
