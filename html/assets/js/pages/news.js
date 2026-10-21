@@ -224,7 +224,10 @@
   function loadChart(keep, fresh) {
     const { code, tf } = chartState;
     const req = ++chartState.req;
-    if (!keep) setChartMsg("Đang tải biểu đồ…");
+    if (!keep) {
+      setChartMsg("Đang tải biểu đồ…");
+      chartEl.querySelector("[data-chart-legend]").textContent = ""; // không để số của mã / khung cũ
+    }
     return Promise.all([loadLib(), fetchChart(code, tf, fresh)])
       .then(([, d]) => {
         if (req !== chartState.req) return; // người xem đã bấm mã / khung khác
