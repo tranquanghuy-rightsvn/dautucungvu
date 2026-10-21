@@ -13,6 +13,8 @@ import { loadCatalog, canWatch } from "./orders.js";
 
 const SLUG = /^[a-z0-9]+(-[a-z0-9]+)*$/;
 const videoKey = (course, lesson) => `courses/${course}/${lesson}.mp4`;
+// Video giới thiệu trên banner trang chủ (thay ảnh chân dung khi admin tải lên, GAS.md II.D)
+const HERO_VIDEO_KEY = "site/hero.mp4";
 
 async function route(request, env, ctx) {
   const url = new URL(request.url);
@@ -52,6 +54,12 @@ async function route(request, env, ctx) {
     return streamObject(env.VIDEOS, videoKey(parts[1], parts[2]), request);
   }
 
+  // GET /api/site-video/hero/<phiên bản> — video giới thiệu trang chủ, CÔNG KHAI (không kiểm quyền).
+  // <phiên bản> (settings.heroVideo.v) chỉ để đổi URL khi thay video, trình duyệt không giữ bản cũ.
+  if (parts[0] === "site-video" && parts[1] === "hero" && parts.length === 3 && method === "GET") {
+    return streamObject(env.VIDEOS, HERO_VIDEO_KEY, request);
+  }
+
   // ----- Admin (GAS CMS gọi qua UrlFetchApp, header Authorization: Bearer <ADMIN_KEY>) -----
   if (parts[0] === "admin") {
     requireAdmin(request, env);
@@ -67,6 +75,23 @@ async function route(request, env, ctx) {
       const key = videoKey(body.course_id, body.lesson_slug);
       const expiresIn = 3600;
       return json({ url: await presignPut(env, key, expiresIn), key, expires_in: expiresIn });
+    }
+
+    // Video giới thiệu trang chủ: POST .../site-video/upload-url -> { url, key, expires_in } ·
+    // GET .../site-video -> { exists, size } · DELETE .../site-video
+    if (parts[1] === "site-video" && parts[2] === "upload-url" && parts.length === 3 && method === "POST") {
+      const expiresIn = 3600;
+      return json({ url: await presignPut(env, HERO_VIDEO_KEY, expiresIn), key: HERO_VIDEO_KEY, expires_in: expiresIn });
+    }
+    if (parts[1] === "site-video" && parts.length === 2) {
+      if (method === "GET") {
+        const obj = await env.VIDEOS.head(HERO_VIDEO_KEY);
+        return json({ exists: !!obj, size: obj ? obj.size : 0 });
+      }
+      if (method === "DELETE") {
+        await env.VIDEOS.delete(HERO_VIDEO_KEY);
+        return json({ ok: true });
+      }
     }
 
     // GET /api/admin/ping — CMS kiểm tra kết nối + khóa

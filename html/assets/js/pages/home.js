@@ -27,6 +27,25 @@
   const sky = document.querySelector("[data-hero-skyline]");
   if (sky) sky.innerHTML = skyline();
 
+  /* ----- Video giới thiệu trên banner (khi CMS đã tải video thay ảnh chân dung) -----
+     Dừng sẵn, chỉ có nút play; bấm thì hiện thanh điều khiển và phát. Hết video -> về nút play. */
+  const heroVideo = document.querySelector("[data-hero-video]");
+  if (heroVideo) {
+    const v = heroVideo.querySelector("video");
+    const playBtn = heroVideo.querySelector("[data-hero-play]");
+    playBtn.addEventListener("click", () => {
+      v.controls = true;
+      heroVideo.classList.add("is-playing");
+      const p = v.play();
+      if (p) p.catch(() => {}); // trình duyệt chặn / lỗi tải -> vẫn còn thanh điều khiển để bấm lại
+    });
+    v.addEventListener("ended", () => {
+      v.controls = false;
+      v.currentTime = 0;
+      heroVideo.classList.remove("is-playing");
+    });
+  }
+
   /* ----- Khóa học: khóa miễn phí trước, tối đa 4 ----- */
   const fc = document.querySelector("[data-featured-courses]");
   if (fc) fc.innerHTML = D.courses.slice().sort((a, b) => (a.price ? 1 : 0) - (b.price ? 1 : 0)).slice(0, 4).map(courseCard).join("");

@@ -28,6 +28,8 @@ NAME = "Đầu tư cùng Vũ"
 # Ảnh site tuỳ biến trong CMS (Cài đặt -> Ảnh site, GAS.md II.D): og = ảnh chia sẻ mặc định,
 # brand = logo (JSON-LD Organization), favicon, hero (ảnh chân dung trang chủ)
 SITE_IMAGES = json.loads((DATA / "settings.json").read_text(encoding="utf-8")).get("images", {})
+# Video giới thiệu trang chủ (CMS tải lên R2, GAS.md II.D): có thì thay ảnh chân dung trên banner
+HERO_VIDEO = json.loads((DATA / "settings.json").read_text(encoding="utf-8")).get("heroVideo") or {}
 DEFAULT_OG = "assets/img/vu.jpg"  # ảnh gốc, biết kích thước 640x640
 IMAGE = SITE + "/" + SITE_IMAGES.get("og", DEFAULT_OG)
 LOGO = SITE + "/" + SITE_IMAGES.get("brand", "assets/img/vu-128.jpg")
@@ -143,7 +145,38 @@ def patch_images(src):
     hero = SITE_IMAGES.get("hero")
     if hero:
         src = re.sub(r'(<figure class="hero-portrait">\s*<img src=")[^"]*(")', lambda m: m.group(1) + hero + m.group(2), src)
-    return src
+    return patch_hero_video(src)
+
+
+def patch_hero_video(src):
+    """Banner trang chủ: có video giới thiệu -> khung video ngang (dừng sẵn, nút play) thay ảnh
+    chân dung; không có -> giữ ảnh. Đặt trong khối đánh dấu để build lại đổi qua đổi lại được."""
+    m = re.search(r'<figure class="hero-portrait[^"]*">.*?</figure>', src, flags=re.S)
+    if not m:
+        return src
+    fig = m.group(0)
+    # Ảnh chân dung dựng lại từ Cài đặt (khi đang ở dạng video, trong trang không còn thẻ <img>)
+    img = ('<img src="' + SITE_IMAGES.get("hero", "assets/img/vu.jpg")
+           + '" alt="Vũ, người sáng lập Đầu tư cùng Vũ" width="640" height="640">')
+    cap = re.search(r'<figcaption[^>]*>.*?</figcaption>', fig, flags=re.S).group(0)
+    v = re.sub(r"[^0-9A-Za-z]", "", str(HERO_VIDEO.get("v", "")))
+    if not v:
+        new = ('<figure class="hero-portrait">\n          ' + img + '\n          ' + cap + '\n        </figure>')
+    else:
+        poster = HERO_VIDEO.get("poster") or ""
+        # Có ảnh bìa: chưa tải byte nào cho tới khi bấm play. Không có: tải metadata + #t=0.1 để
+        # trình duyệt (cả Safari iOS) vẽ khung hình đầu làm ảnh bìa.
+        vsrc = "/api/site-video/hero/" + v + ("" if poster else "#t=0.1")
+        attrs = (' poster="' + poster + '" preload="none"') if poster else ' preload="metadata"'
+        new = ('<figure class="hero-portrait hero-portrait--video">\n'
+               '          <p class="hero-video-label">Video giới thiệu về dautucungvu.com</p>\n'
+               '          <div class="hero-video" data-hero-video>\n'
+               '            <video src="' + vsrc + '"' + attrs + ' playsinline aria-label="Video giới thiệu về dautucungvu.com"></video>\n'
+               '            <button type="button" class="hero-play" data-hero-play aria-label="Phát video giới thiệu"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8.5 5.8v12.4c0 .8.9 1.3 1.6.9l9.6-6.2c.6-.4.6-1.4 0-1.8l-9.6-6.2c-.7-.4-1.6.1-1.6.9z" fill="currentColor"/></svg></button>\n'
+               '          </div>\n'
+               '          ' + cap + '\n'
+               '        </figure>')
+    return src[:m.start()] + new + src[m.end():]
 
 
 def put_head(src, block):

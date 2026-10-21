@@ -228,6 +228,21 @@ Lưu chung `data/settings.json`:
   `html/images/site/<key>.jpg`; build đọc đường dẫn từ `settings.json` (`images.<key>`).
   Favicon tự resize vuông 128px; ảnh `og` khuyến nghị 1200×630. Ảnh bìa bài viết / khóa học
   vẫn quản lý trong form riêng (II.A, II.B).
+- **Video giới thiệu trang chủ** (yêu cầu 21/10, tuỳ chọn — thay ảnh chân dung `hero` trên banner):
+  CMS Cài đặt → Ảnh website → khung "Video giới thiệu trang chủ": Tải / Thay / Xoá video. Chỉ MP4,
+  ≤ 2GB, kiểm tra như video bài học (II.C.1). Kho R2 khoá cố định `site/hero.mp4`; GAS
+  `getHeroVideoUploadUrl` → Worker `POST /api/admin/site-video/upload-url` → trình duyệt PUT (%) →
+  GAS `setHeroVideo(true, ảnh bìa)` kiểm `GET /api/admin/site-video`, ghi ảnh bìa
+  `html/images/site/heroposter.jpg` (CMS cắt khung hình giây ~1 bằng canvas, rộng ≤ 1280) rồi ghi
+  `settings.heroVideo = {v: "yyyyMMddHHmmss", poster, size}` — **áp dụng NGAY** (commit
+  settings.json luôn, không chờ "Lưu cài đặt"; `saveSettings` giữ nguyên `heroVideo` vì gộp từ bản
+  cũ). Xoá: `DELETE /api/admin/site-video` + bỏ `heroVideo` → trang chủ về ảnh.
+  Build (`patch_hero_video`): có `heroVideo.v` → `<figure class="hero-portrait hero-portrait--video">`
+  gồm dòng "Video giới thiệu về dautucungvu.com", khung 16:9 (`object-fit: contain`, video dọc bị
+  viền), `<video src="/api/site-video/hero/<v>" poster preload="none" playsinline>` (không ảnh bìa →
+  `preload="metadata"` + `#t=0.1`), nút play vàng tròn có vòng sáng; không có → dựng lại `<img>` từ
+  `images.hero`. Phát: `home.js` bấm play → hiện điều khiển + phát; hết video → về nút play.
+  Worker `GET /api/site-video/hero/<v>` CÔNG KHAI (không kiểm quyền), có Range; `<v>` chỉ để đổi URL.
 - Chỉ số thị trường + giá cổ phiếu: KHÔNG nhập trong CMS — lấy API thật (II.E). CMS chỉ quản
   danh sách mã hiển thị (`tickers`) và chỉ số hiển thị (`indices`: VNINDEX, VN30, HNX, UPCOM…).
 
@@ -400,7 +415,8 @@ reminded), `sessions` (SHA-256 token, 30 ngày), `email_tokens` (verify 24h / re
 confirmed / cancelled / expired; paid_reported_at, confirmed_by), `course_access`, `rate_limits`.
 Video KHÔNG có bảng D1 (II.C.2).
 
-**R2**: bucket `dautucungvu-videos` (private), khóa `courses/<course_id>/<lesson_slug>.mp4`.
+**R2**: bucket `dautucungvu-videos` (private), khóa `courses/<course_id>/<lesson_slug>.mp4`; video
+giới thiệu trang chủ `site/hero.mp4` (Worker phát công khai).
 
 **API công khai Worker** (`worker/src/account.js`; POST bắt buộc `content-type: application/json` +
 Origin đúng site — chống CSRF cùng cookie `dtcv_session` HttpOnly; Secure; SameSite=Lax):
@@ -408,12 +424,13 @@ Origin đúng site — chống CSRF cùng cookie `dtcv_session` HttpOnly; Secure
 (register/login/forgot qua Turnstile) · `GET|POST /api/orders` (xem / tạo — giá tính lại từ
 `assets/catalog.json`, cần đã xác minh email, đơn pending cùng gói thì trả lại đơn cũ) ·
 `POST /api/orders/paid {code}` (báo đã chuyển -> email Vũ 1 lần) · `GET /api/content/<slug>` ·
-`GET /api/market` · `GET /api/market/chart/<MÃ>/<5m|1D|1W|1M>` · `GET /api/video/<khóa>/<bài>` (II.C.4). Link trong email: `/tai-khoan/xac-minh-email/#<mã>`,
+`GET /api/site-video/hero/<v>` · `GET /api/market` · `GET /api/market/chart/<MÃ>/<5m|1D|1W|1M>` · `GET /api/video/<khóa>/<bài>` (II.C.4). Link trong email: `/tai-khoan/xac-minh-email/#<mã>`,
 `/tai-khoan/dat-lai-mat-khau/#<mã>` (mã sau `#`: không lên máy chủ / log; trang xoá khỏi URL ngay).
 
 **API admin Worker** (`worker/src/admin.js` + `index.js`; GAS gọi qua `UrlFetchApp`, header
 `Authorization: Bearer <WORKER_ADMIN_KEY>` + `X-Admin-Email`): `GET /ping` ·
 `GET|PUT|DELETE /articles/<slug>` · `POST /videos/upload-url` · `GET|DELETE /videos/<course>/<lesson>` · `DELETE /videos/<course>` ·
+`POST /site-video/upload-url` · `GET|DELETE /site-video` (video giới thiệu trang chủ) ·
 `GET /orders` (500 gần nhất) · `POST /orders/<id>/confirm|cancel` · `POST /grant` (kích hoạt tay) ·
 `GET /users` · `POST /users/<id>/vip|extend|set-until|send-reset|lock|revoke-course` ·
 `GET /courses/<id>/sales` (số người sở hữu — chặn xoá khóa). Tiền tố đều là `/api/admin`.

@@ -121,6 +121,104 @@
   color: var(--gold-400);
 }
 
+/* Banner: video giới thiệu thay ảnh chân dung (CMS tải lên, build sinh — scripts/build.py) */
+.hero-portrait--video {
+  width: min(580px, 100%);
+  gap: 14px;
+}
+.hero-portrait--video::before {
+  inset: 12% -4% auto;
+  aspect-ratio: 16 / 9;
+}
+.hero-video-label {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-size: var(--fs-md);
+  font-weight: 700;
+  color: #fff;
+  letter-spacing: 0.01em;
+}
+.hero-video-label::before {
+  content: "";
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--gold-400);
+  box-shadow: 0 0 0 4px rgba(246, 198, 74, 0.22);
+}
+.hero-video {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  border-radius: 20px;
+  background: var(--navy-950);
+  box-shadow: 0 0 0 3px rgba(246, 198, 74, 0.55), 0 30px 60px -20px rgba(0, 0, 0, 0.6);
+}
+.hero-video video {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  background: var(--navy-950);
+}
+.hero-video::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at center, rgba(4, 13, 32, 0.15), rgba(4, 13, 32, 0.5));
+  pointer-events: none;
+  transition: opacity 0.25s;
+}
+.hero-play {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  display: grid;
+  place-items: center;
+  width: 100%;
+  border: 0;
+  background: none;
+  cursor: pointer;
+}
+.hero-play svg {
+  box-sizing: content-box;
+  width: 34px;
+  height: 34px;
+  padding: 24px 22px 24px 26px;
+  border-radius: 50%;
+  color: var(--navy-900);
+  background: var(--gold-400);
+  box-shadow: 0 0 0 10px rgba(246, 198, 74, 0.22), 0 14px 30px -8px rgba(0, 0, 0, 0.55);
+  transition: transform 0.2s, box-shadow 0.2s;
+  animation: hero-play-pulse 2.2s ease-out infinite;
+}
+.hero-play:hover svg,
+.hero-play:focus-visible svg {
+  transform: scale(1.08);
+  box-shadow: 0 0 0 14px rgba(246, 198, 74, 0.3), 0 18px 36px -8px rgba(0, 0, 0, 0.6);
+}
+.hero-play:focus-visible {
+  outline: none;
+}
+@keyframes hero-play-pulse {
+  0% { box-shadow: 0 0 0 0 rgba(246, 198, 74, 0.45), 0 14px 30px -8px rgba(0, 0, 0, 0.55); }
+  70% { box-shadow: 0 0 0 18px rgba(246, 198, 74, 0), 0 14px 30px -8px rgba(0, 0, 0, 0.55); }
+  100% { box-shadow: 0 0 0 0 rgba(246, 198, 74, 0), 0 14px 30px -8px rgba(0, 0, 0, 0.55); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .hero-play svg {
+    animation: none;
+  }
+}
+.hero-video.is-playing::after,
+.hero-video.is-playing .hero-play {
+  opacity: 0;
+  visibility: hidden;
+}
+
 /* Đặc quyền thành viên: nằm đè mép dưới hero */
 .privilege {
   position: relative;
@@ -296,6 +394,9 @@
   }
   .hero-portrait {
     width: min(320px, 80%);
+  }
+  .hero-portrait--video {
+    width: min(580px, 100%);
   }
   .privilege-card {
     grid-template-columns: auto minmax(0, 1fr);
