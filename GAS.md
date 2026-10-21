@@ -703,6 +703,9 @@ chưa có). Site vẫn là bản demo về chức năng:
 
 **GĐ5 — Video (≈ 2–3 ngày)**
 - [x] CMS tải video lên R2 kèm %, thay / xoá (CMS @7, 20/10).
+- [x] Video giới thiệu trang chủ thay ảnh chân dung (CMS @11, 21/10 — II.D). ⚠️ Đã thử trang chủ
+      (video mẫu ở R2 local, build, Chrome headless máy tính + điện thoại) và route Worker; CHƯA thử
+      luồng tải lên thật trong CMS (cần đăng nhập OTP).
 - [x] Worker `/api/video/...` kiểm quyền + `Range`; trình phát `<video>` mặc định (20/10). Đã thử
       production: bài có phí chưa đăng nhập 401, bài học thử qua quyền, khóa miễn phí 200 + Range 206
       đúng byte (file thử đặt tạm rồi xoá). CHƯA thử: đăng nhập nhưng chưa mua → 403 (logic đơn giản).
