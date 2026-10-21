@@ -239,7 +239,9 @@ Lưu chung `data/settings.json`:
 - Nguồn: **VPS** `bgapidatafeed.vps.com.vn/getliststockdata/<mã,...>` (giá khớp + tham chiếu, timeout
   3s) và **DNSE** `services.entrade.com.vn/chart-api/v2/ohlcs/{index|stock}` (điểm chỉ số = nến
   ngày cuối, thay đổi = so nến kế cuối; nến 5 phút cho biểu đồ trong phiên; nến ngày 100 ngày cho
-  biểu đồ 3 tháng). VPS lỗi -> giá cổ phiếu lấy từ DNSE (đã đối chiếu: khớp VPS). Mã chỉ số hỗ trợ:
+  biểu đồ 3 tháng). VPS lỗi -> giá cổ phiếu lấy từ DNSE (đã đối chiếu: khớp VPS). ⚠️ Nến ngày DNSE
+  CHƯA có phiên đang chạy -> trong phiên giá = nến 5 phút cuối, tham chiếu = đóng cửa nến ngày cuối
+  (sửa 21/10: trước đó VPS lỗi là site hiện giá hôm qua suốt phiên). Mã chỉ số hỗ trợ:
   VN-Index, VN30, HNX, UPCoM (bảng `INDEX_MAP`). TCBS bị chặn bot, KHÔNG dùng.
 - ⚠️ Gọi từ máy chủ Cloudflare: VPS chập chờn (colo SIN treo, HKG lúc được lúc không; endpoint
   chỉ số `getlistindexdetail` treo hẳn) dù gọi từ máy thường vẫn chạy; DNSE ổn định. Kiểm nguồn:

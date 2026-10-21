@@ -52,11 +52,27 @@ async function vpsStocks(codes) {
   });
 }
 
-/** Dự phòng: giá từ nến ngày DNSE (nến cuối = phiên hiện tại / gần nhất, kế cuối = phiên trước). */
+/** Dự phòng: giá từ DNSE. Nến ngày DNSE CHƯA có phiên đang chạy (chỉ có sau đóng cửa — đo 21/10)
+ * -> nếu nến 5 phút có ngày mới hơn nến ngày cuối: giá = nến 5 phút cuối, tham chiếu = đóng cửa
+ * nến ngày cuối, khối lượng = tổng nến 5 phút của ngày đó. Không thì giá = nến ngày cuối, tham
+ * chiếu = nến kế cuối (ngoài giờ / sau đóng cửa). Trước 21/10 chỉ dùng nến ngày -> trong phiên
+ * hiện giá hôm qua mỗi khi VPS lỗi. */
 async function dnseStocks(codes, to) {
+  const day = (sec) => new Date((sec + 7 * 3600) * 1000).toISOString().slice(0, 10);
   return Promise.all(codes.map(async (code) => {
-    const d = await getJson(`${DNSE}/stock?from=${to - 10 * 86400}&to=${to}&symbol=${code}&resolution=1D`);
-    const c = (d.c || []).map(Number), v = d.v || [];
+    const [d, m] = await Promise.all([
+      getJson(`${DNSE}/stock?from=${to - 10 * 86400}&to=${to}&symbol=${code}&resolution=1D`),
+      getJson(`${DNSE}/stock?from=${to - 3 * 86400}&to=${to}&symbol=${code}&resolution=5`).catch(() => ({})),
+    ]);
+    const c = (d.c || []).map(Number), v = d.v || [], t = d.t || [];
+    const mt = m.t || [], mc = (m.c || []).map(Number), mv = (m.v || []).map(Number);
+    const lastDay = t.length ? day(t[t.length - 1]) : "";
+    const today = mt.length ? day(mt[mt.length - 1]) : "";
+    if (today && today > lastDay && c.length) {
+      const price = round(mc[mc.length - 1], 2), ref = round(c[c.length - 1], 2);
+      const volume = mt.reduce((sum, s, i) => (day(s) === today ? sum + (mv[i] || 0) : sum), 0);
+      return { code, price, ref, change: round(((price - ref) / ref) * 100, 2), volume, source: "dnse" };
+    }
     if (c.length < 2) return null;
     const price = round(c[c.length - 1], 2), ref = round(c[c.length - 2], 2);
     return { code, price, ref, change: round(((price - ref) / ref) * 100, 2), volume: Number(v[v.length - 1]) || 0, source: "dnse" };
