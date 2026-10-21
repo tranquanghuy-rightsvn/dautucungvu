@@ -248,6 +248,9 @@ Lưu chung `data/settings.json`:
 - KHÔNG dùng Cron: làm mới khi có người xem. Từng phần lưu D1 `market_snapshots` (quotes: 30s trong
   phiên / 5 phút ngoài phiên; intraday: 2 / 30 phút; history: 6 giờ), cả response cache edge
   (30s / 5 phút). Nguồn lỗi -> trả bản D1 gần nhất + `stale: true`. Mọi `fetch` có timeout.
+  Mỗi bản D1 lưu kèm danh sách mã (`{sig, data}`): CMS thêm / bớt mã, chỉ số -> lấy lại ngay, không
+  chờ hết hạn (sửa 21/10: trước đó mã mới thêm trống biểu đồ 3 tháng tới 6 giờ). Mã mới có giá +
+  biểu đồ sau khi build/deploy xong + tối đa 5 phút cache edge.
 - Danh sách mã: build sinh `html/assets/market-symbols.json` từ `settings.tickers` / `indices`.
 - Site: `ui.js` tải `/api/market`, gộp vào `APP_DATA.indices/tickers`, bắn sự kiện `market:update`
   (news.js, dashboard.js vẽ lại), làm mới mỗi 60s trong giờ giao dịch; nhãn "Cập nhật lúc HH:mm"

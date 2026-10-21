@@ -114,21 +114,25 @@ async function fetchHistory(symbols) {
   return out;
 }
 
-/** Lấy 1 phần từ D1 nếu còn mới, không thì gọi nguồn; nguồn lỗi -> bản cũ + stale. */
-async function part(env, key, maxAgeMs, fetcher) {
+/** Lấy 1 phần từ D1 nếu còn mới VÀ cùng danh sách mã (sig), không thì gọi nguồn; nguồn lỗi ->
+ * bản cũ + stale. D1 lưu {sig, data}: CMS thêm / bớt mã -> sig đổi -> lấy lại ngay, không phải
+ * chờ hết hạn (history 6 giờ: mã mới thêm từng trống biểu đồ tới 6 giờ). */
+async function part(env, key, maxAgeMs, sig, fetcher) {
   const row = await env.DB.prepare("SELECT data, fetched_at FROM market_snapshots WHERE key = ?").bind(key).first();
+  const saved = row ? JSON.parse(row.data) : null;
   const age = row ? Date.now() - Date.parse(row.fetched_at) : Infinity;
-  if (row && age < maxAgeMs) return { data: JSON.parse(row.data), at: row.fetched_at, stale: false };
+  if (saved && saved.sig === sig && age < maxAgeMs) return { data: saved.data, at: row.fetched_at, stale: false };
   try {
     const data = await fetcher();
     const at = new Date().toISOString();
     await env.DB.prepare(
       "INSERT INTO market_snapshots (key, data, fetched_at) VALUES (?1, ?2, ?3) ON CONFLICT(key) DO UPDATE SET data = ?2, fetched_at = ?3"
-    ).bind(key, JSON.stringify(data), at).run();
+    ).bind(key, JSON.stringify({ sig, data }), at).run();
     return { data, at, stale: false };
   } catch (err) {
     console.warn("market: nguồn lỗi", key, String(err));
-    if (row) return { data: JSON.parse(row.data), at: row.fetched_at, stale: true };
+    // Bản lưu trước khi đổi định dạng {sig, data} (không có sig) vẫn dùng được làm dự phòng
+    if (saved) return { data: "sig" in saved ? saved.data : saved, at: row.fetched_at, stale: true };
     throw err;
   }
 }
@@ -147,10 +151,11 @@ async function buildMarket(env) {
   const symbols = await loadSymbols(env);
   const live = isTradingHours();
   const minute = 60 * 1000;
+  const sig = symbols.tickers.join(",") + "|" + symbols.indices.join(",");
   const [quotes, intraday, history] = await Promise.all([
-    part(env, "quotes", live ? 30 * 1000 : 5 * minute, () => fetchQuotes(symbols)),
-    part(env, "intraday", live ? 2 * minute : 30 * minute, () => fetchIntraday(symbols)),
-    part(env, "history", 6 * 60 * minute, () => fetchHistory(symbols)),
+    part(env, "quotes", live ? 30 * 1000 : 5 * minute, sig, () => fetchQuotes(symbols)),
+    part(env, "intraday", live ? 2 * minute : 30 * minute, sig, () => fetchIntraday(symbols)),
+    part(env, "history", 6 * 60 * minute, sig, () => fetchHistory(symbols)),
   ]);
   const ti = quotes.data.tickers.reduce((m, t) => ((m[t.code] = t), m), {});
   return {
