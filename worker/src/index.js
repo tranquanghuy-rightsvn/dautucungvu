@@ -4,7 +4,7 @@
 import { json, requireAdmin, HttpError } from "./http.js";
 import { streamObject } from "./r2.js";
 import { presignPut } from "./presign.js";
-import { handleMarket } from "./market.js";
+import { handleMarket, handleChart } from "./market.js";
 import { handleAccount } from "./account.js";
 import { handleAdmin } from "./admin.js";
 import { runDaily } from "./cron.js";
@@ -26,6 +26,10 @@ async function route(request, env, ctx) {
   // GET /api/market — chỉ số + giá cổ phiếu thật (GAS.md II.E)
   if (parts[0] === "market" && parts.length === 1 && method === "GET") {
     return handleMarket(request, env, ctx);
+  }
+  // GET /api/market/chart/<MÃ>/<5m|1D|1W|1M> — nến 1 mã cho biểu đồ trang Tin tức
+  if (parts[0] === "market" && parts[1] === "chart" && parts.length === 4 && method === "GET") {
+    return handleChart(request, env, ctx, parts[2].toUpperCase(), parts[3]);
   }
 
   // ----- Người dùng website: /api/me, /api/auth/*, /api/orders, /api/content/<slug> (GAS.md VI) -----

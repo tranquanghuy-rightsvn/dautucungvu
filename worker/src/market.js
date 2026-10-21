@@ -184,3 +184,107 @@ export async function handleMarket(request, env, ctx) {
   ctx.waitUntil(cache.put(key, res.clone()));
   return res;
 }
+
+/* ---------- Biểu đồ nến 1 mã (trang Tin tức, khi bấm mã) ----------
+   GET /api/market/chart/<MÃ>/<5m|1D|1W|1M>. Chỉ tải khi người xem bấm mã (không gộp vào
+   /api/market: toàn bộ lịch sử mọi mã quá nặng). Nguồn DNSE: nến ngày có từ 2012 (giá đã điều
+   chỉnh cổ tức / chia tách), nến 5 phút ~1 tháng. DNSE không có nến tháng, nến tuần chỉ từ 2021
+   -> tuần / tháng tự gộp từ nến ngày. Mỗi mã lưu D1 2 bản: chart:<MÃ>:1D (toàn bộ nến ngày),
+   chart:<MÃ>:5m. Thời gian trả về theo giờ Việt Nam: ngày "YYYY-MM-DD"; nến 5 phút là số giây
+   đã cộng 7 giờ (thư viện biểu đồ hiển thị theo UTC). */
+const CHART_TF = ["5m", "1D", "1W", "1M"];
+const VN = 7 * 3600;
+const vnDate = (sec) => new Date((sec + VN) * 1000).toISOString().slice(0, 10);
+
+async function dnseOhlc(code, resolution, fromSec) {
+  const d = await getJson(`${DNSE}/stock?from=${fromSec}&to=${Math.floor(Date.now() / 1000)}&symbol=${code}&resolution=${resolution}`);
+  const t = d.t || [];
+  return { t, o: (d.o || []).map(Number), h: (d.h || []).map(Number), l: (d.l || []).map(Number), c: (d.c || []).map(Number), v: (d.v || []).map(Number) };
+}
+
+/** Gộp nến ngày (t = "YYYY-MM-DD") theo khoá kỳ (tuần: ngày thứ Hai, tháng: ngày 01). */
+function groupBars(d, keyOf) {
+  const out = { t: [], o: [], h: [], l: [], c: [], v: [] };
+  d.t.forEach((day, i) => {
+    const k = keyOf(day), n = out.t.length - 1;
+    if (n >= 0 && out.t[n] === k) {
+      out.h[n] = Math.max(out.h[n], d.h[i]);
+      out.l[n] = Math.min(out.l[n], d.l[i]);
+      out.c[n] = d.c[i];
+      out.v[n] += d.v[i];
+    } else {
+      out.t.push(k); out.o.push(d.o[i]); out.h.push(d.h[i]); out.l.push(d.l[i]); out.c.push(d.c[i]); out.v.push(d.v[i]);
+    }
+  });
+  return out;
+}
+const mondayOf = (day) => {
+  const d = new Date(day + "T00:00:00Z");
+  d.setUTCDate(d.getUTCDate() - ((d.getUTCDay() + 6) % 7));
+  return d.toISOString().slice(0, 10);
+};
+
+function chart5m(env, code, live) {
+  return part(env, "chart:" + code + ":5m", live ? 60 * 1000 : 30 * 60 * 1000, "v1", async () => {
+    const d = await dnseOhlc(code, "5", Math.floor(Date.now() / 1000) - 31 * 86400);
+    return { ...d, t: d.t.map((s) => s + VN) };
+  });
+}
+
+function chart1D(env, code, live) {
+  return part(env, "chart:" + code + ":1D", live ? 2 * 60 * 1000 : 30 * 60 * 1000, "v1", async () => {
+    const d = await dnseOhlc(code, "1D", 0);
+    // Mỗi ngày 1 nến (DNSE có thể trả giờ khác nhau trong ngày) — giữ nến sau cùng của ngày
+    const out = { t: [], o: [], h: [], l: [], c: [], v: [] };
+    d.t.forEach((s, i) => {
+      const day = vnDate(s), n = out.t.length - 1;
+      const at = n >= 0 && out.t[n] === day ? n : out.t.push(day) - 1;
+      out.o[at] = d.o[i]; out.h[at] = d.h[i]; out.l[at] = d.l[i]; out.c[at] = d.c[i]; out.v[at] = d.v[i];
+    });
+    return out;
+  });
+}
+
+async function buildChart(env, code, tf) {
+  const live = isTradingHours();
+  if (tf === "5m") {
+    const p = await chart5m(env, code, live);
+    return { code, tf, live, updated_at: p.at, stale: p.stale, ...p.data };
+  }
+  const [p, p5] = await Promise.all([chart1D(env, code, live), chart5m(env, code, live).catch(() => null)]);
+  // DNSE chỉ có nến ngày của phiên hôm nay sau khi đóng cửa -> gộp nến 5 phút các ngày mới hơn
+  // nến ngày cuối (đã đối chiếu 20/10: gộp 5 phút khớp đúng O/H/L/C/V nến ngày DNSE)
+  const daily = { t: p.data.t.slice(), o: p.data.o.slice(), h: p.data.h.slice(), l: p.data.l.slice(), c: p.data.c.slice(), v: p.data.v.slice() };
+  if (p5) {
+    const last = daily.t[daily.t.length - 1] || "";
+    const extra = groupBars({ ...p5.data, t: p5.data.t.map((s) => new Date(s * 1000).toISOString().slice(0, 10)) }, (d) => d);
+    extra.t.forEach((day, i) => {
+      if (day <= last) return;
+      daily.t.push(day); daily.o.push(extra.o[i]); daily.h.push(extra.h[i]); daily.l.push(extra.l[i]); daily.c.push(extra.c[i]); daily.v.push(extra.v[i]);
+    });
+  }
+  const data = tf === "1W" ? groupBars(daily, mondayOf) : tf === "1M" ? groupBars(daily, (d) => d.slice(0, 8) + "01") : daily;
+  const at = p5 && p5.at > p.at ? p5.at : p.at;
+  return { code, tf, live, updated_at: at, stale: p.stale || !!(p5 && p5.stale), ...data };
+}
+
+/** GET /api/market/chart/<MÃ>/<khung> — cache edge 60s trong phiên / 10 phút ngoài phiên. */
+export async function handleChart(request, env, ctx, code, tf) {
+  const symbols = await loadSymbols(env);
+  if (!symbols.tickers.includes(code) || !CHART_TF.includes(tf)) {
+    return new Response(JSON.stringify({ error: "Không có biểu đồ cho mã / khung này" }), { status: 404, headers: { "content-type": "application/json; charset=utf-8" } });
+  }
+  const cache = caches.default;
+  const key = new Request(new URL(`/api/market/chart/${code}/${tf}`, request.url).toString(), { method: "GET" });
+  const hit = await cache.match(key);
+  if (hit) return hit;
+  const body = await buildChart(env, code, tf);
+  const res = new Response(JSON.stringify(body), {
+    headers: {
+      "content-type": "application/json; charset=utf-8",
+      "cache-control": "public, max-age=" + (body.live ? 60 : 600),
+    },
+  });
+  ctx.waitUntil(cache.put(key, res.clone()));
+  return res;
+}

@@ -255,6 +255,21 @@ Lưu chung `data/settings.json`:
 - Site: `ui.js` tải `/api/market`, gộp vào `APP_DATA.indices/tickers`, bắn sự kiện `market:update`
   (news.js, dashboard.js vẽ lại), làm mới mỗi 60s trong giờ giao dịch; nhãn "Cập nhật lúc HH:mm"
   (thêm "(chưa lấy được số mới)" khi stale). Chưa có số -> hiện "—". `data/market-demo.json` đã xoá.
+- **Biểu đồ nến khi bấm mã** (trang Tin tức, yêu cầu Vũ 21/10): `GET /api/market/chart/<MÃ>/<5m|1D|1W|1M>`
+  (`handleChart` trong `market.js`; mã phải có trong `market-symbols.json`, khác -> 404). Trả
+  `{code, tf, live, updated_at, stale, t[], o[], h[], l[], c[], v[]}`; `t` ngày "YYYY-MM-DD", nến 5
+  phút là giây đã cộng 7 giờ (thư viện hiển thị UTC -> ra giờ VN). Nguồn DNSE: nến ngày TOÀN BỘ
+  lịch sử (`from=0`, cổ phiếu có từ 20/03/2012, giá đã điều chỉnh), nến 5 phút 31 ngày. DNSE
+  KHÔNG có nến tháng, nến tuần chỉ từ 2021 -> tuần (khoá = thứ Hai) / tháng tự gộp từ nến ngày.
+  DNSE chưa có nến ngày của phiên đang chạy -> gộp nến 5 phút của các ngày mới hơn nến ngày cuối
+  (đối chiếu 21/10: khớp đúng O/H/L/C/V). D1 2 bản / mã: `chart:<MÃ>:1D` (2 / 30 phút),
+  `chart:<MÃ>:5m` (1 / 30 phút); cache edge 60s / 10 phút.
+  Site (`news.js`): khung `[data-chart]` dưới thẻ giá, trên danh sách tin; nút 5 phút / Ngày /
+  Tuần / Tháng + "Xem toàn bộ"; nến + khối lượng (ô riêng bên dưới) + MA20 (cam) / MA50 (tím);
+  dòng chú thích O/H/L/C/KL/MA theo nến dưới con trỏ; trong phiên tự làm mới 60s, giữ vùng đang
+  xem. Thư viện **TradingView Lightweight Charts 5.2.0** tự host `html/vendor/lightweight-charts/`
+  (Apache 2.0 — giữ logo TradingView trên biểu đồ theo điều kiện giấy phép), chỉ tải khi bấm mã.
+  Thẻ giá bỏ đường giá 3 tháng nhỏ (trùng biểu đồ lớn); Dashboard vẫn dùng `history` 3 tháng.
 
 ---
 
@@ -344,6 +359,7 @@ Không chạy trên GAS. GAS chỉ là giao diện quản trị gọi API admin 
 | `html/images/news/<slug>/…`, `html/images/courses/<id>/cover.jpg`, `html/images/site/<hero\|brand\|favicon\|og>.jpg` | Ảnh do CMS ghi |
 | `html/assets/market-symbols.json` | **SINH** bởi build: danh sách mã + chỉ số cho Worker `/api/market` |
 | `html/vendor/tinymce/` | TinyMCE tự host |
+| `html/vendor/lightweight-charts/` | TradingView Lightweight Charts 5.2.0 (biểu đồ nến trang Tin tức) + LICENSE |
 | `html/admin/index.html` | Trang nhúng iframe CMS (mẫu xevip) |
 | `html/assets/js/data.js` | **SINH** bởi build từ `data/` (đúng cấu trúc `window.APP_DATA` cũ) — không sửa tay |
 | `html/404.html` | Trang 404 (sửa tay) |
@@ -390,7 +406,7 @@ Origin đúng site — chống CSRF cùng cookie `dtcv_session` HttpOnly; Secure
 (register/login/forgot qua Turnstile) · `GET|POST /api/orders` (xem / tạo — giá tính lại từ
 `assets/catalog.json`, cần đã xác minh email, đơn pending cùng gói thì trả lại đơn cũ) ·
 `POST /api/orders/paid {code}` (báo đã chuyển -> email Vũ 1 lần) · `GET /api/content/<slug>` ·
-`GET /api/market` · `GET /api/video/<khóa>/<bài>` (II.C.4). Link trong email: `/tai-khoan/xac-minh-email/#<mã>`,
+`GET /api/market` · `GET /api/market/chart/<MÃ>/<5m|1D|1W|1M>` · `GET /api/video/<khóa>/<bài>` (II.C.4). Link trong email: `/tai-khoan/xac-minh-email/#<mã>`,
 `/tai-khoan/dat-lai-mat-khau/#<mã>` (mã sau `#`: không lên máy chủ / log; trang xoá khỏi URL ngay).
 
 **API admin Worker** (`worker/src/admin.js` + `index.js`; GAS gọi qua `UrlFetchApp`, header

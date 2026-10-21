@@ -1,6 +1,6 @@
 /* Trang tin tức: lọc theo mã cổ phiếu, chủ đề hoặc từ khóa; mới nhất lên đầu */
 (function () {
-  const { icon, fmt, norm, Charts, store, toast, escapeHtml, newsItem, newsSorted, tagLabel, newsUrl } = UI;
+  const { icon, fmt, norm, Charts, store, toast, escapeHtml, newsItem, newsSorted, tagLabel, newsUrl, url, Market } = UI;
   const D = APP_DATA;
   const PAGE = 6;
   const FKEY = "dtcv-follow";
@@ -19,6 +19,7 @@
   const listEl = $("[data-ticker-list]");
   const topicsEl = $("[data-topics]");
   const quoteEl = $("[data-quote]");
+  const chartEl = $("[data-chart]");
   const titleEl = $("[data-news-title]");
   const countEl = $("[data-news-count]");
   const chipsEl = $("[data-active-filters]");
@@ -86,18 +87,193 @@
     quoteEl.hidden = !t;
     followBtn.hidden = !t;
     if (!t) return;
-    const color = t.change >= 0 ? "#16a34a" : "#e0393e";
     const diff = t.price - t.ref;
-    const hist = t.history || [];
     quoteEl.innerHTML =
       '<div class="quote-logo" style="background:' + t.color + '">' + t.code + "</div>" +
       "<div><h3>" + t.code + ' <span class="badge badge--soft">' + t.sector + '</span></h3><p class="co">' + t.name + "</p>" +
-      '<div class="quote-price"><strong class="num">' + fmt.price(t.price) + '</strong><span class="num ' + fmt.cls(t.change) + '">' + fmt.pct(t.change) + (isFinite(diff) ? " (" + (diff >= 0 ? "+" : "") + fmt.int(Math.round(diff * 1000)) + ")" : "") + "</span></div></div>" +
-      '<div class="quote-spark" aria-label="Diễn biến giá 3 tháng">' + (hist.length > 1 ? Charts.spark(hist, { w: 300, h: 64, color }) : "") + "</div>";
+      '<div class="quote-price"><strong class="num">' + fmt.price(t.price) + '</strong><span class="num ' + fmt.cls(t.change) + '">' + fmt.pct(t.change) + (isFinite(diff) ? " (" + (diff >= 0 ? "+" : "") + fmt.int(Math.round(diff * 1000)) + ")" : "") + "</span></div></div>";
     const on = follows.includes(t.code);
     followBtn.setAttribute("aria-pressed", on);
     followBtn.innerHTML = icon(on ? "check" : "plus") + "<span>" + (on ? "Đang theo dõi" : "Theo dõi " + t.code) + "</span>";
   }
+
+  /* ----- Biểu đồ nến khi đang lọc theo mã: 5 phút (~1 tháng) / ngày / tuần / tháng (toàn bộ
+     lịch sử từ 2012), khối lượng + MA20 / MA50. Dữ liệu /api/market/chart/<MÃ>/<khung> chỉ tải khi
+     bấm mã; thư viện TradingView Lightweight Charts (tự host, giấy phép Apache 2.0 — giữ logo
+     TradingView theo điều kiện giấy phép) cũng chỉ tải khi cần. ----- */
+  const TFS = [
+    { id: "5m", label: "5 phút", show: 150 },
+    { id: "1D", label: "Ngày", show: 130 },
+    { id: "1W", label: "Tuần", show: 110 },
+    { id: "1M", label: "Tháng", show: 0 }, // 0 = vừa khung toàn bộ lịch sử
+  ];
+  const MAS = [{ n: 20, color: "#f08a1c" }, { n: 50, color: "#7c3aed" }];
+  const UP = "#16a34a", DOWN = "#e0393e";
+  const chartState = { code: "", tf: "1D", chart: null, candle: null, vol: null, ma: [], bars: [], req: 0 };
+  const chartCache = {}; // "MÃ/khung" -> {at, data}: bấm qua lại giữa các khung không tải lại
+  let libPromise = null;
+
+  function loadLib() {
+    if (window.LightweightCharts) return Promise.resolve();
+    libPromise = libPromise || new Promise((resolve, reject) => {
+      const s = document.createElement("script");
+      s.src = url("vendor/lightweight-charts/lightweight-charts.standalone.production.js");
+      s.onload = resolve;
+      s.onerror = () => { libPromise = null; reject(new Error("không tải được thư viện biểu đồ")); };
+      document.head.appendChild(s);
+    });
+    return libPromise;
+  }
+
+  function fetchChart(code, tf, fresh) {
+    const k = code + "/" + tf, c = chartCache[k];
+    if (!fresh && c && Date.now() - c.at < 60000) return Promise.resolve(c.data);
+    return fetch(url("api/market/chart/" + code + "/" + tf), { headers: { accept: "application/json" } })
+      .then((r) => (r.ok ? r.json() : Promise.reject(new Error("HTTP " + r.status))))
+      .then((d) => ((chartCache[k] = { at: Date.now(), data: d }), d));
+  }
+
+  function chartShell() {
+    chartEl.innerHTML =
+      '<div class="chart-head"><div class="tabs" role="tablist" aria-label="Khung thời gian mỗi nến">' +
+      TFS.map((f) => '<button type="button" class="tab" role="tab" data-tf="' + f.id + '" aria-selected="' + (f.id === chartState.tf) + '">' + f.label + "</button>").join("") +
+      '</div><button type="button" class="link-more" data-chart-all>Xem toàn bộ</button></div>' +
+      '<div class="chart-legend num" data-chart-legend></div>' +
+      '<div class="chart-box" data-chart-box><p class="chart-msg" data-chart-msg>Đang tải biểu đồ…</p></div>' +
+      '<p class="data-note chart-note" data-chart-note></p>';
+  }
+
+  function createChart() {
+    const LC = window.LightweightCharts;
+    const box = chartEl.querySelector("[data-chart-box]");
+    const chart = LC.createChart(box, {
+      autoSize: true,
+      layout: { background: { color: "#ffffff" }, textColor: "#3b4860", fontFamily: getComputedStyle(document.body).fontFamily, fontSize: 12, attributionLogo: true },
+      grid: { vertLines: { color: "#eef2f7" }, horzLines: { color: "#eef2f7" } },
+      rightPriceScale: { borderColor: "#e2e8f1", scaleMargins: { top: 0.08, bottom: 0.06 } },
+      // minBarSpacing nhỏ để "Xem toàn bộ" vừa cả ~3.600 nến ngày từ 2012 (mặc định 0,5px/nến)
+      timeScale: { borderColor: "#e2e8f1", rightOffset: 4, minBarSpacing: 0.05 },
+      crosshair: { mode: LC.CrosshairMode.Normal },
+      localization: { locale: "vi-VN", dateFormat: "dd/MM/yyyy" },
+    });
+    chartState.chart = chart;
+    const priceFormat = { type: "custom", formatter: fmt.index, minMove: 0.01 };
+    chartState.candle = chart.addSeries(LC.CandlestickSeries, { priceFormat, upColor: UP, downColor: DOWN, wickUpColor: UP, wickDownColor: DOWN, borderVisible: false });
+    // Khối lượng ở ô riêng bên dưới (ô 1) — chung trục giá thì trục hiện cả số âm ở vùng khối lượng
+    chartState.vol = chart.addSeries(LC.HistogramSeries, { priceFormat: { type: "custom", formatter: volShort, minMove: 1 }, lastValueVisible: false, priceLineVisible: false }, 1);
+    chart.panes()[0].setStretchFactor(0.78);
+    chart.panes()[1].setStretchFactor(0.22);
+    chartState.ma = MAS.map((m) => chart.addSeries(LC.LineSeries, { color: m.color, lineWidth: 1, priceFormat, priceLineVisible: false, lastValueVisible: false, crosshairMarkerVisible: false }));
+    chart.subscribeCrosshairMove((p) => renderLegend(p && p.time !== undefined ? chartState.bars.findIndex((b) => b.time === p.time) : -1));
+  }
+
+  // Trục khối lượng: 1.250.000 -> "1,25 tr", 3.400 -> "3,4 N"
+  function volShort(v) {
+    const a = Math.abs(v);
+    const f = (x, u) => Number(x.toFixed(x < 10 ? 2 : x < 100 ? 1 : 0)).toLocaleString("vi-VN") + " " + u;
+    return a >= 1e9 ? f(v / 1e9, "tỷ") : a >= 1e6 ? f(v / 1e6, "tr") : a >= 1e3 ? f(v / 1e3, "N") : String(Math.round(v));
+  }
+
+  // Trung bình giá đóng cửa n nến gần nhất (chỉ từ nến thứ n trở đi)
+  function sma(bars, n) {
+    const out = [];
+    let sum = 0;
+    bars.forEach((b, i) => {
+      sum += b.close;
+      if (i >= n) sum -= bars[i - n].close;
+      if (i >= n - 1) out.push({ time: b.time, value: sum / n });
+    });
+    return out;
+  }
+
+  function renderLegend(i) {
+    const el = chartEl.querySelector("[data-chart-legend]");
+    const bars = chartState.bars;
+    if (!el || !bars.length) return;
+    if (i < 0) i = bars.length - 1;
+    const b = bars[i];
+    const when = typeof b.time === "number"
+      ? new Date(b.time * 1000).toISOString().replace(/^(\d{4})-(\d{2})-(\d{2})T(\d{2}:\d{2}).*/, "$3/$2/$1 $4")
+      : fmt.date(b.time);
+    const cls = b.close >= b.open ? "up" : "down";
+    const ma = MAS.map((m, j) => {
+      const v = i >= m.n - 1 ? chartState.maData[j][i - m.n + 1].value : NaN;
+      return '<span style="color:' + m.color + '">MA' + m.n + " " + fmt.index(v) + "</span>";
+    }).join("");
+    el.innerHTML =
+      "<b>" + chartState.code + "</b><span>" + when + "</span>" +
+      '<span>Mở <b class="' + cls + '">' + fmt.index(b.open) + '</b></span><span>Cao <b class="' + cls + '">' + fmt.index(b.high) + "</b></span>" +
+      '<span>Thấp <b class="' + cls + '">' + fmt.index(b.low) + '</b></span><span>Đóng <b class="' + cls + '">' + fmt.index(b.close) + "</b></span>" +
+      "<span>KL <b>" + fmt.int(chartState.vols[i]) + "</b></span>" + ma;
+  }
+
+  function showRange(all) {
+    const ts = chartState.chart.timeScale();
+    const f = TFS.find((x) => x.id === chartState.tf);
+    const n = chartState.bars.length;
+    if (all || !f.show || n <= f.show) ts.fitContent();
+    else ts.setVisibleLogicalRange({ from: n - f.show, to: n + 4 });
+  }
+
+  function setChartMsg(text) {
+    const m = chartEl.querySelector("[data-chart-msg]");
+    if (m) { m.textContent = text; m.hidden = !text; }
+  }
+
+  // keep = giữ nguyên vùng đang xem (làm mới định kỳ trong phiên)
+  function loadChart(keep, fresh) {
+    const { code, tf } = chartState;
+    const req = ++chartState.req;
+    if (!keep) setChartMsg("Đang tải biểu đồ…");
+    return Promise.all([loadLib(), fetchChart(code, tf, fresh)])
+      .then(([, d]) => {
+        if (req !== chartState.req) return; // người xem đã bấm mã / khung khác
+        if (!chartState.chart) createChart();
+        const bars = d.t.map((t, i) => ({ time: t, open: d.o[i], high: d.h[i], low: d.l[i], close: d.c[i] }));
+        const range = keep ? chartState.chart.timeScale().getVisibleLogicalRange() : null;
+        chartState.bars = bars;
+        chartState.vols = d.v;
+        chartState.maData = MAS.map((m) => sma(bars, m.n));
+        chartState.candle.setData(bars);
+        chartState.vol.setData(bars.map((b, i) => ({ time: b.time, value: d.v[i], color: b.close >= b.open ? "rgba(22,163,74,.45)" : "rgba(224,57,62,.45)" })));
+        chartState.ma.forEach((s, j) => s.setData(chartState.maData[j]));
+        chartState.chart.applyOptions({ timeScale: { timeVisible: tf === "5m", secondsVisible: false } });
+        if (range) chartState.chart.timeScale().setVisibleLogicalRange(range);
+        else showRange(false);
+        renderLegend(-1);
+        setChartMsg(bars.length ? "" : "Chưa có dữ liệu cho khung này");
+        const hm = new Date(d.updated_at).toLocaleTimeString("vi-VN", { hour: "2-digit", minute: "2-digit", timeZone: "Asia/Ho_Chi_Minh" });
+        chartEl.querySelector("[data-chart-note]").innerHTML =
+          icon("info") + "Giá nghìn đồng, đã điều chỉnh cổ tức / chia tách. Cập nhật lúc " + hm + (d.stale ? " (chưa lấy được số mới)" : "") + ". Kéo để xem lịch sử, cuộn hoặc chụm 2 ngón để phóng to.";
+      })
+      .catch((e) => {
+        if (req !== chartState.req) return;
+        console.warn("[chart]", e);
+        if (!keep) setChartMsg("Chưa tải được biểu đồ, vui lòng thử lại sau.");
+      });
+  }
+
+  function renderChart() {
+    chartEl.hidden = !state.ticker;
+    if (!state.ticker || state.ticker === chartState.code) return;
+    chartState.code = state.ticker;
+    if (!chartEl.firstChild) chartShell();
+    loadChart(false);
+  }
+
+  chartEl.addEventListener("click", (e) => {
+    const b = e.target.closest("[data-tf]");
+    if (b && b.dataset.tf !== chartState.tf) {
+      chartState.tf = b.dataset.tf;
+      chartEl.querySelectorAll("[data-tf]").forEach((x) => x.setAttribute("aria-selected", x === b));
+      loadChart(false);
+    }
+    if (e.target.closest("[data-chart-all]") && chartState.chart) showRange(true);
+  });
+  // Trong giờ giao dịch: làm mới nến mỗi 60s (giữ vùng đang xem)
+  setInterval(() => {
+    if (chartState.chart && !chartEl.hidden && Market.live && document.visibilityState === "visible") loadChart(true, true);
+  }, 60000);
 
   /* ----- Tiêu đề, bộ lọc đang áp dụng, danh sách bài ----- */
   function renderNews() {
@@ -132,6 +308,7 @@
     renderTopics();
     renderTickers();
     renderQuote();
+    renderChart();
     renderNews();
     // Địa chỉ là trang tĩnh của mã (ưu tiên) hoặc chủ đề đang lọc; từ khóa không đưa lên URL
     const href = newsUrl(state.ticker || state.tag);
