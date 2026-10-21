@@ -432,8 +432,8 @@ window.APP_DATA = {
       "openUrl": "https://www.vps.com.vn",
       "refCode": "",
       "transferUrl": "",
-      "transferCode": "",
-      "openVideo": "",
+      "transferCode": "BB80",
+      "openVideo": "https://youtu.be/M4ewTyYz9pk?si=l6olAlLeAA7i9vT8",
       "transferVideo": ""
     },
     {
