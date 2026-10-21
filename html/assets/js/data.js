@@ -121,6 +121,12 @@ window.APP_DATA = {
       "name": "CTCP Cơ điện lạnh",
       "sector": "Điện",
       "color": "#0369a1"
+    },
+    {
+      "code": "SJD",
+      "name": "CTCP Thủy Điện Cần Đơn",
+      "sector": "Điện",
+      "color": "#1e3a8a"
     }
   ],
   "courses": [
