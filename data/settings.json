@@ -223,12 +223,6 @@
       "color": "#1e3a8a"
     },
     {
-      "code": "SSI",
-      "name": "CTCP Chứng khoán SSI",
-      "sector": "Chứng khoán",
-      "color": "#1e3a8a"
-    },
-    {
       "code": "VCB",
       "name": "Ngân hàng TMCP Ngoại thương Việt Nam",
       "sector": "Ngân hàng",
@@ -268,12 +262,6 @@
       "code": "VHM",
       "name": "CTCP Vinhomes",
       "sector": "Bất động sản",
-      "color": "#1e3a8a"
-    },
-    {
-      "code": "STB",
-      "name": "Ngân hàng TMCP Sài Gòn Thương Tín",
-      "sector": "Ngân hàng",
       "color": "#1e3a8a"
     },
     {
@@ -928,6 +916,474 @@
       "code": "YTC",
       "name": "CTCP Xuất nhập khẩu Y tế Thành phố Hồ Chí Minh",
       "sector": "Chăm sóc sức khỏe",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "TPB",
+      "name": "Ngân Hàng TMCP Tiên Phong",
+      "sector": "Ngân hàng",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "SHB",
+      "name": "Ngân hàng TMCP Sài Gòn - Hà Nội",
+      "sector": "Ngân hàng",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "EIB",
+      "name": "Ngân hàng TMCP Xuất Nhập Khẩu Việt Nam",
+      "sector": "Ngân hàng",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "HDB",
+      "name": "Ngân hàng TMCP Phát triển Thành phố Hồ Chí Minh",
+      "sector": "Ngân hàng",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "CTG",
+      "name": "Ngân hàng TMCP Công Thương Việt Nam",
+      "sector": "Ngân hàng",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "MSB",
+      "name": "Ngân hàng TMCP Hàng Hải Việt Nam",
+      "sector": "Ngân hàng",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "VIB",
+      "name": "Ngân hàng TMCP Quốc tế Việt Nam",
+      "sector": "Ngân hàng",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "VPB",
+      "name": "Ngân hàng TMCP Việt Nam Thịnh Vượng",
+      "sector": "Ngân hàng",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "ACB",
+      "name": "Ngân hàng TMCP Á Châu",
+      "sector": "Ngân hàng",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "BID",
+      "name": "Ngân hàng TMCP Đầu tư và Phát triển Việt Nam",
+      "sector": "Ngân hàng",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "STB",
+      "name": "Ngân hàng TMCP Sài Gòn Tài Lộc",
+      "sector": "Ngân hàng",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "NAB",
+      "name": "Ngân hàng TMCP Nam Á",
+      "sector": "Ngân hàng",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "OCB",
+      "name": "Ngân hàng TMCP Phương Đông",
+      "sector": "Ngân hàng",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "SSB",
+      "name": "Ngân hàng TMCP Đông Nam Á",
+      "sector": "Ngân hàng",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "EVF",
+      "name": "Công ty Tài chính Tổng hợp Cổ phần Điện lực",
+      "sector": "Ngân hàng",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "LPB",
+      "name": "Ngân hàng TMCP Lộc Phát Việt Nam",
+      "sector": "Ngân hàng",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "NVB",
+      "name": "Ngân hàng TMCP Quốc Dân",
+      "sector": "Ngân hàng",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "BVB",
+      "name": "Ngân hàng TMCP Bản Việt",
+      "sector": "Ngân hàng",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "ABB",
+      "name": "Ngân hàng TMCP An Bình",
+      "sector": "Ngân hàng",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "PCB",
+      "name": "Ngân hàng TMCP Đại Chúng Việt Nam",
+      "sector": "Ngân hàng",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "VAB",
+      "name": "Ngân hàng TMCP Việt Á",
+      "sector": "Ngân hàng",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "KLB",
+      "name": "Ngân hàng TMCP Kiên Long",
+      "sector": "Ngân hàng",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "PGB",
+      "name": "Ngân hàng TMCP Thịnh vượng và Phát triển",
+      "sector": "Ngân hàng",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "TIN",
+      "name": "Công ty Tài chính Tổng hợp Cổ phần Tín Việt",
+      "sector": "Ngân hàng",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "VBB",
+      "name": "Ngân hàng TMCP Việt Nam Thương Tín",
+      "sector": "Ngân hàng",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "SGB",
+      "name": "Ngân hàng TMCP Sài Gòn Công thương",
+      "sector": "Ngân hàng",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "BAB",
+      "name": "Ngân hàng TMCP Bắc Á",
+      "sector": "Ngân hàng",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "VIX",
+      "name": "CTCP Chứng khoán VIX",
+      "sector": "Ngân hàng đầu tư - Dịch vụ môi giới",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "SSI",
+      "name": "CTCP Chứng khoán SSI",
+      "sector": "Ngân hàng đầu tư - Dịch vụ môi giới",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "SHS",
+      "name": "CTCP Chứng khoán Sài Gòn - Hà Nội",
+      "sector": "Ngân hàng đầu tư - Dịch vụ môi giới",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "VCI",
+      "name": "CTCP Chứng Khoán Vietcap",
+      "sector": "Ngân hàng đầu tư - Dịch vụ môi giới",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "TCX",
+      "name": "CTCP Chứng khoán Kỹ thương",
+      "sector": "Ngân hàng đầu tư - Dịch vụ môi giới",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "ORS",
+      "name": "CTCP Chứng khoán Tiên Phong",
+      "sector": "Ngân hàng đầu tư - Dịch vụ môi giới",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "VND",
+      "name": "CTCP Chứng khoán VNDIRECT",
+      "sector": "Ngân hàng đầu tư - Dịch vụ môi giới",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "MBS",
+      "name": "CTCP Chứng khoán MB",
+      "sector": "Ngân hàng đầu tư - Dịch vụ môi giới",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "SBS",
+      "name": "CTCP Chứng khoán SBS",
+      "sector": "Ngân hàng đầu tư - Dịch vụ môi giới",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "VCK",
+      "name": "CTCP Chứng khoán VPS",
+      "sector": "Ngân hàng đầu tư - Dịch vụ môi giới",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "HCM",
+      "name": "CTCP Chứng khoán Thành phố Hồ Chí Minh",
+      "sector": "Ngân hàng đầu tư - Dịch vụ môi giới",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "VPX",
+      "name": "CTCP Chứng khoán VPBank",
+      "sector": "Ngân hàng đầu tư - Dịch vụ môi giới",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "CTS",
+      "name": "CTCP Chứng khoán Vietinbank",
+      "sector": "Ngân hàng đầu tư - Dịch vụ môi giới",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "DSE",
+      "name": "CTCP Chứng khoán DNSE",
+      "sector": "Ngân hàng đầu tư - Dịch vụ môi giới",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "FTS",
+      "name": "CTCP Chứng khoán FPT",
+      "sector": "Ngân hàng đầu tư - Dịch vụ môi giới",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "AAS",
+      "name": "CTCP chứng khoán SmartInvest",
+      "sector": "Ngân hàng đầu tư - Dịch vụ môi giới",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "VFS",
+      "name": "CTCP Chứng khoán Nhất Việt",
+      "sector": "Ngân hàng đầu tư - Dịch vụ môi giới",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "APS",
+      "name": "CTCP Chứng khoán Châu Á - Thái Bình Dương",
+      "sector": "Ngân hàng đầu tư - Dịch vụ môi giới",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "BVS",
+      "name": "CTCP Chứng khoán Bảo Việt",
+      "sector": "Ngân hàng đầu tư - Dịch vụ môi giới",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "BSI",
+      "name": "CTCP Chứng khoán BIDV",
+      "sector": "Ngân hàng đầu tư - Dịch vụ môi giới",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "LPS",
+      "name": "CTCP Chứng khoán LPS",
+      "sector": "Ngân hàng đầu tư - Dịch vụ môi giới",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "VDS",
+      "name": "CTCP Chứng khoán Rồng Việt",
+      "sector": "Ngân hàng đầu tư - Dịch vụ môi giới",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "TCI",
+      "name": "CTCP Chứng Khoán Thành Công",
+      "sector": "Ngân hàng đầu tư - Dịch vụ môi giới",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "KAI",
+      "name": "CTCP Chứng khoán KAFI",
+      "sector": "Ngân hàng đầu tư - Dịch vụ môi giới",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "F88",
+      "name": "CTCP Đầu tư F88",
+      "sector": "Ngân hàng đầu tư - Dịch vụ môi giới",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "AGR",
+      "name": "CTCP Chứng khoán Agribank",
+      "sector": "Ngân hàng đầu tư - Dịch vụ môi giới",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "APG",
+      "name": "CTCP Chứng khoán APG",
+      "sector": "Ngân hàng đầu tư - Dịch vụ môi giới",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "EVS",
+      "name": "CTCP Chứng khoán EVS",
+      "sector": "Ngân hàng đầu tư - Dịch vụ môi giới",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "TVS",
+      "name": "CTCP chứng khoán Thiên Việt",
+      "sector": "Ngân hàng đầu tư - Dịch vụ môi giới",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "PSI",
+      "name": "CTCP Chứng khoán Dầu Khí",
+      "sector": "Ngân hàng đầu tư - Dịch vụ môi giới",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "ABW",
+      "name": "CTCP Chứng khoán An Bình",
+      "sector": "Ngân hàng đầu tư - Dịch vụ môi giới",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "IPA",
+      "name": "CTCP Tập đoàn Đầu tư I.P.A",
+      "sector": "Ngân hàng đầu tư - Dịch vụ môi giới",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "VIG",
+      "name": "CTCP Chứng khoán Đầu tư Tài chính Việt Nam",
+      "sector": "Ngân hàng đầu tư - Dịch vụ môi giới",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "TVC",
+      "name": "CTCP Tập đoàn Quản lý tài sản T-CORP",
+      "sector": "Ngân hàng đầu tư - Dịch vụ môi giới",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "PVI",
+      "name": "CTCP PVI",
+      "sector": "Ngân hàng đầu tư - Dịch vụ môi giới",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "IVS",
+      "name": "CTCP Chứng khoán Guotai Haitong (Việt Nam)",
+      "sector": "Ngân hàng đầu tư - Dịch vụ môi giới",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "DSC",
+      "name": "CTCP Chứng khoán DSC",
+      "sector": "Ngân hàng đầu tư - Dịch vụ môi giới",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "BMS",
+      "name": "CTCP Chứng khoán Bảo Minh",
+      "sector": "Ngân hàng đầu tư - Dịch vụ môi giới",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "PHS",
+      "name": "CTCP Chứng khoán Phú Hưng",
+      "sector": "Ngân hàng đầu tư - Dịch vụ môi giới",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "WSS",
+      "name": "CTCP Chứng khoán Phố Wall",
+      "sector": "Ngân hàng đầu tư - Dịch vụ môi giới",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "ART",
+      "name": "CTCP Chứng khoán ARTEX",
+      "sector": "Ngân hàng đầu tư - Dịch vụ môi giới",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "BCG",
+      "name": "CTCP Tập đoàn Bamboo Capital",
+      "sector": "Ngân hàng đầu tư - Dịch vụ môi giới",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "CSI",
+      "name": "CTCP Chứng khoán Kirin",
+      "sector": "Ngân hàng đầu tư - Dịch vụ môi giới",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "DCV",
+      "name": "CTCP Quản lý Quỹ Đầu tư Dragon Capital Việt Nam",
+      "sector": "Ngân hàng đầu tư - Dịch vụ môi giới",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "HAC",
+      "name": "CTCP Chứng khoán Hải Phòng",
+      "sector": "Ngân hàng đầu tư - Dịch vụ môi giới",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "HBS",
+      "name": "CTCP Chứng khoán Hòa Bình",
+      "sector": "Ngân hàng đầu tư - Dịch vụ môi giới",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "HVA",
+      "name": "CTCP Đầu tư HVA",
+      "sector": "Ngân hàng đầu tư - Dịch vụ môi giới",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "TGG",
+      "name": "CTCP The Golden Group",
+      "sector": "Ngân hàng đầu tư - Dịch vụ môi giới",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "UPS",
+      "name": "CTCP Chứng khoán UP",
+      "sector": "Ngân hàng đầu tư - Dịch vụ môi giới",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "VUA",
+      "name": "CTCP Chứng khoán Stanley Brothers",
+      "sector": "Ngân hàng đầu tư - Dịch vụ môi giới",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "VNINDEX",
+      "name": "Chỉ số VNindex",
+      "sector": "chỉ số",
       "color": "#1e3a8a"
     }
   ]
