@@ -66,61 +66,61 @@ window.APP_DATA = {
       "code": "SSI",
       "name": "CTCP Chứng khoán SSI",
       "sector": "Chứng khoán",
-      "color": "#d71920"
+      "color": "#1e3a8a"
     },
     {
       "code": "VCB",
       "name": "Ngân hàng TMCP Ngoại thương Việt Nam",
       "sector": "Ngân hàng",
-      "color": "#0f7a3d"
+      "color": "#1e3a8a"
     },
     {
       "code": "VNM",
       "name": "CTCP Sữa Việt Nam",
       "sector": "Thực phẩm",
-      "color": "#1d4ed8"
+      "color": "#1e3a8a"
     },
     {
       "code": "FPT",
       "name": "CTCP FPT",
       "sector": "Công nghệ",
-      "color": "#f37021"
+      "color": "#1e3a8a"
     },
     {
       "code": "HPG",
       "name": "CTCP Tập đoàn Hòa Phát",
       "sector": "Thép",
-      "color": "#b91c1c"
+      "color": "#1e3a8a"
     },
     {
       "code": "TCB",
       "name": "Ngân hàng TMCP Kỹ thương Việt Nam",
       "sector": "Ngân hàng",
-      "color": "#dc2626"
+      "color": "#1e3a8a"
     },
     {
       "code": "VIC",
       "name": "Tập đoàn Vingroup",
       "sector": "Bất động sản",
-      "color": "#9f1239"
+      "color": "#1e3a8a"
     },
     {
       "code": "VHM",
       "name": "CTCP Vinhomes",
       "sector": "Bất động sản",
-      "color": "#be123c"
+      "color": "#1e3a8a"
     },
     {
       "code": "STB",
       "name": "Ngân hàng TMCP Sài Gòn Thương Tín",
       "sector": "Ngân hàng",
-      "color": "#1e40af"
+      "color": "#1e3a8a"
     },
     {
       "code": "REE",
       "name": "CTCP Cơ điện lạnh",
       "sector": "Điện",
-      "color": "#0369a1"
+      "color": "#1e3a8a"
     },
     {
       "code": "SJD",
@@ -312,6 +312,462 @@ window.APP_DATA = {
       "code": "VTH",
       "name": "CTCP Dây cáp điện Việt Thái",
       "sector": "Công nghệ",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "VGI",
+      "name": "Tổng CTCP Đầu tư Quốc tế Viettel",
+      "sector": "Viễn thông",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "FOX",
+      "name": "CTCP Viễn thông FPT",
+      "sector": "Viễn thông",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "SAM",
+      "name": "CTCP Sam Holdings",
+      "sector": "Viễn thông",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "MFS",
+      "name": "CTCP Dịch vụ kỹ thuật Mobifone",
+      "sector": "Viễn thông",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "ICT",
+      "name": "CTCP Viễn thông - Tin học Bưu điện",
+      "sector": "Viễn thông",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "PMJ",
+      "name": "CTCP Vật tư Bưu điện",
+      "sector": "Viễn thông",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "ABC",
+      "name": "CTCP Truyền thông VMG",
+      "sector": "Viễn thông",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "CCS",
+      "name": "CTCP Chíp Sáng",
+      "sector": "Viễn thông",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "CKV",
+      "name": "CTCP COKYVINA",
+      "sector": "Viễn thông",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "KST",
+      "name": "CTCP KASATI",
+      "sector": "Viễn thông",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "LTC",
+      "name": "CTCP Điện nhẹ Viễn thông",
+      "sector": "Viễn thông",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "PMT",
+      "name": "CTCP Viễn thông Telvina Việt Nam",
+      "sector": "Viễn thông",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "SMT",
+      "name": "CTCP Sametel",
+      "sector": "Viễn thông",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "TST",
+      "name": "CTCP Dịch vụ Kỹ thuật Viễn thông",
+      "sector": "Viễn thông",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "UNI",
+      "name": "CTCP Đầu tư và Phát triển Sao Mai Việt",
+      "sector": "Viễn thông",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "VIE",
+      "name": "CTCP Công nghệ Viễn thông VITECO",
+      "sector": "Viễn thông",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "VTC",
+      "name": "CTCP Viễn thông VTC",
+      "sector": "Viễn thông",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "VTE",
+      "name": "CTCP Vinacap Kim Long",
+      "sector": "Viễn thông",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "AMV",
+      "name": "CTCP Sản xuất kinh doanh Dược và Trang thiết bị Y tế Việt Mỹ",
+      "sector": "Chăm sóc sức khỏe",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "DCL",
+      "name": "CTCP Dược phẩm Cửu Long",
+      "sector": "Chăm sóc sức khỏe",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "TNH",
+      "name": "CTCP Tập đoàn Bệnh viện TNH",
+      "sector": "Chăm sóc sức khỏe",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "JVC",
+      "name": "CTCP Đầu tư và Phát triển Y tế Việt Nhật",
+      "sector": "Chăm sóc sức khỏe",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "DHG",
+      "name": "CTCP Dược Hậu Giang",
+      "sector": "Chăm sóc sức khỏe",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "DVN",
+      "name": "Tổng Công ty Dược Việt Nam - CTCP",
+      "sector": "Chăm sóc sức khỏe",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "DHT",
+      "name": "CTCP Dược phẩm Hà Tây",
+      "sector": "Chăm sóc sức khỏe",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "VMD",
+      "name": "CTCP Y Dược phẩm Vimedimex",
+      "sector": "Chăm sóc sức khỏe",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "DP3",
+      "name": "CTCP Dược phẩm Trung ương 3",
+      "sector": "Chăm sóc sức khỏe",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "OPC",
+      "name": "CTCP Dược phẩm OPC",
+      "sector": "Chăm sóc sức khỏe",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "TRA",
+      "name": "CTCP Traphaco",
+      "sector": "Chăm sóc sức khỏe",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "PBC",
+      "name": "CTCP Dược phẩm Trung ương I - Pharbaco",
+      "sector": "Chăm sóc sức khỏe",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "DMC",
+      "name": "CTCP Xuất nhập khẩu Y tế Domesco",
+      "sector": "Chăm sóc sức khỏe",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "DP1",
+      "name": "CTCP Dược phẩm Trung ương CPC1",
+      "sector": "Chăm sóc sức khỏe",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "BBT",
+      "name": "CTCP Bông Bạch Tuyết",
+      "sector": "Chăm sóc sức khỏe",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "DTP",
+      "name": "CTCP Dược phẩm CPC1 Hà Nội",
+      "sector": "Chăm sóc sức khỏe",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "DBD",
+      "name": "CTCP Dược - Trang thiết bị y tế Bình Định",
+      "sector": "Chăm sóc sức khỏe",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "MKP",
+      "name": "CTCP Hóa - Dược phẩm Mekophar",
+      "sector": "Chăm sóc sức khỏe",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "CNC",
+      "name": "CTCP Công nghệ cao Traphaco",
+      "sector": "Chăm sóc sức khỏe",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "SPM",
+      "name": "CTCP S.P.M",
+      "sector": "Chăm sóc sức khỏe",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "VET",
+      "name": "CTCP Thuốc Thú y Trung ương NAVETCO",
+      "sector": "Chăm sóc sức khỏe",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "AGP",
+      "name": "CTCP Dược phẩm Agimexpharm",
+      "sector": "Chăm sóc sức khỏe",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "AMP",
+      "name": "CTCP Armephaco",
+      "sector": "Chăm sóc sức khỏe",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "BCP",
+      "name": "CTCP Dược Enlie",
+      "sector": "Chăm sóc sức khỏe",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "BIO",
+      "name": "CTCP Vắc xin và Sinh phẩm Nha Trang",
+      "sector": "Chăm sóc sức khỏe",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "CDP",
+      "name": "CTCP Dược phẩm Trung ương Codupha",
+      "sector": "Chăm sóc sức khỏe",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "DBM",
+      "name": "CTCP Dược - Vật tư Y tế Đăc Lăk",
+      "sector": "Chăm sóc sức khỏe",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "DBT",
+      "name": "CTCP Dược phẩm Bến Tre",
+      "sector": "Chăm sóc sức khỏe",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "DDN",
+      "name": "CTCP Dược - Thiết bị y tế Đà Nẵng",
+      "sector": "Chăm sóc sức khỏe",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "DHD",
+      "name": "CTCP Dược Vật tư Y tế Hải Dương",
+      "sector": "Chăm sóc sức khỏe",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "DHN",
+      "name": "CTCP Dược phẩm Hà Nội",
+      "sector": "Chăm sóc sức khỏe",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "DNM",
+      "name": "Tổng CTCP Y tế Danameco",
+      "sector": "Chăm sóc sức khỏe",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "DP2",
+      "name": "CTCP Dược phẩm Trung ương 2",
+      "sector": "Chăm sóc sức khỏe",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "DPH",
+      "name": "CTCP Dược phẩm Hải Phòng",
+      "sector": "Chăm sóc sức khỏe",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "DPP",
+      "name": "CTCP Dược Đồng Nai",
+      "sector": "Chăm sóc sức khỏe",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "DTG",
+      "name": "CTCP Dược phẩm Tipharco",
+      "sector": "Chăm sóc sức khỏe",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "DTH",
+      "name": "CTCP Dược - Vật tư Y tế Thanh Hóa",
+      "sector": "Chăm sóc sức khỏe",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "DVM",
+      "name": "CTCP Dược liệu Việt Nam",
+      "sector": "Chăm sóc sức khỏe",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "HDP",
+      "name": "CTCP Dược Hà Tĩnh",
+      "sector": "Chăm sóc sức khỏe",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "IMP",
+      "name": "CTCP Dược phẩm Imexpharm",
+      "sector": "Chăm sóc sức khỏe",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "LDP",
+      "name": "CTCP Dược Lâm Đồng - LADOPHAR",
+      "sector": "Chăm sóc sức khỏe",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "MED",
+      "name": "CTCP Dược Trung ương Mediplantex",
+      "sector": "Chăm sóc sức khỏe",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "MEF",
+      "name": "CTCP MEINFA",
+      "sector": "Chăm sóc sức khỏe",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "MKV",
+      "name": "CTCP Dược thú y Cai Lậy",
+      "sector": "Chăm sóc sức khỏe",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "MRF",
+      "name": "CTCP Merufa",
+      "sector": "Chăm sóc sức khỏe",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "MTP",
+      "name": "CTCP Dược Medipharco",
+      "sector": "Chăm sóc sức khỏe",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "NDC",
+      "name": "CTCP Nam Dược",
+      "sector": "Chăm sóc sức khỏe",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "NHD",
+      "name": "CTCP Dược phẩm Nam Hà",
+      "sector": "Chăm sóc sức khỏe",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "NTF",
+      "name": "CTCP Dược - Vật tư Y tế Nghệ An",
+      "sector": "Chăm sóc sức khỏe",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "PMC",
+      "name": "CTCP Dược phẩm dược liệu Pharmedic",
+      "sector": "Chăm sóc sức khỏe",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "PPP",
+      "name": "CTCP Dược phẩm Phong Phú",
+      "sector": "Chăm sóc sức khỏe",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "TTD",
+      "name": "CTCP Bệnh viện tim Tâm Đức",
+      "sector": "Chăm sóc sức khỏe",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "TW3",
+      "name": "CTCP Dược Trung ương 3",
+      "sector": "Chăm sóc sức khỏe",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "UPH",
+      "name": "CTCP Dược phẩm TW25",
+      "sector": "Chăm sóc sức khỏe",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "VDP",
+      "name": "CTCP Dược phẩm Trung ương VIDIPHA",
+      "sector": "Chăm sóc sức khỏe",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "VNY",
+      "name": "CTCP Thuốc thú y Trung ương I",
+      "sector": "Chăm sóc sức khỏe",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "VXP",
+      "name": "CTCP Thuốc Thú y Trung ương VETVACO",
+      "sector": "Chăm sóc sức khỏe",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "YTC",
+      "name": "CTCP Xuất nhập khẩu Y tế Thành phố Hồ Chí Minh",
+      "sector": "Chăm sóc sức khỏe",
       "color": "#1e3a8a"
     }
   ],
