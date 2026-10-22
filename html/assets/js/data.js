@@ -93,18 +93,6 @@ window.APP_DATA = {
       "color": "#1e3a8a"
     },
     {
-      "code": "VIC",
-      "name": "Tập đoàn Vingroup",
-      "sector": "Bất động sản",
-      "color": "#1e3a8a"
-    },
-    {
-      "code": "VHM",
-      "name": "CTCP Vinhomes",
-      "sector": "Bất động sản",
-      "color": "#1e3a8a"
-    },
-    {
       "code": "REE",
       "name": "CTCP Cơ điện lạnh",
       "sector": "Điện",
@@ -1221,33 +1209,801 @@ window.APP_DATA = {
       "color": "#1e3a8a"
     },
     {
-      "code": "VNINDEX",
-      "name": "Chỉ số VNindex",
-      "sector": "Chỉ số",
+      "code": "BVH",
+      "name": "Tập đoàn Bảo Việt",
+      "sector": "Bảo hiểm",
       "color": "#1e3a8a"
     },
     {
-      "code": "VN30",
-      "name": "Chỉ số VN30",
-      "sector": "Chỉ số",
+      "code": "MIG",
+      "name": "Tổng CTCP Bảo hiểm Quân Đội",
+      "sector": "Bảo hiểm",
       "color": "#1e3a8a"
     },
     {
-      "code": "VN100",
-      "name": "Chỉ số VN100",
-      "sector": "Chỉ số",
+      "code": "BMI",
+      "name": "Tổng CTCP Bảo Minh",
+      "sector": "Bảo hiểm",
       "color": "#1e3a8a"
     },
     {
-      "code": "HNXINDEX",
-      "name": "Chỉ số HNX",
-      "sector": "Chỉ số",
+      "code": "VNR",
+      "name": "Tổng CTCP Tái bảo hiểm Quốc gia Việt Nam",
+      "sector": "Bảo hiểm",
       "color": "#1e3a8a"
     },
     {
-      "code": "HNX30",
-      "name": "Chỉ số HNX30",
-      "sector": "Chỉ số",
+      "code": "ABI",
+      "name": "CTCP Bảo hiểm Ngân hàng Nông nghiệp",
+      "sector": "Bảo hiểm",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "BIC",
+      "name": "Tổng CTCP Bảo hiểm Ngân hàng Đầu tư và Phát triển Việt Nam",
+      "sector": "Bảo hiểm",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "PRE",
+      "name": "Tổng CTCP Tái bảo hiểm Hà Nội",
+      "sector": "Bảo hiểm",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "PTI",
+      "name": "Tổng CTCP Bảo hiểm Bưu điện",
+      "sector": "Bảo hiểm",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "PGI",
+      "name": "Tổng CTCP Bảo hiểm Petrolimex",
+      "sector": "Bảo hiểm",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "AIC",
+      "name": "CTCP Tập đoàn bảo hiểm DBV",
+      "sector": "Bảo hiểm",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "BHI",
+      "name": "Tổng CTCP Bảo hiểm Sài Gòn - Hà Nội",
+      "sector": "Bảo hiểm",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "BLI",
+      "name": "Tổng CTCP Bảo hiểm Bảo Long",
+      "sector": "Bảo hiểm",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "NVL",
+      "name": "CTCP Tập đoàn Đầu tư Địa ốc Novaland",
+      "sector": "Bất động sản",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "VHM",
+      "name": "CTCP Vinhomes",
+      "sector": "Bất động sản",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "CEO",
+      "name": "CTCP Tập đoàn C.E.O",
+      "sector": "Bất động sản",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "DXG",
+      "name": "CTCP Bluemarq Group",
+      "sector": "Bất động sản",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "TCH",
+      "name": "CTCP Đầu tư Dịch vụ Tài chính Hoàng Huy",
+      "sector": "Bất động sản",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "PDR",
+      "name": "CTCP Phát triển Bất động sản Phát Đạt",
+      "sector": "Bất động sản",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "KDH",
+      "name": "CTCP Đầu tư và Kinh doanh Nhà Khang Điền",
+      "sector": "Bất động sản",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "VRE",
+      "name": "CTCP Vincom Retail",
+      "sector": "Bất động sản",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "HDC",
+      "name": "CTCP Phát triển Nhà Bà Rịa - Vũng Tàu",
+      "sector": "Bất động sản",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "DIG",
+      "name": "Tổng CTCP Đầu tư Phát triển Xây dựng",
+      "sector": "Bất động sản",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "KHG",
+      "name": "CTCP Tập đoàn Khải Hoàn Land",
+      "sector": "Bất động sản",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "NLG",
+      "name": "CTCP Đầu tư Nam Long",
+      "sector": "Bất động sản",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "VC3",
+      "name": "CTCP Tập đoàn Nam Mê Kông",
+      "sector": "Bất động sản",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "DXS",
+      "name": "CTCP Dịch vụ Bất động sản Đất Xanh",
+      "sector": "Bất động sản",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "VIC",
+      "name": "Tập đoàn Vingroup - CTCP",
+      "sector": "Bất động sản",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "VPI",
+      "name": "CTCP Phát triển Bất động sản Văn Phú",
+      "sector": "Bất động sản",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "TIG",
+      "name": "CTCP Tập đoàn Đầu tư Thăng Long",
+      "sector": "Bất động sản",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "IJC",
+      "name": "CTCP Phát triển Hạ tầng Kỹ thuật",
+      "sector": "Bất động sản",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "KBC",
+      "name": "Tổng Công ty Phát triển Đô Thị Kinh Bắc - CTCP",
+      "sector": "Bất động sản",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "GEL",
+      "name": "CTCP Hạ tầng Gelex",
+      "sector": "Bất động sản",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "IDC",
+      "name": "Tổng công ty IDICO - CTCP",
+      "sector": "Bất động sản",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "HQC",
+      "name": "CTCP Tư vấn - Thương mại - Dịch vụ Địa ốc Hoàng Quân",
+      "sector": "Bất động sản",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "HDG",
+      "name": "CTCP Tập đoàn Hà Đô",
+      "sector": "Bất động sản",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "HHS",
+      "name": "CTCP Đầu tư dịch vụ Hoàng Huy",
+      "sector": "Bất động sản",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "HPX",
+      "name": "CTCP Đầu tư Hải Phát",
+      "sector": "Bất động sản",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "SZC",
+      "name": "CTCP Sonadezi Châu Đức",
+      "sector": "Bất động sản",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "SCR",
+      "name": "CTCP Địa ốc Sài Gòn Thương Tín",
+      "sector": "Bất động sản",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "BCM",
+      "name": "Tập đoàn Đầu tư và Phát triển Công nghiệp Becamex - CTCP",
+      "sector": "Bất động sản",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "IDJ",
+      "name": "CTCP Đầu tư IDJ Việt Nam",
+      "sector": "Bất động sản",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "EVG",
+      "name": "CTCP Tập đoàn Everland",
+      "sector": "Bất động sản",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "DLG",
+      "name": "CTCP Tập đoàn Đức Long Gia Lai",
+      "sector": "Bất động sản",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "LDG",
+      "name": "CTCP Đầu tư LDG",
+      "sector": "Bất động sản",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "ASM",
+      "name": "CTCP Tập Đoàn Sao Mai",
+      "sector": "Bất động sản",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "FIT",
+      "name": "CTCP Tập đoàn F.I.T",
+      "sector": "Bất động sản",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "CRE",
+      "name": "CTCP Bất động sản Thế Kỷ",
+      "sector": "Bất động sản",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "VRC",
+      "name": "CTCP Bất động sản và Đầu tư VRC",
+      "sector": "Bất động sản",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "QCG",
+      "name": "CTCP Quốc Cường - Gia Lai",
+      "sector": "Bất động sản",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "NTL",
+      "name": "CTCP Phát triển đô thị Từ Liêm",
+      "sector": "Bất động sản",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "SIP",
+      "name": "CTCP Đầu tư Sài Gòn VRG",
+      "sector": "Bất động sản",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "OGC",
+      "name": "CTCP Tập đoàn Đại Dương",
+      "sector": "Bất động sản",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "KOS",
+      "name": "CTCP Kosy",
+      "sector": "Bất động sản",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "NRC",
+      "name": "CTCP Tập đoàn Bất động sản Quốc gia",
+      "sector": "Bất động sản",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "TEG",
+      "name": "CTCP Trường Thành Energy Group",
+      "sector": "Bất động sản",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "NDN",
+      "name": "CTCP Đầu tư Phát triển Nhà Đà Nẵng",
+      "sector": "Bất động sản",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "LHG",
+      "name": "CTCP Long Hậu",
+      "sector": "Bất động sản",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "TAL",
+      "name": "CTCP Đầu tư Bất động sản Taseco",
+      "sector": "Bất động sản",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "AGG",
+      "name": "CTCP Đầu tư và Phát triển Bất động sản An Gia",
+      "sector": "Bất động sản",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "ITC",
+      "name": "CTCP Tập đoàn Sunshine",
+      "sector": "Bất động sản",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "PV2",
+      "name": "CTCP Genea Capital",
+      "sector": "Bất động sản",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "CKG",
+      "name": "CTCP Tập đoàn CIC",
+      "sector": "Bất động sản",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "CCL",
+      "name": "CTCP Đầu tư và Phát triển Đô thị Dầu khí Cửu Long",
+      "sector": "Bất động sản",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "TDC",
+      "name": "CTCP Kinh doanh và Phát triển Bình Dương",
+      "sector": "Bất động sản",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "HAR",
+      "name": "CTCP Đầu tư Thương mại Bất động sản An Dương Thảo Điền",
+      "sector": "Bất động sản",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "API",
+      "name": "CTCP Đầu tư Châu Á - Thái Bình Dương",
+      "sector": "Bất động sản",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "FIR",
+      "name": "CTCP Địa ốc First Real",
+      "sector": "Bất động sản",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "SGR",
+      "name": "CTCP Tổng CTCP Địa ốc Sài Gòn",
+      "sector": "Bất động sản",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "PFL",
+      "name": "CTCP Dầu khí Đông Đô",
+      "sector": "Bất động sản",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "D2D",
+      "name": "CTCP Phát triển Đô thị Công nghiệp Số 2",
+      "sector": "Bất động sản",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "PXL",
+      "name": "CTCP Đầu tư khu công nghiệp Dầu khí Long Sơn",
+      "sector": "Bất động sản",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "PTL",
+      "name": "CTCP Victory Capital",
+      "sector": "Bất động sản",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "SZL",
+      "name": "CTCP Sonadezi Long Thành",
+      "sector": "Bất động sản",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "AAV",
+      "name": "CTCP AAV Group",
+      "sector": "Bất động sản",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "HLD",
+      "name": "CTCP Đầu tư và Phát triển Bất động sản HUDLAND",
+      "sector": "Bất động sản",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "NBB",
+      "name": "CTCP Đầu tư Năm Bảy Bảy",
+      "sector": "Bất động sản",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "CIG",
+      "name": "CTCP COMA 18",
+      "sector": "Bất động sản",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "DTA",
+      "name": "CTCP Đệ Tam",
+      "sector": "Bất động sản",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "LGL",
+      "name": "CTCP Đầu tư và Phát triển Đô thị Long Giang",
+      "sector": "Bất động sản",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "CSC",
+      "name": "CTCP Tập đoàn Cotana",
+      "sector": "Bất động sản",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "NTC",
+      "name": "CTCP Khu Công nghiệp Nam Tân Uyên",
+      "sector": "Bất động sản",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "TDH",
+      "name": "CTCP Phát triển Nhà Thủ Đức",
+      "sector": "Bất động sản",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "SJS",
+      "name": "CTCP SJ Group",
+      "sector": "Bất động sản",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "VPH",
+      "name": "CTCP Vạn Phát Hưng",
+      "sector": "Bất động sản",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "RCL",
+      "name": "CTCP Địa ốc Chợ Lớn",
+      "sector": "Bất động sản",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "THD",
+      "name": "CTCP Thaiholdings",
+      "sector": "Bất động sản",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "LAI",
+      "name": "CTCP Đầu tư Xây dựng Long An IDICO",
+      "sector": "Bất động sản",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "PWA",
+      "name": "CTCP Bất động sản Dầu khí",
+      "sector": "Bất động sản",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "EFI",
+      "name": "CTCP Đầu tư Tài chính Giáo dục",
+      "sector": "Bất động sản",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "IDV",
+      "name": "CTCP Phát triển Hạ tầng Vĩnh Phúc",
+      "sector": "Bất động sản",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "TN1",
+      "name": "CTCP Rox Key Holdings",
+      "sector": "Bất động sản",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "HD6",
+      "name": "CTCP Đầu tư và Phát triển Nhà số 6 Hà Nội",
+      "sector": "Bất động sản",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "VHG",
+      "name": "CTCP Đầu tư và Phát triển Việt Trung Nam",
+      "sector": "Bất động sản",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "D11",
+      "name": "CTCP Địa ốc 11",
+      "sector": "Bất động sản",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "HPI",
+      "name": "CTCP Khu công nghiệp Hiệp Phước",
+      "sector": "Bất động sản",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "TIP",
+      "name": "CTCP Phát triển Khu công nghiệp Tín Nghĩa",
+      "sector": "Bất động sản",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "LSG",
+      "name": "CTCP Bất động sản Sài Gòn Vi Na",
+      "sector": "Bất động sản",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "MBT",
+      "name": "CTCP Bất động sản cho thuê Minh Bảo Tín",
+      "sector": "Bất động sản",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "EIN",
+      "name": "CTCP Đầu tư - Thương mại - Dịch vụ Điện lực",
+      "sector": "Bất động sản",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "VNI",
+      "name": "CTCP Đầu tư Bất động sản Việt Nam",
+      "sector": "Bất động sản",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "VRG",
+      "name": "CTCP Phát triển Đô thị và Khu công nghiệp Cao su Việt Nam",
+      "sector": "Bất động sản",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "SNZ",
+      "name": "Tổng CTCP Phát triển khu công nghiệp",
+      "sector": "Bất động sản",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "MH3",
+      "name": "CTCP Khu Công nghiệp Cao su Bình Long",
+      "sector": "Bất động sản",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "HD2",
+      "name": "CTCP Đầu tư phát triển nhà HUD2",
+      "sector": "Bất động sản",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "DTI",
+      "name": "CTCP Đầu tư Đức Trung",
+      "sector": "Bất động sản",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "BVL",
+      "name": "CTCP BV Land",
+      "sector": "Bất động sản",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "CCI",
+      "name": "CTCP Đầu tư Phát triển Công nghiệp - Thương mại Củ Chi",
+      "sector": "Bất động sản",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "HRB",
+      "name": "CTCP Harec Đầu tư và Thương mại",
+      "sector": "Bất động sản",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "HU6",
+      "name": "CTCP Đầu tư Phát triển Nhà và Đô thị HUD6",
+      "sector": "Bất động sản",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "NVT",
+      "name": "CTCP Bất động sản Du lịch Ninh Vân Bay",
+      "sector": "Bất động sản",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "CRV",
+      "name": "CTCP Tập đoàn bất động sản CRV",
+      "sector": "Bất động sản",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "DLR",
+      "name": "CTCP Địa ốc Đà Lạt",
+      "sector": "Bất động sản",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "DRH",
+      "name": "CTCP DRH Holdings",
+      "sector": "Bất động sản",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "FDC",
+      "name": "CTCP Ngoại thương và Phát triển Đầu tư Thành phố Hồ Chí Minh",
+      "sector": "Bất động sản",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "HD8",
+      "name": "CTCP Đầu tư phát triển nhà và đô thị HUD8",
+      "sector": "Bất động sản",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "HTT",
+      "name": "CTCP Thương mại Hà Tây",
+      "sector": "Bất động sản",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "ITA",
+      "name": "CTCP Đầu tư và Công nghiệp Tân Tạo",
+      "sector": "Bất động sản",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "LEC",
+      "name": "CTCP Bất động sản điện lực Miền Trung",
+      "sector": "Bất động sản",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "MGR",
+      "name": "CTCP Tập đoàn MGROUP",
+      "sector": "Bất động sản",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "PLA",
+      "name": "CTCP Đầu tư và Dịch vụ Hạ tầng Xăng dầu",
+      "sector": "Bất động sản",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "PNT",
+      "name": "CTCP Kỹ thuật Xây dựng Phú Nhuận",
+      "sector": "Bất động sản",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "PPI",
+      "name": "CTCP Đầu tư và Phát triển dự án Hạ tầng Thái Bình Dương",
+      "sector": "Bất động sản",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "PVL",
+      "name": "CTCP Địa ốc Dầu khí",
+      "sector": "Bất động sản",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "PVR",
+      "name": "CTCP Đầu tư PVR Hà Nội",
+      "sector": "Bất động sản",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "PXA",
+      "name": "CTCP Đầu tư và Thương mại Dầu khí Nghệ An",
+      "sector": "Bất động sản",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "RGG",
+      "name": "CTCP Regal Group",
+      "sector": "Bất động sản",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "SDU",
+      "name": "CTCP Đầu tư Xây dựng và Phát triển Đô thị Sông Đà",
+      "sector": "Bất động sản",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "SLD",
+      "name": "CTCP Địa ốc Sacom",
+      "sector": "Bất động sản",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "SSH",
+      "name": "CTCP Phát triển Sunshine Homes",
+      "sector": "Bất động sản",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "SZG",
+      "name": "CTCP Sonadezi Giang Điền",
+      "sector": "Bất động sản",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "TBR",
+      "name": "CTCP Địa ốc Tân Bình",
+      "sector": "Bất động sản",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "TIX",
+      "name": "CTCP Sản xuất Kinh doanh Xuất nhập khẩu Dịch vụ và Đầu tư Tân Bình",
+      "sector": "Bất động sản",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "VCR",
+      "name": "CTCP Đầu tư và Phát triển Du lịch ITC",
+      "sector": "Bất động sản",
       "color": "#1e3a8a"
     }
   ],
