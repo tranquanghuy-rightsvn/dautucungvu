@@ -1223,7 +1223,31 @@ window.APP_DATA = {
     {
       "code": "VNINDEX",
       "name": "Chỉ số VNindex",
-      "sector": "chỉ số",
+      "sector": "Chỉ số",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "VN30",
+      "name": "Chỉ số VN30",
+      "sector": "Chỉ số",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "VN100",
+      "name": "Chỉ số VN100",
+      "sector": "Chỉ số",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "HNXINDEX",
+      "name": "Chỉ số HNX",
+      "sector": "Chỉ số",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "HNX30",
+      "name": "Chỉ số HNX30",
+      "sector": "Chỉ số",
       "color": "#1e3a8a"
     }
   ],
