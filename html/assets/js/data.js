@@ -2305,7 +2305,27 @@ window.APP_DATA = {
       ]
     }
   ],
-  "news": [],
+  "news": [
+    {
+      "id": 1,
+      "slug": "tcb-phat-hanh-co-phieu-de-tra-co-tuc-cho-co-dong-hien-huu",
+      "date": "2026-10-23 05:10",
+      "tags": [
+        "TCB",
+        "thi-truong",
+        "doanh-nghiep",
+        "co-tuc"
+      ],
+      "access": "public",
+      "art": "chart",
+      "title": "TCB: Phát hành cổ phiếu để trả cổ tức cho cổ đông hiện hữu",
+      "excerpt": "TCB: Phát hành cổ phiếu để trả cổ tức cho cổ đông hiện hữu\n Ngân hàng Thương mại cổ phần Kỹ thương Việt Nam công bố thông tin phát hành cổ phiếu để chi trả cổ tức",
+      "cover": "images/news/tcb-phat-hanh-co-phieu-de-tra-co-tuc-cho-co-dong-hien-huu/cover.jpg",
+      "cover_alt": "TCB: Phát hành cổ phiếu để trả cổ tức cho cổ đông hiện hữu",
+      "seo_title": "TCB: Phát hành cổ phiếu để trả cổ tức cho cổ đông hiện hữu | Đầu tư cùng Vũ",
+      "updated_at": "2026-10-22T22:40:29Z"
+    }
+  ],
   "brokers": [
     {
       "id": "vps",
