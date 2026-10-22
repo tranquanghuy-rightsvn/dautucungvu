@@ -287,6 +287,192 @@
       "name": "CTCP Thủy Điện Cần Đơn",
       "sector": "Điện",
       "color": "#1e3a8a"
+    },
+    {
+      "code": "GEE",
+      "name": "CTCP Điện lực Gelex",
+      "sector": "Công nghệ",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "DDG",
+      "name": "CTCP Đầu tư Công nghiệp Xuất nhập khẩu Đông Dương",
+      "sector": "Công nghệ",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "ELC",
+      "name": "CTCP Công nghệ - Viễn thông ELCOM",
+      "sector": "Công nghệ",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "TGP",
+      "name": "CTCP Trường Phú",
+      "sector": "Công nghệ",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "CMG",
+      "name": "CTCP Tập đoàn Công nghệ CMC",
+      "sector": "Công nghệ",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "TTN",
+      "name": "CTCP Công nghệ và Truyền thông Việt Nam",
+      "sector": "Công nghệ",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "TYA",
+      "name": "CTCP Dây và Cáp điện Taya Việt Nam",
+      "sector": "Công nghệ",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "ST8",
+      "name": "CTCP Tập đoàn ST8",
+      "sector": "Công nghệ",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "SGT",
+      "name": "CTCP Công nghệ Viễn thông Sài Gòn",
+      "sector": "Công nghệ",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "SRB",
+      "name": "CTCP Tập đoàn Sara",
+      "sector": "Công nghệ",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "ONE",
+      "name": "CTCP Công nghệ ONE",
+      "sector": "Công nghệ",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "AME",
+      "name": "CTCP Alphanam E&C",
+      "sector": "Công nghệ",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "BTH",
+      "name": "CTCP Chế tạo biến thế và Vật liệu điện Hà Nội",
+      "sector": "Công nghệ",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "CJC",
+      "name": "CTCP Cơ điện Miền Trung",
+      "sector": "Công nghệ",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "CMT",
+      "name": "CMT",
+      "sector": "Công nghệ",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "DHP",
+      "name": "CTCP Điện cơ Hải Phòng",
+      "sector": "Công nghệ",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "EMG",
+      "name": "CTCP Thiết bị Phụ tùng Cơ điện",
+      "sector": "Công nghệ",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "HLS",
+      "name": "CTCP Sứ kỹ thuật Hoàng Liên Sơn",
+      "sector": "Công nghệ",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "HPT",
+      "name": "CTCP Dịch vụ Công nghệ Tin học HPT",
+      "sector": "Công nghệ",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "ITD",
+      "name": "CTCP Công nghệ ITD",
+      "sector": "Công nghệ",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "KIP",
+      "name": "CTCP K.I.P Việt Nam",
+      "sector": "Công nghệ",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "PAI",
+      "name": "CTCP Công nghệ thông tin, Viễn thông và Tự động hóa Dầu Khí",
+      "sector": "Công nghệ",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "PIA",
+      "name": "CTCP Tin học Viễn thông Petrolimex",
+      "sector": "Công nghệ",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "POT",
+      "name": "CTCP Thiết bị Bưu điện",
+      "sector": "Công nghệ",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "PPS",
+      "name": "CTCP Dịch vụ Kỹ thuật Điện lực Dầu khí Việt Nam",
+      "sector": "Công nghệ",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "SBD",
+      "name": "CTCP Công nghệ Sao Bắc Đẩu",
+      "sector": "Công nghệ",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "SRA",
+      "name": "CTCP Sara Việt Nam",
+      "sector": "Công nghệ",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "TBD",
+      "name": "Tổng Công ty Thiết bị điện Đông Anh - CTCP",
+      "sector": "Công nghệ",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "TIE",
+      "name": "CTCP TIE",
+      "sector": "Công nghệ",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "VLA",
+      "name": "CTCP Đầu tư và Phát triển Công nghệ Văn Lang",
+      "sector": "Công nghệ",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "VTH",
+      "name": "CTCP Dây cáp điện Việt Thái",
+      "sector": "Công nghệ",
+      "color": "#1e3a8a"
     }
   ]
 }
