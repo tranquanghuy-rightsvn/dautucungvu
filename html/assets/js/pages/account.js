@@ -22,22 +22,26 @@
     return '<div class="copy-row"><span>' + label + "</span><b>" + escapeHtml(value) + '</b><button type="button" class="btn btn--outline btn--sm" data-copy="' + escapeHtml(value) + '">Sao chép</button></div>';
   }
 
+  // Bài hướng dẫn chi tiết do admin viết trong CMS (Cài đặt > Công ty chứng khoán), trống thì không hiện
+  function guide(html) {
+    return html ? '<div class="article-body broker-guide">' + html + "</div>" : "";
+  }
+
   function openAction(b) {
     return (
       "<h3>2. Mở tài khoản tại " + b.name + "</h3>" +
-      "<p>Bấm nút bên dưới, trang của " + b.name + " sẽ mở trong tab mới để bạn điền thông tin và xác thực eKYC (chụp CCCD, quay khuôn mặt).</p>" +
       (b.refCode ? copyRow("Mã giới thiệu cần nhập", b.refCode) : "") +
       '<a class="btn btn--green btn--lg btn--block" href="' + escapeHtml(b.openUrl) + '" target="_blank" rel="noopener">Mở tài khoản ' + b.name + icon("arrowRight") + "</a>" +
-      '<p class="broker-hint">' + icon("info") + "<span>Chuẩn bị sẵn CCCD gắn chip và số điện thoại chính chủ. Xong thì nhắn Vũ ở cuối trang để kích hoạt quyền xem.</span></p>"
+      guide(b.openGuide)
     );
   }
 
   function transferAction(b) {
     return (
       "<h3>2. Chuyển ID tại " + b.name + "</h3>" +
-      "<p>Vào ứng dụng hoặc trang web của " + b.name + ", tìm mục <b>đổi môi giới / người chăm sóc</b> và nhập mã của Vũ. Nếu không tìm thấy, gọi tổng đài " + b.name + " và đề nghị chuyển sang mã bên dưới.</p>" +
       (b.transferCode ? copyRow("Mã môi giới / ID của Vũ", b.transferCode) : '<p class="broker-hint">' + icon("info") + "<span>Nhắn Zalo cho Vũ để nhận mã môi giới tại " + b.name + ".</span></p>") +
-      (b.transferUrl ? '<a class="btn btn--navy btn--lg btn--block" href="' + escapeHtml(b.transferUrl) + '" target="_blank" rel="noopener">Mở trang đổi môi giới ' + b.name + icon("arrowRight") + "</a>" : "")
+      (b.transferUrl ? '<a class="btn btn--navy btn--lg btn--block" href="' + escapeHtml(b.transferUrl) + '" target="_blank" rel="noopener">Mở trang đổi môi giới ' + b.name + icon("arrowRight") + "</a>" : "") +
+      guide(b.transferGuide)
     );
   }
 

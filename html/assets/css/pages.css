@@ -2918,3 +2918,24 @@
     justify-content: center;
   }
 }
+
+/* Bài hướng dẫn mở TK / chuyển ID (soạn trong CMS) dưới nút của công ty đã chọn */
+.broker-guide.article-body {
+  margin-top: 4px;
+  padding-top: 16px;
+  border-top: 1px solid var(--line);
+  font-size: var(--fs-md);
+}
+.broker-guide > :first-child {
+  margin-top: 0;
+}
+.broker-guide img {
+  max-width: 100%;
+  height: auto;
+  border-radius: var(--r-md);
+}
+/* Dòng mã đã có gạch dưới -> bài ngay sau thì bỏ gạch trên cho khỏi 2 vạch */
+.copy-row + .broker-guide.article-body {
+  border-top: 0;
+  padding-top: 0;
+}

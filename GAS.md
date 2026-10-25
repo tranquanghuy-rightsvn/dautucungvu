@@ -782,6 +782,8 @@ trong account. (Tra 20/10/2026 — kiểm lại trang giá Cloudflare trước k
 
 | 25/10 | CMS soạn bài: gắn mã CP bằng ô gõ `#MBB` (gợi ý A→Z, mã khớp đầu trước rồi tới tên công ty; Enter / dấu cách / phẩy để thêm, dán nhiều mã 1 lần), thay lưới checkbox vài trăm mã. CMS @12 | Danh sách mã quá dài, khó tìm khi gắn |
 
+| 25/10 | Trang Mở tài khoản: ô "2. Mở tài khoản tại X" / "2. Chuyển ID tại X" bỏ đoạn chữ cố định; ngay dưới tiêu đề là mã + nút link, bên dưới là BÀI HƯỚNG DẪN do admin tự viết (field `openGuide` / `transferGuide` của từng công ty trong `settings.brokers`, HTML từ trình soạn thảo, ảnh ở `html/images/guides/<id>-mo-tai-khoan|chuyen-id/`). Trống thì không hiện. Soạn ở CMS > Cài đặt > Công ty chứng khoán > nút "✎ Hướng dẫn ...", "Lưu hướng dẫn" lưu luôn cả Cài đặt. CMS @13 | Có cả video lẫn bài tóm tắt hướng dẫn |
+
 ## XIV. Quy ước làm việc với chủ dự án
 - Tiếng Việt, ngắn gọn; nói rõ đã kiểm chứng gì / chưa kiểm chứng gì.
 - Làm xong 1 việc: commit (message tiếng Việt, kết thúc bằng dòng
