@@ -784,6 +784,8 @@ trong account. (Tra 20/10/2026 — kiểm lại trang giá Cloudflare trước k
 
 | 25/10 | Trang Mở tài khoản: ô "2. Mở tài khoản tại X" / "2. Chuyển ID tại X" bỏ đoạn chữ cố định; ngay dưới tiêu đề là mã + nút link, bên dưới là BÀI HƯỚNG DẪN do admin tự viết (field `openGuide` / `transferGuide` của từng công ty trong `settings.brokers`, HTML từ trình soạn thảo, ảnh ở `html/images/guides/<id>-mo-tai-khoan|chuyen-id/`). Trống thì không hiện. Soạn ở CMS > Cài đặt > Công ty chứng khoán > nút "✎ Hướng dẫn ...", "Lưu hướng dẫn" lưu luôn cả Cài đặt. CMS @13 | Có cả video lẫn bài tóm tắt hướng dẫn |
 
+| 25/10 | Trang Liên hệ: bài viết dưới thẻ liên hệ sửa được trong CMS > Cài đặt > Liên hệ > nút "✎ Bài viết trang Liên hệ" (cùng trình soạn với bài hướng dẫn công ty CK, ảnh ở `images/guides/lien-he/`). Lưu ở `settings.contactPage`; `scripts/build.py` ghi thẳng vào `html/lien-he/index.html` giữa 2 dấu `CONTACT_BODY` (bot đọc được), trống thì dùng bài mẫu `CONTACT_DEFAULT`; không đưa vào data.js. CMS @14 | Yêu cầu chủ dự án |
+
 ## XIV. Quy ước làm việc với chủ dự án
 - Tiếng Việt, ngắn gọn; nói rõ đã kiểm chứng gì / chưa kiểm chứng gì.
 - Làm xong 1 việc: commit (message tiếng Việt, kết thúc bằng dòng

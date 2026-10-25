@@ -200,7 +200,7 @@ def load_data():
     settings = read_json("settings.json")
     # Giá / chỉ số KHÔNG nằm trong data.js: trình duyệt tải số thật từ /api/market (GAS.md II.E)
     news = [read_json(f"news/{p['slug']}.json") for p in read_json("posts.json")]
-    site = {k: v for k, v in settings.items() if k not in ("brokers", "newsTags", "indices", "tickers")}
+    site = {k: v for k, v in settings.items() if k not in ("brokers", "newsTags", "indices", "tickers", "contactPage")}
     return {
         "site": site,
         "indices": settings["indices"],
@@ -257,6 +257,25 @@ for slug, title, desc, kind, index in PAGES:
     print("SEO:", path.relative_to(ROOT))
     if index:
         sitemap.append((url, today, "daily" if slug in ("", "tin-tuc") else "weekly", "1.0" if not slug else "0.8"))
+
+# ---------- Trang Liên hệ: bài viết dưới thẻ liên hệ = settings.contactPage (soạn trong CMS) ----------
+CONTACT_DEFAULT = """
+          <h2>Vũ có thể hỗ trợ bạn những gì?</h2>
+          <p>Đây là bài viết mẫu, sẽ được chỉnh sửa sau. Bạn có thể giới thiệu ngắn về bản thân, kinh nghiệm đầu tư và cách làm việc với khách hàng tại đây.</p>
+          <ul>
+            <li><b>Mở tài khoản chứng khoán</b> tại VPS, SSI, MBS, TCBS, HSC, KIS và nhận trọn bộ khóa học.</li>
+            <li><b>Chuyển ID tư vấn</b> về Đầu tư cùng Vũ — tài khoản, tiền và cổ phiếu của bạn giữ nguyên.</li>
+            <li><b>Giải đáp về khóa học và gói hội viên</b>: kích hoạt, thanh toán, quyền xem.</li>
+          </ul>
+          <h2>Thời gian làm việc</h2>
+          <p>Thứ 2 – Thứ 6, 8:00 – 17:00. Tin nhắn ngoài giờ sẽ được trả lời sớm nhất trong ngày làm việc tiếp theo.</p>
+"""
+contact_path = ROOT / "lien-he" / "index.html"
+contact_body = (read_json("settings.json").get("contactPage") or "").strip()
+contact_body = "\n" + contact_body + "\n" if contact_body else CONTACT_DEFAULT
+contact_path.write_text(re.sub(r"(<!-- CONTACT_BODY[^>]*-->).*?(\s*<!-- /CONTACT_BODY -->)",
+                               lambda m: m.group(1) + contact_body.rstrip() + m.group(2),
+                               contact_path.read_text(encoding="utf-8"), count=1, flags=re.S), encoding="utf-8")
 
 # ---------- Bài viết: bai-viet/<slug>/index.html ----------
 tag_labels = {t["id"]: t["label"] for t in data["newsTags"]}
