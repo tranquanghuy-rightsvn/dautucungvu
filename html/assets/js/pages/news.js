@@ -431,8 +431,9 @@
   function openTkSuggest() {
     const nq = norm(tkInput.value);
     // Khớp đầu mã trước, sau đó khớp tên công ty
-    const byCode = D.tickers.filter((t) => !nq || t.code.toLowerCase().startsWith(nq));
-    const byName = nq ? D.tickers.filter((t) => !byCode.includes(t) && norm(t.name).includes(nq)) : [];
+    const az = (a, b) => (a.code < b.code ? -1 : 1);
+    const byCode = D.tickers.filter((t) => !nq || t.code.toLowerCase().startsWith(nq)).sort(az);
+    const byName = nq ? D.tickers.filter((t) => !byCode.includes(t) && norm(t.name).includes(nq)).sort(az) : [];
     tkOptions = byCode.concat(byName).slice(0, 8);
     tkActive = nq && tkOptions.length ? 0 : -1;
     tkSugEl.innerHTML = tkOptions.length

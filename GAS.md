@@ -780,6 +780,8 @@ trong account. (Tra 20/10/2026 — kiểm lại trang giá Cloudflare trước k
 | 25/10 | Trang Tin tức: bỏ danh sách toàn bộ mã ở cột trái, thay bằng ô "Nhập mã CP" + chip mã đã chọn / đang theo dõi. Chủ đề + mã chọn được NHIỀU cùng lúc (bấm lần 2 bỏ chọn), bài phải có ĐỦ mọi tag đã chọn; "Tất cả" xoá hết. Chọn nhiều thì URL giữ trang tĩnh của bộ lọc đầu tiên (mã ưu tiên), không có trang tĩnh cho tổ hợp | Một sàn vài trăm mã, liệt kê hết quá dài (nhất là điện thoại); lọc từng tag riêng lẻ khó tìm tin |
 | 25/10 | Biểu đồ cổ phiếu: 2 đường MA sửa được số phiên ngay trên biểu đồ (2–500, nhớ trong trình duyệt), mặc định MA20 xanh lá mảnh + MA100 xám đậm dày hơn 1 bậc | Yêu cầu chủ dự án (trước là MA20 cam / MA50 tím) |
 
+| 25/10 | CMS soạn bài: gắn mã CP bằng ô gõ `#MBB` (gợi ý A→Z, mã khớp đầu trước rồi tới tên công ty; Enter / dấu cách / phẩy để thêm, dán nhiều mã 1 lần), thay lưới checkbox vài trăm mã. CMS @12 | Danh sách mã quá dài, khó tìm khi gắn |
+
 ## XIV. Quy ước làm việc với chủ dự án
 - Tiếng Việt, ngắn gọn; nói rõ đã kiểm chứng gì / chưa kiểm chứng gì.
 - Làm xong 1 việc: commit (message tiếng Việt, kết thúc bằng dòng
