@@ -60,7 +60,7 @@ export async function handleAccount(request, env, parts) {
       const name = String(b.name || "").trim();
       const phone = String(b.phone || "").replace(/[^\d+]/g, "");
       if (name.length < 2 || name.length > 80) throw new HttpError(400, "Vui lòng nhập họ tên");
-      if (!/^\+?\d{9,15}$/.test(phone)) throw new HttpError(400, "Số điện thoại / Zalo không hợp lệ");
+      if (phone && !/^\+?\d{9,15}$/.test(phone)) throw new HttpError(400, "Số điện thoại / Zalo không hợp lệ");
       checkPassword(b.password);
       const exists = await env.DB.prepare("SELECT id FROM users WHERE email = ?").bind(email).first();
       if (exists) throw new HttpError(409, "Email này đã có tài khoản — hãy đăng nhập hoặc dùng Quên mật khẩu");

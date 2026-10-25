@@ -309,7 +309,8 @@ Không áp dụng (site không có form liên hệ; liên hệ qua Zalo / điệ
 
 Không chạy trên GAS. GAS chỉ là giao diện quản trị gọi API admin của Worker.
 
-1. **Tài khoản**: email + mật khẩu (≥ 8 ký tự), họ tên, số điện thoại/Zalo.
+1. **Tài khoản**: email + mật khẩu (≥ 8 ký tự), họ tên, số điện thoại/Zalo (KHÔNG bắt buộc —
+   chủ dự án chốt 25/10: khách không thích bị ép nhập SĐT; nhập thì phải đúng định dạng).
    - Mật khẩu: PBKDF2-SHA256 (WebCrypto), salt riêng; không lưu bản gốc.
    - Session: cookie `HttpOnly; Secure; SameSite=Lax`, 30 ngày, lưu D1; xoá khi đăng xuất / đổi
      mật khẩu / đặt lại mật khẩu (đăng xuất mọi thiết bị).
@@ -772,6 +773,9 @@ trong account. (Tra 20/10/2026 — kiểm lại trang giá Cloudflare trước k
 | 20/10 | Video: CHỈ nhận MP4 (H.264 + AAC), không .mov (chủ dự án chốt "mp4 làm đi") | .mov từ iPhone thường là HEVC, nhiều trình duyệt không phát |
 | 20/10 | Video: không bảng D1, cờ `lesson.video = "mp4"` trong courses.json, khóa R2 suy từ slug | Slug bài bất biến; bớt 1 nơi lưu phải đồng bộ |
 | 20/10 | Deploy: GitHub Actions build + commit `html/`, Cloudflare Workers Builds nối Git tự deploy; KHÔNG dùng `CLOUDFLARE_API_TOKEN`; KHÔNG build trên Cloudflare | Yêu cầu chủ dự án ("build github action rồi ánh xạ lên cloudflare"). RIÊNG dự án này (dự án đặc biệt) — KHÔNG đưa vào skill, các dự án GAS khác giữ cách cũ |
+
+| 25/10 | Đăng ký: SĐT / Zalo KHÔNG bắt buộc (vẫn bắt buộc email để xác minh + quên mật khẩu) | Khách không thích bị ép nhập SĐT. Gửi mã xác nhận qua SMS: chưa làm — cần nhà cung cấp SMS trả phí, chờ chủ dự án chốt |
+| 25/10 | Thêm trang `/lien-he/` (ảnh Vũ + SĐT/Zalo + email, bên dưới là bài mẫu sửa sau) + mục "Liên hệ" trên menu; menu chuyển sang nút ☰ từ ≤ 1024px, 1025–1240px ẩn nút "Mở tài khoản" góc phải | Trên điện thoại không thấy thông tin liên hệ. Trang HTML viết tay như trang điều khoản; SĐT/Zalo lấy theo Cài đặt CMS bằng JS |
 
 ## XIV. Quy ước làm việc với chủ dự án
 - Tiếng Việt, ngắn gọn; nói rõ đã kiểm chứng gì / chưa kiểm chứng gì.

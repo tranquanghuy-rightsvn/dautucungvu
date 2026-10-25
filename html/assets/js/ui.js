@@ -482,6 +482,7 @@
     { id: "account", href: url("mo-tai-khoan/"), label: "Mở tài khoản" },
     { id: "news", href: url("tin-tuc/"), label: "Tin tức" },
     { id: "premium", href: url("premium/"), label: "Hội viên", premium: true },
+    { id: "contact", href: url("lien-he/"), label: "Liên hệ" },
   ];
 
   function navLinks(page) {
@@ -694,7 +695,7 @@
       '<form novalidate data-auth-form="register" hidden>' +
       field("reg-name", "Họ tên", 'name="name" autocomplete="name" required maxlength="80"') +
       field("reg-email", "Email", 'name="email" type="email" autocomplete="email" required') +
-      field("reg-phone", "Số điện thoại / Zalo", 'name="phone" type="tel" autocomplete="tel" required') +
+      field("reg-phone", "Số điện thoại / Zalo (không bắt buộc)", 'name="phone" type="tel" autocomplete="tel"') +
       field("reg-pass", "Mật khẩu (ít nhất 8 ký tự)", 'name="password" type="password" autocomplete="new-password" required minlength="8"') +
       '<div data-ts class="ts-box"></div><p class="form-error" data-form-error aria-live="polite"></p>' +
       '<button class="btn btn--green btn--lg btn--block" type="submit">Tạo tài khoản miễn phí</button>' +
@@ -772,7 +773,8 @@
     if (kind !== "forgot") need("password", form.password.value.length >= (kind === "register" ? 8 : 1), kind === "register" ? "Mật khẩu cần ít nhất 8 ký tự." : "Nhập mật khẩu.");
     if (kind === "register") {
       need("name", v("name").length >= 2, "Nhập họ tên.");
-      need("phone", /^\+?\d{9,15}$/.test(v("phone").replace(/[\s.-]/g, "")), "Nhập số điện thoại / Zalo.");
+      // SĐT không bắt buộc (khách không thích bị ép) — chỉ kiểm tra khi có nhập
+      need("phone", !v("phone") || /^\+?\d{9,15}$/.test(v("phone").replace(/[\s.-]/g, "")), "Số điện thoại / Zalo không hợp lệ.");
     }
     if (!ok) return;
     formError(form, "");
@@ -1151,6 +1153,12 @@
     document.querySelectorAll("[data-offer-title]").forEach((el) => (el.textContent = S.offerTitle));
     document.querySelectorAll("[data-offer-text]").forEach((el) => (el.textContent = S.offerText));
     document.querySelectorAll("[data-slogan]").forEach((el) => (el.textContent = S.slogan));
+    // Trang Liên hệ: SĐT / Zalo theo Cài đặt CMS (HTML có sẵn số để bot đọc)
+    document.querySelectorAll("[data-contact-tel]").forEach((el) => {
+      el.href = "tel:" + S.contact.phone.replace(/\s/g, "");
+      if (!el.classList.contains("btn")) el.textContent = S.contact.phone;
+    });
+    document.querySelectorAll("[data-contact-zalo]").forEach((el) => (el.href = S.contact.zalo));
   }
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", boot);
   else boot();

@@ -549,6 +549,7 @@ button {
   padding: 10px 14px;
   font-size: var(--fs-sm);
   font-weight: 600;
+  white-space: nowrap;
   color: rgba(255, 255, 255, 0.78);
   border-radius: 8px;
   transition: color 0.18s, background-color 0.18s;
@@ -578,6 +579,7 @@ button {
 .main-nav .nav-premium svg {
   width: 15px;
   height: 15px;
+  flex: none;
   color: var(--gold-400);
 }
 .header-actions {
@@ -731,7 +733,13 @@ button {
     display: none;
   }
 }
-@media (max-width: 920px) {
+/* Menu đủ 6 mục: màn hẹp thì bỏ nút "Mở tài khoản" ở góc phải (menu đã có mục này) */
+@media (min-width: 1025px) and (max-width: 1240px) {
+  .header-actions .btn--green {
+    display: none;
+  }
+}
+@media (max-width: 1024px) {
   .main-nav,
   .header-actions .hide-mobile {
     display: none;
