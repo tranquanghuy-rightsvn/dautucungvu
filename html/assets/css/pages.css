@@ -974,6 +974,93 @@
   min-height: 40px;
   font-size: var(--fs-sm);
 }
+/* Ô nhập mã CP + mã đã chọn / đang theo dõi (thay cho danh sách toàn bộ mã) */
+.ticker-picked {
+  padding: 0 4px;
+}
+.picked-label {
+  margin: 6px 0 6px;
+  font-size: var(--fs-xs);
+  font-weight: 700;
+  color: var(--muted);
+}
+.picked-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-bottom: 6px;
+}
+.picked-hint {
+  font-size: var(--fs-xs);
+  color: var(--muted);
+  line-height: 1.5;
+}
+.picked-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 10px;
+  border-radius: var(--r-pill);
+  border: 1px solid var(--line);
+  background: var(--surface);
+  font-size: var(--fs-xs);
+  transition: background-color 0.18s, border-color 0.18s;
+}
+.picked-chip:hover {
+  background: var(--surface-2);
+}
+.picked-chip[aria-pressed="true"] {
+  background: var(--blue-50);
+  border-color: var(--blue-500);
+}
+.picked-chip i {
+  width: 8px;
+  height: 8px;
+  border-radius: 2px;
+}
+.picked-chip b {
+  color: var(--navy-800);
+  font-size: var(--fs-sm);
+}
+.picked-chip span {
+  font-weight: 600;
+}
+.picked-chip svg {
+  width: 13px;
+  height: 13px;
+  color: var(--muted);
+}
+.ma-inputs {
+  display: flex;
+  gap: 6px;
+  margin-left: auto;
+}
+.ma-inputs label {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 2px 4px 2px 8px;
+  border: 1px solid var(--line);
+  border-left: 3px solid var(--ma);
+  border-radius: 8px;
+  font-size: var(--fs-xs);
+  font-weight: 700;
+  color: var(--ma);
+}
+.ma-inputs input {
+  width: 46px;
+  padding: 3px 2px;
+  border: 0;
+  background: transparent;
+  font: inherit;
+  color: var(--text);
+  text-align: center;
+  -moz-appearance: textfield;
+}
+.ma-inputs input::-webkit-inner-spin-button,
+.ma-inputs input::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+}
 /* Hiện đủ mọi mã, không giấu trong khung cuộn */
 .ticker-list {
   display: grid;
@@ -1190,8 +1277,7 @@
     position: static;
     padding: 12px;
   }
-  .ticker-side h2,
-  .ticker-side .search-box {
+  .ticker-side h2 {
     display: none;
   }
   /* Chip mã xếp lưới đều, không trượt ra ngoài khung hình */

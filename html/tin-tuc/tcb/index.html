@@ -144,7 +144,14 @@
       <div class="container news-layout">
         <aside class="panel ticker-side" aria-label="Tin theo mã cổ phiếu">
           <h2>Tin theo mã cổ phiếu</h2>
-          <ul class="ticker-list" data-ticker-list></ul>
+          <div class="search-box" id="tim-ma-cp">
+            <span data-icon="search"></span>
+            <label class="sr-only" for="ticker-search">Nhập mã cổ phiếu</label>
+            <input class="input" id="ticker-search" type="search" placeholder="Nhập mã CP..." autocomplete="off" autocapitalize="characters"
+              role="combobox" aria-expanded="false" aria-controls="ticker-suggest" aria-autocomplete="list">
+            <div class="suggest" id="ticker-suggest" role="listbox" aria-label="Mã cổ phiếu" hidden></div>
+          </div>
+          <div class="ticker-picked" data-ticker-picked></div>
         </aside>
 
         <div>

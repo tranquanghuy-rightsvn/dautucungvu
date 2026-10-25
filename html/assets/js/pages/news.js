@@ -1,4 +1,5 @@
-/* Trang tin tức: lọc theo mã cổ phiếu, chủ đề hoặc từ khóa; mới nhất lên đầu */
+/* Trang tin tức: lọc theo mã cổ phiếu, chủ đề hoặc từ khóa; mới nhất lên đầu.
+   Chọn nhiều chủ đề / mã cùng lúc (bấm lần 2 bỏ chọn): bài phải có ĐỦ mọi tag đã chọn. */
 (function () {
   const { icon, fmt, norm, Charts, store, toast, escapeHtml, newsItem, newsSorted, tagLabel, newsUrl, url, Market } = UI;
   const D = APP_DATA;
@@ -8,15 +9,22 @@
   // Trạng thái lấy từ trang tĩnh: /tin-tuc/<mã viết thường>/ hoặc /tin-tuc/<chủ đề>/
   const page = document.body.dataset;
   const state = {
-    ticker: D.tickers.some((t) => t.code === page.ticker) ? page.ticker : "",
-    tag: D.newsTags.some((t) => t.id === page.tag) ? page.tag : "",
+    tickers: D.tickers.some((t) => t.code === page.ticker) ? [page.ticker] : [],
+    tags: D.newsTags.some((t) => t.id === page.tag) ? [page.tag] : [],
     q: "",
   };
+  const toggle = (arr, v) => (arr.includes(v) ? arr.filter((x) => x !== v) : arr.concat(v));
+  // Mã đang xem giá + biểu đồ: mã chọn gần nhất
+  const focusTicker = () => state.tickers[state.tickers.length - 1] || "";
   let limit = PAGE;
   let follows = store.get(FKEY, []);
 
   const $ = (s) => document.querySelector(s);
-  const listEl = $("[data-ticker-list]");
+  const pickedEl = $("[data-ticker-picked]");
+  const tkInput = document.getElementById("ticker-search");
+  const tkSugEl = document.getElementById("ticker-suggest");
+  const bannerH1 = $(".news-banner h1");
+  const bannerLead = $(".news-banner h1 + p");
   const topicsEl = $("[data-topics]");
   const quoteEl = $("[data-quote]");
   const chartEl = $("[data-chart]");
@@ -54,36 +62,39 @@
   }
   function filtered(s) {
     const f = s || state;
-    return newsSorted(D.news.filter((n) => (!f.ticker || n.tags.includes(f.ticker)) && (!f.tag || n.tags.includes(f.tag)) && matchesQuery(n, f.q)));
+    const need = f.tags.concat(f.tickers);
+    return newsSorted(D.news.filter((n) => need.every((t) => n.tags.includes(t)) && matchesQuery(n, f.q)));
   }
 
   /* ----- Chủ đề trong banner ----- */
   function renderTopics() {
     topicsEl.innerHTML =
-      '<button type="button" class="topic" data-topic="" aria-pressed="' + !state.tag + '">Tất cả</button>' +
-      D.newsTags.map((t) => '<button type="button" class="topic" data-topic="' + t.id + '" aria-pressed="' + (state.tag === t.id) + '">' + t.label + "</button>").join("");
+      '<button type="button" class="topic" data-topic="" aria-pressed="' + !(state.tags.length || state.tickers.length || state.q) + '">Tất cả</button>' +
+      D.newsTags.map((t) => '<button type="button" class="topic" data-topic="' + t.id + '" aria-pressed="' + state.tags.includes(t.id) + '">' + t.label + "</button>").join("");
   }
 
-  /* ----- Danh sách mã bên trái ----- */
+  /* ----- Cột trái: ô nhập mã CP + các mã đã chọn / đang theo dõi (không liệt kê hết mã) ----- */
+  function tickerChip(code, on) {
+    const t = D.tickers.find((x) => x.code === code);
+    if (!t) return "";
+    return (
+      '<button type="button" class="picked-chip" data-ticker="' + code + '" aria-pressed="' + on + '"' + (on ? ' aria-label="Bỏ chọn ' + code + '"' : "") + ">" +
+      '<i style="background:' + t.color + '"></i><b>' + code + "</b>" +
+      '<span class="num ' + fmt.cls(t.change) + '">' + fmt.price(t.price) + " " + fmt.pct(t.change) + "</span>" +
+      (on ? icon("x") : "") + "</button>"
+    );
+  }
   function renderTickers() {
-    const items = [{ code: "", label: "Toàn thị trường" }].concat(D.tickers.map((t) => ({ code: t.code, label: t.code, t })));
-    listEl.innerHTML = items
-      .map((x) => {
-        const cnt = filtered({ ticker: x.code, tag: state.tag, q: state.q }).length;
-        return (
-          '<li><button type="button" data-ticker="' + x.code + '" aria-pressed="' + (x.code === state.ticker) + '">' +
-          "<b>" + (x.t ? '<i style="background:' + x.t.color + '"></i>' : "") + x.label + (follows.includes(x.code) ? ' <span title="Đang theo dõi" style="color:var(--gold-500)">★</span>' : "") + "</b>" +
-          '<span class="cnt">' + cnt + "</span>" +
-          (x.t ? '<span class="chg num ' + fmt.cls(x.t.change) + '">' + fmt.price(x.t.price) + " " + fmt.pct(x.t.change) + "</span>" : "") +
-          "</button></li>"
-        );
-      })
-      .join("");
+    const fol = follows.filter((c) => !state.tickers.includes(c));
+    pickedEl.innerHTML =
+      (state.tickers.length ? '<p class="picked-label">Đang lọc</p><div class="picked-row">' + state.tickers.map((c) => tickerChip(c, true)).join("") + "</div>" : "") +
+      (fol.length ? '<p class="picked-label">★ Đang theo dõi</p><div class="picked-row">' + fol.map((c) => tickerChip(c, false)).join("") + "</div>" : "") +
+      (!state.tickers.length && !fol.length ? '<p class="picked-hint">Nhập mã để xem tin của cổ phiếu đó. Chọn thêm chủ đề phía trên để lọc kỹ hơn.</p>' : "");
   }
 
   /* ----- Thẻ giá khi đang lọc theo mã ----- */
   function renderQuote() {
-    const t = D.tickers.find((x) => x.code === state.ticker);
+    const t = D.tickers.find((x) => x.code === focusTicker());
     quoteEl.hidden = !t;
     followBtn.hidden = !t;
     if (!t) return;
@@ -98,7 +109,8 @@
   }
 
   /* ----- Biểu đồ nến khi đang lọc theo mã: 5 phút (~1 tháng) / ngày / tuần / tháng (toàn bộ
-     lịch sử từ 2012), khối lượng + MA20 / MA50. Dữ liệu /api/market/chart/<MÃ>/<khung> chỉ tải khi
+     lịch sử từ 2012), khối lượng + 2 đường MA (mặc định MA20 / MA100, người xem tự sửa số
+     phiên ngay trên biểu đồ, nhớ trong trình duyệt). Dữ liệu /api/market/chart/<MÃ>/<khung> chỉ tải khi
      bấm mã; thư viện TradingView Lightweight Charts (tự host, giấy phép Apache 2.0 — giữ logo
      TradingView theo điều kiện giấy phép) cũng chỉ tải khi cần. ----- */
   const TFS = [
@@ -107,7 +119,16 @@
     { id: "1W", label: "Tuần", show: 110 },
     { id: "1M", label: "Tháng", show: 0 }, // 0 = vừa khung toàn bộ lịch sử
   ];
-  const MAS = [{ n: 20, color: "#f08a1c" }, { n: 50, color: "#7c3aed" }];
+  // MA ngắn: xanh lá, mảnh; MA dài: xám đậm, dày hơn 1 bậc (xu hướng dài)
+  const MA_KEY = "dtcv-ma";
+  const MA_DEF = [20, 100];
+  const MAS = [{ color: "#16a34a", width: 1 }, { color: "#3f3f46", width: 2 }];
+  const savedMa = store.get(MA_KEY, MA_DEF);
+  MAS.forEach((m, j) => (m.n = maPeriod(savedMa[j], MA_DEF[j])));
+  function maPeriod(v, def) {
+    const n = Math.round(Number(v));
+    return n >= 2 && n <= 500 ? n : def;
+  }
   const UP = "#16a34a", DOWN = "#e0393e";
   const chartState = { code: "", tf: "1D", chart: null, candle: null, vol: null, ma: [], bars: [], req: 0 };
   const chartCache = {}; // "MÃ/khung" -> {at, data}: bấm qua lại giữa các khung không tải lại
@@ -137,6 +158,8 @@
     chartEl.innerHTML =
       '<div class="chart-head"><div class="tabs" role="tablist" aria-label="Khung thời gian mỗi nến">' +
       TFS.map((f) => '<button type="button" class="tab" role="tab" data-tf="' + f.id + '" aria-selected="' + (f.id === chartState.tf) + '">' + f.label + "</button>").join("") +
+      '</div><div class="ma-inputs" aria-label="Số phiên của 2 đường MA">' +
+      MAS.map((m, j) => '<label style="--ma:' + m.color + '"><span>MA</span><input type="number" inputmode="numeric" min="2" max="500" value="' + m.n + '" data-ma="' + j + '" aria-label="Số phiên đường MA thứ ' + (j + 1) + '"></label>').join("") +
       '</div><button type="button" class="link-more" data-chart-all>Xem toàn bộ</button></div>' +
       '<div class="chart-legend num" data-chart-legend></div>' +
       '<div class="chart-box" data-chart-box><p class="chart-msg" data-chart-msg>Đang tải biểu đồ…</p></div>' +
@@ -163,7 +186,7 @@
     chartState.vol = chart.addSeries(LC.HistogramSeries, { priceFormat: { type: "custom", formatter: volShort, minMove: 1 }, lastValueVisible: false, priceLineVisible: false }, 1);
     chart.panes()[0].setStretchFactor(0.78);
     chart.panes()[1].setStretchFactor(0.22);
-    chartState.ma = MAS.map((m) => chart.addSeries(LC.LineSeries, { color: m.color, lineWidth: 1, priceFormat, priceLineVisible: false, lastValueVisible: false, crosshairMarkerVisible: false }));
+    chartState.ma = MAS.map((m) => chart.addSeries(LC.LineSeries, { color: m.color, lineWidth: m.width, priceFormat, priceLineVisible: false, lastValueVisible: false, crosshairMarkerVisible: false }));
     chart.subscribeCrosshairMove((p) => renderLegend(p && p.time !== undefined ? chartState.bars.findIndex((b) => b.time === p.time) : -1));
   }
 
@@ -257,9 +280,10 @@
   }
 
   function renderChart() {
-    chartEl.hidden = !state.ticker;
-    if (!state.ticker || state.ticker === chartState.code) return;
-    chartState.code = state.ticker;
+    const code = focusTicker();
+    chartEl.hidden = !code;
+    if (!code || code === chartState.code) return;
+    chartState.code = code;
     if (!chartEl.firstChild) chartShell();
     loadChart(false);
   }
@@ -273,6 +297,19 @@
     }
     if (e.target.closest("[data-chart-all]") && chartState.chart) showRange(true);
   });
+  // Sửa số phiên MA: vẽ lại 2 đường từ nến đang có, không tải lại dữ liệu
+  chartEl.addEventListener("change", (e) => {
+    const inp = e.target.closest("[data-ma]");
+    if (!inp) return;
+    const j = +inp.dataset.ma;
+    MAS[j].n = maPeriod(inp.value, MAS[j].n);
+    inp.value = MAS[j].n;
+    store.set(MA_KEY, MAS.map((m) => m.n));
+    if (!chartState.chart || !chartState.bars.length) return;
+    chartState.maData = MAS.map((m) => sma(chartState.bars, m.n));
+    chartState.ma.forEach((ser, k) => ser.setData(chartState.maData[k]));
+    renderLegend(-1);
+  });
   // Trong giờ giao dịch: làm mới nến mỗi 60s (giữ vùng đang xem)
   setInterval(() => {
     if (chartState.chart && !chartEl.hidden && Market.live && document.visibilityState === "visible") loadChart(true, true);
@@ -281,12 +318,14 @@
   /* ----- Tiêu đề, bộ lọc đang áp dụng, danh sách bài ----- */
   function renderNews() {
     const list = filtered();
-    const parts = [];
-    if (state.ticker) parts.push({ k: "ticker", label: state.ticker });
-    if (state.tag) parts.push({ k: "tag", label: tagLabel(state.tag) });
+    const parts = state.tickers.map((c) => ({ k: "ticker:" + c, label: c }))
+      .concat(state.tags.map((t) => ({ k: "tag:" + t, label: tagLabel(t) })));
     if (state.q) parts.push({ k: "q", label: "“" + state.q + "”" });
 
-    titleEl.textContent = state.ticker ? "Tin tức liên quan đến " + state.ticker : state.tag ? tagLabel(state.tag) : state.q ? "Kết quả tìm kiếm" : "Tất cả tin tức";
+    const names = state.tickers.concat(state.tags.map(tagLabel));
+    titleEl.textContent = names.length
+      ? (state.tickers.length && !state.tags.length ? "Tin tức liên quan đến " : "Tin tức: ") + names.join(" + ")
+      : state.q ? "Kết quả tìm kiếm" : "Tất cả tin tức";
     countEl.textContent = list.length + " bài viết, mới nhất trước";
     chipsEl.innerHTML = parts.length
       ? parts.map((p) => '<button type="button" class="filter-chip" data-clear="' + p.k + '" aria-label="Bỏ lọc ' + escapeHtml(p.label) + '">' + escapeHtml(p.label) + icon("x") + "</button>").join("") +
@@ -305,16 +344,34 @@
     moreWrap.hidden = list.length <= limit;
   }
 
+  // Banner khớp bộ lọc: đúng 1 chủ đề / 1 mã thì giống trang tĩnh của nó (scripts/build.py), còn lại là trang chung
+  const BANNER0 = { h1: "Tin tức chứng khoán", lead: "Nhận định thị trường mỗi sáng, tin doanh nghiệp, cổ tức, BCTC và dòng tiền khối ngoại, sắp xếp mới nhất lên đầu." };
+  function renderBanner() {
+    let b = BANNER0;
+    const n = state.tags.length + state.tickers.length;
+    if (n === 1 && state.tags.length) {
+      const l = tagLabel(state.tags[0]);
+      b = { h1: l, lead: "Tổng hợp tin " + l.toLowerCase() + " mới nhất trên thị trường chứng khoán Việt Nam, cập nhật mỗi ngày tại Đầu tư cùng Vũ." };
+    } else if (n === 1) {
+      const t = D.tickers.find((x) => x.code === state.tickers[0]);
+      b = { h1: "Tin tức cổ phiếu " + t.code, lead: "Tin tức, kết quả kinh doanh, cổ tức và phân tích cổ phiếu " + t.code + " – " + t.name + ", mới nhất lên đầu." };
+    }
+    if (bannerH1) bannerH1.textContent = b.h1;
+    if (bannerLead) bannerLead.textContent = b.lead;
+  }
+
   function apply(patch, opts) {
     Object.assign(state, patch);
     limit = PAGE;
+    renderBanner();
     renderTopics();
     renderTickers();
     renderQuote();
     renderChart();
     renderNews();
-    // Địa chỉ là trang tĩnh của mã (ưu tiên) hoặc chủ đề đang lọc; từ khóa không đưa lên URL
-    const href = newsUrl(state.ticker || state.tag);
+    // Địa chỉ là trang tĩnh của mã (ưu tiên) hoặc chủ đề chọn đầu tiên; chọn nhiều thì không có
+    // trang tĩnh riêng cho tổ hợp (GAS.md 0.1) — giữ trang của bộ lọc đầu; từ khóa không đưa lên URL
+    const href = newsUrl(state.tickers[0] || state.tags[0]);
     if (href !== location.pathname || location.hash) history.replaceState(null, "", href);
     if (opts && opts.scroll) titleEl.scrollIntoView({ behavior: "smooth", block: "start" });
   }
@@ -363,10 +420,62 @@
   function choose(o) {
     closeSuggest();
     input.value = "";
-    if (o.type === "tag") apply({ tag: o.value, q: "" }, { scroll: true });
-    else if (o.type === "ticker") apply({ ticker: o.value, q: "" }, { scroll: true });
+    if (o.type === "tag") apply({ tags: state.tags.includes(o.value) ? state.tags : state.tags.concat(o.value), q: "" }, { scroll: true });
+    else if (o.type === "ticker") apply({ tickers: state.tickers.includes(o.value) ? state.tickers : state.tickers.concat(o.value), q: "" }, { scroll: true });
     else apply({ q: o.value }, { scroll: true });
   }
+
+  /* ----- Ô nhập mã CP ở cột trái (chỉ gợi ý mã) ----- */
+  let tkOptions = [];
+  let tkActive = -1;
+  function openTkSuggest() {
+    const nq = norm(tkInput.value);
+    // Khớp đầu mã trước, sau đó khớp tên công ty
+    const byCode = D.tickers.filter((t) => !nq || t.code.toLowerCase().startsWith(nq));
+    const byName = nq ? D.tickers.filter((t) => !byCode.includes(t) && norm(t.name).includes(nq)) : [];
+    tkOptions = byCode.concat(byName).slice(0, 8);
+    tkActive = nq && tkOptions.length ? 0 : -1;
+    tkSugEl.innerHTML = tkOptions.length
+      ? tkOptions.map((t, i) => {
+          const cnt = D.news.filter((n) => n.tags.includes(t.code)).length;
+          return '<button type="button" role="option" id="tsg-' + i + '" data-tsg="' + i + '" aria-selected="' + (i === tkActive) + '"><b>' + t.code + (state.tickers.includes(t.code) ? " ✓" : "") + "</b><span>" + escapeHtml(t.name) + " · " + cnt + " bài</span></button>";
+        }).join("")
+      : '<div class="suggest-group">Không có mã phù hợp</div>';
+    tkSugEl.hidden = false;
+    tkInput.setAttribute("aria-expanded", "true");
+    tkInput.setAttribute("aria-activedescendant", tkActive >= 0 ? "tsg-" + tkActive : "");
+  }
+  function closeTkSuggest() {
+    tkSugEl.hidden = true;
+    tkInput.setAttribute("aria-expanded", "false");
+    tkInput.removeAttribute("aria-activedescendant");
+  }
+  function moveTkActive(d) {
+    if (!tkOptions.length) return;
+    tkActive = (tkActive + d + tkOptions.length) % tkOptions.length;
+    tkSugEl.querySelectorAll("[data-tsg]").forEach((b) => b.setAttribute("aria-selected", +b.dataset.tsg === tkActive));
+    tkInput.setAttribute("aria-activedescendant", "tsg-" + tkActive);
+    tkSugEl.querySelector("#tsg-" + tkActive).scrollIntoView({ block: "nearest" });
+  }
+  function chooseTicker(t) {
+    closeTkSuggest();
+    tkInput.value = "";
+    tkInput.blur();
+    if (t && !state.tickers.includes(t.code)) apply({ tickers: state.tickers.concat(t.code) }, { scroll: window.matchMedia("(max-width: 960px)").matches });
+  }
+  tkInput.addEventListener("focus", openTkSuggest);
+  tkInput.addEventListener("input", openTkSuggest);
+  tkInput.addEventListener("keydown", (e) => {
+    if (e.key === "ArrowDown") { e.preventDefault(); tkSugEl.hidden ? openTkSuggest() : moveTkActive(1); }
+    else if (e.key === "ArrowUp") { e.preventDefault(); moveTkActive(-1); }
+    else if (e.key === "Escape") closeTkSuggest();
+    else if (e.key === "Enter") {
+      e.preventDefault();
+      const exact = D.tickers.find((t) => t.code === tkInput.value.trim().toUpperCase());
+      chooseTicker(exact || tkOptions[tkActive]);
+    }
+  });
+  tkSugEl.addEventListener("mousedown", (e) => e.preventDefault());
 
   input.addEventListener("focus", openSuggest);
   input.addEventListener("input", openSuggest);
@@ -383,16 +492,21 @@
   sugEl.addEventListener("mousedown", (e) => e.preventDefault()); // giữ focus ở ô nhập khi bấm gợi ý
   document.addEventListener("click", (e) => {
     if (!e.target.closest("#tim-ma")) closeSuggest();
+    if (!e.target.closest("#tim-ma-cp")) closeTkSuggest();
     const sg = e.target.closest("[data-sg]");
     if (sg) return choose(options[+sg.dataset.sg]);
+    const ts = e.target.closest("[data-tsg]");
+    if (ts) return chooseTicker(tkOptions[+ts.dataset.tsg]);
     const tp = e.target.closest("[data-topic]");
-    if (tp) return apply({ tag: tp.dataset.topic === state.tag ? "" : tp.dataset.topic });
+    if (tp) return apply(tp.dataset.topic ? { tags: toggle(state.tags, tp.dataset.topic) } : { tags: [], tickers: [], q: "" });
     const tk = e.target.closest("[data-ticker]");
-    if (tk) return apply({ ticker: tk.dataset.ticker }, { scroll: window.matchMedia("(max-width: 960px)").matches });
+    if (tk) return apply({ tickers: toggle(state.tickers, tk.dataset.ticker) });
     const cl = e.target.closest("[data-clear]");
     if (cl) {
-      const k = cl.dataset.clear;
-      apply(k === "all" ? { ticker: "", tag: "", q: "" } : { [k]: "" });
+      const [k, v] = cl.dataset.clear.split(":");
+      if (k === "all") apply({ tickers: [], tags: [], q: "" });
+      else if (k === "q") apply({ q: "" });
+      else apply({ [k + "s"]: state[k + "s"].filter((x) => x !== v) });
     }
   });
 
@@ -402,7 +516,7 @@
   });
 
   followBtn.addEventListener("click", () => {
-    const code = state.ticker;
+    const code = focusTicker();
     const on = follows.includes(code);
     follows = on ? follows.filter((c) => c !== code) : follows.concat(code);
     store.set(FKEY, follows);
