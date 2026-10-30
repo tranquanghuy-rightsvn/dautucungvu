@@ -2005,6 +2005,468 @@ window.APP_DATA = {
       "name": "CTCP Đầu tư và Phát triển Du lịch ITC",
       "sector": "Bất động sản",
       "color": "#1e3a8a"
+    },
+    {
+      "code": "CTF",
+      "name": "CTCP City Auto",
+      "sector": "Ôtô và linh kiện ôtô",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "DRC",
+      "name": "CTCP Cao Su Đà Nẵng",
+      "sector": "Ôtô và linh kiện ôtô",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "HAX",
+      "name": "CTCP Dịch Vụ Ô Tô Hàng Xanh",
+      "sector": "Ôtô và linh kiện ôtô",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "CSM",
+      "name": "CTCP Công nghiệp cao su Miền Nam",
+      "sector": "Ôtô và linh kiện ôtô",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "VKC",
+      "name": "CTCP VKC Holdings",
+      "sector": "Ôtô và linh kiện ôtô",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "TMT",
+      "name": "CTCP Ô tô TMT",
+      "sector": "Ôtô và linh kiện ôtô",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "GGG",
+      "name": "CTCP Ô tô Giải Phóng",
+      "sector": "Ôtô và linh kiện ôtô",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "HTL",
+      "name": "CTCP Kỹ thuật và Ô tô Trường Long",
+      "sector": "Ôtô và linh kiện ôtô",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "SVC",
+      "name": "CTCP Dịch vụ Tổng hợp Sài Gòn",
+      "sector": "Ôtô và linh kiện ôtô",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "CMC",
+      "name": "CTCP Đầu tư CMC",
+      "sector": "Ôtô và linh kiện ôtô",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "DAS",
+      "name": "CTCP Máy - Thiết bị Dầu khí Đà Nẵng",
+      "sector": "Ôtô và linh kiện ôtô",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "SRC",
+      "name": "CTCP Cao su Sao vàng",
+      "sector": "Ôtô và linh kiện ôtô",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "VMA",
+      "name": "CTCP Công nghiệp Ô tô - Vinacomin",
+      "sector": "Ôtô và linh kiện ôtô",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "CPH",
+      "name": "CTCP Phục vụ mai táng Hải Phòng",
+      "sector": "Dịch vụ dành cho người tiêu dùng",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "TTF",
+      "name": "CTCP Tập đoàn Kỹ nghệ Gỗ Trường Thành",
+      "sector": "Hàng gia dụng & Xây dựng nhà cửa",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "SHI",
+      "name": "CTCP Quốc tế Sơn Hà",
+      "sector": "Hàng gia dụng & Xây dựng nhà cửa",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "MBG",
+      "name": "CTCP Tập đoàn MBG",
+      "sector": "Hàng gia dụng & Xây dựng nhà cửa",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "DDB",
+      "name": "CTCP Thương mại và Xây dựng Đông Dương",
+      "sector": "Hàng gia dụng & Xây dựng nhà cửa",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "EVE",
+      "name": "EVE",
+      "sector": "Hàng gia dụng & Xây dựng nhà cửa",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "KSD",
+      "name": "CTCP Đầu tư DNA",
+      "sector": "Hàng gia dụng & Xây dựng nhà cửa",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "GDT",
+      "name": "CTCP Chế biến Gỗ Đức Thành",
+      "sector": "Hàng gia dụng & Xây dựng nhà cửa",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "KMR",
+      "name": "CTCP Mirae",
+      "sector": "Hàng gia dụng & Xây dựng nhà cửa",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "SAV",
+      "name": "CTCP Hợp tác kinh tế và Xuất nhập khẩu Savimex",
+      "sector": "Hàng gia dụng & Xây dựng nhà cửa",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "ACG",
+      "name": "CTCP Gỗ An Cường",
+      "sector": "Hàng gia dụng & Xây dựng nhà cửa",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "XHC",
+      "name": "CTCP Xuân Hòa Việt Nam",
+      "sector": "Hàng gia dụng & Xây dựng nhà cửa",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "GTA",
+      "name": "CTCP Chế biến Gỗ Thuận An",
+      "sector": "Hàng gia dụng & Xây dựng nhà cửa",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "KTL",
+      "name": "CTCP Kim khí Thăng Long",
+      "sector": "Hàng gia dụng & Xây dựng nhà cửa",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "MHL",
+      "name": "CTCP Minh Hữu Liên",
+      "sector": "Hàng gia dụng & Xây dựng nhà cửa",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "PID",
+      "name": "CTCP Trang trí Nội thất Dầu khí",
+      "sector": "Hàng gia dụng & Xây dựng nhà cửa",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "VTB",
+      "name": "CTCP Viettronics Tân Bình",
+      "sector": "Hàng tiêu khiển",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "GLT",
+      "name": "CTCP Kỹ thuật Điện Toàn Cầu",
+      "sector": "Hàng tiêu khiển",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "BEL",
+      "name": "CTCP Điện tử Biên Hòa",
+      "sector": "Hàng tiêu khiển",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "PNJ",
+      "name": "CTCP Vàng bạc Đá quý Phú Nhuận",
+      "sector": "Đồ dùng cá nhân",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "TNG",
+      "name": "CTCP Đầu tư và Thương mại TNG",
+      "sector": "Đồ dùng cá nhân",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "HLT",
+      "name": "CTCP Dệt - May Hoàng Thị Loan",
+      "sector": "Đồ dùng cá nhân",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "VGT",
+      "name": "Tập đoàn Dệt may Việt Nam",
+      "sector": "Đồ dùng cá nhân",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "TCM",
+      "name": "CTCP Dệt may - Đầu tư - Thương mại Thành Công",
+      "sector": "Đồ dùng cá nhân",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "GIL",
+      "name": "CTCP Sản xuất kinh doanh Xuất nhập khẩu Bình Thạnh",
+      "sector": "Đồ dùng cá nhân",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "MSH",
+      "name": "CTCP May Sông Hồng",
+      "sector": "Đồ dùng cá nhân",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "ADS",
+      "name": "CTCP Damsan",
+      "sector": "Đồ dùng cá nhân",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "FTM",
+      "name": "CTCP Đầu tư và Phát triển Đức Quân",
+      "sector": "Đồ dùng cá nhân",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "MPT",
+      "name": "CTCP Tập đoàn MPT",
+      "sector": "Đồ dùng cá nhân",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "PPH",
+      "name": "Tổng CTCP Phong Phú",
+      "sector": "Đồ dùng cá nhân",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "G20",
+      "name": "CTCP Đầu tư Dệt may Vĩnh Phúc",
+      "sector": "Đồ dùng cá nhân",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "HSM",
+      "name": "Tổng CTCP Dệt May Hà Nội",
+      "sector": "Đồ dùng cá nhân",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "TDT",
+      "name": "CTCP Đầu tư và Phát triển TDT",
+      "sector": "Đồ dùng cá nhân",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "VDG",
+      "name": "CTCP Vạn Đạt Group",
+      "sector": "Đồ dùng cá nhân",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "NDT",
+      "name": "Tổng CTCP Dệt may Nam Định",
+      "sector": "Đồ dùng cá nhân",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "STK",
+      "name": "CTCP Sợi Thế Kỷ",
+      "sector": "Đồ dùng cá nhân",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "TTG",
+      "name": "CTCP Royal Healthtech",
+      "sector": "Đồ dùng cá nhân",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "HTG",
+      "name": "Tổng CTCP Dệt may Hòa Thọ",
+      "sector": "Đồ dùng cá nhân",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "VGG",
+      "name": "Tổng CTCP May Việt Tiến",
+      "sector": "Đồ dùng cá nhân",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "HDM",
+      "name": "CTCP Dệt May Huế",
+      "sector": "Đồ dùng cá nhân",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "M10",
+      "name": "Tổng công ty May 10 - CTCP",
+      "sector": "Đồ dùng cá nhân",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "AG1",
+      "name": "CTCP 28.1",
+      "sector": "Đồ dùng cá nhân",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "BDG",
+      "name": "CTCP May mặc Bình Dương",
+      "sector": "Đồ dùng cá nhân",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "X20",
+      "name": "CTCP X20",
+      "sector": "Đồ dùng cá nhân",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "SGI",
+      "name": "CTCP Đầu tư SGI Holdings",
+      "sector": "Đồ dùng cá nhân",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "HNI",
+      "name": "CTCP May Hữu Nghị",
+      "sector": "Đồ dùng cá nhân",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "TVT",
+      "name": "Tổng Công ty Việt Thắng - CTCP",
+      "sector": "Đồ dùng cá nhân",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "A32",
+      "name": "CTCP 32",
+      "sector": "Đồ dùng cá nhân",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "BMG",
+      "name": "CTCP May Bình Minh",
+      "sector": "Đồ dùng cá nhân",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "BVN",
+      "name": "CTCP Bông Việt Nam",
+      "sector": "Đồ dùng cá nhân",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "DCG",
+      "name": "CTCP Tổng công ty May Đáp Cầu",
+      "sector": "Đồ dùng cá nhân",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "DM7",
+      "name": "CTCP Dệt May 7",
+      "sector": "Đồ dùng cá nhân",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "GMC",
+      "name": "CTCP Garmex Sài Gòn",
+      "sector": "Đồ dùng cá nhân",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "GTD",
+      "name": "CTCP Giầy Thượng Đình",
+      "sector": "Đồ dùng cá nhân",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "HUG",
+      "name": "Tổng Công ty May Hưng Yên - CTCP",
+      "sector": "Đồ dùng cá nhân",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "MGG",
+      "name": "Tổng Công ty Đức Giang - CTCP",
+      "sector": "Đồ dùng cá nhân",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "MNB",
+      "name": "Tổng công ty May Nhà Bè - CTCP",
+      "sector": "Đồ dùng cá nhân",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "NJC",
+      "name": "CTCP May Nam Định",
+      "sector": "Đồ dùng cá nhân",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "NTT",
+      "name": "CTCP Dệt - May Nha Trang",
+      "sector": "Đồ dùng cá nhân",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "PTG",
+      "name": "CTCP May Xuất khẩu Phan Thiết",
+      "sector": "Đồ dùng cá nhân",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "TET",
+      "name": "CTCP Bất động sản Pristie",
+      "sector": "Đồ dùng cá nhân",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "THM",
+      "name": "CTCP Tứ Hải Hà Nam",
+      "sector": "Đồ dùng cá nhân",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "VDN",
+      "name": "CTCP Vinatex Đà Nẵng",
+      "sector": "Đồ dùng cá nhân",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "VTI",
+      "name": "CTCP Sản xuất - Xuất nhập khẩu Dệt May",
+      "sector": "Đồ dùng cá nhân",
+      "color": "#1e3a8a"
     }
   ],
   "courses": [
@@ -2338,7 +2800,9 @@ window.APP_DATA = {
       "transferUrl": "",
       "transferCode": "BB80",
       "openVideo": "https://youtu.be/M4ewTyYz9pk?si=l6olAlLeAA7i9vT8",
-      "transferVideo": ""
+      "transferVideo": "",
+      "openGuide": "",
+      "transferGuide": ""
     },
     {
       "id": "ssi",
@@ -2351,7 +2815,9 @@ window.APP_DATA = {
       "transferUrl": "",
       "transferCode": "",
       "openVideo": "",
-      "transferVideo": ""
+      "transferVideo": "",
+      "openGuide": "",
+      "transferGuide": ""
     },
     {
       "id": "mbs",
@@ -2364,7 +2830,9 @@ window.APP_DATA = {
       "transferUrl": "",
       "transferCode": "",
       "openVideo": "",
-      "transferVideo": ""
+      "transferVideo": "",
+      "openGuide": "",
+      "transferGuide": ""
     },
     {
       "id": "tcbs",
@@ -2377,7 +2845,9 @@ window.APP_DATA = {
       "transferUrl": "",
       "transferCode": "",
       "openVideo": "",
-      "transferVideo": ""
+      "transferVideo": "",
+      "openGuide": "",
+      "transferGuide": ""
     },
     {
       "id": "hsc",
@@ -2390,7 +2860,9 @@ window.APP_DATA = {
       "transferUrl": "",
       "transferCode": "",
       "openVideo": "",
-      "transferVideo": ""
+      "transferVideo": "",
+      "openGuide": "",
+      "transferGuide": ""
     },
     {
       "id": "kis",
@@ -2403,7 +2875,9 @@ window.APP_DATA = {
       "transferUrl": "",
       "transferCode": "",
       "openVideo": "",
-      "transferVideo": ""
+      "transferVideo": "",
+      "openGuide": "",
+      "transferGuide": ""
     }
   ]
 };
