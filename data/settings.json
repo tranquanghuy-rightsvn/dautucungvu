@@ -2639,6 +2639,606 @@
       "name": "CTCP Sản xuất - Xuất nhập khẩu Dệt May",
       "sector": "Đồ dùng cá nhân",
       "color": "#1e3a8a"
+    },
+    {
+      "code": "CAR",
+      "name": "CTCP Tập đoàn Giáo dục Trí Việt",
+      "sector": "Truyền thông",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "ODE",
+      "name": "CTCP Tập đoàn Truyền thông và Giải trí ODE",
+      "sector": "Truyền thông",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "VNB",
+      "name": "CTCP Sách Việt Nam",
+      "sector": "Truyền thông",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "ADG",
+      "name": "CTCP Clever Group",
+      "sector": "Truyền thông",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "FOC",
+      "name": "CTCP Dịch vụ Trực tuyến FPT",
+      "sector": "Truyền thông",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "EID",
+      "name": "CTCP Đầu tư và Phát triển giáo dục Hà Nội",
+      "sector": "Truyền thông",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "NBE",
+      "name": "CTCP Sách và Thiết bị Giáo dục Miền Bắc",
+      "sector": "Truyền thông",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "LBE",
+      "name": "CTCP Thương mại và Dịch vụ LVA",
+      "sector": "Truyền thông",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "DAD",
+      "name": "CTCP Đầu tư và Phát triển giáo dục Đà Nẵng",
+      "sector": "Truyền thông",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "INN",
+      "name": "CTCP Bao bì và In Nông nghiệp",
+      "sector": "Truyền thông",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "ADC",
+      "name": "CTCP Mỹ thuật và Truyền Thông",
+      "sector": "Truyền thông",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "STH",
+      "name": "CTCP STH Holdings",
+      "sector": "Truyền thông",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "HEV",
+      "name": "CTCP Sách Đại học - Dạy nghề",
+      "sector": "Truyền thông",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "SMN",
+      "name": "CTCP Sách và Thiết bị Giáo dục Miền Nam",
+      "sector": "Truyền thông",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "KHX",
+      "name": "CTCP Phát hành sách Khánh Hòa",
+      "sector": "Truyền thông",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "SED",
+      "name": "CTCP Đầu tư và Phát triển Giáo dục Phương Nam",
+      "sector": "Truyền thông",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "ALT",
+      "name": "CTCP Văn hóa Tân Bình",
+      "sector": "Truyền thông",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "BED",
+      "name": "CTCP Sách và Thiết bị Trường học Đà Nẵng",
+      "sector": "Truyền thông",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "DAE",
+      "name": "CTCP Sách Giáo dục tại Thành phố Đà Nẵng",
+      "sector": "Truyền thông",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "EBS",
+      "name": "CTCP Sách Giáo dục tại Thành phố Hà Nội",
+      "sector": "Truyền thông",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "ECI",
+      "name": "CTCP Tập đoàn ECI",
+      "sector": "Truyền thông",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "FHS",
+      "name": "CTCP Phát hành sách Thành phố Hồ Chí Minh - FAHASA",
+      "sector": "Truyền thông",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "HTP",
+      "name": "CTCP In sách giáo khoa Hòa Phát",
+      "sector": "Truyền thông",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "IBD",
+      "name": "CTCP In Tổng hợp Bình Dương",
+      "sector": "Truyền thông",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "IN4",
+      "name": "CTCP In số 4",
+      "sector": "Truyền thông",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "PNC",
+      "name": "CTCP Văn hóa Phương Nam",
+      "sector": "Truyền thông",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "PTP",
+      "name": "CTCP PTP",
+      "sector": "Truyền thông",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "QST",
+      "name": "CTCP Sách và Thiết bị trường học Quảng Ninh",
+      "sector": "Truyền thông",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "SGD",
+      "name": "CTCP Sách Giáo dục tại Thành phố Hồ Chí Minh",
+      "sector": "Truyền thông",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "STC",
+      "name": "CTCP Sách và Thiết bị trường học Thành phố Hồ Chí Minh",
+      "sector": "Truyền thông",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "VNX",
+      "name": "CTCP Quảng cáo và Hội chợ Thương Mại Vinexad",
+      "sector": "Truyền thông",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "VPR",
+      "name": "CTCP Vinaprint",
+      "sector": "Truyền thông",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "MWG",
+      "name": "CTCP Đầu tư Thế giới Di động",
+      "sector": "Bán lẻ",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "DGW",
+      "name": "CTCP Thế giới số",
+      "sector": "Bán lẻ",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "PET",
+      "name": "Tổng CTCP Dịch vụ Tổng hợp Dầu khí",
+      "sector": "Bán lẻ",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "FRT",
+      "name": "CTCP Bán lẻ Kỹ thuật số FPT",
+      "sector": "Bán lẻ",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "TTH",
+      "name": "CTCP Thương mại và Dịch vụ Tiến Thành",
+      "sector": "Bán lẻ",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "DMX",
+      "name": "CTCP Đầu tư Điện Máy Xanh",
+      "sector": "Bán lẻ",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "LMH",
+      "name": "CTCP Quốc tế Holding",
+      "sector": "Bán lẻ",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "PSD",
+      "name": "CTCP Dịch vụ Phân phối Tổng hợp Dầu khí",
+      "sector": "Bán lẻ",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "AAT",
+      "name": "CTCP Tập đoàn Tiên Sơn Thanh Hóa",
+      "sector": "Bán lẻ",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "PIV",
+      "name": "CTCP PIV",
+      "sector": "Bán lẻ",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "CEN",
+      "name": "CTCP CENCON Việt Nam",
+      "sector": "Bán lẻ",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "SVT",
+      "name": "CTCP Công nghệ Sài Gòn Viễn Đông",
+      "sector": "Bán lẻ",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "AST",
+      "name": "CTCP Dịch vụ Hàng không Taseco",
+      "sector": "Bán lẻ",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "SID",
+      "name": "CTCP Đầu tư Phát triển Sài Gòn Co.op",
+      "sector": "Bán lẻ",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "PIT",
+      "name": "CTCP Xuất nhập khẩu Petrolimex",
+      "sector": "Bán lẻ",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "ABR",
+      "name": "CTCP Đầu tư Nhãn Hiệu Việt",
+      "sector": "Bán lẻ",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "HTC",
+      "name": "CTCP Thương mại Hóc Môn",
+      "sector": "Bán lẻ",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "SFC",
+      "name": "CTCP Nhiên liệu Sài Gòn",
+      "sector": "Bán lẻ",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "BMF",
+      "name": "CTCP Vật liệu Xây dựng và Chất đốt Đồng Nai",
+      "sector": "Bán lẻ",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "BTT",
+      "name": "CTCP Thương mại - Dịch vụ Bến Thành",
+      "sector": "Bán lẻ",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "CMV",
+      "name": "CTCP Thương nghiệp Cà Mau",
+      "sector": "Bán lẻ",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "COM",
+      "name": "CTCP Vật tư - Xăng dầu",
+      "sector": "Bán lẻ",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "GCB",
+      "name": "CTCP Petec Bình Định",
+      "sector": "Bán lẻ",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "GMA",
+      "name": "CTCP G-AUTOMOBILE",
+      "sector": "Bán lẻ",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "HFX",
+      "name": "CTCP Sản xuất - Xuất nhập khẩu Thanh Hà",
+      "sector": "Bán lẻ",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "HLO",
+      "name": "CTCP Công nghệ Ha Lô",
+      "sector": "Bán lẻ",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "HTM",
+      "name": "Tổng Công ty Thương mại Hà Nội - CTCP",
+      "sector": "Bán lẻ",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "KTC",
+      "name": "CTCP Thương mại Kiên Giang",
+      "sector": "Bán lẻ",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "THS",
+      "name": "CTCP Thanh Hoa - Sông Đà",
+      "sector": "Bán lẻ",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "TMC",
+      "name": "CTCP Thương Mại Xuất Nhập Khẩu Thủ Đức",
+      "sector": "Bán lẻ",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "TNA",
+      "name": "CTCP Thương Mại Xuất Nhập Khẩu Thiên Nam",
+      "sector": "Bán lẻ",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "VTJ",
+      "name": "CTCP Thương mại và Đầu tư Vi na ta ba",
+      "sector": "Bán lẻ",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "VJC",
+      "name": "CTCP Hàng không VIETJET",
+      "sector": "Du lịch và giải trí",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "VPL",
+      "name": "CTCP Vinpearl",
+      "sector": "Du lịch và giải trí",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "YEG",
+      "name": "CTCP Tập đoàn Yeah1",
+      "sector": "Du lịch và giải trí",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "HVN",
+      "name": "Tổng Công ty Hàng không Việt Nam - CTCP",
+      "sector": "Du lịch và giải trí",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "VTD",
+      "name": "CTCP Vietourist Holdings",
+      "sector": "Du lịch và giải trí",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "OCH",
+      "name": "CTCP One Capital Hospitality",
+      "sector": "Du lịch và giải trí",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "DAH",
+      "name": "CTCP Tập đoàn Khách sạn Đông Á",
+      "sector": "Du lịch và giải trí",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "VTR",
+      "name": "CTCP Du lịch Vietravel",
+      "sector": "Du lịch và giải trí",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "VNG",
+      "name": "CTCP Du lịch Thành Thành Công",
+      "sector": "Du lịch và giải trí",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "TSD",
+      "name": "CTCP Du lịch Trường Sơn COECCO",
+      "sector": "Du lịch và giải trí",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "DSN",
+      "name": "CTCP Công viên nước Đầm Sen",
+      "sector": "Du lịch và giải trí",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "TTT",
+      "name": "CTCP Du lịch - Thương mại Tây Ninh",
+      "sector": "Du lịch và giải trí",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "DLD",
+      "name": "CTCP Du lịch Đăk Lăk",
+      "sector": "Du lịch và giải trí",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "TCT",
+      "name": "CTCP Cáp Treo Núi Bà Tây Ninh",
+      "sector": "Du lịch và giải trí",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "VNZ",
+      "name": "CTCP Tập đoàn VNG",
+      "sector": "Du lịch và giải trí",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "SGH",
+      "name": "CTCP Khách Sạn Sài Gòn",
+      "sector": "Du lịch và giải trí",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "BCV",
+      "name": "CTCP Du lịch và Thương mại Bằng Giang - Vimico",
+      "sector": "Du lịch và giải trí",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "BTV",
+      "name": "CTCP Dịch vụ Du lịch Bến Thành",
+      "sector": "Du lịch và giải trí",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "DNT",
+      "name": "CTCP Du lịch Đồng Nai",
+      "sector": "Du lịch và giải trí",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "DS3",
+      "name": "CTCP DS3",
+      "sector": "Du lịch và giải trí",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "DSD",
+      "name": "CTCP DHC Suối Đôi",
+      "sector": "Du lịch và giải trí",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "DSP",
+      "name": "CTCP Dịch vụ Du lịch Phú Thọ",
+      "sector": "Du lịch và giải trí",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "DXL",
+      "name": "CTCP Du lịch và Xuất nhập khẩu Lạng Sơn",
+      "sector": "Du lịch và giải trí",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "GTT",
+      "name": "CTCP Thuận Thảo",
+      "sector": "Du lịch và giải trí",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "HES",
+      "name": "CTCP Dịch vụ Giải trí Hà Nội",
+      "sector": "Du lịch và giải trí",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "HGT",
+      "name": "CTCP Du lịch Hương Giang",
+      "sector": "Du lịch và giải trí",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "HOT",
+      "name": "CTCP Du lịch - Dịch vụ Hội An",
+      "sector": "Du lịch và giải trí",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "MAS",
+      "name": "CTCP Dịch vụ Hàng không sân bay Đà Nẵng",
+      "sector": "Du lịch và giải trí",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "NAS",
+      "name": "CTCP Dịch vụ Hàng không Sân bay Nội Bài",
+      "sector": "Du lịch và giải trí",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "ONW",
+      "name": "CTCP Tập đoàn ONW",
+      "sector": "Du lịch và giải trí",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "PDC",
+      "name": "CTCP Du lịch Dầu khí Phương Đông",
+      "sector": "Du lịch và giải trí",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "RIC",
+      "name": "CTCP Quốc tế Hoàng Gia",
+      "sector": "Du lịch và giải trí",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "STT",
+      "name": "CTCP Vận chuyển Sài Gòn Tourist",
+      "sector": "Du lịch và giải trí",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "TSJ",
+      "name": "CTCP Du lịch Dịch vụ Hà Nội",
+      "sector": "Du lịch và giải trí",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "VIR",
+      "name": "CTCP Du lịch Quốc tế Vũng Tàu",
+      "sector": "Du lịch và giải trí",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "VTG",
+      "name": "CTCP Du lịch tỉnh Bà Rịa - Vũng Tàu",
+      "sector": "Du lịch và giải trí",
+      "color": "#1e3a8a"
     }
   ],
   "contactPage": ""
