@@ -69,12 +69,6 @@ window.APP_DATA = {
       "color": "#1e3a8a"
     },
     {
-      "code": "VNM",
-      "name": "CTCP Sữa Việt Nam",
-      "sector": "Thực phẩm",
-      "color": "#1e3a8a"
-    },
-    {
       "code": "FPT",
       "name": "CTCP FPT",
       "sector": "Công nghệ",
@@ -3066,6 +3060,1032 @@ window.APP_DATA = {
       "code": "VTG",
       "name": "CTCP Du lịch tỉnh Bà Rịa - Vũng Tàu",
       "sector": "Du lịch và giải trí",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "HNG",
+      "name": "CTCP Nông nghiệp Quốc tế Hoàng Anh Gia Lai",
+      "sector": "Thực phẩm và đồ uống",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "MSN",
+      "name": "CTCP Tập đoàn MaSan",
+      "sector": "Thực phẩm và đồ uống",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "VNM",
+      "name": "CTCP Sữa Việt Nam",
+      "sector": "Thực phẩm và đồ uống",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "HAG",
+      "name": "CTCP Hoàng Anh Gia Lai",
+      "sector": "Thực phẩm và đồ uống",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "BAF",
+      "name": "CTCP Nông nghiệp BAF Việt Nam",
+      "sector": "Thực phẩm và đồ uống",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "ANV",
+      "name": "CTCP Nam Việt",
+      "sector": "Thực phẩm và đồ uống",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "PAN",
+      "name": "CTCP Tập đoàn PAN",
+      "sector": "Thực phẩm và đồ uống",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "DBC",
+      "name": "CTCP Tập đoàn Dabaco Việt Nam",
+      "sector": "Thực phẩm và đồ uống",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "SBT",
+      "name": "CTCP Thành Thành Công - Biên Hòa",
+      "sector": "Thực phẩm và đồ uống",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "IDI",
+      "name": "CTCP Đầu tư và Phát triển Đa quốc gia I.D.I",
+      "sector": "Thực phẩm và đồ uống",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "SAB",
+      "name": "Tổng CTCP Bia - Rượu - Nước giải khát Sài Gòn",
+      "sector": "Thực phẩm và đồ uống",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "QNS",
+      "name": "CTCP Đường Quảng Ngãi",
+      "sector": "Thực phẩm và đồ uống",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "NAF",
+      "name": "CTCP Nafoods Group",
+      "sector": "Thực phẩm và đồ uống",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "VHC",
+      "name": "CTCP Vĩnh Hoàn",
+      "sector": "Thực phẩm và đồ uống",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "AAN",
+      "name": "CTCP Lương thực A An",
+      "sector": "Thực phẩm và đồ uống",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "MCH",
+      "name": "CTCP Hàng tiêu dùng MASAN",
+      "sector": "Thực phẩm và đồ uống",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "SBB",
+      "name": "CTCP Tập đoàn Bia Sài Gòn Bình Tây",
+      "sector": "Thực phẩm và đồ uống",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "KDC",
+      "name": "CTCP Tập đoàn KIDO",
+      "sector": "Thực phẩm và đồ uống",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "HNM",
+      "name": "CTCP Sữa Hà Nội",
+      "sector": "Thực phẩm và đồ uống",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "HSL",
+      "name": "CTCP Công nghệ sinh học Helios",
+      "sector": "Thực phẩm và đồ uống",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "CMX",
+      "name": "CTCP Camimex Group",
+      "sector": "Thực phẩm và đồ uống",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "VHE",
+      "name": "CTCP Dược liệu và Thực phẩm Việt Nam",
+      "sector": "Thực phẩm và đồ uống",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "AFX",
+      "name": "CTCP Xuất nhập khẩu Nông sản Thực phẩm An Giang",
+      "sector": "Thực phẩm và đồ uống",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "CAD",
+      "name": "CTCP Chế biến và Xuất nhập khẩu Thủy sản Cadovimex",
+      "sector": "Thực phẩm và đồ uống",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "HKB",
+      "name": "CTCP Nông nghiệp và Thực phẩm Hà Nội - Kinh Bắc",
+      "sector": "Thực phẩm và đồ uống",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "MML",
+      "name": "CTCP Masan MeatLife",
+      "sector": "Thực phẩm và đồ uống",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "JOS",
+      "name": "CTCP Chế biến Thủy sản Xuất khẩu Minh Hải",
+      "sector": "Thực phẩm và đồ uống",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "TAR",
+      "name": "CTCP Nông nghiệp Công nghệ cao Trung An",
+      "sector": "Thực phẩm và đồ uống",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "VLC",
+      "name": "Tổng Công ty Chăn nuôi Việt Nam - CTCP",
+      "sector": "Thực phẩm và đồ uống",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "CTP",
+      "name": "CTCP Tập đoàn CTP Group",
+      "sector": "Thực phẩm và đồ uống",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "HPA",
+      "name": "CTCP Phát triển Nông nghiệp Hòa Phát",
+      "sector": "Thực phẩm và đồ uống",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "V68",
+      "name": "CTCP Đầu tư Sản xuất và Thương mại Tuấn Anh",
+      "sector": "Thực phẩm và đồ uống",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "VSF",
+      "name": "Tổng Công ty Lương Thực Miền Nam - CTCP",
+      "sector": "Thực phẩm và đồ uống",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "MCM",
+      "name": "CTCP Giống Bò sữa Mộc Châu",
+      "sector": "Thực phẩm và đồ uống",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "TT6",
+      "name": "CTCP Tập đoàn Tiến Thịnh",
+      "sector": "Thực phẩm và đồ uống",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "ANT",
+      "name": "CTCP Rau quả thực phẩm An Giang",
+      "sector": "Thực phẩm và đồ uống",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "MPC",
+      "name": "CTCP Tập Đoàn Thủy Sản Minh Phú",
+      "sector": "Thực phẩm và đồ uống",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "GPC",
+      "name": "CTCP Tập đoàn Green+",
+      "sector": "Thực phẩm và đồ uống",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "AIG",
+      "name": "CTCP Nguyên liệu Á Châu AIG",
+      "sector": "Thực phẩm và đồ uống",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "FMC",
+      "name": "CTCP Thực phẩm Sao Ta",
+      "sector": "Thực phẩm và đồ uống",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "VNH",
+      "name": "CTCP Đầu tư Việt Việt Nhật",
+      "sector": "Thực phẩm và đồ uống",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "LSS",
+      "name": "CTCP Mía đường Lam Sơn",
+      "sector": "Thực phẩm và đồ uống",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "ILA",
+      "name": "CTCP ILA",
+      "sector": "Thực phẩm và đồ uống",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "CET",
+      "name": "CTCP HTC Holding",
+      "sector": "Thực phẩm và đồ uống",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "QHW",
+      "name": "CTCP Nước khoáng Quảng Ninh",
+      "sector": "Thực phẩm và đồ uống",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "HKT",
+      "name": "CTCP QP Holdings",
+      "sector": "Thực phẩm và đồ uống",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "BSL",
+      "name": "CTCP Bia Sài Gòn - Sông Lam",
+      "sector": "Thực phẩm và đồ uống",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "SMB",
+      "name": "CTCP Bia Sài Gòn - Miền Trung",
+      "sector": "Thực phẩm và đồ uống",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "AGM",
+      "name": "CTCP Xuất nhập khẩu An Giang",
+      "sector": "Thực phẩm và đồ uống",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "SAF",
+      "name": "CTCP Lương thực Thực phẩm Safoco",
+      "sector": "Thực phẩm và đồ uống",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "HJC",
+      "name": "CTCP Hòa Việt",
+      "sector": "Thực phẩm và đồ uống",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "SBL",
+      "name": "CTCP Bia Sài Gòn - Bạc Liêu",
+      "sector": "Thực phẩm và đồ uống",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "ABT",
+      "name": "CTCP Xuất nhập khẩu Thuỷ sản Bến Tre",
+      "sector": "Thực phẩm và đồ uống",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "NST",
+      "name": "CTCP Ngân Sơn",
+      "sector": "Thực phẩm và đồ uống",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "SLS",
+      "name": "CTCP Mía đường Sơn La",
+      "sector": "Thực phẩm và đồ uống",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "AAM",
+      "name": "CTCP Thủy sản Mekong",
+      "sector": "Thực phẩm và đồ uống",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "GCF",
+      "name": "CTCP Thực phẩm G.C",
+      "sector": "Thực phẩm và đồ uống",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "BSH",
+      "name": "CTCP Bia Sài Gòn - Hà Nội",
+      "sector": "Thực phẩm và đồ uống",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "SGC",
+      "name": "CTCP Xuất nhập khẩu Sa Giang",
+      "sector": "Thực phẩm và đồ uống",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "CAT",
+      "name": "CTCP Thủy sản Cà Mau",
+      "sector": "Thực phẩm và đồ uống",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "AGF",
+      "name": "CTCP Xuất nhập khẩu Thủy sản An Giang",
+      "sector": "Thực phẩm và đồ uống",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "BHN",
+      "name": "Tổng CTCP Bia - Rượu - Nước Giải khát Hà Nội",
+      "sector": "Thực phẩm và đồ uống",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "CMM",
+      "name": "CTCP Camimex",
+      "sector": "Thực phẩm và đồ uống",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "APF",
+      "name": "CTCP Nông sản Thực phẩm Quảng Ngãi",
+      "sector": "Thực phẩm và đồ uống",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "ATA",
+      "name": "CTCP NTACO",
+      "sector": "Thực phẩm và đồ uống",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "SSC",
+      "name": "CTCP Giống cây trồng Miền Nam",
+      "sector": "Thực phẩm và đồ uống",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "CLC",
+      "name": "CTCP Cát Lợi",
+      "sector": "Thực phẩm và đồ uống",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "BSP",
+      "name": "CTCP Bia Sài Gòn - Phú Thọ",
+      "sector": "Thực phẩm và đồ uống",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "KHS",
+      "name": "CTCP Kiên Hùng",
+      "sector": "Thực phẩm và đồ uống",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "PCF",
+      "name": "CTCP Cà phê PETEC",
+      "sector": "Thực phẩm và đồ uống",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "WSB",
+      "name": "CTCP Bia Sài Gòn - Miền Tây",
+      "sector": "Thực phẩm và đồ uống",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "PSL",
+      "name": "CTCP Chăn nuôi Phú Sơn",
+      "sector": "Thực phẩm và đồ uống",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "SCD",
+      "name": "CTCP Nước giải khát Chương Dương",
+      "sector": "Thực phẩm và đồ uống",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "CMN",
+      "name": "CTCP Lương thực Thực phẩm Colusa - Miliket",
+      "sector": "Thực phẩm và đồ uống",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "BSQ",
+      "name": "CTCP Bia Sài Gòn - Quảng Ngãi",
+      "sector": "Thực phẩm và đồ uống",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "ICF",
+      "name": "CTCP Đầu tư - Thương mại - Thuỷ Sản",
+      "sector": "Thực phẩm và đồ uống",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "KTS",
+      "name": "CTCP Đường Kon Tum",
+      "sector": "Thực phẩm và đồ uống",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "THB",
+      "name": "CTCP Bia Hà Nội - Thanh Hóa",
+      "sector": "Thực phẩm và đồ uống",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "ACL",
+      "name": "CTCP Xuất nhập khẩu Thuỷ sản Cửu Long An Giang",
+      "sector": "Thực phẩm và đồ uống",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "AGX",
+      "name": "CTCP Thực phẩm Nông sản Xuất khẩu Sài Gòn",
+      "sector": "Thực phẩm và đồ uống",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "IFS",
+      "name": "CTCP Thực phẩm Quốc tế",
+      "sector": "Thực phẩm và đồ uống",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "SKV",
+      "name": "CTCP Nước giải khát Yến sào Khánh Hòa",
+      "sector": "Thực phẩm và đồ uống",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "TFC",
+      "name": "CTCP Trang",
+      "sector": "Thực phẩm và đồ uống",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "HNF",
+      "name": "CTCP Thực phẩm Hữu Nghị",
+      "sector": "Thực phẩm và đồ uống",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "SEA",
+      "name": "Tổng Công ty Thủy sản Việt Nam - CTCP",
+      "sector": "Thực phẩm và đồ uống",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "BQB",
+      "name": "CTCP Bia Hà Nội - Quảng Bình",
+      "sector": "Thực phẩm và đồ uống",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "CFV",
+      "name": "CTCP Cà phê Thắng Lợi",
+      "sector": "Thực phẩm và đồ uống",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "MCF",
+      "name": "CTCP Xây lắp - Cơ khí và Lương thực Thực phẩm",
+      "sector": "Thực phẩm và đồ uống",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "SKH",
+      "name": "CTCP Nước giải khát Sanest Khánh Hòa",
+      "sector": "Thực phẩm và đồ uống",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "BCF",
+      "name": "CTCP Thực phẩm Bích Chi",
+      "sector": "Thực phẩm và đồ uống",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "FCS",
+      "name": "CTCP Lương thực Thành phố Hồ Chí Minh",
+      "sector": "Thực phẩm và đồ uống",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "HBH",
+      "name": "CTCP Habeco - Hải Phòng",
+      "sector": "Thực phẩm và đồ uống",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "NCG",
+      "name": "CTCP Đầu tư Anova Agri",
+      "sector": "Thực phẩm và đồ uống",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "NCS",
+      "name": "CTCP Suất ăn Hàng không Nội Bài",
+      "sector": "Thực phẩm và đồ uống",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "SEP",
+      "name": "CTCP Tổng Công ty Thương mại Quảng Trị",
+      "sector": "Thực phẩm và đồ uống",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "STD",
+      "name": "CTCP Bia - Nước giải khát Sài Gòn - Tây Đô",
+      "sector": "Thực phẩm và đồ uống",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "VSN",
+      "name": "CTCP Việt Nam Kỹ nghệ Súc sản",
+      "sector": "Thực phẩm và đồ uống",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "APT",
+      "name": "CTCP Kinh doanh Thủy Hải Sản Sài Gòn",
+      "sector": "Thực phẩm và đồ uống",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "ATS",
+      "name": "CTCP Tập đoàn Đầu tư ATS",
+      "sector": "Thực phẩm và đồ uống",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "BBM",
+      "name": "CTCP Bia Hà Nội - Nam Định",
+      "sector": "Thực phẩm và đồ uống",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "BHG",
+      "name": "CTCP Chè Biển Hồ",
+      "sector": "Thực phẩm và đồ uống",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "BHH",
+      "name": "CTCP Bia Hà Nội - Hưng Yên 89",
+      "sector": "Thực phẩm và đồ uống",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "BHK",
+      "name": "CTCP Bia Hà Nội - Kim Bài",
+      "sector": "Thực phẩm và đồ uống",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "BHP",
+      "name": "CTCP Bia Hà Nội - Hải Phòng",
+      "sector": "Thực phẩm và đồ uống",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "BLF",
+      "name": "CTCP Thủy sản Bạc Liêu",
+      "sector": "Thực phẩm và đồ uống",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "BLT",
+      "name": "CTCP Lương thực Bình Định",
+      "sector": "Thực phẩm và đồ uống",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "BMV",
+      "name": "CTCP Bột mỳ Vinafood 1",
+      "sector": "Thực phẩm và đồ uống",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "BNA",
+      "name": "CTCP Tập đoàn Đầu tư Bảo Ngọc",
+      "sector": "Thực phẩm và đồ uống",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "BSD",
+      "name": "CTCP Bia, Rượu Sài Gòn - Đồng Xuân",
+      "sector": "Thực phẩm và đồ uống",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "BTB",
+      "name": "CTCP Bia Hà Nội - Thái Bình",
+      "sector": "Thực phẩm và đồ uống",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "C22",
+      "name": "CTCP 22",
+      "sector": "Thực phẩm và đồ uống",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "CAN",
+      "name": "CTCP Đồ hộp Hạ Long",
+      "sector": "Thực phẩm và đồ uống",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "CBS",
+      "name": "CTCP Mía đường Cao Bằng",
+      "sector": "Thực phẩm và đồ uống",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "CCA",
+      "name": "CTCP Xuất nhập khẩu Thủy sản Cần Thơ",
+      "sector": "Thực phẩm và đồ uống",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "CMF",
+      "name": "CTCP Thực phẩm Cholimex",
+      "sector": "Thực phẩm và đồ uống",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "CNA",
+      "name": "CTCP Tổng Công ty Chè Nghệ An",
+      "sector": "Thực phẩm và đồ uống",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "CPA",
+      "name": "CTCP Cà phê Phước An",
+      "sector": "Thực phẩm và đồ uống",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "DAT",
+      "name": "CTCP Đầu tư Du lịch và Phát triển Thủy sản",
+      "sector": "Thực phẩm và đồ uống",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "DMN",
+      "name": "CTCP Domenal",
+      "sector": "Thực phẩm và đồ uống",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "FCC",
+      "name": "CTCP Bất động sản Ramond",
+      "sector": "Thực phẩm và đồ uống",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "FGL",
+      "name": "CTCP Cà phê Gia Lai",
+      "sector": "Thực phẩm và đồ uống",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "FHN",
+      "name": "CTCP Xuất nhập khẩu Lương thực - Thực phẩm Hà Nội",
+      "sector": "Thực phẩm và đồ uống",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "HAD",
+      "name": "CTCP Bia Hà Nội - Hải Dương",
+      "sector": "Thực phẩm và đồ uống",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "HAF",
+      "name": "CTCP Thực phẩm Hà Nội",
+      "sector": "Thực phẩm và đồ uống",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "HAT",
+      "name": "CTCP Thương mại Bia Hà Nội",
+      "sector": "Thực phẩm và đồ uống",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "HAV",
+      "name": "CTCP Rượu Hapro",
+      "sector": "Thực phẩm và đồ uống",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "HHB",
+      "name": "CTCP Bia Hà Nội - Hồng Hà",
+      "sector": "Thực phẩm và đồ uống",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "HHC",
+      "name": "CTCP Bánh kẹo Hải Hà",
+      "sector": "Thực phẩm và đồ uống",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "HLB",
+      "name": "CTCP Bia và Nước giải Khát Hạ Long",
+      "sector": "Thực phẩm và đồ uống",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "HNR",
+      "name": "CTCP Rượu và Nước Giải Khát Hà Nội",
+      "sector": "Thực phẩm và đồ uống",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "IDP",
+      "name": "CTCP Sữa Quốc Tế Lof",
+      "sector": "Thực phẩm và đồ uống",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "KGM",
+      "name": "CTCP Xuất nhập khẩu Kiên Giang",
+      "sector": "Thực phẩm và đồ uống",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "LAF",
+      "name": "CTCP Chế biến Hàng xuất khẩu Long An",
+      "sector": "Thực phẩm và đồ uống",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "MLS",
+      "name": "CTCP Chăn nuôi - Mitraco",
+      "sector": "Thực phẩm và đồ uống",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "NHV",
+      "name": "CTCP Sức khỏe hồi sinh Việt Nam",
+      "sector": "Thực phẩm và đồ uống",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "NSC",
+      "name": "CTCP Tập đoàn Giống cây trồng Việt Nam",
+      "sector": "Thực phẩm và đồ uống",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "NSS",
+      "name": "CTCP Nông Súc Sản Đồng Nai",
+      "sector": "Thực phẩm và đồ uống",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "PRO",
+      "name": "CTCP Procimex Việt Nam",
+      "sector": "Thực phẩm và đồ uống",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "SB1",
+      "name": "CTCP Bia Sài Gòn - Nghệ Tĩnh",
+      "sector": "Thực phẩm và đồ uống",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "SJ1",
+      "name": "CTCP Nông nghiệp Hùng Hậu",
+      "sector": "Thực phẩm và đồ uống",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "SJF",
+      "name": "CTCP Đầu tư Sao Thái Dương",
+      "sector": "Thực phẩm và đồ uống",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "SKN",
+      "name": "CTCP Nước giải khát Sanna Khánh Hòa",
+      "sector": "Thực phẩm và đồ uống",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "SNC",
+      "name": "CTCP Xuất nhập khẩu Thủy sản Năm Căn",
+      "sector": "Thực phẩm và đồ uống",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "SPD",
+      "name": "CTCP Xuất nhập khẩu Thủy sản Miền Trung",
+      "sector": "Thực phẩm và đồ uống",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "SPH",
+      "name": "CTCP Xuất nhập khẩu Thủy sản Hà Nội",
+      "sector": "Thực phẩm và đồ uống",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "SPV",
+      "name": "CTCP Thủy Đặc Sản",
+      "sector": "Thực phẩm và đồ uống",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "TCJ",
+      "name": "CTCP Tô Châu",
+      "sector": "Thực phẩm và đồ uống",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "THP",
+      "name": "CTCP Thủy sản và Thương mại Thuận Phước",
+      "sector": "Thực phẩm và đồ uống",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "TID",
+      "name": "CTCP Tổng Công ty Tín Nghĩa",
+      "sector": "Thực phẩm và đồ uống",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "UXC",
+      "name": "CTCP Chế biến Thủy sản Út Xi",
+      "sector": "Thực phẩm và đồ uống",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "VCF",
+      "name": "CTCP Vinacafé Biên Hòa",
+      "sector": "Thực phẩm và đồ uống",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "VDL",
+      "name": "CTCP Thực phẩm Lâm Đồng",
+      "sector": "Thực phẩm và đồ uống",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "VHF",
+      "name": "CTCP Xây dựng và Chế biến lương thực Vĩnh Hà",
+      "sector": "Thực phẩm và đồ uống",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "TLG",
+      "name": "CTCP Tập đoàn Thiên Long",
+      "sector": "",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "PAC",
+      "name": "CTCP Pin Ắc quy miền Nam",
+      "sector": "",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "DCS",
+      "name": "CTCP Tập đoàn EDX",
+      "sector": "",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "CLX",
+      "name": "CTCP Xuất nhập khẩu và đầu tư Chợ Lớn (Cholimex)",
+      "sector": "",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "LIX",
+      "name": "CTCP Lix",
+      "sector": "",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "DQC",
+      "name": "CTCP Tập đoàn Điện Quang",
+      "sector": "",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "NHT",
+      "name": "CTCP Sản xuất và Thương mại Nam Hoa",
+      "sector": "",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "SVD",
+      "name": "CTCP Đầu tư và Thương mại Vũ Đăng",
+      "sector": "",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "NET",
+      "name": "CTCP Bột Giặt Net",
+      "sector": "",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "RAL",
+      "name": "CTCP Bóng đèn Phích nước Rạng Đông",
+      "sector": "",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "TH1",
+      "name": "CTCP Xuất nhập khẩu Tổng hợp I Việt Nam",
+      "sector": "",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "XPH",
+      "name": "CTCP Xà phòng Hà Nội",
+      "sector": "",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "PHN",
+      "name": "CTCP Pin Hà Nội",
+      "sector": "",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "PNG",
+      "name": "CTCP Thương mại Phú Nhuận",
+      "sector": "",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "SPB",
+      "name": "CTCP Sợi Phú Bài",
+      "sector": "",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "TOP",
+      "name": "CTCP Phân phối Top One",
+      "sector": "",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "TV6",
+      "name": "CTCP Tập đoàn EMA Land",
+      "sector": "",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "X26",
+      "name": "CTCP 26",
+      "sector": "",
       "color": "#1e3a8a"
     }
   ],
