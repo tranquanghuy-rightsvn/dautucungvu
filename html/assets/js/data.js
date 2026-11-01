@@ -3983,109 +3983,1855 @@ window.APP_DATA = {
     {
       "code": "TLG",
       "name": "CTCP Tập đoàn Thiên Long",
-      "sector": "",
+      "sector": "Cửa hàng tiện lợi",
       "color": "#1e3a8a"
     },
     {
       "code": "PAC",
       "name": "CTCP Pin Ắc quy miền Nam",
-      "sector": "",
+      "sector": "Cửa hàng tiện lợi",
       "color": "#1e3a8a"
     },
     {
       "code": "DCS",
       "name": "CTCP Tập đoàn EDX",
-      "sector": "",
+      "sector": "Cửa hàng tiện lợi",
       "color": "#1e3a8a"
     },
     {
       "code": "CLX",
       "name": "CTCP Xuất nhập khẩu và đầu tư Chợ Lớn (Cholimex)",
-      "sector": "",
+      "sector": "Cửa hàng tiện lợi",
       "color": "#1e3a8a"
     },
     {
       "code": "LIX",
       "name": "CTCP Lix",
-      "sector": "",
+      "sector": "Cửa hàng tiện lợi",
       "color": "#1e3a8a"
     },
     {
       "code": "DQC",
       "name": "CTCP Tập đoàn Điện Quang",
-      "sector": "",
+      "sector": "Cửa hàng tiện lợi",
       "color": "#1e3a8a"
     },
     {
       "code": "NHT",
       "name": "CTCP Sản xuất và Thương mại Nam Hoa",
-      "sector": "",
+      "sector": "Cửa hàng tiện lợi",
       "color": "#1e3a8a"
     },
     {
       "code": "SVD",
       "name": "CTCP Đầu tư và Thương mại Vũ Đăng",
-      "sector": "",
+      "sector": "Cửa hàng tiện lợi",
       "color": "#1e3a8a"
     },
     {
       "code": "NET",
       "name": "CTCP Bột Giặt Net",
-      "sector": "",
+      "sector": "Cửa hàng tiện lợi",
       "color": "#1e3a8a"
     },
     {
       "code": "RAL",
       "name": "CTCP Bóng đèn Phích nước Rạng Đông",
-      "sector": "",
+      "sector": "Cửa hàng tiện lợi",
       "color": "#1e3a8a"
     },
     {
       "code": "TH1",
       "name": "CTCP Xuất nhập khẩu Tổng hợp I Việt Nam",
-      "sector": "",
+      "sector": "Cửa hàng tiện lợi",
       "color": "#1e3a8a"
     },
     {
       "code": "XPH",
       "name": "CTCP Xà phòng Hà Nội",
-      "sector": "",
+      "sector": "Cửa hàng tiện lợi",
       "color": "#1e3a8a"
     },
     {
       "code": "PHN",
       "name": "CTCP Pin Hà Nội",
-      "sector": "",
+      "sector": "Cửa hàng tiện lợi",
       "color": "#1e3a8a"
     },
     {
       "code": "PNG",
       "name": "CTCP Thương mại Phú Nhuận",
-      "sector": "",
+      "sector": "Cửa hàng tiện lợi",
       "color": "#1e3a8a"
     },
     {
       "code": "SPB",
       "name": "CTCP Sợi Phú Bài",
-      "sector": "",
+      "sector": "Cửa hàng tiện lợi",
       "color": "#1e3a8a"
     },
     {
       "code": "TOP",
       "name": "CTCP Phân phối Top One",
-      "sector": "",
+      "sector": "Cửa hàng tiện lợi",
       "color": "#1e3a8a"
     },
     {
       "code": "TV6",
       "name": "CTCP Tập đoàn EMA Land",
-      "sector": "",
+      "sector": "Cửa hàng tiện lợi",
       "color": "#1e3a8a"
     },
     {
       "code": "X26",
       "name": "CTCP 26",
-      "sector": "",
+      "sector": "Cửa hàng tiện lợi",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "CII",
+      "name": "CTCP Đầu tư Hạ tầng Kỹ thuật Thành phố Hồ Chí Minh",
+      "sector": "Xây dựng và vật liệu xây dựng",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "VCG",
+      "name": "Tổng CTCP Xuất nhập khẩu và Xây dựng Việt Nam",
+      "sector": "Xây dựng và vật liệu xây dựng",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "HHV",
+      "name": "CTCP Đầu tư Hạ tầng giao thông Đèo Cả",
+      "sector": "Xây dựng và vật liệu xây dựng",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "MST",
+      "name": "CTCP Đầu tư MST",
+      "sector": "Xây dựng và vật liệu xây dựng",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "TLD",
+      "name": "CTCP Đầu tư Xây dựng và Phát triển Đô thị Thăng Long",
+      "sector": "Xây dựng và vật liệu xây dựng",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "CRC",
+      "name": "CTCP Create Capital Việt Nam",
+      "sector": "Xây dựng và vật liệu xây dựng",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "HT1",
+      "name": "CTCP Xi Măng Vicem Hà Tiên",
+      "sector": "Xây dựng và vật liệu xây dựng",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "HUT",
+      "name": "CTCP Tasco",
+      "sector": "Xây dựng và vật liệu xây dựng",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "SDD",
+      "name": "CTCP Đầu tư và Xây lắp Sông Đà",
+      "sector": "Xây dựng và vật liệu xây dựng",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "FCN",
+      "name": "CTCP Tập đoàn FECON",
+      "sector": "Xây dựng và vật liệu xây dựng",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "DPG",
+      "name": "CTCP Tập đoàn Đạt Phương",
+      "sector": "Xây dựng và vật liệu xây dựng",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "PVX",
+      "name": "Tổng CTCP Xây lắp Dầu khí Việt Nam",
+      "sector": "Xây dựng và vật liệu xây dựng",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "PC1",
+      "name": "CTCP Tập đoàn PC1",
+      "sector": "Xây dựng và vật liệu xây dựng",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "VGC",
+      "name": "Tổng Công ty Viglacera - CTCP",
+      "sector": "Xây dựng và vật liệu xây dựng",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "LCG",
+      "name": "CTCP Lizen",
+      "sector": "Xây dựng và vật liệu xây dựng",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "BIG",
+      "name": "CTCP Tập đoàn Đầu tư BIG",
+      "sector": "Xây dựng và vật liệu xây dựng",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "HBC",
+      "name": "CTCP Tập đoàn Xây dựng Hòa Bình",
+      "sector": "Xây dựng và vật liệu xây dựng",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "CTD",
+      "name": "CTCP Xây dựng COTECCONS",
+      "sector": "Xây dựng và vật liệu xây dựng",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "BOT",
+      "name": "CTCP BOT Cầu Thái Hà",
+      "sector": "Xây dựng và vật liệu xây dựng",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "HID",
+      "name": "CTCP Halcom Việt Nam",
+      "sector": "Xây dựng và vật liệu xây dựng",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "CDC",
+      "name": "CTCP Chương Dương",
+      "sector": "Xây dựng và vật liệu xây dựng",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "CTI",
+      "name": "CTCP Đầu tư Phát triển Cường Thuận IDICO",
+      "sector": "Xây dựng và vật liệu xây dựng",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "HVH",
+      "name": "CTCP Đầu tư và Công nghệ HVC",
+      "sector": "Xây dựng và vật liệu xây dựng",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "CVN",
+      "name": "CTCP Vinam",
+      "sector": "Xây dựng và vật liệu xây dựng",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "C4G",
+      "name": "CTCP Tập đoàn CIENCO4",
+      "sector": "Xây dựng và vật liệu xây dựng",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "LIG",
+      "name": "CTCP Licogi 13",
+      "sector": "Xây dựng và vật liệu xây dựng",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "VNE",
+      "name": "Tổng CTCP Xây dựng điện Việt Nam",
+      "sector": "Xây dựng và vật liệu xây dựng",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "NTP",
+      "name": "CTCP Nhựa Thiếu Niên Tiền Phong",
+      "sector": "Xây dựng và vật liệu xây dựng",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "DC4",
+      "name": "CTCP Dicera Holdings",
+      "sector": "Xây dựng và vật liệu xây dựng",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "DTD",
+      "name": "CTCP Đầu tư Phát triển Thành Đạt",
+      "sector": "Xây dựng và vật liệu xây dựng",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "SVN",
+      "name": "CTCP Tập đoàn Vexilla Việt Nam",
+      "sector": "Xây dựng và vật liệu xây dựng",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "BCC",
+      "name": "CTCP Xi măng Bỉm Sơn",
+      "sector": "Xây dựng và vật liệu xây dựng",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "HTN",
+      "name": "CTCP Hưng Thịnh Incons",
+      "sector": "Xây dựng và vật liệu xây dựng",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "SCL",
+      "name": "CTCP Sông Đà Cao Cường",
+      "sector": "Xây dựng và vật liệu xây dựng",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "CTR",
+      "name": "Tổng CTCP Công trình Viettel",
+      "sector": "Xây dựng và vật liệu xây dựng",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "VC7",
+      "name": "CTCP Tập đoàn BGI",
+      "sector": "Xây dựng và vật liệu xây dựng",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "NAG",
+      "name": "CTCP Tập đoàn Nagakawa",
+      "sector": "Xây dựng và vật liệu xây dựng",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "C69",
+      "name": "CTCP Xây dựng 1369",
+      "sector": "Xây dựng và vật liệu xây dựng",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "SDT",
+      "name": "CTCP Sông Đà 10",
+      "sector": "Xây dựng và vật liệu xây dựng",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "VTV",
+      "name": "CTCP Năng lượng và Môi trường VICEM",
+      "sector": "Xây dựng và vật liệu xây dựng",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "ACC",
+      "name": "CTCP Đầu tư và Xây dựng Bình Dương ACC",
+      "sector": "Xây dựng và vật liệu xây dựng",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "PXS",
+      "name": "CTCP Kết cấu kim loại và Lắp máy Dầu khí",
+      "sector": "Xây dựng và vật liệu xây dựng",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "G36",
+      "name": "Tổng Công ty 36 - CTCP",
+      "sector": "Xây dựng và vật liệu xây dựng",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "DST",
+      "name": "CTCP Đầu tư Sao Thăng Long",
+      "sector": "Xây dựng và vật liệu xây dựng",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "HDA",
+      "name": "CTCP Hãng Sơn Đông Á",
+      "sector": "Xây dựng và vật liệu xây dựng",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "PTD",
+      "name": "CTCP Thiết kế Xây dựng Thương mại Phúc Thịnh",
+      "sector": "Xây dựng và vật liệu xây dựng",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "DGT",
+      "name": "CTCP Công trình giao thông Đồng Nai",
+      "sector": "Xây dựng và vật liệu xây dựng",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "PTB",
+      "name": "CTCP Phú Tài",
+      "sector": "Xây dựng và vật liệu xây dựng",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "NHA",
+      "name": "Tổng Công ty Đầu tư Phát triển Nhà và Đô thị Nam Hà Nội",
+      "sector": "Xây dựng và vật liệu xây dựng",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "CDO",
+      "name": "CTCP Tư vấn thiết kế và Phát triển đô thị",
+      "sector": "Xây dựng và vật liệu xây dựng",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "DSH",
+      "name": "CTCP Đông Sơn Holdings",
+      "sector": "Xây dựng và vật liệu xây dựng",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "GDA",
+      "name": "CTCP Tôn Đông Á",
+      "sector": "Xây dựng và vật liệu xây dựng",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "KDM",
+      "name": "CTCP Tập đoàn GCL",
+      "sector": "Xây dựng và vật liệu xây dựng",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "PXI",
+      "name": "CTCP Xây dựng Công nghiệp và Dân dụng Dầu khí",
+      "sector": "Xây dựng và vật liệu xây dựng",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "VLB",
+      "name": "CTCP Xây dựng và sản xuất vật liệu xây dựng Biên Hòa",
+      "sector": "Xây dựng và vật liệu xây dựng",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "HU4",
+      "name": "CTCP Đầu tư và Xây dựng HUD4",
+      "sector": "Xây dựng và vật liệu xây dựng",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "DFF",
+      "name": "CTCP Tập đoàn Đua Fat",
+      "sector": "Xây dựng và vật liệu xây dựng",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "VIW",
+      "name": "Tổng công ty Đầu tư Nước và Môi trường Việt Nam - CTCP",
+      "sector": "Xây dựng và vật liệu xây dựng",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "BCE",
+      "name": "CTCP Xây dựng và Giao thông Bình Dương",
+      "sector": "Xây dựng và vật liệu xây dựng",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "ICG",
+      "name": "CTCP Xây dựng Sông Hồng",
+      "sector": "Xây dựng và vật liệu xây dựng",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "NNC",
+      "name": "CTCP Đá Núi Nhỏ",
+      "sector": "Xây dựng và vật liệu xây dựng",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "MCG",
+      "name": "CTCP Năng lượng và Bất động sản MCG",
+      "sector": "Xây dựng và vật liệu xây dựng",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "MVC",
+      "name": "CTCP Vật liệu và Xây dựng Bình Dương",
+      "sector": "Xây dựng và vật liệu xây dựng",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "HTI",
+      "name": "CTCP Đầu tư Phát triển Hạ tầng IDICO",
+      "sector": "Xây dựng và vật liệu xây dựng",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "V21",
+      "name": "CTCP VINACONEX 21",
+      "sector": "Xây dựng và vật liệu xây dựng",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "SCG",
+      "name": "CTCP Tập đoàn Xây dựng SCG",
+      "sector": "Xây dựng và vật liệu xây dựng",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "L40",
+      "name": "CTCP Đầu tư và Xây dựng 40",
+      "sector": "Xây dựng và vật liệu xây dựng",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "CMD",
+      "name": "CTCP Vật liệu Xây dựng và Trang trí nội thất Thành phố Hồ Chí Minh",
+      "sector": "Xây dựng và vật liệu xây dựng",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "L18",
+      "name": "CTCP Đầu tư và Xây dựng số 18",
+      "sector": "Xây dựng và vật liệu xây dựng",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "ALV",
+      "name": "CTCP Tập đoàn MCST",
+      "sector": "Xây dựng và vật liệu xây dựng",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "PHC",
+      "name": "CTCP Xây dựng Phục Hưng Holdings",
+      "sector": "Xây dựng và vật liệu xây dựng",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "DIC",
+      "name": "CTCP Đầu tư và Thương mại DIC",
+      "sector": "Xây dựng và vật liệu xây dựng",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "UDJ",
+      "name": "CTCP Phát triển Đô thị",
+      "sector": "Xây dựng và vật liệu xây dựng",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "VC2",
+      "name": "CTCP Đầu tư và Xây dựng Vina2",
+      "sector": "Xây dựng và vật liệu xây dựng",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "SJE",
+      "name": "CTCP Sông Đà 11",
+      "sector": "Xây dựng và vật liệu xây dựng",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "VCS",
+      "name": "CTCP Vicostone",
+      "sector": "Xây dựng và vật liệu xây dựng",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "SCI",
+      "name": "CTCP SCI E&C",
+      "sector": "Xây dựng và vật liệu xây dựng",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "CTX",
+      "name": "Tổng CTCP Đầu tư xây dựng và Thương mại Việt Nam",
+      "sector": "Xây dựng và vật liệu xây dựng",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "L14",
+      "name": "CTCP Licogi 14",
+      "sector": "Xây dựng và vật liệu xây dựng",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "PSB",
+      "name": "CTCP Cảng kỹ thuật PTSC Sao Mai",
+      "sector": "Xây dựng và vật liệu xây dựng",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "L10",
+      "name": "CTCP Lilama 10",
+      "sector": "Xây dựng và vật liệu xây dựng",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "LBM",
+      "name": "CTCP Khoáng sản và Vật liệu Xây dựng Lâm Đồng",
+      "sector": "Xây dựng và vật liệu xây dựng",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "PXM",
+      "name": "CTCP Xây lắp Dầu khí Miền Trung",
+      "sector": "Xây dựng và vật liệu xây dựng",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "LHC",
+      "name": "CTCP Đầu tư và Xây dựng Thủy lợi Lâm Đồng",
+      "sector": "Xây dựng và vật liệu xây dựng",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "THG",
+      "name": "CTCP Đầu tư và Xây dựng Tiền Giang",
+      "sector": "Xây dựng và vật liệu xây dựng",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "S99",
+      "name": "CTCP SCI",
+      "sector": "Xây dựng và vật liệu xây dựng",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "SD5",
+      "name": "CTCP Sông Đà 5",
+      "sector": "Xây dựng và vật liệu xây dựng",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "VTA",
+      "name": "CTCP VITALY",
+      "sector": "Xây dựng và vật liệu xây dựng",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "C32",
+      "name": "CTCP Đầu tư và Xây dựng 3-2",
+      "sector": "Xây dựng và vật liệu xây dựng",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "DVG",
+      "name": "CTCP Đại Việt Group DVG",
+      "sector": "Xây dựng và vật liệu xây dựng",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "DHA",
+      "name": "CTCP Hóa An",
+      "sector": "Xây dựng và vật liệu xây dựng",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "HAS",
+      "name": "CTCP Hacisco",
+      "sector": "Xây dựng và vật liệu xây dựng",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "MDG",
+      "name": "CTCP Miền Đông",
+      "sector": "Xây dựng và vật liệu xây dựng",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "SD6",
+      "name": "CTCP Sông Đà 6",
+      "sector": "Xây dựng và vật liệu xây dựng",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "TA9",
+      "name": "CTCP Xây lắp Thành An 96",
+      "sector": "Xây dựng và vật liệu xây dựng",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "HU3",
+      "name": "CTCP Đầu tư và Xây dựng HUD3",
+      "sector": "Xây dựng và vật liệu xây dựng",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "NO1",
+      "name": "CTCP Tập đoàn 911",
+      "sector": "Xây dựng và vật liệu xây dựng",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "CCC",
+      "name": "CTCP Xây dựng CDC",
+      "sector": "Xây dựng và vật liệu xây dựng",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "HVX",
+      "name": "CTCP Xi măng VICEM Hải Vân",
+      "sector": "Xây dựng và vật liệu xây dựng",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "HTE",
+      "name": "CTCP Đầu tư Kinh doanh Điện lực Thành phố Hồ Chí Minh",
+      "sector": "Xây dựng và vật liệu xây dựng",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "TSA",
+      "name": "CTCP Đầu tư và Xây lắp Trường Sơn",
+      "sector": "Xây dựng và vật liệu xây dựng",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "HSP",
+      "name": "CTCP Sơn Tổng hợp Hà Nội",
+      "sector": "Xây dựng và vật liệu xây dựng",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "ACE",
+      "name": "CTCP Bê tông Ly tâm An Giang",
+      "sector": "Xây dựng và vật liệu xây dựng",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "ACS",
+      "name": "CTCP Xây lắp Thương mại 2",
+      "sector": "Xây dựng và vật liệu xây dựng",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "MEC",
+      "name": "CTCP Cơ khí - Lắp máy Sông Đà",
+      "sector": "Xây dựng và vật liệu xây dựng",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "TL4",
+      "name": "Tổng Công ty Xây dựng Thủy lợi 4 - CTCP",
+      "sector": "Xây dựng và vật liệu xây dựng",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "AMS",
+      "name": "CTCP Cơ khí Xây dựng AMECC",
+      "sector": "Xây dựng và vật liệu xây dựng",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "FIC",
+      "name": "Tổng Công ty Vật liệu Xây dựng Số 1 - CTCP",
+      "sector": "Xây dựng và vật liệu xây dựng",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "BTS",
+      "name": "CTCP Xi măng VICEM Bút Sơn",
+      "sector": "Xây dựng và vật liệu xây dựng",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "CMS",
+      "name": "CTCP Tập đoàn CMH Việt Nam",
+      "sector": "Xây dựng và vật liệu xây dựng",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "DTC",
+      "name": "CTCP Viglacera Đông Triều",
+      "sector": "Xây dựng và vật liệu xây dựng",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "DCT",
+      "name": "CTCP Tấm lợp - Vật liệu Xây dựng Đồng Nai",
+      "sector": "Xây dựng và vật liệu xây dựng",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "PVV",
+      "name": "CTCP Vinaconex 39",
+      "sector": "Xây dựng và vật liệu xây dựng",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "HMR",
+      "name": "CTCP Đá Hoàng Mai",
+      "sector": "Xây dựng và vật liệu xây dựng",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "HPP",
+      "name": "CTCP Sơn Hải Phòng",
+      "sector": "Xây dựng và vật liệu xây dựng",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "SD9",
+      "name": "CTCP Sông Đà 9",
+      "sector": "Xây dựng và vật liệu xây dựng",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "HCC",
+      "name": "CTCP Bê tông Hòa Cầm - INTIMEX",
+      "sector": "Xây dựng và vật liệu xây dựng",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "SJM",
+      "name": "CTCP Sunspace Holdings",
+      "sector": "Xây dựng và vật liệu xây dựng",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "SZB",
+      "name": "CTCP Sonadezi Long Bình",
+      "sector": "Xây dựng và vật liệu xây dựng",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "VSI",
+      "name": "CTCP Đầu tư và Xây dựng Cấp thoát nước",
+      "sector": "Xây dựng và vật liệu xây dựng",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "BHC",
+      "name": "CTCP Bê tông Biên Hòa",
+      "sector": "Xây dựng và vật liệu xây dựng",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "VIT",
+      "name": "CTCP Viglacera Tiên Sơn",
+      "sector": "Xây dựng và vật liệu xây dựng",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "VMC",
+      "name": "CTCP VIMECO",
+      "sector": "Xây dựng và vật liệu xây dựng",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "HUB",
+      "name": "CTCP Xây lắp Thừa Thiên Huế",
+      "sector": "Xây dựng và vật liệu xây dựng",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "C47",
+      "name": "CTCP Xây dựng 47",
+      "sector": "Xây dựng và vật liệu xây dựng",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "ICN",
+      "name": "CTCP Đầu tư Xây dựng Dầu khí IDICO",
+      "sector": "Xây dựng và vật liệu xây dựng",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "VC9",
+      "name": "CTCP Xây dựng số 9 - VC9",
+      "sector": "Xây dựng và vật liệu xây dựng",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "HAN",
+      "name": "Tổng Công ty Xây dựng Hà Nội - CTCP",
+      "sector": "Xây dựng và vật liệu xây dựng",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "LO5",
+      "name": "CTCP Lilama 5",
+      "sector": "Xây dựng và vật liệu xây dựng",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "PTC",
+      "name": "CTCP Đầu tư ICAPITAL",
+      "sector": "Xây dựng và vật liệu xây dựng",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "BDT",
+      "name": "CTCP Xây lắp và Vật liệu xây dựng Đồng Tháp",
+      "sector": "Xây dựng và vật liệu xây dựng",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "MCO",
+      "name": "CTCP Đầu tư và Xây dựng BDC Việt Nam",
+      "sector": "Xây dựng và vật liệu xây dựng",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "TTL",
+      "name": "Tổng Công ty Thăng Long - CTCP",
+      "sector": "Xây dựng và vật liệu xây dựng",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "BMK",
+      "name": "CTCP Kỹ thuật nhiệt Mèo Đen",
+      "sector": "Xây dựng và vật liệu xây dựng",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "HMS",
+      "name": "CTCP Xây dựng bảo tàng Hồ Chí Minh",
+      "sector": "Xây dựng và vật liệu xây dựng",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "HOM",
+      "name": "CTCP Xi măng VICEM Hoàng Mai",
+      "sector": "Xây dựng và vật liệu xây dựng",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "L35",
+      "name": "CTCP Cơ khí Lắp máy Lilama",
+      "sector": "Xây dựng và vật liệu xây dựng",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "TDF",
+      "name": "CTCP Trung Đô",
+      "sector": "Xây dựng và vật liệu xây dựng",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "VC1",
+      "name": "CTCP Xây dựng số 1",
+      "sector": "Xây dựng và vật liệu xây dựng",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "CC1",
+      "name": "Tổng Công ty Xây dựng Số 1 - CTCP",
+      "sector": "Xây dựng và vật liệu xây dựng",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "SJG",
+      "name": "Tổng Công ty Sông Đà - CTCP",
+      "sector": "Xây dựng và vật liệu xây dựng",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "TS3",
+      "name": "CTCP Trường Sơn 532",
+      "sector": "Xây dựng và vật liệu xây dựng",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "L12",
+      "name": "CTCP Licogi 12",
+      "sector": "Xây dựng và vật liệu xây dựng",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "SD2",
+      "name": "CTCP Sông Đà 2",
+      "sector": "Xây dựng và vật liệu xây dựng",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "PXT",
+      "name": "CTCP Xây lắp Đường ống Bể chứa Dầu khí",
+      "sector": "Xây dựng và vật liệu xây dựng",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "ADP",
+      "name": "CTCP Sơn Á Đông",
+      "sector": "Xây dựng và vật liệu xây dựng",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "BTN",
+      "name": "CTCP Đầu Tư Bitco Bình Định",
+      "sector": "Xây dựng và vật liệu xây dựng",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "GTS",
+      "name": "CTCP Công trình Giao thông Sài Gòn",
+      "sector": "Xây dựng và vật liệu xây dựng",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "CIP",
+      "name": "CTCP Xây lắp và Sản xuất Công nghiệp",
+      "sector": "Xây dựng và vật liệu xây dựng",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "CVT",
+      "name": "CTCP CMC",
+      "sector": "Xây dựng và vật liệu xây dựng",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "HEC",
+      "name": "CTCP Tư vấn Xây dựng Thủy Lợi II",
+      "sector": "Xây dựng và vật liệu xây dựng",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "TTC",
+      "name": "CTCP Gạch men Thanh Thanh",
+      "sector": "Xây dựng và vật liệu xây dựng",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "XMD",
+      "name": "CTCP Xuân Mai - Đạo Tú",
+      "sector": "Xây dựng và vật liệu xây dựng",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "CHS",
+      "name": "CTCP Chiếu sáng Công cộng thành phố Hồ Chí Minh",
+      "sector": "Xây dựng và vật liệu xây dựng",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "E12",
+      "name": "CTCP Xây dựng điện Vneco 12",
+      "sector": "Xây dựng và vật liệu xây dựng",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "PVH",
+      "name": "CTCP Xây lắp Dầu khí Thanh Hóa",
+      "sector": "Xây dựng và vật liệu xây dựng",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "VCC",
+      "name": "CTCP Vinaconex 25",
+      "sector": "Xây dựng và vật liệu xây dựng",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "CLH",
+      "name": "CTCP Xi măng La Hiên VVMI",
+      "sector": "Xây dựng và vật liệu xây dựng",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "DXV",
+      "name": "CTCP VICEM Vật liệu Xây dựng Đà Nẵng",
+      "sector": "Xây dựng và vật liệu xây dựng",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "DCR",
+      "name": "CTCP Gạch Men Cosevco",
+      "sector": "Xây dựng và vật liệu xây dựng",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "SCJ",
+      "name": "CTCP Xi măng Sài Sơn",
+      "sector": "Xây dựng và vật liệu xây dựng",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "TXM",
+      "name": "CTCP VICEM Thạch cao Xi măng",
+      "sector": "Xây dựng và vật liệu xây dựng",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "VHD",
+      "name": "CTCP Đầu tư Phát triển nhà và Đô thị Vinahud",
+      "sector": "Xây dựng và vật liệu xây dựng",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "VSE",
+      "name": "CTCP Dịch vụ Đường cao tốc Việt Nam",
+      "sector": "Xây dựng và vật liệu xây dựng",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "VXB",
+      "name": "CTCP Vật liệu Xây dựng Bến Tre",
+      "sector": "Xây dựng và vật liệu xây dựng",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "CID",
+      "name": "CTCP Xây dựng và Phát triển Cơ sở Hạ tầng",
+      "sector": "Xây dựng và vật liệu xây dựng",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "CT3",
+      "name": "CTCP Đầu tư và Xây dựng Công trình 3",
+      "sector": "Xây dựng và vật liệu xây dựng",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "DND",
+      "name": "CTCP Đầu tư Xây dựng và Vật liệu Đồng Nai",
+      "sector": "Xây dựng và vật liệu xây dựng",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "GMH",
+      "name": "CTCP Minh Hưng Quảng Trị",
+      "sector": "Xây dựng và vật liệu xây dựng",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "GND",
+      "name": "CTCP Gạch ngói Đồng Nai",
+      "sector": "Xây dựng và vật liệu xây dựng",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "LM3",
+      "name": "CTCP Lilama 3",
+      "sector": "Xây dựng và vật liệu xây dựng",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "RYG",
+      "name": "CTCP Sản xuất và Đầu tư Hoàng Gia",
+      "sector": "Xây dựng và vật liệu xây dựng",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "SD3",
+      "name": "CTCP Sông Đà 3",
+      "sector": "Xây dựng và vật liệu xây dựng",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "UDC",
+      "name": "CTCP Đầu tư xây dựng UDCONS",
+      "sector": "Xây dựng và vật liệu xây dựng",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "UIC",
+      "name": "CTCP Đầu tư phát triển Nhà và Đô thị IDICO",
+      "sector": "Xây dựng và vật liệu xây dựng",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "VHL",
+      "name": "CTCP Viglacera Hạ Long",
+      "sector": "Xây dựng và vật liệu xây dựng",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "ANI",
+      "name": "CTCP ANI",
+      "sector": "Xây dựng và vật liệu xây dựng",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "BAX",
+      "name": "CTCP Thống Nhất",
+      "sector": "Xây dựng và vật liệu xây dựng",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "BT6",
+      "name": "CTCP Beton 6",
+      "sector": "Xây dựng và vật liệu xây dựng",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "BTD",
+      "name": "CTCP Bê tông Ly tâm Thủ Đức",
+      "sector": "Xây dựng và vật liệu xây dựng",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "C92",
+      "name": "CTCP Xây dựng và Đầu tư 492",
+      "sector": "Xây dựng và vật liệu xây dựng",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "CCM",
+      "name": "CTCP Khoáng sản và Xi măng Cần Thơ",
+      "sector": "Xây dựng và vật liệu xây dựng",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "CCV",
+      "name": "CTCP Tư vấn Xây dựng Công nghiệp và Đô thị Việt Nam",
+      "sector": "Xây dựng và vật liệu xây dựng",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "CDG",
+      "name": "CTCP Cầu Đuống",
+      "sector": "Xây dựng và vật liệu xây dựng",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "CDR",
+      "name": "CTCP Xây dựng Cao Su Đồng Nai",
+      "sector": "Xây dựng và vật liệu xây dựng",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "CGV",
+      "name": "CTCP Vinaceglass",
+      "sector": "Xây dựng và vật liệu xây dựng",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "CH5",
+      "name": "CTCP Xây dựng Số 5 Hà Nội",
+      "sector": "Xây dựng và vật liệu xây dựng",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "CHC",
+      "name": "CTCP Cẩm Hà",
+      "sector": "Xây dựng và vật liệu xây dựng",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "CI5",
+      "name": "CTCP Đầu tư Xây dựng số 5",
+      "sector": "Xây dựng và vật liệu xây dựng",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "CK8",
+      "name": "CTCP Cơ khí 120",
+      "sector": "Xây dựng và vật liệu xây dựng",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "CNT",
+      "name": "CTCP Tập đoàn CNT",
+      "sector": "Xây dựng và vật liệu xây dựng",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "CQT",
+      "name": "CTCP Xi măng Quán Triều - VVMI",
+      "sector": "Xây dựng và vật liệu xây dựng",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "CT6",
+      "name": "CTCP Công trình 6",
+      "sector": "Xây dựng và vật liệu xây dựng",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "CX8",
+      "name": "CTCP Đầu tư và Xây lắp Constrexim số 8",
+      "sector": "Xây dựng và vật liệu xây dựng",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "DAC",
+      "name": "CTCP 382 Đông Anh",
+      "sector": "Xây dựng và vật liệu xây dựng",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "DC1",
+      "name": "CTCP Đầu tư Phát triển xây dựng số 1",
+      "sector": "Xây dựng và vật liệu xây dựng",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "DC2",
+      "name": "CTCP Đầu tư phát triển - Xây dựng (DIC) Số 2",
+      "sector": "Xây dựng và vật liệu xây dựng",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "DCF",
+      "name": "CTCP Xây dựng và Thiết kế số 1",
+      "sector": "Xây dựng và vật liệu xây dựng",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "DID",
+      "name": "CTCP DIC - Đồng Tiến",
+      "sector": "Xây dựng và vật liệu xây dựng",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "DIH",
+      "name": "CTCP Đầu tư Phát triển Xây dựng - Hội An",
+      "sector": "Xây dựng và vật liệu xây dựng",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "DKG",
+      "name": "CTCP Tập đoàn DamiK",
+      "sector": "Xây dựng và vật liệu xây dựng",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "DNP",
+      "name": "CTCP DNP Holding",
+      "sector": "Xây dựng và vật liệu xây dựng",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "DSG",
+      "name": "CTCP Kính Đáp Cầu",
+      "sector": "Xây dựng và vật liệu xây dựng",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "E29",
+      "name": "CTCP Đầu tư xây dựng và kỹ thuật 29",
+      "sector": "Xây dựng và vật liệu xây dựng",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "EME",
+      "name": "CTCP Điện Cơ",
+      "sector": "Xây dựng và vật liệu xây dựng",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "FID",
+      "name": "CTCP Đầu tư và Phát triển Doanh nghiệp Việt Nam",
+      "sector": "Xây dựng và vật liệu xây dựng",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "GH3",
+      "name": "CTCP Công trình Giao thông Hà Nội",
+      "sector": "Xây dựng và vật liệu xây dựng",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "GKM",
+      "name": "CTCP GKM Holdings",
+      "sector": "Xây dựng và vật liệu xây dựng",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "GMX",
+      "name": "CTCP Gạch ngói Gốm Xây dựng Mỹ Xuân",
+      "sector": "Xây dựng và vật liệu xây dựng",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "H11",
+      "name": "CTCP Xây dựng HUD101",
+      "sector": "Xây dựng và vật liệu xây dựng",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "HAM",
+      "name": "CTCP Vật tư Hậu Giang",
+      "sector": "Xây dựng và vật liệu xây dựng",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "HC1",
+      "name": "CTCP Xây dựng số 1 Hà Nội",
+      "sector": "Xây dựng và vật liệu xây dựng",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "HC3",
+      "name": "CTCP Xây dựng số 3 Hải Phòng",
+      "sector": "Xây dựng và vật liệu xây dựng",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "HCI",
+      "name": "CTCP Đầu tư - Xây dựng Hà Nội",
+      "sector": "Xây dựng và vật liệu xây dựng",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "HFB",
+      "name": "CTCP Công trình Cầu phà Thành phố Hồ Chí Minh",
+      "sector": "Xây dựng và vật liệu xây dựng",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "HLY",
+      "name": "CTCP Gốm Xây dựng Yên Hưng",
+      "sector": "Xây dựng và vật liệu xây dựng",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "HU1",
+      "name": "CTCP Đầu tư và Xây dựng HUD1",
+      "sector": "Xây dựng và vật liệu xây dựng",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "ICC",
+      "name": "CTCP Xây dựng công nghiệp",
+      "sector": "Xây dựng và vật liệu xây dựng",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "ICI",
+      "name": "CTCP Đầu tư và Xây dựng Công nghiệp",
+      "sector": "Xây dựng và vật liệu xây dựng",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "KPF",
+      "name": "CTCP Đầu tư tài sản Koji",
+      "sector": "Xây dựng và vật liệu xây dựng",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "KTT",
+      "name": "CTCP Tập đoàn Đầu tư KTT",
+      "sector": "Xây dựng và vật liệu xây dựng",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "L43",
+      "name": "CTCP Lilama 45.3",
+      "sector": "Xây dựng và vật liệu xây dựng",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "L45",
+      "name": "CTCP Lilama 45.1",
+      "sector": "Xây dựng và vật liệu xây dựng",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "L61",
+      "name": "CTCP Lilama 69-1",
+      "sector": "Xây dựng và vật liệu xây dựng",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "LG9",
+      "name": "CTCP Cơ giới và Xây lắp số 9",
+      "sector": "Xây dựng và vật liệu xây dựng",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "LGC",
+      "name": "CTCP Đầu tư Cầu đường CII",
+      "sector": "Xây dựng và vật liệu xây dựng",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "LIC",
+      "name": "Tổng Công ty Licogi - CTCP",
+      "sector": "Xây dựng và vật liệu xây dựng",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "LM8",
+      "name": "CTCP Lilama 18",
+      "sector": "Xây dựng và vật liệu xây dựng",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "LMI",
+      "name": "CTCP Đầu tư xây dựng lắp máy IDICO",
+      "sector": "Xây dựng và vật liệu xây dựng",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "LQN",
+      "name": "CTCP Licogi Quảng Ngãi",
+      "sector": "Xây dựng và vật liệu xây dựng",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "MCC",
+      "name": "CTCP Gạch ngói Cao cấp",
+      "sector": "Xây dựng và vật liệu xây dựng",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "MES",
+      "name": "CTCP Cơ điện Công trình",
+      "sector": "Xây dựng và vật liệu xây dựng",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "NAV",
+      "name": "CTCP Nam Việt",
+      "sector": "Xây dựng và vật liệu xây dựng",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "NDX",
+      "name": "CTCP Xây lắp Phát triển Nhà Đà Nẵng",
+      "sector": "Xây dựng và vật liệu xây dựng",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "NHC",
+      "name": "CTCP Gạch ngói Nhị Hiệp",
+      "sector": "Xây dựng và vật liệu xây dựng",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "NXT",
+      "name": "CTCP Nextracorp",
+      "sector": "Xây dựng và vật liệu xây dựng",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "PCC",
+      "name": "CTCP Tập đoàn Xây lắp 1 - Petrolimex",
+      "sector": "Xây dựng và vật liệu xây dựng",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "PCM",
+      "name": "CTCP Vật liệu xây dựng Bưu điện",
+      "sector": "Xây dựng và vật liệu xây dựng",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "PDB",
+      "name": "CTCP Tập đoàn đầu tư Din Capital",
+      "sector": "Xây dựng và vật liệu xây dựng",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "PEN",
+      "name": "CTCP Xây lắp III - Petrolimex",
+      "sector": "Xây dựng và vật liệu xây dựng",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "PHH",
+      "name": "CTCP Hồng Hà Việt Nam",
+      "sector": "Xây dựng và vật liệu xây dựng",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "PLE",
+      "name": "CTCP Tư vấn Xây dựng Petrolimex",
+      "sector": "Xây dựng và vật liệu xây dựng",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "PQN",
+      "name": "CTCP Dịch vụ dầu khí Quảng Ngãi PTSC",
+      "sector": "Xây dựng và vật liệu xây dựng",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "PTE",
+      "name": "CTCP Xi măng Phú Thọ",
+      "sector": "Xây dựng và vật liệu xây dựng",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "PTO",
+      "name": "CTCP Dịch vụ - Xây dựng công trình Bưu điện",
+      "sector": "Xây dựng và vật liệu xây dựng",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "QCC",
+      "name": "CTCP Đầu tư xây dựng và Phát triển Hạ tầng Viễn thông",
+      "sector": "Xây dựng và vật liệu xây dựng",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "QHD",
+      "name": "CTCP Que hàn điện Việt Đức",
+      "sector": "Xây dựng và vật liệu xây dựng",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "QNC",
+      "name": "CTCP Xi măng và Xây dựng Quảng Ninh",
+      "sector": "Xây dựng và vật liệu xây dựng",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "QTC",
+      "name": "CTCP Công trình Giao thông Vận tải Quảng Nam",
+      "sector": "Xây dựng và vật liệu xây dựng",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "RCC",
+      "name": "CTCP Tổng Công ty Công trình Đường sắt",
+      "sector": "Xây dựng và vật liệu xây dựng",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "ROS",
+      "name": "CTCP Xây dựng FLC FAROS",
+      "sector": "Xây dựng và vật liệu xây dựng",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "S12",
+      "name": "CTCP Sông Đà 12",
+      "sector": "Xây dựng và vật liệu xây dựng",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "S55",
+      "name": "CTCP Sông Đà 505",
+      "sector": "Xây dựng và vật liệu xây dựng",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "S72",
+      "name": "CTCP Sông Đà 7.02",
+      "sector": "Xây dựng và vật liệu xây dựng",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "S74",
+      "name": "CTCP Sông Đà 7.04",
+      "sector": "Xây dựng và vật liệu xây dựng",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "SC5",
+      "name": "CTCP Xây dựng số 5",
+      "sector": "Xây dựng và vật liệu xây dựng",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "SCC",
+      "name": "CTCP Thương Mại Đầu tư SHB",
+      "sector": "Xây dựng và vật liệu xây dựng",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "SD4",
+      "name": "CTCP Sông Đà 4",
+      "sector": "Xây dựng và vật liệu xây dựng",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "SD7",
+      "name": "CTCP Sông Đà 7",
+      "sector": "Xây dựng và vật liệu xây dựng",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "SD8",
+      "name": "CTCP Sông Đà 8",
+      "sector": "Xây dựng và vật liệu xây dựng",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "SDN",
+      "name": "CTCP Sơn Đồng Nai",
+      "sector": "Xây dựng và vật liệu xây dựng",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "SDP",
+      "name": "CTCP SDP",
+      "sector": "Xây dựng và vật liệu xây dựng",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "SDY",
+      "name": "CTCP Xi măng Sông Đà Yaly",
+      "sector": "Xây dựng và vật liệu xây dựng",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "SIG",
+      "name": "CTCP Đầu tư và Thương mại Sông Đà",
+      "sector": "Xây dựng và vật liệu xây dựng",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "SPI",
+      "name": "CTCP SPIRAL GALAXY",
+      "sector": "Xây dựng và vật liệu xây dựng",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "TA6",
+      "name": "CTCP Đầu tư và Xây lắp Thành An 665",
+      "sector": "Xây dựng và vật liệu xây dựng",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "TCK",
+      "name": "Tổng Công ty cơ khí xây dựng - CTCP",
+      "sector": "Xây dựng và vật liệu xây dựng",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "TCR",
+      "name": "CTCP Công nghiệp Gốm Sứ Taicera",
+      "sector": "Xây dựng và vật liệu xây dựng",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "TED",
+      "name": "Tổng Công ty Tư vấn thiết kế Giao thông vận tải - CTCP",
+      "sector": "Xây dựng và vật liệu xây dựng",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "TMX",
+      "name": "CTCP VICEM Thương mại Xi măng",
+      "sector": "Xây dựng và vật liệu xây dựng",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "TRT",
+      "name": "CTCP Redstarcera",
+      "sector": "Xây dựng và vật liệu xây dựng",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "TTB",
+      "name": "CTCP TTBGROUP",
+      "sector": "Xây dựng và vật liệu xây dựng",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "TVA",
+      "name": "CTCP Sứ Viglacera Thanh Trì",
+      "sector": "Xây dựng và vật liệu xây dựng",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "TVG",
+      "name": "CTCP Tư vấn đầu tư và Xây dựng Giao thông vận tải",
+      "sector": "Xây dựng và vật liệu xây dựng",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "V12",
+      "name": "CTCP Xây dựng số 12",
+      "sector": "Xây dựng và vật liệu xây dựng",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "VC6",
+      "name": "CTCP Xây dựng và Đầu tư Visicons",
+      "sector": "Xây dựng và vật liệu xây dựng",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "VCX",
+      "name": "CTCP Xi măng Yên Bình",
+      "sector": "Xây dựng và vật liệu xây dựng",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "VE1",
+      "name": "CTCP Xây dựng điện VNECO 1",
+      "sector": "Xây dựng và vật liệu xây dựng",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "VE3",
+      "name": "CTCP Xây dựng điện VNECO3",
+      "sector": "Xây dựng và vật liệu xây dựng",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "VE4",
+      "name": "CTCP Xây dựng điện VNECO4",
+      "sector": "Xây dựng và vật liệu xây dựng",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "VE9",
+      "name": "CTCP Đầu tư và Xây dựng VNECO 9",
+      "sector": "Xây dựng và vật liệu xây dựng",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "VES",
+      "name": "CTCP Tập đoàn Vinaliving",
+      "sector": "Xây dựng và vật liệu xây dựng",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "VHH",
+      "name": "CTCP Đầu tư Kinh doanh nhà Thành Đạt",
+      "sector": "Xây dựng và vật liệu xây dựng",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "VPC",
+      "name": "CTCP Đầu tư và Phát triển Năng lượng Việt Nam",
+      "sector": "Xây dựng và vật liệu xây dựng",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "VVN",
+      "name": "Tổng CTCP Xây dựng Công nghiệp Việt",
+      "sector": "Xây dựng và vật liệu xây dựng",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "VW3",
+      "name": "CTCP Viwaseen3",
+      "sector": "Xây dựng và vật liệu xây dựng",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "X77",
+      "name": "CTCP Thành An 77",
+      "sector": "Xây dựng và vật liệu xây dựng",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "XDH",
+      "name": "CTCP Đầu tư Xây dựng Dân dụng Hà Nội",
+      "sector": "Xây dựng và vật liệu xây dựng",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "XLV",
+      "name": "CTCP Xây lắp và Dịch vụ Sông Đà",
+      "sector": "Xây dựng và vật liệu xây dựng",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "XMC",
+      "name": "CTCP Đầu tư và Xây dựng Xuân Mai",
+      "sector": "Xây dựng và vật liệu xây dựng",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "YBC",
+      "name": "CTCP Xi măng và Khoáng sản Yên Bái",
+      "sector": "Xây dựng và vật liệu xây dựng",
       "color": "#1e3a8a"
     }
   ],
