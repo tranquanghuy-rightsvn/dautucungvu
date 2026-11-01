@@ -6005,6 +6005,1296 @@
       "name": "CTCP Xi măng và Khoáng sản Yên Bái",
       "sector": "Xây dựng và vật liệu xây dựng",
       "color": "#1e3a8a"
+    },
+    {
+      "code": "VSC",
+      "name": "CTCP Container Việt Nam",
+      "sector": "Công nghiệp",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "GEX",
+      "name": "CTCP Tập đoàn GELEX",
+      "sector": "Công nghiệp",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "PVT",
+      "name": "Tổng CTCP Vận tải Dầu khí",
+      "sector": "Công nghiệp",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "TCD",
+      "name": "CTCP Tập đoàn Xây dựng TRACODI",
+      "sector": "Công nghiệp",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "PVP",
+      "name": "CTCP Vận tải Dầu khí Thái Bình Dương",
+      "sector": "Công nghiệp",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "GMD",
+      "name": "CTCP Tập đoàn Gemadept",
+      "sector": "Công nghiệp",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "VOS",
+      "name": "CTCP Vận tải Biển Việt Nam",
+      "sector": "Công nghiệp",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "ACV",
+      "name": "Tổng Công ty Cảng hàng không Việt Nam - C",
+      "sector": "Công nghiệp",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "VEA",
+      "name": "Tổng Công ty Máy động lực và Máy nông nghiệp Việt Nam - CTCP",
+      "sector": "Công nghiệp",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "PHP",
+      "name": "CTCP Cảng Hải Phòng",
+      "sector": "Công nghiệp",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "HAH",
+      "name": "CTCP Vận tải và Xếp dỡ Hải An",
+      "sector": "Công nghiệp",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "TV2",
+      "name": "CTCP Tư vấn Xây dựng Điện 2",
+      "sector": "Công nghiệp",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "VTO",
+      "name": "CTCP Vận tải Xăng dầu Vitaco",
+      "sector": "Công nghiệp",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "VTP",
+      "name": "Tổng CTCP Bưu chính Viettel",
+      "sector": "Công nghiệp",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "TCO",
+      "name": "CTCP Janus Group",
+      "sector": "Công nghiệp",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "DXP",
+      "name": "CTCP Cảng Đoạn Xá",
+      "sector": "Công nghiệp",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "LLM",
+      "name": "Tổng Công ty lắp máy Việt Nam - CTCP",
+      "sector": "Công nghiệp",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "TV1",
+      "name": "CTCP Tư vấn Xây dựng Điện 1",
+      "sector": "Công nghiệp",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "SGN",
+      "name": "CTCP Phục vụ mặt đất Sài Gòn",
+      "sector": "Công nghiệp",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "VVS",
+      "name": "CTCP Đầu tư Phát triển Máy Việt Nam",
+      "sector": "Công nghiệp",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "SCS",
+      "name": "CTCP Dịch vụ Hàng hóa Sài Gòn",
+      "sector": "Công nghiệp",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "TOS",
+      "name": "CTCP Dịch vụ biển Tân Cảng",
+      "sector": "Công nghiệp",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "SHN",
+      "name": "CTCP Đầu tư Tổng hợp Hà Nội",
+      "sector": "Công nghiệp",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "DL1",
+      "name": "CTCP Tập đoàn Alpha Seven",
+      "sector": "Công nghiệp",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "VST",
+      "name": "CTCP Vận tải và Thuê tàu biển Việt Nam 2.60",
+      "sector": "Công nghiệp",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "SKG",
+      "name": "CTCP Tàu cao tốc Superdong - Kiên Giang",
+      "sector": "Công nghiệp",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "VIP",
+      "name": "CTCP Vận tải Xăng dầu VIPCO",
+      "sector": "Công nghiệp",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "CLI",
+      "name": "CTCP Tập đoàn CNCTech",
+      "sector": "Công nghiệp",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "SGP",
+      "name": "CTCP Cảng Sài Gòn",
+      "sector": "Công nghiệp",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "CQN",
+      "name": "CTCP Cảng Quảng Ninh",
+      "sector": "Công nghiệp",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "PDV",
+      "name": "CTCP Vận tải và Tiếp vận Phương Đông Việt",
+      "sector": "Công nghiệp",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "MAC",
+      "name": "CTCP Tập đoàn Macstar",
+      "sector": "Công nghiệp",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "HHG",
+      "name": "CTCP Hoàng Hà",
+      "sector": "Công nghiệp",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "PTS",
+      "name": "CTCP Vận tải và Dịch vụ Petrolimex Hải Phòng",
+      "sector": "Công nghiệp",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "MHC",
+      "name": "CTCP MHC",
+      "sector": "Công nghiệp",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "VEC",
+      "name": "Tổng CTCP Điện tử và Tin học Việt Nam",
+      "sector": "Công nghiệp",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "MCP",
+      "name": "CTCP In và Bao bì Mỹ Châu",
+      "sector": "Công nghiệp",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "TRV",
+      "name": "CTCP Vận tải Đường sắt",
+      "sector": "Công nghiệp",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "VNS",
+      "name": "CTCP Ánh Dương Việt Nam",
+      "sector": "Công nghiệp",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "SAS",
+      "name": "CTCP Dịch vụ Hàng không Sân bay Tân Sơn Nhất",
+      "sector": "Công nghiệp",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "PVE",
+      "name": "Tổng Công ty Tư vấn Thiết kế Dầu khí - CTCP",
+      "sector": "Công nghiệp",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "SDA",
+      "name": "CTCP SIMCO Sông Đà",
+      "sector": "Công nghiệp",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "TCL",
+      "name": "CTCP Đại lý giao nhận vận tải xếp dỡ Tân Cảng",
+      "sector": "Công nghiệp",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "ILB",
+      "name": "CTCP ICD Tân Cảng - Long Bình",
+      "sector": "Công nghiệp",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "DVP",
+      "name": "CTCP Đầu tư và Phát triển Cảng Đình Vũ",
+      "sector": "Công nghiệp",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "VGP",
+      "name": "CTCP Cảng Rau Quả",
+      "sector": "Công nghiệp",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "CAG",
+      "name": "CTCP Cảng An Giang",
+      "sector": "Công nghiệp",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "VNF",
+      "name": "CTCP VINAFREIGHT",
+      "sector": "Công nghiệp",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "PCT",
+      "name": "CTCP Vận tải biển Global Pacific",
+      "sector": "Công nghiệp",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "ALC",
+      "name": "CTCP Âu Lạc",
+      "sector": "Công nghiệp",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "TOT",
+      "name": "CTCP Transimex Logistics",
+      "sector": "Công nghiệp",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "GIC",
+      "name": "CTCP VSC Green Logistics",
+      "sector": "Công nghiệp",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "MVN",
+      "name": "Tổng Công ty Hàng hải Việt Nam - CTCP",
+      "sector": "Công nghiệp",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "SWC",
+      "name": "Tổng CTCP Đường Sông Miền Nam",
+      "sector": "Công nghiệp",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "HMH",
+      "name": "CTCP Hải Minh",
+      "sector": "Công nghiệp",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "NHH",
+      "name": "CTCP Nhựa Hà Nội",
+      "sector": "Công nghiệp",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "PDN",
+      "name": "CTCP Cảng Đồng Nai",
+      "sector": "Công nghiệp",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "NCT",
+      "name": "CTCP Dịch vụ Hàng hóa Nội Bài",
+      "sector": "Công nghiệp",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "ULG",
+      "name": "CTCP Logistics U&I",
+      "sector": "Công nghiệp",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "PSP",
+      "name": "CTCP Cảng dịch vụ Dầu khí Đình Vũ",
+      "sector": "Công nghiệp",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "CLL",
+      "name": "CTCP Cảng Cát Lái",
+      "sector": "Công nghiệp",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "CIA",
+      "name": "CTCP Dịch vụ Sân bay Quốc tế Cam Ranh",
+      "sector": "Công nghiệp",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "CPI",
+      "name": "CTCP Đầu tư Cảng Cái Lân",
+      "sector": "Công nghiệp",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "LPT",
+      "name": "CTCP Thương mại và Sản xuất Lập Phương Thành",
+      "sector": "Công nghiệp",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "VGR",
+      "name": "CTCP Cảng Xanh VIP",
+      "sector": "Công nghiệp",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "VTK",
+      "name": "CTCP Tư vấn và dịch vụ Viettel",
+      "sector": "Công nghiệp",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "HTV",
+      "name": "CTCP Logistics Vicem",
+      "sector": "Công nghiệp",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "ILS",
+      "name": "CTCP Đầu tư Thương mại và Dịch vụ Quốc tế",
+      "sector": "Công nghiệp",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "GSP",
+      "name": "CTCP Vận tải Sản phẩm khí Quốc tế",
+      "sector": "Công nghiệp",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "TJC",
+      "name": "CTCP Dịch vụ Vận tải và Thương mại",
+      "sector": "Công nghiệp",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "TMS",
+      "name": "CTCP Transimex",
+      "sector": "Công nghiệp",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "TCW",
+      "name": "CTCP Kho vận Tân Cảng",
+      "sector": "Công nghiệp",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "VSG",
+      "name": "CTCP Container phía Nam",
+      "sector": "Công nghiệp",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "VEF",
+      "name": "CTCP Trung tâm Hội chợ Triển lãm Việt Nam",
+      "sector": "Công nghiệp",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "TNI",
+      "name": "CTCP Tập đoàn Thành Nam",
+      "sector": "Công nghiệp",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "PNP",
+      "name": "CTCP Tân Cảng - Phú Hữu",
+      "sector": "Công nghiệp",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "PPE",
+      "name": "CTCP Tư vấn đầu tư PP Enterprise",
+      "sector": "Công nghiệp",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "CDN",
+      "name": "CTCP Cảng Đà Nẵng",
+      "sector": "Công nghiệp",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "CCR",
+      "name": "CTCP Cảng Cam Ranh",
+      "sector": "Công nghiệp",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "NAP",
+      "name": "CTCP Cảng Nghệ Tĩnh",
+      "sector": "Công nghiệp",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "SRF",
+      "name": "CTCP SEAREFICO",
+      "sector": "Công nghiệp",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "VNT",
+      "name": "CTCP Giao nhận Vận tải Ngoại Thương",
+      "sector": "Công nghiệp",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "STP",
+      "name": "CTCP Công nghiệp Thương mại Sông Đà",
+      "sector": "Công nghiệp",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "VBH",
+      "name": "CTCP Điện tử Bình Hòa",
+      "sector": "Công nghiệp",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "VNL",
+      "name": "CTCP Logistics VINALINK",
+      "sector": "Công nghiệp",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "PRC",
+      "name": "CTCP Logistics Portserco",
+      "sector": "Công nghiệp",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "CTB",
+      "name": "CTCP Chế tạo Bơm Hải Dương",
+      "sector": "Công nghiệp",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "L62",
+      "name": "CTCP Lilama 69-2",
+      "sector": "Công nghiệp",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "STG",
+      "name": "CTCP Kho vận Miền Nam",
+      "sector": "Công nghiệp",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "WCS",
+      "name": "CTCP Bến xe Miền Tây",
+      "sector": "Công nghiệp",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "ASG",
+      "name": "CTCP Tập đoàn ASG",
+      "sector": "Công nghiệp",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "SSG",
+      "name": "CTCP Vận tải biển Hải Âu",
+      "sector": "Công nghiệp",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "HPB",
+      "name": "CTCP Bao bì PP",
+      "sector": "Công nghiệp",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "IST",
+      "name": "CTCP ICD Tân Cảng Sóng Thần",
+      "sector": "Công nghiệp",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "MA1",
+      "name": "CTCP Thiết bị",
+      "sector": "Công nghiệp",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "PBP",
+      "name": "CTCP Bao bì dầu khí Việt Nam",
+      "sector": "Công nghiệp",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "PMS",
+      "name": "CTCP Cơ khí Xăng dầu",
+      "sector": "Công nghiệp",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "VFR",
+      "name": "CTCP Vận tải và Thuê tàu",
+      "sector": "Công nghiệp",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "VMS",
+      "name": "CTCP Phát triển Hàng Hải",
+      "sector": "Công nghiệp",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "CNN",
+      "name": "CTCP Tư vấn công nghệ, thiết bị và kiểm định xây dựng - CONINCO",
+      "sector": "Công nghiệp",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "EMS",
+      "name": "Tổng Công ty Chuyển phát nhanh Bưu điện - CTCP",
+      "sector": "Công nghiệp",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "ILC",
+      "name": "CTCP Hợp tác lao động với Nước ngoài",
+      "sector": "Công nghiệp",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "NOS",
+      "name": "CTCP Vận tải Biển và Thương mại Phương Đông",
+      "sector": "Công nghiệp",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "PTT",
+      "name": "CTCP Vận tải Dầu khí Đông Dương",
+      "sector": "Công nghiệp",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "SHC",
+      "name": "CTCP Hàng Hải Sài Gòn",
+      "sector": "Công nghiệp",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "VSA",
+      "name": "CTCP Đại lý Hàng hải Việt Nam",
+      "sector": "Công nghiệp",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "VXT",
+      "name": "CTCP Kho vận và Dịch vụ Thương mại",
+      "sector": "Công nghiệp",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "APL",
+      "name": "CTCP Cơ khí và thiết bị áp lực - VVMI",
+      "sector": "Công nghiệp",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "ARM",
+      "name": "CTCP Xuất Nhập khẩu Hàng Không",
+      "sector": "Công nghiệp",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "BAL",
+      "name": "CTCP Bao bì Bia - Rượu - Nước giải khát",
+      "sector": "Công nghiệp",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "BBH",
+      "name": "CTCP Bao bì Hoàng Thạch",
+      "sector": "Công nghiệp",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "BBS",
+      "name": "CTCP VICEM Bao bì Bút Sơn",
+      "sector": "Công nghiệp",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "BLN",
+      "name": "CTCP Vận tải và Dịch vụ Liên Ninh",
+      "sector": "Công nghiệp",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "BPC",
+      "name": "CTCP VICEM Bao bì Bỉm Sơn",
+      "sector": "Công nghiệp",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "BSG",
+      "name": "CTCP Xe khách Sài Gòn",
+      "sector": "Công nghiệp",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "BTG",
+      "name": "CTCP Bao bì Tiền Giang",
+      "sector": "Công nghiệp",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "BXH",
+      "name": "CTCP VICEM Bao bì Hải Phòng",
+      "sector": "Công nghiệp",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "CCP",
+      "name": "CTCP Cảng Cửa Cấm Hải Phòng",
+      "sector": "Công nghiệp",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "CCT",
+      "name": "CTCP Cảng Cần Thơ",
+      "sector": "Công nghiệp",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "CFM",
+      "name": "CTCP Đầu tư CFM Private Equity",
+      "sector": "Công nghiệp",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "CMK",
+      "name": "CTCP Cơ khí Mạo khê - Vinacomin",
+      "sector": "Công nghiệp",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "CMP",
+      "name": "CTCP Cảng Chân Mây",
+      "sector": "Công nghiệp",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "CTT",
+      "name": "CTCP Chế tạo máy - Vinacomin",
+      "sector": "Công nghiệp",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "DCH",
+      "name": "CTCP Địa chính Hà Nội",
+      "sector": "Công nghiệp",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "DDH",
+      "name": "CTCP Đảm bảo giao thông đường thủy Hải Phòng",
+      "sector": "Công nghiệp",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "DDM",
+      "name": "CTCP Hàng hải Đông Đô",
+      "sector": "Công nghiệp",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "DKC",
+      "name": "CTCP Chợ Lạng Sơn",
+      "sector": "Công nghiệp",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "DLT",
+      "name": "CTCP Du lịch và Thương mại - Vinacomin",
+      "sector": "Công nghiệp",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "DNL",
+      "name": "CTCP Logistics Cảng Đà Nẵng",
+      "sector": "Công nghiệp",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "DOP",
+      "name": "CTCP Vận tải Xăng dầu Đồng Tháp",
+      "sector": "Công nghiệp",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "DPC",
+      "name": "CTCP Nhựa Đà Nẵng",
+      "sector": "Công nghiệp",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "DVC",
+      "name": "CTCP Thương mại Dịch vụ Tổng hợp Cảng Hải Phòng",
+      "sector": "Công nghiệp",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "FBC",
+      "name": "CTCP Cơ khí Phổ Yên",
+      "sector": "Công nghiệp",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "FSO",
+      "name": "CTCP Cơ khí đóng tàu thủy sản Việt Nam",
+      "sector": "Công nghiệp",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "FT1",
+      "name": "CTCP Phụ tùng máy số 1",
+      "sector": "Công nghiệp",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "FTI",
+      "name": "CTCP Công nghiệp - Thương mại Hữu Nghị",
+      "sector": "Công nghiệp",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "GTX",
+      "name": "CTCP Global Tanker",
+      "sector": "Công nghiệp",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "HBD",
+      "name": "CTCP Bao bì PP Bình Dương",
+      "sector": "Công nghiệp",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "HCT",
+      "name": "CTCP Thương mại Dịch vụ Vận tải Xi măng Hải Phòng",
+      "sector": "Công nghiệp",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "HEJ",
+      "name": "Tổng Công ty Tư vấn Xây dựng Thủy Lợi Việt Nam - CTCP",
+      "sector": "Công nghiệp",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "HHN",
+      "name": "CTCP Vận tải và Dịch vụ Hàng hóa Hà Nội",
+      "sector": "Công nghiệp",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "HNB",
+      "name": "CTCP Bến xe Hà Nội",
+      "sector": "Công nghiệp",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "HPO",
+      "name": "CTCP Công nghiệp HAPULICO",
+      "sector": "Công nghiệp",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "HSA",
+      "name": "CTCP HESTIA",
+      "sector": "Công nghiệp",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "IME",
+      "name": "CTCP Cơ khí và Xây lắp Công nghiệp",
+      "sector": "Công nghiệp",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "INC",
+      "name": "CTCP Tư vấn đầu tư IDICO",
+      "sector": "Công nghiệp",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "ISG",
+      "name": "CTCP Vận tải biển và Hợp tác lao động quốc tế",
+      "sector": "Công nghiệp",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "ITS",
+      "name": "CTCP Đầu tư, Thương mại và Dịch vụ - Vinacomin",
+      "sector": "Công nghiệp",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "L63",
+      "name": "CTCP Lilama 69-3",
+      "sector": "Công nghiệp",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "LCD",
+      "name": "CTCP Lắp máy - Thí nghiệm Cơ Điện",
+      "sector": "Công nghiệp",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "LM7",
+      "name": "CTCP Lilama 7",
+      "sector": "Công nghiệp",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "MIE",
+      "name": "Tổng Công ty Máy và Thiết bị Công nghiệp - CTCP",
+      "sector": "Công nghiệp",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "NAC",
+      "name": "CTCP Tư vấn Xây dựng Tổng hợp",
+      "sector": "Công nghiệp",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "NWT",
+      "name": "CTCP Vận tải Newway",
+      "sector": "Công nghiệp",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "PAP",
+      "name": "CTCP Dầu khí Đầu tư khai thác cảng Phước An",
+      "sector": "Công nghiệp",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "PBT",
+      "name": "CTCP Bao bì và Thương mại Dầu khí Bình Sơn",
+      "sector": "Công nghiệp",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "PGT",
+      "name": "CTCP PGT Holdings",
+      "sector": "Công nghiệp",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "PJC",
+      "name": "CTCP Thương mại và Vận tải Petrolimex Hà Nội",
+      "sector": "Công nghiệp",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "PJT",
+      "name": "CTCP Vận tải Xăng dầu Đường Thủy Petrolimex",
+      "sector": "Công nghiệp",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "PLO",
+      "name": "CTCP Kho vận Petec",
+      "sector": "Công nghiệp",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "PMP",
+      "name": "CTCP Bao bì đạm Phú Mỹ",
+      "sector": "Công nghiệp",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "PSC",
+      "name": "CTCP Vận tải và Dịch vụ Petrolimex Sài Gòn",
+      "sector": "Công nghiệp",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "PSN",
+      "name": "CTCP Dịch vụ kỹ thuật PTSC Thanh Hóa",
+      "sector": "Công nghiệp",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "PTH",
+      "name": "CTCP Vận tải và Dịch vụ Petrolimex Hà Tây",
+      "sector": "Công nghiệp",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "PTM",
+      "name": "CTCP Sản xuất Thương mại và Dịch vụ Ô tô PTM",
+      "sector": "Công nghiệp",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "PVM",
+      "name": "CTCP Máy - Thiết bị Dầu Khí",
+      "sector": "Công nghiệp",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "QNP",
+      "name": "CTCP Cảng Quy Nhơn",
+      "sector": "Công nghiệp",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "QNT",
+      "name": "CTCP Tư vấn và Đầu tư phát triển Quảng Nam",
+      "sector": "Công nghiệp",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "QSP",
+      "name": "CTCP Tân Cảng Quy Nhơn",
+      "sector": "Công nghiệp",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "RAT",
+      "name": "CTCP Vận tải và Thương mại Đường sắt",
+      "sector": "Công nghiệp",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "SAC",
+      "name": "CTCP Xếp dỡ và Dịch vụ Cảng Sài Gòn",
+      "sector": "Công nghiệp",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "SAL",
+      "name": "CTCP Trục vớt Cứu hộ Việt Nam",
+      "sector": "Công nghiệp",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "SCO",
+      "name": "CTCP Công nghiệp Thủy Sản",
+      "sector": "Công nghiệp",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "SDC",
+      "name": "CTCP Tư vấn sông Đà",
+      "sector": "Công nghiệp",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "SDG",
+      "name": "CTCP Sadico Cần Thơ",
+      "sector": "Công nghiệp",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "SDK",
+      "name": "CTCP Cơ khí Luyện Kim",
+      "sector": "Công nghiệp",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "SFI",
+      "name": "CTCP Đại lý Vận tải SAFI",
+      "sector": "Công nghiệp",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "SFN",
+      "name": "CTCP Dệt lưới Sài Gòn",
+      "sector": "Công nghiệp",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "SGS",
+      "name": "CTCP Vận tải Biển Sài Gòn",
+      "sector": "Công nghiệp",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "SMA",
+      "name": "CTCP Thiết bị Phụ Tùng Sài Gòn",
+      "sector": "Công nghiệp",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "STS",
+      "name": "CTCP Dịch vụ Vận tải Sài Gòn",
+      "sector": "Công nghiệp",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "TAB",
+      "name": "CTCP Freco Việt Nam",
+      "sector": "Công nghiệp",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "TKA",
+      "name": "CTCP Bao bì Tân Khánh An",
+      "sector": "Công nghiệp",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "TNP",
+      "name": "CTCP Cảng Thị Nại",
+      "sector": "Công nghiệp",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "TPS",
+      "name": "CTCP Bến bãi Vận tải Sài Gòn",
+      "sector": "Công nghiệp",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "TR1",
+      "name": "CTCP Vận tải 1 Traco",
+      "sector": "Công nghiệp",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "TRS",
+      "name": "CTCP Vận tải và Dịch vụ Hàng hải",
+      "sector": "Công nghiệp",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "TSB",
+      "name": "CTCP Ắc quy Tia Sáng",
+      "sector": "Công nghiệp",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "TSG",
+      "name": "CTCP Thông tin tín hiệu Đường sắt Sài Gòn",
+      "sector": "Công nghiệp",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "TTZ",
+      "name": "CTCP Đầu tư Xây dựng và Công nghệ Tiến Trung",
+      "sector": "Công nghiệp",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "TUG",
+      "name": "CTCP Lai dắt và Vận tải Cảng Hải Phòng",
+      "sector": "Công nghiệp",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "TV3",
+      "name": "CTCP Tư Vấn Xây Dựng Điện 3",
+      "sector": "Công nghiệp",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "TV4",
+      "name": "CTCP Tư vấn Xây dựng Điện 4",
+      "sector": "Công nghiệp",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "TVH",
+      "name": "CTCP Tư vấn Xây dựng Công trình Hàng hải",
+      "sector": "Công nghiệp",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "TVM",
+      "name": "CTCP Tư vấn đầu tư Mỏ và Công nghiệp - Vinacomin",
+      "sector": "Công nghiệp",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "UEM",
+      "name": "CTCP Cơ điện Uông Bí - Vinacomin",
+      "sector": "Công nghiệp",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "USC",
+      "name": "CTCP Khảo sát và Xây dựng - USCO",
+      "sector": "Công nghiệp",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "VBC",
+      "name": "CTCP Nhựa - Bao bì Vinh",
+      "sector": "Công nghiệp",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "VBT",
+      "name": "CTCP Vận tải Bảo Thắng",
+      "sector": "Công nghiệp",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "VCM",
+      "name": "CTCP BV Life",
+      "sector": "Công nghiệp",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "VCT",
+      "name": "CTCP Tư vấn Xây dựng Vinaconex",
+      "sector": "Công nghiệp",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "VFC",
+      "name": "CTCP Vinafco",
+      "sector": "Công nghiệp",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "VGV",
+      "name": "Tổng công ty Tư vấn Xây dựng Việt Nam - CTCP",
+      "sector": "Công nghiệp",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "VIN",
+      "name": "CTCP Giao nhận Kho vận Ngoại thương Việt Nam",
+      "sector": "Công nghiệp",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "VLG",
+      "name": "CTCP VIMC Logistics",
+      "sector": "Công nghiệp",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "VMT",
+      "name": "CTCP Giao nhận Vận tải Miền Trung",
+      "sector": "Công nghiệp",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "VNA",
+      "name": "CTCP Vận tải biển VINASHIP",
+      "sector": "Công nghiệp",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "VNC",
+      "name": "CTCP Tập đoàn Vinacontrol",
+      "sector": "Công nghiệp",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "VPA",
+      "name": "CTCP Vận Tải Hóa Dầu VP",
+      "sector": "Công nghiệp",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "VQC",
+      "name": "CTCP Giám định Vinacomin",
+      "sector": "Công nghiệp",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "VSM",
+      "name": "CTCP Container Miền Trung",
+      "sector": "Công nghiệp",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "VTM",
+      "name": "CTCP Vận tải và Đưa đón thợ mỏ - Vinacomin",
+      "sector": "Công nghiệp",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "VTX",
+      "name": "CTCP Vận tải đa phương thức Vietranstimex",
+      "sector": "Công nghiệp",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "VWS",
+      "name": "CTCP Nước và Môi trường Việt Nam",
+      "sector": "Công nghiệp",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "WTC",
+      "name": "CTCP Vận tải Thủy - Vinacomin",
+      "sector": "Công nghiệp",
+      "color": "#1e3a8a"
     }
   ],
   "contactPage": ""
