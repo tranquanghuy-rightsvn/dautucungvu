@@ -8797,6 +8797,12 @@ window.APP_DATA = {
       "name": "Công ty Cổ phần Chiếu xạ An Phú",
       "sector": "Hóa chất",
       "color": "#1e3a8a"
+    },
+    {
+      "code": "APH",
+      "name": "Công ty cổ phần Tập đoàn An Phát Holdings",
+      "sector": "Hóa chất",
+      "color": "#1e3a8a"
     }
   ],
   "courses": [
