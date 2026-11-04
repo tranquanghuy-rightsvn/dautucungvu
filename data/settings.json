@@ -8981,6 +8981,198 @@
       "name": "Công ty Cổ phần Đầu tư BKG Việt Nam",
       "sector": "Tài nguyên cơ bản",
       "color": "#1e3a8a"
+    },
+    {
+      "code": "BMD",
+      "name": "Công ty Cổ phần Môi trường và Dịch vụ Đô thị Bình Thuận",
+      "sector": "Dịch vụ, tiện ích",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "BMP",
+      "name": "Công ty Cổ phần nhựa Bình Minh",
+      "sector": "vật liệu xây dựng",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "CKA",
+      "name": "Công ty cổ phần Cơ Khí An Giang",
+      "sector": "Công nghiệp",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "CKD",
+      "name": "Công ty Cổ phần cơ khí Đông Anh Licogi",
+      "sector": "Công nghiệp",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "CMI",
+      "name": "Công ty Cổ phần CMISTONE Việt Nam",
+      "sector": "vật liệu xây dựng",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "DDV",
+      "name": "Công ty Cổ phần DAP - VINACHEM",
+      "sector": "Hóa chất",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "DNE",
+      "name": "Công ty cổ phần Môi trường Đô thị Đà Nẵng",
+      "sector": "Chất thải , môi trường",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "DTR",
+      "name": "Công ty cổ phần Đông Tây Land",
+      "sector": "Bất động sản",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "DUS",
+      "name": "CÔNG TY CỔ PHẦN DỊCH VỤ ĐÔ THỊ ĐÀ LẠT",
+      "sector": "Chất thải , môi trường",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "DVV",
+      "name": "Công ty cổ phần DatViet VAC Group Holdings",
+      "sector": "Truyền thông",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "DVW",
+      "name": "Công ty Cổ phần Dịch vụ và Xây dựng Cấp nước Đồng Nai",
+      "sector": "Xây dựng",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "EIC",
+      "name": "Công ty Cổ phần EVN Quốc tế",
+      "sector": "Xây dựng",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "FCM",
+      "name": "Công ty Cổ phần Khoáng sản FECON",
+      "sector": "Vật liệu xây dựng",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "GDH",
+      "name": "Cổ phiếu Công ty cổ phần Tập đoàn GDC",
+      "sector": "Xây dựng",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "KSB",
+      "name": "Công ty Cổ phần Khoáng sản và Xây dựng Bình Dương",
+      "sector": "Vật liệu xây dựng",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "KSF",
+      "name": "CTCP Tập đoàn Real Tech",
+      "sector": "Bất động sản",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "KSQ",
+      "name": "Công ty cổ phần CNC Capital Việt Nam",
+      "sector": "Vật liệu xây dựng",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "LUT",
+      "name": "Công ty Cổ phần Đầu tư xây dựng Lương Tài",
+      "sector": "Xây dựng",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "MBN",
+      "name": "Công ty cổ phần Môi trường và Công trình đô thị Bắc Ninh",
+      "sector": "Chất thải, môi trường",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "MLC",
+      "name": "Công ty Cổ phần Môi trường Đô thị tỉnh Lào Cai",
+      "sector": "Chất thải, môi trường",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "MND",
+      "name": "Công ty Cổ phần Môi trường Nam Định",
+      "sector": "Chất thải & Môi trường",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "MPY",
+      "name": "Công ty Cổ phần Môi trường đô thị Phú Yên",
+      "sector": "Chất thải & Môi trường",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "MQB",
+      "name": "Công ty Cổ phần Môi trường và Phát triển đô thị Quảng Bình",
+      "sector": "Chất thải & Môi trường",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "MQN",
+      "name": "Công ty Cổ phần Môi trường đô thị Quảng Ngãi",
+      "sector": "Chất thải & Môi trường",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "MTB",
+      "name": "CÔNG TY CỔ PHẦN MÔI TRƯỜNG VÀ CÔNG TRÌNH ĐÔ THỊ TỈNH THÁI BÌNH",
+      "sector": "Chất thải & Môi trường",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "MTS",
+      "name": "Công ty Cổ phần Vật tư - TKV",
+      "sector": "Công nghiệp",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "MTV",
+      "name": "Công ty Cổ phần Dịch vụ Môi trường và Công trình Đô thị Vũng Tàu",
+      "sector": "Chất thải & Môi trường",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "NAU",
+      "name": "Công ty Cổ phần Môi trường và Công trình Đô thị Nghệ An",
+      "sector": "Chất thải & Môi trường",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "NDP",
+      "name": "Công ty Cổ phần Dược phẩm 2/9",
+      "sector": "Y tế",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "PLP",
+      "name": "Công ty cổ phần Sản xuất và Công nghệ Nhựa Pha Lê",
+      "sector": "Công nghiệp",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "PRT",
+      "name": "Tổng công ty Sản xuất - Xuất nhập khẩu Bình Dương - TNHH MTV",
+      "sector": "Bất động sản",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "PVY",
+      "name": "Công ty cổ phần Chế tạo Giàn khoan Dầu khí",
+      "sector": "Xây dựng",
+      "color": "#1e3a8a"
     }
   ],
   "contactPage": ""
