@@ -8803,6 +8803,12 @@ window.APP_DATA = {
       "name": "Công ty cổ phần Tập đoàn An Phát Holdings",
       "sector": "Hóa chất",
       "color": "#1e3a8a"
+    },
+    {
+      "code": "BKG",
+      "name": "Công ty Cổ phần Đầu tư BKG Việt Nam",
+      "sector": "Tài nguyên cơ bản",
+      "color": "#1e3a8a"
     }
   ],
   "courses": [
