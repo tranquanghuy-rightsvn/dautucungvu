@@ -8785,6 +8785,12 @@ window.APP_DATA = {
       "name": "Công ty cổ phần thủy điện Xuân Minh",
       "sector": "Điện nước xăng dầu khí đốt",
       "color": "#1e3a8a"
+    },
+    {
+      "code": "DGC",
+      "name": "Công ty cổ phần Tập đoàn Hóa chất Đức Giang",
+      "sector": "Hóa chất",
+      "color": "#1e3a8a"
     }
   ],
   "courses": [
