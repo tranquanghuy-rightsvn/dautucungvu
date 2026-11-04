@@ -7123,6 +7123,120 @@ window.APP_DATA = {
       "name": "CTCP Vận tải Thủy - Vinacomin",
       "sector": "Công nghiệp",
       "color": "#1e3a8a"
+    },
+    {
+      "code": "AAA",
+      "name": "Nhựa An Phát Xanh",
+      "sector": "Hóa chất",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "ABS",
+      "name": "Công ty Cổ phần Dịch vụ Nông nghiệp Bình Thuận",
+      "sector": "",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "APP",
+      "name": "Công ty Cổ phần Phát triển Phụ gia và Sản phẩm dầu mỏ",
+      "sector": "",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "AVG",
+      "name": "Công ty Cổ phần Phân bón Quốc tế Âu Việt",
+      "sector": "",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "BFC",
+      "name": "Công ty Cổ phần Phân bón Bình Điền",
+      "sector": "",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "BQP",
+      "name": "CTCP Nhựa Chất lượng cao Bình Thuận",
+      "sector": "",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "BRC",
+      "name": "Công ty Cổ phần Cao su Bến Thành",
+      "sector": "",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "BRR",
+      "name": "Công ty Cổ phần Cao su Bà Rịa",
+      "sector": "",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "BT1",
+      "name": "Công ty cổ phần bảo vệ thực vật 1 Trung Ương",
+      "sector": "",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "CPC",
+      "name": "Công ty Cổ phần Thuốc sát trùng Cần Thơ",
+      "sector": "",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "CSV",
+      "name": "Công ty Cổ phần hóa chất cơ bản Miền Nam",
+      "sector": "",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "DAG",
+      "name": "Công ty Cổ phần Tập đoàn Nhựa Đông Á",
+      "sector": "",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "DCM",
+      "name": "Công ty cổ phần Tập đoàn Hóa chất Đức Giang",
+      "sector": "",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "DHB",
+      "name": "Công ty Cổ phần Phân đạm và Hóa chất Hà Bắc",
+      "sector": "",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "DOC",
+      "name": "Công ty cổ phần Vật tư nông nghiệp Đồng Nai",
+      "sector": "",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "DPM",
+      "name": "Tổng Công ty Phân bón và Hóa chất Dầu khí-Công ty Cổ phần",
+      "sector": "",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "DPR",
+      "name": "Công ty Cổ phần Cao su Đồng Phú",
+      "sector": "",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "DRG",
+      "name": "Công ty Cổ phần cao su Đắk Lắk",
+      "sector": "",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "DRI",
+      "name": "Công ty Cổ phần Đầu tư cao su Đắk Lắk",
+      "sector": "",
+      "color": "#1e3a8a"
     }
   ],
   "courses": [
