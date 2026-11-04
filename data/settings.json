@@ -247,27 +247,9 @@
       "color": "#1e3a8a"
     },
     {
-      "code": "HPG",
-      "name": "CTCP Tập đoàn Hòa Phát",
-      "sector": "Thép",
-      "color": "#1e3a8a"
-    },
-    {
       "code": "TCB",
       "name": "Ngân hàng TMCP Kỹ thương Việt Nam",
       "sector": "Ngân hàng",
-      "color": "#1e3a8a"
-    },
-    {
-      "code": "REE",
-      "name": "CTCP Cơ điện lạnh",
-      "sector": "Điện",
-      "color": "#1e3a8a"
-    },
-    {
-      "code": "SJD",
-      "name": "CTCP Thủy Điện Cần Đơn",
-      "sector": "Điện",
       "color": "#1e3a8a"
     },
     {
@@ -4543,12 +4525,6 @@
       "color": "#1e3a8a"
     },
     {
-      "code": "PTB",
-      "name": "CTCP Phú Tài",
-      "sector": "Xây dựng và vật liệu xây dựng",
-      "color": "#1e3a8a"
-    },
-    {
       "code": "NHA",
       "name": "Tổng Công ty Đầu tư Phát triển Nhà và Đô thị Nam Hà Nội",
       "sector": "Xây dựng và vật liệu xây dựng",
@@ -5313,12 +5289,6 @@
     {
       "code": "VHL",
       "name": "CTCP Viglacera Hạ Long",
-      "sector": "Xây dựng và vật liệu xây dựng",
-      "color": "#1e3a8a"
-    },
-    {
-      "code": "ANI",
-      "name": "CTCP ANI",
       "sector": "Xây dựng và vật liệu xây dựng",
       "color": "#1e3a8a"
     },
@@ -6133,12 +6103,6 @@
       "color": "#1e3a8a"
     },
     {
-      "code": "TOS",
-      "name": "CTCP Dịch vụ biển Tân Cảng",
-      "sector": "Công nghiệp",
-      "color": "#1e3a8a"
-    },
-    {
       "code": "SHN",
       "name": "CTCP Đầu tư Tổng hợp Hà Nội",
       "sector": "Công nghiệp",
@@ -6165,12 +6129,6 @@
     {
       "code": "VIP",
       "name": "CTCP Vận tải Xăng dầu VIPCO",
-      "sector": "Công nghiệp",
-      "color": "#1e3a8a"
-    },
-    {
-      "code": "CLI",
-      "name": "CTCP Tập đoàn CNCTech",
       "sector": "Công nghiệp",
       "color": "#1e3a8a"
     },
@@ -7305,108 +7263,1698 @@
     {
       "code": "ABS",
       "name": "Công ty Cổ phần Dịch vụ Nông nghiệp Bình Thuận",
-      "sector": "",
+      "sector": "Hóa chất",
       "color": "#1e3a8a"
     },
     {
       "code": "APP",
       "name": "Công ty Cổ phần Phát triển Phụ gia và Sản phẩm dầu mỏ",
-      "sector": "",
+      "sector": "Hóa chất",
       "color": "#1e3a8a"
     },
     {
       "code": "AVG",
       "name": "Công ty Cổ phần Phân bón Quốc tế Âu Việt",
-      "sector": "",
+      "sector": "Hóa chất",
       "color": "#1e3a8a"
     },
     {
       "code": "BFC",
       "name": "Công ty Cổ phần Phân bón Bình Điền",
-      "sector": "",
+      "sector": "Hóa chất",
       "color": "#1e3a8a"
     },
     {
       "code": "BQP",
       "name": "CTCP Nhựa Chất lượng cao Bình Thuận",
-      "sector": "",
+      "sector": "Hóa chất",
       "color": "#1e3a8a"
     },
     {
       "code": "BRC",
       "name": "Công ty Cổ phần Cao su Bến Thành",
-      "sector": "",
+      "sector": "Hóa chất",
       "color": "#1e3a8a"
     },
     {
       "code": "BRR",
       "name": "Công ty Cổ phần Cao su Bà Rịa",
-      "sector": "",
+      "sector": "Hóa chất",
       "color": "#1e3a8a"
     },
     {
       "code": "BT1",
       "name": "Công ty cổ phần bảo vệ thực vật 1 Trung Ương",
-      "sector": "",
+      "sector": "Hóa chất",
       "color": "#1e3a8a"
     },
     {
       "code": "CPC",
       "name": "Công ty Cổ phần Thuốc sát trùng Cần Thơ",
-      "sector": "",
+      "sector": "Hóa chất",
       "color": "#1e3a8a"
     },
     {
       "code": "CSV",
       "name": "Công ty Cổ phần hóa chất cơ bản Miền Nam",
-      "sector": "",
+      "sector": "Hóa chất",
       "color": "#1e3a8a"
     },
     {
       "code": "DAG",
       "name": "Công ty Cổ phần Tập đoàn Nhựa Đông Á",
-      "sector": "",
+      "sector": "Hóa chất",
       "color": "#1e3a8a"
     },
     {
       "code": "DCM",
       "name": "Công ty cổ phần Tập đoàn Hóa chất Đức Giang",
-      "sector": "",
+      "sector": "Hóa chất",
       "color": "#1e3a8a"
     },
     {
       "code": "DHB",
       "name": "Công ty Cổ phần Phân đạm và Hóa chất Hà Bắc",
-      "sector": "",
+      "sector": "Hóa chất",
       "color": "#1e3a8a"
     },
     {
       "code": "DOC",
       "name": "Công ty cổ phần Vật tư nông nghiệp Đồng Nai",
-      "sector": "",
+      "sector": "Hóa chất",
       "color": "#1e3a8a"
     },
     {
       "code": "DPM",
       "name": "Tổng Công ty Phân bón và Hóa chất Dầu khí-Công ty Cổ phần",
-      "sector": "",
+      "sector": "Hóa chất",
       "color": "#1e3a8a"
     },
     {
       "code": "DPR",
       "name": "Công ty Cổ phần Cao su Đồng Phú",
-      "sector": "",
+      "sector": "Hóa chất",
       "color": "#1e3a8a"
     },
     {
       "code": "DRG",
       "name": "Công ty Cổ phần cao su Đắk Lắk",
-      "sector": "",
+      "sector": "Hóa chất",
       "color": "#1e3a8a"
     },
     {
       "code": "DRI",
       "name": "Công ty Cổ phần Đầu tư cao su Đắk Lắk",
+      "sector": "Hóa chất",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "DTT",
+      "name": "Công ty Cổ phần Kỹ nghệ Đô Thành",
+      "sector": "Hóa chất",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "ECO",
+      "name": "Công ty Cổ phần Nhựa sinh thái Việt Nam",
+      "sector": "Hóa chất",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "GER",
+      "name": "Công ty Cổ phần Thể Thao Ngôi Sao Geru",
+      "sector": "Hóa chất",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "GVR",
+      "name": "Tập đoàn Công nghiệp Cao su Việt Nam",
+      "sector": "Hóa chất",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "HCD",
+      "name": "Công ty cổ phần Đầu tư Sản xuất và Thương mại HCD",
+      "sector": "Hóa chất",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "HII",
+      "name": "Công ty Cổ phần An Tiến Industries",
+      "sector": "Hóa chất",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "HMD",
+      "name": "Công ty Cổ phần Hóa chất Minh Đức",
+      "sector": "Hóa chất",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "HNP",
+      "name": "Công ty cổ phần Hanel Xốp nhựa",
+      "sector": "Hóa chất",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "HPH",
+      "name": "Công ty Cổ phần Hóa chất Hưng Phát Hà Bắc",
+      "sector": "Hóa chất",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "HRC",
+      "name": "Công ty Cổ phần Cao su Hòa Bình",
+      "sector": "Hóa chất",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "HVT",
+      "name": "Công ty Cổ phần Hóa chất Việt Trì",
+      "sector": "Hóa chất",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "IRC",
+      "name": "Công ty cổ phần Cao su Công nghiệp",
+      "sector": "Hóa chất",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "LAS",
+      "name": "Công ty Cổ phần Supe Phốt phát và Hóa chất Lâm Thao",
+      "sector": "Hóa chất",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "LNC",
+      "name": "Công ty cổ phần Lệ Ninh",
+      "sector": "Hóa chất",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "NFC",
+      "name": "Công ty Cổ phần Phân lân Ninh Bình",
+      "sector": "Hóa chất",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "NSG",
+      "name": "Công ty Cổ phần Nhựa Sài Gòn",
+      "sector": "Hóa chất",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "PAT",
+      "name": "CTCP Phốt Pho Apatit Việt Nam",
+      "sector": "Hóa chất",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "PCE",
+      "name": "Công ty Cổ phần Phân bón và Hóa chất Dầu khí Miền Trung",
+      "sector": "Hóa chất",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "PCH",
+      "name": "PICOMAT",
+      "sector": "Hóa chất",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "PGN",
+      "name": "Công ty cổ phần Phụ Gia Nhựa",
+      "sector": "Hóa chất",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "PHR",
+      "name": "Công ty Cổ phần Cao su Phước Hòa",
+      "sector": "Hóa chất",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "PLC",
+      "name": "Công ty cổ phần Sản xuất và Công nghệ Nhựa Pha Lê",
+      "sector": "Hóa chất",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "PMB",
+      "name": "Công ty Cổ phần Phân bón và Hóa chất Dầu khí miền Bắc",
+      "sector": "Hóa chất",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "PSE",
+      "name": "Công ty Cổ phần Phân Bón và Hóa Chất Dầu Khí Đông Nam Bộ",
+      "sector": "Hóa chất",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "PSW",
+      "name": "Công ty Cổ phần Phân bón và Hóa chất dầu khí Tây Nam Bộ",
+      "sector": "Hóa chất",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "PVO",
+      "name": "Công ty Cổ phần DẦU NHỜN PV OIL",
+      "sector": "Hóa chất",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "QBS",
+      "name": "Công ty Cổ phần Xuất nhập khẩu Quảng Bình",
+      "sector": "Hóa chất",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "RBC",
+      "name": "Công ty cổ phần Công nghiệp và Xuất nhập khẩu Cao su",
+      "sector": "Hóa chất",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "RTB",
+      "name": "Công ty cổ phần Cao su Tân Biên",
+      "sector": "Hóa chất",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "SBR",
+      "name": "Công ty cổ phần Cao su Sông Bé",
+      "sector": "Hóa chất",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "SFG",
+      "name": "Công ty Cổ phần phân bón Miền Nam",
+      "sector": "Hóa chất",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "SPC",
+      "name": "Công ty Cổ phần Bảo vệ thực vật Sài Gòn",
+      "sector": "Hóa chất",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "TNC",
+      "name": "Công ty Cổ phần Cao su Thống Nhất",
+      "sector": "Hóa chất",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "TPC",
+      "name": "Công ty Cổ phần Nhựa Tân Đại Hưng",
+      "sector": "Hóa chất",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "TRC",
+      "name": "Công ty Cổ phần Cao su Tây Ninh",
+      "sector": "Hóa chất",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "TSC",
+      "name": "Công ty Cổ phần Vật tư kỹ thuật nông nghiệp Cần Thơ",
+      "sector": "Hóa chất",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "VAF",
+      "name": "Công ty Cổ phần Phân lân nung chảy Văn Điển",
+      "sector": "Hóa chất",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "VFG",
+      "name": "Công ty Cổ phần Khử trùng Việt Nam",
+      "sector": "Hóa chất",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "VNP",
+      "name": "Công ty Cổ phần nhựa Việt Nam",
+      "sector": "Hóa chất",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "VPS",
+      "name": "Công ty Cổ phần thuốc sát trùng Việt Nam",
+      "sector": "Hóa chất",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "VTQ",
+      "name": "Công ty cổ phần Việt Trung Quảng Bình",
+      "sector": "Hóa chất",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "VTZ",
+      "name": "Công ty Cổ phần Sản xuất và Thương mại Nhựa Việt Thành",
+      "sector": "Hóa chất",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "AAH",
+      "name": "Công ty Cổ phần Hợp Nhất",
+      "sector": "Tài nguyên cơ bản",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "ACM",
+      "name": "Công ty Cổ phần Tập đoàn khoáng sản Á Cường",
+      "sector": "Tài nguyên cơ bản",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "AMC",
+      "name": "Công ty Cổ phần Khoáng sản Á Châu",
+      "sector": "Tài nguyên cơ bản",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "ATG",
+      "name": "Công ty Cổ phần An Trường An",
+      "sector": "Tài nguyên cơ bản",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "BCA",
+      "name": "Công ty cổ phần B.C.H",
+      "sector": "Tài nguyên cơ bản",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "BCB",
+      "name": "Công ty cổ phần 397",
+      "sector": "Tài nguyên cơ bản",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "BKC",
+      "name": "Công ty Cổ phần Khoáng sản Bắc Kạn",
+      "sector": "Tài nguyên cơ bản",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "BMC",
+      "name": "Công ty Cổ phần Khoáng sản Bình Định",
+      "sector": "Tài nguyên cơ bản",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "BMJ",
+      "name": "Công ty cổ phần khoáng sản Miền Đông AHP",
+      "sector": "Tài nguyên cơ bản",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "BVG",
+      "name": "Công ty Cổ phần Đầu tư BVG",
+      "sector": "Tài nguyên cơ bản",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "CAP",
+      "name": "Công ty Cổ phần Lâm nông sản thực phẩm Yên Bái",
+      "sector": "Tài nguyên cơ bản",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "CBI",
+      "name": "Công ty Cổ phần Gang thép Cao Bằng",
+      "sector": "Tài nguyên cơ bản",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "CLI",
+      "name": "Công ty cổ phần Tập đoàn CNCTech",
+      "sector": "Tài nguyên cơ bản",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "CLM",
+      "name": "Công ty cổ phần Xuất nhập khẩu Than - Vinacomin",
+      "sector": "Tài nguyên cơ bản",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "CST",
+      "name": "Công ty cổ phần Than Cao Sơn - TKV",
+      "sector": "Tài nguyên cơ bản",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "DFC",
+      "name": "Công ty Cổ phần Xích Líp Đông Anh",
+      "sector": "Tài nguyên cơ bản",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "DHC",
+      "name": "Công ty Cổ phần Đông Hải Bến Tre",
+      "sector": "Tài nguyên cơ bản",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "DHM",
+      "name": "Công ty cổ phần thương mại và khai thác khoáng sản Dương Hiếu",
+      "sector": "Tài nguyên cơ bản",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "DTL",
+      "name": "Công ty Cổ phần Đại Thiên Lộc",
+      "sector": "Tài nguyên cơ bản",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "FRC",
+      "name": "Công ty cổ phần Lâm đặc sản Xuất khẩu Quảng Nam",
+      "sector": "Tài nguyên cơ bản",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "FRM",
+      "name": "Công ty Cổ phần Lâm nghiệp Sài Gòn",
+      "sector": "Tài nguyên cơ bản",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "GLC",
+      "name": "Công ty cổ phần Vàng Lào Cai",
+      "sector": "Tài nguyên cơ bản",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "GVT",
+      "name": "Công ty Cổ phần Giấy Việt Trì",
+      "sector": "Tài nguyên cơ bản",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "HAP",
+      "name": "Công ty Cổ phần Tập đoàn HAPACO",
+      "sector": "Tài nguyên cơ bản",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "HGM",
+      "name": "Công ty Cổ phần Cơ khí và Khoáng sản Hà Giang",
+      "sector": "Tài nguyên cơ bản",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "HHP",
+      "name": "Công ty cổ phần Giấy Hoàng Hà Hải Phòng",
+      "sector": "Tài nguyên cơ bản",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "HLA",
+      "name": "Công ty Cổ phần Hữu Liên Á Châu",
+      "sector": "Tài nguyên cơ bản",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "HLC",
+      "name": "Công ty Cổ phần Than Hà Lầm - Vinacomin",
+      "sector": "Tài nguyên cơ bản",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "HMC",
+      "name": "Công ty Cổ phần Kim khí Thành phố Hồ Chí Minh - VNSTEEL",
+      "sector": "Tài nguyên cơ bản",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "HMG",
+      "name": "Công ty Cổ phần kim khí Hà Nội - VNSTEEL",
+      "sector": "Tài nguyên cơ bản",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "HPG",
+      "name": "Công ty Cổ phần Tập đoàn Hòa Phát",
+      "sector": "Tài nguyên cơ bản",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "HSG",
+      "name": "Công ty Cổ phần Tập đoàn Hoa Sen",
+      "sector": "Tài nguyên cơ bản",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "HSV",
+      "name": "Công ty Cổ phần Gang thép Hà Nội",
+      "sector": "Tài nguyên cơ bản",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "ITQ",
+      "name": "Công ty Cổ phần Tập đoàn Thiên Quang",
+      "sector": "Tài nguyên cơ bản",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "KCB",
+      "name": "Công ty Cổ phần Khoáng sản và luyện kim Cao Bằng",
+      "sector": "Tài nguyên cơ bản",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "KHD",
+      "name": "Công ty cổ phần khai thác, chế biến khoáng sản Hải Dương",
+      "sector": "Tài nguyên cơ bản",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "KKC",
+      "name": "Công ty Cổ phần Tập đoàn Thành Thái",
+      "sector": "Tài nguyên cơ bản",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "KMT",
+      "name": "Công ty Cổ phần Kim khí Miền Trung",
+      "sector": "Tài nguyên cơ bản",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "KSV",
+      "name": "Tổng công ty Khoáng sản TKV - CTCP",
+      "sector": "Tài nguyên cơ bản",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "KVC",
+      "name": "Công ty Cổ phần sản xuất xuất nhập khẩu INOX Kim vĩ",
+      "sector": "Tài nguyên cơ bản",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "LCM",
+      "name": "Công ty Cổ phần Khai thác và Chế biến Khoáng sản Lào Cai",
+      "sector": "Tài nguyên cơ bản",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "LMC",
+      "name": "Công ty cổ phần Khoáng sản Latca",
+      "sector": "Tài nguyên cơ bản",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "MDC",
+      "name": "Công ty Cổ phần Than Mông Dương - Vinacomin",
+      "sector": "Tài nguyên cơ bản",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "MDF",
+      "name": "Công ty Cổ phần Gỗ MDF VRG Quảng Trị",
+      "sector": "Tài nguyên cơ bản",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "MEL",
+      "name": "Công ty Cổ phần Thép Mê Lin",
+      "sector": "Tài nguyên cơ bản",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "MGC",
+      "name": "Công ty cổ phần Địa chất mỏ - TKV",
+      "sector": "Tài nguyên cơ bản",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "MIC",
+      "name": "Công ty Cổ phần Kỹ nghệ khoáng sản Quảng Nam",
+      "sector": "Tài nguyên cơ bản",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "MSR",
+      "name": "CÔNG TY CỔ PHẦN MASAN HIGH-TECH MATERIALS",
+      "sector": "Tài nguyên cơ bản",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "MTA",
+      "name": "Tổng Công ty Khoáng sản và Thương mại Hà Tĩnh - CTCP",
+      "sector": "Tài nguyên cơ bản",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "MVB",
+      "name": "Tổng công ty Công nghiệp mỏ Việt Bắc TKV - Công ty Cổ phần",
+      "sector": "Tài nguyên cơ bản",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "MZG",
+      "name": "CTCP Miza",
+      "sector": "Tài nguyên cơ bản",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "NBC",
+      "name": "Công ty Cổ phần Than Núi Béo – Vinacomin",
+      "sector": "Tài nguyên cơ bản",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "NKG",
+      "name": "Công ty Cổ phần Thép Nam Kim",
+      "sector": "Tài nguyên cơ bản",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "NSH",
+      "name": "Công ty Cổ phần Nhôm Sông Hồng",
+      "sector": "Tài nguyên cơ bản",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "PAS",
+      "name": "CÔNG TY CỔ PHẦN QUỐC TẾ PHƯƠNG ANH",
+      "sector": "Tài nguyên cơ bản",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "PIS",
+      "name": "Tổng công ty PISICO Bình Định - CTCP",
+      "sector": "Tài nguyên cơ bản",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "POM",
+      "name": "Công ty Cổ phần Thép Pomina",
+      "sector": "Tài nguyên cơ bản",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "PTB",
+      "name": "Công ty cổ phần Phú Tài",
+      "sector": "Tài nguyên cơ bản",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "SHA",
+      "name": "Công ty Cổ phần Sơn Hà Sài Gòn",
+      "sector": "Tài nguyên cơ bản",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "SMC",
+      "name": "Công ty Cổ phần Ðầu tư Thương mại SMC",
+      "sector": "Tài nguyên cơ bản",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "SSM",
+      "name": "Công ty Cổ phần Chế tạo kết cấu thép VNECO.SSM",
+      "sector": "Tài nguyên cơ bản",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "TAH",
+      "name": "Cổ phiếu Công ty cổ phần Thương mại Dịch vụ Giấy Thuận An",
+      "sector": "Tài nguyên cơ bản",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "TD6",
+      "name": "Công ty cổ phần Than Đèo Nai - Cọc Sáu - TKV",
+      "sector": "Tài nguyên cơ bản",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "TDS",
+      "name": "Công ty Cổ phần Thép Thủ Đức - Vnsteel",
+      "sector": "Tài nguyên cơ bản",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "THT",
+      "name": "Công ty Cổ phần Than Hà Tu - Vinacomin",
+      "sector": "Tài nguyên cơ bản",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "TIS",
+      "name": "Công ty Cổ phần Gang thép Thái Nguyên",
+      "sector": "Tài nguyên cơ bản",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "TKU",
+      "name": "Công ty Cổ phần Công nghiệp Tung Kuang",
+      "sector": "Tài nguyên cơ bản",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "TLH",
+      "name": "Công ty Cổ phần Tập đoàn thép Tiến Lên",
+      "sector": "Tài nguyên cơ bản",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "TMB",
+      "name": "Công ty Cổ phần Kinh doanh Than miền Bắc - Vinacomin",
+      "sector": "Tài nguyên cơ bản",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "TMG",
+      "name": "Công ty cổ phần Kim loại màu Thái Nguyên - Vimico",
+      "sector": "Tài nguyên cơ bản",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "TNB",
+      "name": "Công ty Cổ phần Thép Nhà Bè - VNSTEEL",
+      "sector": "Tài nguyên cơ bản",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "TNS",
+      "name": "Công ty Cổ phần Thép Tấm lá Thống Nhất",
+      "sector": "Tài nguyên cơ bản",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "TTS",
+      "name": "Công ty cổ phần Cán thép Thái Trung",
+      "sector": "Tài nguyên cơ bản",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "TVD",
+      "name": "Công ty Cổ phần than Vàng Danh - Vinacomin",
+      "sector": "Tài nguyên cơ bản",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "TVN",
+      "name": "Tổng công ty Thép Việt Nam - CTCP",
+      "sector": "Tài nguyên cơ bản",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "VBG",
+      "name": "Công ty cổ phần Địa chất Việt Bắc - TKV",
+      "sector": "Tài nguyên cơ bản",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "VCA",
+      "name": "Công ty Cổ phần Thép VICASA - VNSTEEL",
+      "sector": "Tài nguyên cơ bản",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "VDB",
+      "name": "Công ty cổ phần Vận tải và Chế biến Than Đông Bắc",
+      "sector": "Tài nguyên cơ bản",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "VDT",
+      "name": "Công ty Cổ phần Lưới thép Bình Tây",
+      "sector": "Tài nguyên cơ bảnTài nguyên cơ bản",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "VGL",
+      "name": "Công ty cổ phần Mạ kẽm công nghiệp Vingal - Vnsteel",
+      "sector": "Tài nguyên cơ bản",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "VGS",
+      "name": "Công ty Cổ phần Ống thép Việt Đức VG PIPE",
+      "sector": "Tài nguyên cơ bản",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "VID",
+      "name": "Công ty Cổ phần Đầu tư Phát triển Thương mại Viễn Đông",
+      "sector": "Tài nguyên cơ bản",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "VIF",
+      "name": "Tổng công ty Lâm nghiệp Việt Nam - Công ty cổ phần",
+      "sector": "Tài nguyên cơ bản",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "VIM",
+      "name": "Công ty Cổ phần Khoáng sản Viglacera",
+      "sector": "Tài nguyên cơ bản",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "VLS",
+      "name": "Công ty cổ phần Sản xuất Thép Việt Long",
+      "sector": "Tài nguyên cơ bản",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "VPG",
+      "name": "Công ty cổ phần Đầu tư Thương mại Xuất nhập khẩu Việt Phát",
+      "sector": "Tài nguyên cơ bản",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "YBM",
+      "name": "Công ty cổ phần Khoáng sản công nghiệp Yên Bái",
+      "sector": "Tài nguyên cơ bản",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "BSR",
+      "name": "Tổng Công ty Lọc hóa dầu Việt Nam",
+      "sector": "Dầu khí",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "OIL",
+      "name": "Tổng Công ty Dầu Việt Nam - Công ty Cổ phần",
+      "sector": "Dầu khí",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "PEQ",
+      "name": "Công ty Cổ phần Thiết bị xăng dầu Petrolimex",
+      "sector": "Dầu khí",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "PLX",
+      "name": "Tập đoàn Xăng dầu Việt Nam Sản xuất và Khai thác dầu",
+      "sector": "Dầu khí",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "POS",
+      "name": "Công ty cổ phần Dịch vụ Lắp đặt, Vận hành và Bảo dưỡng Công trình Dầu khí biển PTSC",
+      "sector": "Dầu khí",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "PTV",
+      "name": "Công ty cổ phần Thương mại Dầu khí",
+      "sector": "Dầu khí",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "PVB",
+      "name": "Công ty Cổ phần Bọc Ống Dầu khí Việt Nam",
+      "sector": "Dầu khí",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "PVC",
+      "name": "Tổng Công ty Hóa chất và Dịch vụ Dầu khí - Công ty Cổ phần",
+      "sector": "Dầu khí",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "PVD",
+      "name": "Tổng Công ty Cổ phần Khoan và Dịch vụ khoan dầu khí",
+      "sector": "Dầu khí",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "PVS",
+      "name": "Tổng Công ty Cổ phần Dịch vụ Kỹ thuật Dầu khí Việt Nam",
+      "sector": "Dầu khí",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "TOS",
+      "name": "Công ty Cổ phần Dịch vụ biển Tân Cảng",
+      "sector": "Dầu khí",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "ANI",
+      "name": "Công ty Cổ phần ANI",
+      "sector": "Điện nước xăng dầu khí đốt",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "ASP",
+      "name": "Công ty Cổ phần Tập đoàn Dầu khí An Pha",
+      "sector": "",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "AVC",
+      "name": "Công ty cổ phần Thủy điện A Vương",
+      "sector": "",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "BDW",
+      "name": "Công ty Cổ phần Cấp thoát nước Bình Định",
+      "sector": "",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "BGE",
+      "name": "CÔNG TY CỔ PHẦN BCG ENERGY",
+      "sector": "",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "BGW",
+      "name": "Công ty Cổ phần Nước sạch Bắc Giang",
+      "sector": "",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "BHA",
+      "name": "Công ty Cổ phần Thủy điện Bắc Hà",
+      "sector": "",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "BNW",
+      "name": "Công ty cổ phần Nước sạch Bắc Ninh",
+      "sector": "",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "BSA",
+      "name": "Công ty Cổ phần Thủy Điện Buôn Đôn",
+      "sector": "",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "BTP",
+      "name": "Công ty Cổ phần Nhiệt điện Bà Rịa",
+      "sector": "",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "BTW",
+      "name": "Công ty Cổ phần Cấp nước Bến Thành",
+      "sector": "",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "BWA",
+      "name": "Công ty Cổ phần Cấp thoát nước và Xây dựng Bảo Lộc",
+      "sector": "",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "BWE",
+      "name": "Công ty Cổ phần Nước – Môi trường Bình Dương",
+      "sector": "",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "BWS",
+      "name": "Công ty cổ phần Cấp nước Bà Rịa - Vũng Tàu",
+      "sector": "",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "CHP",
+      "name": "Công ty Cổ phần Thủy điện miền Trung",
+      "sector": "",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "CLW",
+      "name": "Công ty Cổ phần Cấp nước Chợ Lớn",
+      "sector": "",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "CMW",
+      "name": "Công ty Cổ phần cấp nước Cà Mau",
+      "sector": "",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "CNG",
+      "name": "Công ty Cổ phần CNG Việt Nam",
+      "sector": "",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "CTW",
+      "name": "Công ty Cổ phần Cấp thoát nước Cần Thơ",
+      "sector": "",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "DNA",
+      "name": "Công ty Cổ phần Điện nước An Giang",
+      "sector": "",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "DNC",
+      "name": "Công ty Cổ phần Điện nước lắp máy Hải Phòng",
+      "sector": "",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "DNH",
+      "name": "Công ty cổ phần Thủy điện Đa Nhim - Hàm Thuận - Đa Mi",
+      "sector": "",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "DNN",
+      "name": "Công ty Cổ phần Cấp nước Đà Nẵng",
+      "sector": "",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "DNW",
+      "name": "Công ty Cổ phần Cấp nước Đồng Nai",
+      "sector": "",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "DRL",
+      "name": "Công ty Cổ phần Thủy điện – Điện lực 3",
+      "sector": "",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "DTK",
+      "name": "Tổng công ty Điện lực TKV - CTCP",
+      "sector": "",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "DWC",
+      "name": "Công ty Cổ phần Cấp nước Đắk Lắk",
+      "sector": "",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "DWS",
+      "name": "Công ty Cổ phần Cấp nước và Môi trường đô thị Đồng Tháp",
+      "sector": "",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "GAS",
+      "name": "Tổng Công ty Khí Việt Nam-Công ty Cổ phần",
+      "sector": "",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "GDW",
+      "name": "Công ty Cổ phần Cấp nước Gia Định",
+      "sector": "",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "GEG",
+      "name": "Công ty Cổ phần Điện Gia Lai",
+      "sector": "",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "GHC",
+      "name": "Công ty Cổ phần Thủy điện Gia Lai",
+      "sector": "",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "GLW",
+      "name": "Công ty Cổ phần Cấp thoát nước Gia Lai",
+      "sector": "",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "GSM",
+      "name": "Công ty Cổ phần Thủy điện Hương Sơn",
+      "sector": "",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "HDW",
+      "name": "Công ty Cổ phần Kinh doanh Nước sạch Hải Dương",
+      "sector": "",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "HFC",
+      "name": "Công ty cổ phần Xăng dầu HFC",
+      "sector": "",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "HIO",
+      "name": "Công ty cổ phần Helio Energy",
+      "sector": "",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "HJS",
+      "name": "Công ty Cổ phần Thủy điện Nậm Mu",
+      "sector": "",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "HNA",
+      "name": "Công ty cổ phần Thủy điện Hủa Na",
+      "sector": "",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "HND",
+      "name": "Công ty Cổ phần Nhiệt điện Hải Phòng",
+      "sector": "",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "HPD",
+      "name": "Công ty Công ty Cổ phần Thủy điện Đăk Đoa",
+      "sector": "",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "HPW",
+      "name": "Công ty cổ phần Cấp nước Hải Phòng",
+      "sector": "",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "HWS",
+      "name": "Công ty Cổ phần Cấp nước Thừa Thiên Huế",
+      "sector": "",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "ISH",
+      "name": "Công ty Cổ phần thủy điện SROK Phu Miêng IDICO",
+      "sector": "",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "KHP",
+      "name": "Công ty Cổ phần Điện lực Khánh Hòa",
+      "sector": "",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "KHW",
+      "name": "Công ty Cổ phần Cấp nước Khánh Hòa",
+      "sector": "",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "LAW",
+      "name": "Công ty Cổ phần Cấp thoát nước Long An",
+      "sector": "",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "LDW",
+      "name": "Công ty cổ phần Cấp thoát nước Lâm Đồng",
+      "sector": "",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "LKW",
+      "name": "Công ty Cổ phần Cấp nước Long Khánh",
+      "sector": "",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "MTG",
+      "name": "Công ty Cổ phần MT GAS",
+      "sector": "",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "NAW",
+      "name": "Công ty Cổ phần Cấp nước Nghệ An",
+      "sector": "",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "NBP",
+      "name": "Công ty Cổ phần Nhiệt điện Ninh Bình",
+      "sector": "",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "NBT",
+      "name": "Công ty cổ phần cấp thoát nước Bến Tre",
+      "sector": "",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "NBW",
+      "name": "Công ty Cổ phần Cấp nước Nhà Bè",
+      "sector": "",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "ND2",
+      "name": "Công ty Cổ phần Đầu tư Phát triển điện Miền Bắc 2",
+      "sector": "",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "NDW",
+      "name": "Công ty Cổ phần Cấp nước Nam Định",
+      "sector": "",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "NED",
+      "name": "Công ty cổ phần Đầu tư và Phát triển Điện Tây Bắc",
+      "sector": "",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "NLS",
+      "name": "Công ty cổ phần Cấp thoát nước Lạng Sơn",
+      "sector": "",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "NNT",
+      "name": "Công ty Cổ phần Cấp nước Ninh Thuận",
+      "sector": "",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "NQB",
+      "name": "Công ty Cổ phần Cấp nước Quảng Bình",
+      "sector": "",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "NQN",
+      "name": "Công ty Cổ phần Nước sạch Quảng Ninh",
+      "sector": "",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "NSL",
+      "name": "Công ty Cổ phần cấp nước Sơn La",
+      "sector": "",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "NT2",
+      "name": "Công ty Cổ phần Điện lực Dầu khí Nhơn Trạch 2",
+      "sector": "",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "NTH",
+      "name": "Công ty cổ phần Thủy điện Nước trong",
+      "sector": "",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "NTW",
+      "name": "Công ty Cổ phần Cấp nước Nhơn Trạch",
+      "sector": "",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "NVP",
+      "name": "Công ty cổ phần Nước sạch Vĩnh Phúc",
+      "sector": "",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "PCG",
+      "name": "Công ty Cổ phần Đầu tư và Phát triển Gas Đô Thị",
+      "sector": "",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "PEG",
+      "name": "Tổng Công ty Thương mại Kỹ thuật và Đầu tư - Công ty cổ phần",
+      "sector": "",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "PGC",
+      "name": "Tổng Công ty Gas Petrolimex-Công ty Cổ phần",
+      "sector": "",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "PGD",
+      "name": "Công ty Cổ phần Phân phối khí Thấp áp Dầu khí Việt Nam",
+      "sector": "",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "PGS",
+      "name": "Công ty cổ phần kinh doanh khí miền nam",
+      "sector": "",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "PGV",
+      "name": "Tổng Công ty Phát điện 3 - Công ty cổ phần",
+      "sector": "",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "PIC",
+      "name": "Công ty Cổ phần Đầu tư Điện lực 3",
+      "sector": "",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "PJS",
+      "name": "Công ty Cổ phần cấp nước Phú Hòa Tân",
+      "sector": "",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "PMG",
+      "name": "Công ty Cổ phần Đầu tư và Sản xuất Petro Miền Trung",
+      "sector": "",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "PMW",
+      "name": "Công ty cổ phần Cấp nước Phú Mỹ",
+      "sector": "",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "PND",
+      "name": "Công ty cổ phần Xăng dầu Dầu khí Nam Định",
+      "sector": "",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "POB",
+      "name": "Công ty Cổ phần Xăng dầu Dầu khí Thái Bình",
+      "sector": "",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "POV",
+      "name": "Công ty Cổ phần Xăng dầu Dầu khí Vũng Áng",
+      "sector": "",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "POW",
+      "name": "Tổng Công ty Điện lực Dầu khí Việt Nam - Công ty Cổ phần",
+      "sector": "",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "PPC",
+      "name": "Công ty Cổ phần Nhiệt điện Phả Lại",
+      "sector": "",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "PPT",
+      "name": "Công ty cổ phần Petro Times",
+      "sector": "",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "PPY",
+      "name": "Công ty Cổ phần Xăng dầu Dầu khí Phú Yên",
+      "sector": "",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "PTX",
+      "name": "Công ty cổ phần Vận tải và Dịch vụ Petrolimex Nghệ Tĩnh",
+      "sector": "",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "PVG",
+      "name": "CÔNG TY CỔ PHẦN KINH DOANH LPG VIỆT NAM",
+      "sector": "",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "PWS",
+      "name": "Công ty Cổ phần Cấp thoát nước Phú Yên",
+      "sector": "",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "QNW",
+      "name": "Công ty cổ phần Cấp thoát nước và Xây dựng Quảng Ngãi",
+      "sector": "",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "QPH",
+      "name": "Công ty Cổ phần thủy điện Quế Phong",
+      "sector": "",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "QTP",
+      "name": "Công ty Cổ phần Nhiệt điện Quảng Ninh",
+      "sector": "",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "REE",
+      "name": "Công ty Cổ phần Cơ điện lạnh",
+      "sector": "",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "S4A",
+      "name": "Công ty Cổ phần Thủy điện Sê San 4A",
+      "sector": "",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "SBA",
+      "name": "Công ty Cổ phần Sông Ba",
+      "sector": "",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "SBH",
+      "name": "Công ty Cổ phần Thủy điện Sông Ba Hạ",
+      "sector": "",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "SBM",
+      "name": "Công ty cổ phần Đầu tư Phát triển Bắc Minh",
+      "sector": "",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "SEB",
+      "name": "Công ty Cổ phần Đầu tư và Phát triển điện miền Trung",
+      "sector": "",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "SHP",
+      "name": "Công ty Cổ phần Thủy điện miền Nam",
+      "sector": "",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "SII",
+      "name": "Công ty Cổ phần Hạ tầng Nước Sài Gòn",
+      "sector": "",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "SJD",
+      "name": "Công ty Cổ phần Thủy Điện Cần Đơn",
+      "sector": "",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "SP2",
+      "name": "Công ty cổ phần Thủy điện Sử Pán 2",
+      "sector": "",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "STW",
+      "name": "Công ty cổ phần Cấp nước Sóc Trăng",
+      "sector": "",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "SVH",
+      "name": "Công ty cổ phần Thủy điện Sông Vàng",
+      "sector": "",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "TAW",
+      "name": "Công ty Cổ phần Cấp nước Trung An",
+      "sector": "",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "TBC",
+      "name": "Công ty Cổ phần Thủy điện Thác Bà",
+      "sector": "",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "TBW",
+      "name": "Công ty cổ phần Nước sạch Thái Bình",
+      "sector": "",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "TDB",
+      "name": "Công ty cổ phần Thủy điện Định Bình",
+      "sector": "",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "TDG",
+      "name": "Công ty Cổ phần Đầu tư TDG GLOBAL",
+      "sector": "",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "TDM",
+      "name": "Công ty cổ phần Nước Thủ Dầu Một",
+      "sector": "",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "TDW",
+      "name": "Công ty Cổ phần Cấp nước Thủ Đức",
+      "sector": "",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "THN",
+      "name": "Công ty cổ phần Cấp nước Thanh Hóa",
+      "sector": "",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "THW",
+      "name": "Công ty cổ phần cấp nước Tân Hòa",
+      "sector": "",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "TLP",
+      "name": "Tổng Công ty Thương mại Xuất nhập khẩu Thanh Lễ - Công ty Cổ phần",
+      "sector": "",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "TMP",
+      "name": "Công ty Cổ phần Thủy điện Thác Mơ",
+      "sector": "",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "TNW",
+      "name": "Công ty Cổ phần Nước sạch Thái Nguyên",
+      "sector": "",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "TOW",
+      "name": "Công ty cổ phần Cấp nước Trà Nóc - Ô Môn",
+      "sector": "",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "TQW",
+      "name": "Công ty Cổ phần Cấp thoát nước Tuyên Quang",
+      "sector": "",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "TTA",
+      "name": "Công ty Cổ phần Đầu tư Xây dựng và Phát triển Trường Thành",
+      "sector": "",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "TTE",
+      "name": "Công ty cổ phần Đầu tư Năng lượng Trường Thịnh",
+      "sector": "",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "UPC",
+      "name": "Công ty cổ phần Phát triển công viên cây xanh và Đô thị Vũng Tàu",
+      "sector": "",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "VAV",
+      "name": "Công ty cổ phần VIWACO",
+      "sector": "",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "VCP",
+      "name": "Công ty Cổ phần Xây dựng và Năng lượng VCP",
+      "sector": "",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "VLW",
+      "name": "Công ty cổ phần Cấp nước Vĩnh Long",
+      "sector": "",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "VMG",
+      "name": "Công ty Cổ phần Phát triển Điện Lực Việt Nam",
+      "sector": "",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "VPW",
+      "name": "Công ty Cổ phần Cấp thoát nước số 1 Vĩnh Phúc",
+      "sector": "",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "VSH",
+      "name": "Công ty Cổ phần Thủy điện Vĩnh Sơn - Sông Hinh",
+      "sector": "",
+      "color": "#1e3a8a"
+    },
+    {
+      "code": "XMP",
+      "name": "Công ty cổ phần thủy điện Xuân Minh",
       "sector": "",
       "color": "#1e3a8a"
     }
