@@ -8791,6 +8791,12 @@ window.APP_DATA = {
       "name": "Công ty cổ phần Tập đoàn Hóa chất Đức Giang",
       "sector": "Hóa chất",
       "color": "#1e3a8a"
+    },
+    {
+      "code": "APC",
+      "name": "Công ty Cổ phần Chiếu xạ An Phú",
+      "sector": "Hóa chất",
+      "color": "#1e3a8a"
     }
   ],
   "courses": [
