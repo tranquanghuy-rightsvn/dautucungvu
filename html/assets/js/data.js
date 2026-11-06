@@ -9422,6 +9422,25 @@ window.APP_DATA = {
       "cover_alt": "TCB: Phát hành cổ phiếu để trả cổ tức cho cổ đông hiện hữu",
       "seo_title": "TCB: Phát hành cổ phiếu để trả cổ tức cho cổ đông hiện hữu | Đầu tư cùng Vũ",
       "updated_at": "2026-10-22T22:40:29Z"
+    },
+    {
+      "id": 2,
+      "slug": "bmc-tra-co-tuc-bang-tien-nam-2025",
+      "date": "2026-11-06 16:44",
+      "tags": [
+        "BMC",
+        "thi-truong",
+        "doanh-nghiep",
+        "co-tuc"
+      ],
+      "access": "public",
+      "art": "chart",
+      "title": "BMC: Trả cổ tức bằng tiền năm 2025",
+      "excerpt": "Công ty Cổ phần Khoáng sản Bình định mới đây ra thông báo trả cổ tức bằng tiền mặt với tỉ lệ chi trả 6.5%",
+      "cover": "images/news/bmc-tra-co-tuc-bang-tien-nam-2025/cover.jpg",
+      "cover_alt": "BMC: Trả cổ tức bằng tiền năm 2025",
+      "seo_title": "BMC: Trả cổ tức bằng tiền năm 2025 | Đầu tư cùng Vũ",
+      "updated_at": "2026-11-06T10:05:34Z"
     }
   ],
   "brokers": [
