@@ -9441,6 +9441,25 @@ window.APP_DATA = {
       "cover_alt": "BMC: Trả cổ tức bằng tiền năm 2025",
       "seo_title": "BMC: Trả cổ tức bằng tiền năm 2025 | Đầu tư cùng Vũ",
       "updated_at": "2026-11-06T10:05:34Z"
+    },
+    {
+      "id": 3,
+      "slug": "det-may-viet-nam-vgt-chot-danh-sach-co-dong-ngay-25-11-de-xin-y-kien-tam-ung-co-tuc-2026",
+      "date": "2026-11-07 17:06",
+      "tags": [
+        "VGT",
+        "thi-truong",
+        "doanh-nghiep",
+        "co-tuc"
+      ],
+      "access": "public",
+      "art": "chart",
+      "title": "Dệt may Việt Nam (VGT) chốt danh sách cổ đông ngày 25/11 để xin ý kiến tạm ứng cổ tức 2026",
+      "excerpt": "Tập đoàn Dệt may Việt Nam (mã VGT) vừa khởi động quy trình tạm ứng cổ tức năm 2026",
+      "cover": "images/news/det-may-viet-nam-vgt-chot-danh-sach-co-dong-ngay-25-11-de-xin-y-kien-tam-ung-co-tuc-2026/cover.jpg",
+      "cover_alt": "Dệt may Việt Nam (VGT) chốt danh sách cổ đông ngày 25/11 để xin ý kiến tạm ứng cổ tức 2026",
+      "seo_title": "Dệt may Việt Nam (VGT) chốt danh sách cổ đông ngày 25/11 để xin ý kiến tạm ứng cổ tức 2026 | Đầu tư cùng Vũ",
+      "updated_at": "2026-11-07T10:14:26Z"
     }
   ],
   "brokers": [
