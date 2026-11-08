@@ -9478,6 +9478,25 @@ window.APP_DATA = {
       "cover_alt": "Yeah1 (YEG) chốt danh sách cổ đông ngày 18/11 để xin ý kiến về nhân sự Ban kiểm soát và sửa Điều lệ",
       "seo_title": "Yeah1 (YEG) chốt danh sách cổ đông ngày 18/11 để xin ý kiến về nhân sự Ban kiểm soát và sửa Điều lệ | Đầu tư cùng Vũ",
       "updated_at": "2026-11-08T02:17:39Z"
+    },
+    {
+      "id": 5,
+      "slug": "pharmedic-pmc-chot-quyen-nhan-co-tuc-tien-mat-30",
+      "date": "2026-11-08 12:01",
+      "tags": [
+        "PMC",
+        "thi-truong",
+        "doanh-nghiep",
+        "co-tuc"
+      ],
+      "access": "public",
+      "art": "chart",
+      "title": "Pharmedic (PMC) chốt quyền nhận cổ tức tiền mặt 30%",
+      "excerpt": "Pharmedic (PMC) chốt quyền nhận cổ tức tiền mặt 30%, mỗi cổ phiếu nhận 3.000 đồng",
+      "cover": "images/news/pharmedic-pmc-chot-quyen-nhan-co-tuc-tien-mat-30/cover.jpg",
+      "cover_alt": "Pharmedic (PMC) chốt quyền nhận cổ tức tiền mặt 30%",
+      "seo_title": "Pharmedic (PMC) chốt quyền nhận cổ tức tiền mặt 30% | Đầu tư cùng Vũ",
+      "updated_at": "2026-11-08T05:09:29Z"
     }
   ],
   "brokers": [
