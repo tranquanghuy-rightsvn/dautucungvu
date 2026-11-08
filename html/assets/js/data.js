@@ -9460,6 +9460,24 @@ window.APP_DATA = {
       "cover_alt": "Dệt may Việt Nam (VGT) chốt danh sách cổ đông ngày 25/11 để xin ý kiến tạm ứng cổ tức 2026",
       "seo_title": "Dệt may Việt Nam (VGT) chốt danh sách cổ đông ngày 25/11 để xin ý kiến tạm ứng cổ tức 2026 | Đầu tư cùng Vũ",
       "updated_at": "2026-11-07T10:14:26Z"
+    },
+    {
+      "id": 4,
+      "slug": "yeah1-yeg-chot-danh-sach-co-dong-ngay-18-11-de-xin-y-kien-ve-nhan-su-ban-kiem-soat-va-sua-dieu-le",
+      "date": "2026-11-08 09:13",
+      "tags": [
+        "YEG",
+        "thi-truong",
+        "doanh-nghiep"
+      ],
+      "access": "public",
+      "art": "chart",
+      "title": "Yeah1 (YEG) chốt danh sách cổ đông ngày 18/11 để xin ý kiến về nhân sự Ban kiểm soát và sửa Điều lệ",
+      "excerpt": "Công ty cổ phần Tập đoàn Yeah1 (HOSE: YEG) sẽ lấy ý kiến cổ đông bằng văn bản về nhân sự Ban kiểm soát và việc sửa đổi Điều lệ. Ngày đăng ký cuối cùng...",
+      "cover": "images/news/yeah1-yeg-chot-danh-sach-co-dong-ngay-18-11-de-xin-y-kien-ve-nhan-su-ban-kiem-soat-va-sua-dieu-le/cover.jpg",
+      "cover_alt": "Yeah1 (YEG) chốt danh sách cổ đông ngày 18/11 để xin ý kiến về nhân sự Ban kiểm soát và sửa Điều lệ",
+      "seo_title": "Yeah1 (YEG) chốt danh sách cổ đông ngày 18/11 để xin ý kiến về nhân sự Ban kiểm soát và sửa Điều lệ | Đầu tư cùng Vũ",
+      "updated_at": "2026-11-08T02:17:39Z"
     }
   ],
   "brokers": [
