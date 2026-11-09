@@ -85,6 +85,12 @@
     <priority>0.6</priority>
   </url>
   <url>
+    <loc>https://dautucungvu.com/bai-viet/sonadezi-long-binh-szb-tam-ung-co-tuc-dot-1-2026-1-000-dong-moi-co-phieu/</loc>
+    <lastmod>2026-11-09</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
     <loc>https://dautucungvu.com/khoa-hoc/nhap-mon-chung-khoan/</loc>
     <lastmod>2026-11-09</lastmod>
     <changefreq>weekly</changefreq>
@@ -164,6 +170,12 @@
   </url>
   <url>
     <loc>https://dautucungvu.com/tin-tuc/yeg/</loc>
+    <lastmod>2026-11-09</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://dautucungvu.com/tin-tuc/szb/</loc>
     <lastmod>2026-11-09</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>

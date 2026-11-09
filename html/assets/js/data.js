@@ -9516,6 +9516,25 @@ window.APP_DATA = {
       "cover_alt": "Gạch ngói Đồng Nai (GND) tạm ứng cổ tức đợt 1/2026 1000đ/cổ phiếu",
       "seo_title": "Gạch ngói Đồng Nai (GND) tạm ứng cổ tức đợt 1/2026 1000đ/cổ phiếu | Đầu tư cùng Vũ",
       "updated_at": "2026-11-09T07:32:04Z"
+    },
+    {
+      "id": 7,
+      "slug": "sonadezi-long-binh-szb-tam-ung-co-tuc-dot-1-2026-1-000-dong-moi-co-phieu",
+      "date": "2026-11-09 14:32",
+      "tags": [
+        "SZB",
+        "thi-truong",
+        "doanh-nghiep",
+        "co-tuc"
+      ],
+      "access": "public",
+      "art": "chart",
+      "title": "Sonadezi Long Bình (SZB) tạm ứng cổ tức đợt 1/2026, 1.000 đồng mỗi cổ phiếu",
+      "excerpt": "CTCP Sonadezi Long Bình (HNX: SZB) tạm ứng cổ tức năm 2026 (đợt 1) bằng tiền, tỷ lệ 10%",
+      "cover": "images/news/sonadezi-long-binh-szb-tam-ung-co-tuc-dot-1-2026-1-000-dong-moi-co-phieu/cover.jpg",
+      "cover_alt": "Sonadezi Long Bình (SZB) tạm ứng cổ tức đợt 1/2026, 1.000 đồng mỗi cổ phiếu",
+      "seo_title": "Sonadezi Long Bình (SZB) tạm ứng cổ tức đợt 1/2026, 1.000 đồng mỗi cổ phiếu | Đầu tư cùng Vũ",
+      "updated_at": "2026-11-09T07:34:34Z"
     }
   ],
   "brokers": [
