@@ -9554,6 +9554,25 @@ window.APP_DATA = {
       "cover_alt": "Cấp nước Phú Mỹ (PMW) tạm ứng cổ tức đợt 1/2026, 1.000 đồng mỗi cổ phiếu",
       "seo_title": "Cấp nước Phú Mỹ (PMW) tạm ứng cổ tức đợt 1/2026, 1.000 đồng mỗi cổ phiếu | Đầu tư cùng Vũ",
       "updated_at": "2026-11-09T07:36:42Z"
+    },
+    {
+      "id": 9,
+      "slug": "vlb-tam-ung-co-tuc-nam-2026-voi-ty-le-25-moi-co-phieu-nhan-2-500-dong",
+      "date": "2026-11-09 14:36",
+      "tags": [
+        "VLB",
+        "thi-truong",
+        "doanh-nghiep",
+        "co-tuc"
+      ],
+      "access": "public",
+      "art": "chart",
+      "title": "VLB tạm ứng cổ tức năm 2026 với tỷ lệ 25%, mỗi cổ phiếu nhận 2.500 đồng",
+      "excerpt": "CTCP Xây dựng và sản xuất vật liệu xây dựng Biên Hòa (UPCoM: VLB) tạm ứng cổ tức năm 2026 bằng tiền, tỷ lệ 25%",
+      "cover": "images/news/vlb-tam-ung-co-tuc-nam-2026-voi-ty-le-25-moi-co-phieu-nhan-2-500-dong/cover.jpg",
+      "cover_alt": "VLB tạm ứng cổ tức năm 2026 với tỷ lệ 25%, mỗi cổ phiếu nhận 2.500 đồng",
+      "seo_title": "VLB tạm ứng cổ tức năm 2026 với tỷ lệ 25%, mỗi cổ phiếu nhận 2.500 đồng | Đầu tư cùng Vũ",
+      "updated_at": "2026-11-09T07:39:06Z"
     }
   ],
   "brokers": [
