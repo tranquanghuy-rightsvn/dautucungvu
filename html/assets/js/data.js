@@ -9497,6 +9497,25 @@ window.APP_DATA = {
       "cover_alt": "Pharmedic (PMC) chốt quyền nhận cổ tức tiền mặt 30%",
       "seo_title": "Pharmedic (PMC) chốt quyền nhận cổ tức tiền mặt 30% | Đầu tư cùng Vũ",
       "updated_at": "2026-11-08T05:09:29Z"
+    },
+    {
+      "id": 6,
+      "slug": "gach-ngoi-dong-nai-gnd-tam-ung-co-tuc-dot-1-2026-1000d-co-phieu",
+      "date": "2026-11-09 14:28",
+      "tags": [
+        "GND",
+        "thi-truong",
+        "doanh-nghiep",
+        "co-tuc"
+      ],
+      "access": "public",
+      "art": "chart",
+      "title": "Gạch ngói Đồng Nai (GND) tạm ứng cổ tức đợt 1/2026 1000đ/cổ phiếu",
+      "excerpt": "CTCP Gạch ngói Đồng Nai (UPCoM: GND) tạm ứng cổ tức đợt 1 năm 2026 bằng tiền, tỷ lệ 10%",
+      "cover": "images/news/gach-ngoi-dong-nai-gnd-tam-ung-co-tuc-dot-1-2026-1000d-co-phieu/cover.jpg",
+      "cover_alt": "Gạch ngói Đồng Nai (GND) tạm ứng cổ tức đợt 1/2026 1000đ/cổ phiếu",
+      "seo_title": "Gạch ngói Đồng Nai (GND) tạm ứng cổ tức đợt 1/2026 1000đ/cổ phiếu | Đầu tư cùng Vũ",
+      "updated_at": "2026-11-09T07:32:04Z"
     }
   ],
   "brokers": [
