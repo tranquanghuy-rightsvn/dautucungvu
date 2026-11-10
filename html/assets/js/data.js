@@ -9573,6 +9573,24 @@ window.APP_DATA = {
       "cover_alt": "VLB tạm ứng cổ tức năm 2026 với tỷ lệ 25%, mỗi cổ phiếu nhận 2.500 đồng",
       "seo_title": "VLB tạm ứng cổ tức năm 2026 với tỷ lệ 25%, mỗi cổ phiếu nhận 2.500 đồng | Đầu tư cùng Vũ",
       "updated_at": "2026-11-09T07:39:06Z"
+    },
+    {
+      "id": 10,
+      "slug": "bao-hiem-agribank-abi-chot-quyen-nhan-co-tuc-nam-2025-1-500-dong-moi-co-phieu",
+      "date": "2026-11-10 09:47",
+      "tags": [
+        "ABI",
+        "thi-truong",
+        "co-tuc"
+      ],
+      "access": "public",
+      "art": "chart",
+      "title": "Bảo hiểm Agribank (ABI) chốt quyền nhận cổ tức năm 2025, 1.500 đồng mỗi cổ phiếu",
+      "excerpt": "CTCP Bảo hiểm Ngân hàng Nông nghiệp (UPCoM: ABI) chi trả cổ tức năm 2025 bằng tiền, tỷ lệ 15%",
+      "cover": "images/news/bao-hiem-agribank-abi-chot-quyen-nhan-co-tuc-nam-2025-1-500-dong-moi-co-phieu/cover.jpg",
+      "cover_alt": "Bảo hiểm Agribank (ABI) chốt quyền nhận cổ tức năm 2025, 1.500 đồng mỗi cổ phiếu",
+      "seo_title": "Bảo hiểm Agribank (ABI) chốt quyền nhận cổ tức năm 2025, 1.500 đồng mỗi cổ phiếu | Đầu tư cùng Vũ",
+      "updated_at": "2026-11-10T02:49:39Z"
     }
   ],
   "brokers": [
