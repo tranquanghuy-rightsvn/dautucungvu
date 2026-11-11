@@ -9591,6 +9591,29 @@ window.APP_DATA = {
       "cover_alt": "Bảo hiểm Agribank (ABI) chốt quyền nhận cổ tức năm 2025, 1.500 đồng mỗi cổ phiếu",
       "seo_title": "Bảo hiểm Agribank (ABI) chốt quyền nhận cổ tức năm 2025, 1.500 đồng mỗi cổ phiếu | Đầu tư cùng Vũ",
       "updated_at": "2026-11-10T02:49:39Z"
+    },
+    {
+      "id": 11,
+      "slug": "co-nen-mua-co-phieu-ngan-hang-luc-nay",
+      "date": "2026-11-11 17:10",
+      "tags": [
+        "ABB",
+        "MBB",
+        "SHB",
+        "TCB",
+        "TPB",
+        "VCB",
+        "thi-truong",
+        "nhan-dinh"
+      ],
+      "access": "public",
+      "art": "chart",
+      "title": "Có nên mua cổ phiếu ngân hàng lúc này",
+      "excerpt": "Nhận định thị trường chứng khoán ngày 11/11/2026",
+      "cover": "images/news/co-nen-mua-co-phieu-ngan-hang-luc-nay/cover.jpg",
+      "cover_alt": "Có nên mua cổ phiếu ngân hàng lúc này",
+      "seo_title": "Có nên mua cổ phiếu ngân hàng lúc này | Đầu tư cùng Vũ",
+      "updated_at": "2026-11-11T10:14:20Z"
     }
   ],
   "brokers": [
