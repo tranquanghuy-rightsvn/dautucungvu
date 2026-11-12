@@ -9613,7 +9613,7 @@ window.APP_DATA = {
       "cover": "images/news/co-nen-mua-co-phieu-ngan-hang-luc-nay/cover.jpg",
       "cover_alt": "Có nên mua cổ phiếu ngân hàng lúc này",
       "seo_title": "Có nên mua cổ phiếu ngân hàng lúc này | Đầu tư cùng Vũ",
-      "updated_at": "2026-11-11T10:14:20Z"
+      "updated_at": "2026-11-12T09:20:04Z"
     }
   ],
   "brokers": [
