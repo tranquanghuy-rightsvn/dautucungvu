@@ -187,5 +187,22 @@
     "excerpt": "Nhận định thị trường chứng khoán ngày 11/11/2026",
     "cover": "images/news/co-nen-mua-co-phieu-ngan-hang-luc-nay/cover.jpg",
     "updated_at": "2026-11-12T09:20:04Z"
+  },
+  {
+    "id": 12,
+    "slug": "tap-doan-bao-viet-bvh-chot-quyen-tra-co-tuc-tien-mat-nam-2025-ty-le-8-09",
+    "date": "2026-11-15 16:15",
+    "tags": [
+      "BVH",
+      "thi-truong",
+      "doanh-nghiep",
+      "co-tuc"
+    ],
+    "access": "public",
+    "art": "chart",
+    "title": "Tập đoàn Bảo Việt (BVH) chốt quyền trả cổ tức tiền mặt năm 2025, tỷ lệ 8,09%",
+    "excerpt": "BVH sẽ chi trả cổ tức bằng tiền mặt với tỷ lệ 8,09%, tương ứng mỗi cổ phiếu nhận được 809 đồng",
+    "cover": "images/news/tap-doan-bao-viet-bvh-chot-quyen-tra-co-tuc-tien-mat-nam-2025-ty-le-8-09/cover.jpg",
+    "updated_at": "2026-11-15T09:29:24Z"
   }
 ]
