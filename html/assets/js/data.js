@@ -9632,7 +9632,7 @@ window.APP_DATA = {
       "cover": "images/news/tap-doan-bao-viet-bvh-chot-quyen-tra-co-tuc-tien-mat-nam-2025-ty-le-8-09/cover.jpg",
       "cover_alt": "Tập đoàn Bảo Việt (BVH) chốt quyền trả cổ tức tiền mặt năm 2025, tỷ lệ 8,09%",
       "seo_title": "Tập đoàn Bảo Việt (BVH) chốt quyền trả cổ tức tiền mặt năm 2025, tỷ lệ 8,09% | Đầu tư cùng Vũ",
-      "updated_at": "2026-11-15T09:29:24Z"
+      "updated_at": "2026-11-15T09:34:19Z"
     }
   ],
   "brokers": [
