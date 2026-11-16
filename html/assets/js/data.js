@@ -9633,6 +9633,24 @@ window.APP_DATA = {
       "cover_alt": "Tập đoàn Bảo Việt (BVH) chốt quyền trả cổ tức tiền mặt năm 2025, tỷ lệ 8,09%",
       "seo_title": "Tập đoàn Bảo Việt (BVH) chốt quyền trả cổ tức tiền mặt năm 2025, tỷ lệ 8,09% | Đầu tư cùng Vũ",
       "updated_at": "2026-11-15T09:34:19Z"
+    },
+    {
+      "id": 13,
+      "slug": "cang-dong-nai-pdn-tam-ung-co-tuc-dot-1-2026-1-000-dong-moi-co-phieu",
+      "date": "2026-11-16 10:55",
+      "tags": [
+        "thi-truong",
+        "doanh-nghiep",
+        "co-tuc"
+      ],
+      "access": "public",
+      "art": "chart",
+      "title": "Cảng Đồng Nai (PDN) tạm ứng cổ tức đợt 1/2026, 1.000 đồng mỗi cổ phiếu",
+      "excerpt": "CTCP Cảng Đồng Nai (HOSE: PDN) tạm ứng cổ tức đợt 1 năm 2026 bằng tiền, tỷ lệ 10%",
+      "cover": "images/news/cang-dong-nai-pdn-tam-ung-co-tuc-dot-1-2026-1-000-dong-moi-co-phieu/cover.jpg",
+      "cover_alt": "Cảng Đồng Nai (PDN) tạm ứng cổ tức đợt 1/2026, 1.000 đồng mỗi cổ phiếu",
+      "seo_title": "Cảng Đồng Nai (PDN) tạm ứng cổ tức đợt 1/2026, 1.000 đồng mỗi cổ phiếu | Đầu tư cùng Vũ",
+      "updated_at": "2026-11-16T04:00:26Z"
     }
   ],
   "brokers": [
