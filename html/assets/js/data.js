@@ -9689,6 +9689,24 @@ window.APP_DATA = {
       "cover_alt": "FPT tạm ứng cổ tức đợt 1/2026, 1.000 đồng mỗi cổ phiếu",
       "seo_title": "FPT tạm ứng cổ tức đợt 1/2026, 1.000 đồng mỗi cổ phiếu | Đầu tư cùng Vũ",
       "updated_at": "2026-11-17T09:40:25Z"
+    },
+    {
+      "id": 16,
+      "slug": "vinh-hoan-vhc-tam-ung-co-tuc-nam-2026-3-000-dong-moi-co-phieu",
+      "date": "2026-11-17 16:40",
+      "tags": [
+        "thi-truong",
+        "doanh-nghiep",
+        "co-tuc"
+      ],
+      "access": "public",
+      "art": "chart",
+      "title": "Vĩnh Hoàn (VHC) tạm ứng cổ tức năm 2026, 3.000 đồng mỗi cổ phiếu",
+      "excerpt": "CTCP Vĩnh Hoàn (HOSE: VHC) tạm ứng cổ tức năm 2026 bằng tiền, tỷ lệ 30%,",
+      "cover": "images/news/vinh-hoan-vhc-tam-ung-co-tuc-nam-2026-3-000-dong-moi-co-phieu/cover.jpg",
+      "cover_alt": "Vĩnh Hoàn (VHC) tạm ứng cổ tức năm 2026, 3.000 đồng mỗi cổ phiếu",
+      "seo_title": "Vĩnh Hoàn (VHC) tạm ứng cổ tức năm 2026, 3.000 đồng mỗi cổ phiếu | Đầu tư cùng Vũ",
+      "updated_at": "2026-11-17T09:43:23Z"
     }
   ],
   "brokers": [
