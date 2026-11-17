@@ -9651,6 +9651,25 @@ window.APP_DATA = {
       "cover_alt": "Cảng Đồng Nai (PDN) tạm ứng cổ tức đợt 1/2026, 1.000 đồng mỗi cổ phiếu",
       "seo_title": "Cảng Đồng Nai (PDN) tạm ứng cổ tức đợt 1/2026, 1.000 đồng mỗi cổ phiếu | Đầu tư cùng Vũ",
       "updated_at": "2026-11-16T04:00:26Z"
+    },
+    {
+      "id": 14,
+      "slug": "may-song-hong-msh-tam-ung-co-tuc-nam-2026-4-000-dong-moi-co-phieu",
+      "date": "2026-11-17 16:27",
+      "tags": [
+        "MSH",
+        "thi-truong",
+        "doanh-nghiep",
+        "co-tuc"
+      ],
+      "access": "public",
+      "art": "chart",
+      "title": "May Sông Hồng (MSH) tạm ứng cổ tức năm 2026, 4.000 đồng mỗi cổ phiếu",
+      "excerpt": "CTCP May Sông Hồng (HOSE: MSH) tạm ứng cổ tức năm 2026 bằng tiền, tỷ lệ 40%",
+      "cover": "images/news/may-song-hong-msh-tam-ung-co-tuc-nam-2026-4-000-dong-moi-co-phieu/cover.jpg",
+      "cover_alt": "May Sông Hồng (MSH) tạm ứng cổ tức năm 2026, 4.000 đồng mỗi cổ phiếu",
+      "seo_title": "May Sông Hồng (MSH) tạm ứng cổ tức năm 2026, 4.000 đồng mỗi cổ phiếu | Đầu tư cùng Vũ",
+      "updated_at": "2026-11-17T09:32:30Z"
     }
   ],
   "brokers": [
