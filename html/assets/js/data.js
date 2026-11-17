@@ -9670,6 +9670,25 @@ window.APP_DATA = {
       "cover_alt": "May Sông Hồng (MSH) tạm ứng cổ tức năm 2026, 4.000 đồng mỗi cổ phiếu",
       "seo_title": "May Sông Hồng (MSH) tạm ứng cổ tức năm 2026, 4.000 đồng mỗi cổ phiếu | Đầu tư cùng Vũ",
       "updated_at": "2026-11-17T09:32:30Z"
+    },
+    {
+      "id": 15,
+      "slug": "fpt-tam-ung-co-tuc-dot-1-2026-1-000-dong-moi-co-phieu",
+      "date": "2026-11-17 16:35",
+      "tags": [
+        "FPT",
+        "thi-truong",
+        "doanh-nghiep",
+        "co-tuc"
+      ],
+      "access": "public",
+      "art": "chart",
+      "title": "FPT tạm ứng cổ tức đợt 1/2026, 1.000 đồng mỗi cổ phiếu",
+      "excerpt": "CTCP FPT (HOSE: FPT) tạm ứng cổ tức đợt 1 năm 2026 bằng tiền, tỷ lệ 10%",
+      "cover": "images/news/fpt-tam-ung-co-tuc-dot-1-2026-1-000-dong-moi-co-phieu/cover.jpg",
+      "cover_alt": "FPT tạm ứng cổ tức đợt 1/2026, 1.000 đồng mỗi cổ phiếu",
+      "seo_title": "FPT tạm ứng cổ tức đợt 1/2026, 1.000 đồng mỗi cổ phiếu | Đầu tư cùng Vũ",
+      "updated_at": "2026-11-17T09:40:25Z"
     }
   ],
   "brokers": [
