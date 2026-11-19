@@ -9707,6 +9707,25 @@ window.APP_DATA = {
       "cover_alt": "Vĩnh Hoàn (VHC) tạm ứng cổ tức năm 2026, 3.000 đồng mỗi cổ phiếu",
       "seo_title": "Vĩnh Hoàn (VHC) tạm ứng cổ tức năm 2026, 3.000 đồng mỗi cổ phiếu | Đầu tư cùng Vũ",
       "updated_at": "2026-11-17T09:43:23Z"
+    },
+    {
+      "id": 17,
+      "slug": "fpt-telecom-fox-chi-tra-co-tuc-nam-2025-2-000-dong-moi-co-phieu-doi-ngay-thanh-toan-som-hon",
+      "date": "2026-11-19 17:30",
+      "tags": [
+        "FOX",
+        "thi-truong",
+        "doanh-nghiep",
+        "co-tuc"
+      ],
+      "access": "public",
+      "art": "chart",
+      "title": "FPT Telecom (FOX) chi trả cổ tức năm 2025, 2.000 đồng mỗi cổ phiếu, đổi ngày thanh toán sớm hơn",
+      "excerpt": "CTCP Viễn thông FPT (UPCoM: FOX) thông báo điều chỉnh ngày thanh toán cổ tức bằng tiền năm 2025",
+      "cover": "images/news/fpt-telecom-fox-chi-tra-co-tuc-nam-2025-2-000-dong-moi-co-phieu-doi-ngay-thanh-toan-som-hon/cover.jpg",
+      "cover_alt": "FPT Telecom (FOX) chi trả cổ tức năm 2025, 2.000 đồng mỗi cổ phiếu, đổi ngày thanh toán sớm hơn",
+      "seo_title": "FPT Telecom (FOX) chi trả cổ tức năm 2025, 2.000 đồng mỗi cổ phiếu, đổi ngày thanh toán sớm hơn | Đầu tư cùng Vũ",
+      "updated_at": "2026-11-19T10:34:42Z"
     }
   ],
   "brokers": [
