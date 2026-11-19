@@ -9726,6 +9726,25 @@ window.APP_DATA = {
       "cover_alt": "FPT Telecom (FOX) chi trả cổ tức năm 2025, 2.000 đồng mỗi cổ phiếu, đổi ngày thanh toán sớm hơn",
       "seo_title": "FPT Telecom (FOX) chi trả cổ tức năm 2025, 2.000 đồng mỗi cổ phiếu, đổi ngày thanh toán sớm hơn | Đầu tư cùng Vũ",
       "updated_at": "2026-11-19T10:34:42Z"
+    },
+    {
+      "id": 18,
+      "slug": "sua-quoc-te-lof-idp-tam-ung-co-tuc-dot-2-2026-3-200-dong-moi-co-phieu",
+      "date": "2026-11-19 17:35",
+      "tags": [
+        "IDP",
+        "thi-truong",
+        "doanh-nghiep",
+        "co-tuc"
+      ],
+      "access": "public",
+      "art": "chart",
+      "title": "Sữa Quốc tế LOF (IDP) tạm ứng cổ tức đợt 2/2026, 3.200 đồng mỗi cổ phiếu",
+      "excerpt": "CTCP Sữa Quốc tế LOF (UPCoM: IDP) tạm ứng cổ tức bằng tiền đợt 2 năm 2026, tỷ lệ 32%",
+      "cover": "images/news/sua-quoc-te-lof-idp-tam-ung-co-tuc-dot-2-2026-3-200-dong-moi-co-phieu/cover.jpg",
+      "cover_alt": "Sữa Quốc tế LOF (IDP) tạm ứng cổ tức đợt 2/2026, 3.200 đồng mỗi cổ phiếu",
+      "seo_title": "Sữa Quốc tế LOF (IDP) tạm ứng cổ tức đợt 2/2026, 3.200 đồng mỗi cổ phiếu | Đầu tư cùng Vũ",
+      "updated_at": "2026-11-19T10:39:01Z"
     }
   ],
   "brokers": [
