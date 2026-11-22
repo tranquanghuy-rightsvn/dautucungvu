@@ -9745,6 +9745,25 @@ window.APP_DATA = {
       "cover_alt": "Sữa Quốc tế LOF (IDP) tạm ứng cổ tức đợt 2/2026, 3.200 đồng mỗi cổ phiếu",
       "seo_title": "Sữa Quốc tế LOF (IDP) tạm ứng cổ tức đợt 2/2026, 3.200 đồng mỗi cổ phiếu | Đầu tư cùng Vũ",
       "updated_at": "2026-11-19T10:39:01Z"
+    },
+    {
+      "id": 19,
+      "slug": "logistics-u-i-ulg-tam-ung-co-tuc-nam-2026-500-dong-moi-co-phieu",
+      "date": "2026-11-22 10:35",
+      "tags": [
+        "ULG",
+        "thi-truong",
+        "doanh-nghiep",
+        "co-tuc"
+      ],
+      "access": "public",
+      "art": "chart",
+      "title": "Logistics U&I (ULG) tạm ứng cổ tức năm 2026, 500 đồng mỗi cổ phiếu",
+      "excerpt": "CTCP Logistics U&I (UPCoM: ULG) tạm ứng cổ tức năm 2026 bằng tiền, tỷ lệ 5%",
+      "cover": "images/news/logistics-u-i-ulg-tam-ung-co-tuc-nam-2026-500-dong-moi-co-phieu/cover.jpg",
+      "cover_alt": "Logistics U&I (ULG) tạm ứng cổ tức năm 2026, 500 đồng mỗi cổ phiếu",
+      "seo_title": "Logistics U&I (ULG) tạm ứng cổ tức năm 2026, 500 đồng mỗi cổ phiếu | Đầu tư cùng Vũ",
+      "updated_at": "2026-11-22T03:39:56Z"
     }
   ],
   "brokers": [
