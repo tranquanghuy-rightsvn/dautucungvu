@@ -9764,6 +9764,24 @@ window.APP_DATA = {
       "cover_alt": "Logistics U&I (ULG) tạm ứng cổ tức năm 2026, 500 đồng mỗi cổ phiếu",
       "seo_title": "Logistics U&I (ULG) tạm ứng cổ tức năm 2026, 500 đồng mỗi cổ phiếu | Đầu tư cùng Vũ",
       "updated_at": "2026-11-22T03:39:56Z"
+    },
+    {
+      "id": 20,
+      "slug": "tong-cong-ty-song-da-sjg-tam-ung-co-tuc-nam-2026-1-000-dong-moi-co-phieu",
+      "date": "2026-11-25 19:04",
+      "tags": [
+        "thi-truong",
+        "doanh-nghiep",
+        "co-tuc"
+      ],
+      "access": "public",
+      "art": "chart",
+      "title": "Tổng Công ty Sông Đà (SJG) tạm ứng cổ tức năm 2026, 1.000 đồng mỗi cổ phiếu",
+      "excerpt": "Tổng Công ty Sông Đà – CTCP (UPCoM: SJG) tạm ứng cổ tức năm 2026 bằng tiền, tỷ lệ 10%",
+      "cover": "images/news/tong-cong-ty-song-da-sjg-tam-ung-co-tuc-nam-2026-1-000-dong-moi-co-phieu/cover.jpg",
+      "cover_alt": "Tổng Công ty Sông Đà (SJG) tạm ứng cổ tức năm 2026, 1.000 đồng mỗi cổ phiếu",
+      "seo_title": "Tổng Công ty Sông Đà (SJG) tạm ứng cổ tức năm 2026, 1.000 đồng mỗi cổ phiếu | Đầu tư cùng Vũ",
+      "updated_at": "2026-11-25T12:08:09Z"
     }
   ],
   "brokers": [
