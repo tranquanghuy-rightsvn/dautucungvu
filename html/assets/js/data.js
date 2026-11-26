@@ -9788,6 +9788,25 @@ window.APP_DATA = {
       "cover_alt": "Tổng Công ty Sông Đà (SJG) tạm ứng cổ tức năm 2026, 1.000 đồng mỗi cổ phiếu",
       "seo_title": "Tổng Công ty Sông Đà (SJG) tạm ứng cổ tức năm 2026, 1.000 đồng mỗi cổ phiếu | Đầu tư cùng Vũ",
       "updated_at": "2026-11-25T12:08:09Z"
+    },
+    {
+      "id": 21,
+      "slug": "cong-nghiep-a-my-amy-tam-ung-co-tuc-nam-2026-2-000-dong-moi-co-phieu",
+      "date": "2026-11-26 15:51",
+      "tags": [
+        "AMY",
+        "thi-truong",
+        "doanh-nghiep",
+        "co-tuc"
+      ],
+      "access": "public",
+      "art": "chart",
+      "title": "Công nghiệp Á Mỹ (AMY) tạm ứng cổ tức năm 2026, 2.000 đồng mỗi cổ phiếu",
+      "excerpt": "CTCP Công nghiệp Á Mỹ (HOSE: AMY) tạm ứng cổ tức năm 2026 bằng tiền, tỷ lệ 20%",
+      "cover": "images/news/cong-nghiep-a-my-amy-tam-ung-co-tuc-nam-2026-2-000-dong-moi-co-phieu/cover.jpg",
+      "cover_alt": "Công nghiệp Á Mỹ (AMY) tạm ứng cổ tức năm 2026, 2.000 đồng mỗi cổ phiếu",
+      "seo_title": "Công nghiệp Á Mỹ (AMY) tạm ứng cổ tức năm 2026, 2.000 đồng mỗi cổ phiếu | Đầu tư cùng Vũ",
+      "updated_at": "2026-11-26T09:39:17Z"
     }
   ],
   "brokers": [
