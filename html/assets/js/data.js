@@ -9103,6 +9103,12 @@ window.APP_DATA = {
       "name": "Công ty cổ phần Vimarko",
       "sector": "Vật liệu xây dựng",
       "color": "#1e3a8a"
+    },
+    {
+      "code": "AMY",
+      "name": "CTCP Công nghiệp Á Mỹ",
+      "sector": "Vật liệu xây dựng",
+      "color": "#1e3a8a"
     }
   ],
   "courses": [
