@@ -11,7 +11,7 @@ window.APP_DATA = {
       "phone": "0982277493",
       "zalo": "https://zalo.me/0982277493",
       "facebook": "#",
-      "youtube": "#",
+      "youtube": "https://www.youtube.com/@dautucungvu",
       "telegram": "#"
     },
     "payment": {
