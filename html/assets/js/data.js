@@ -5,7 +5,7 @@ window.APP_DATA = {
     "name": "Đầu tư cùng Vũ",
     "slogan": "Đầu tư thông minh – Tài chính vững vàng – Tự do tài chính",
     "offerTitle": "Mở tài khoản hoặc chuyển ID về ĐẦU TƯ CÙNG VŨ",
-    "offerText": "với số vốn từ 50 triệu đồng – Miễn phí toàn bộ khóa học & tin tức độc quyền!",
+    "offerText": "với số vốn duy trì từ 50 triệu đồng – Miễn phí toàn bộ khóa học & tin tức độc quyền!",
     "minCapital": "50 triệu đồng",
     "contact": {
       "phone": "0982277493",
