@@ -9826,6 +9826,25 @@ window.APP_DATA = {
       "cover_alt": "CFM Private Equity (CFM) tạm ứng cổ tức năm 2026, 200 đồng mỗi cổ phiếu",
       "seo_title": "CFM Private Equity (CFM) tạm ứng cổ tức năm 2026, 200 đồng mỗi cổ phiếu | Đầu tư cùng Vũ",
       "updated_at": "2026-11-28T02:33:01Z"
+    },
+    {
+      "id": 23,
+      "slug": "que-han-dien-viet-duc-qhd-tam-ung-co-tuc-nam-2026-2-000-dong-moi-co-phieu",
+      "date": "2026-11-28 09:33",
+      "tags": [
+        "QHD",
+        "thi-truong",
+        "doanh-nghiep",
+        "co-tuc"
+      ],
+      "access": "public",
+      "art": "chart",
+      "title": "Que hàn điện Việt Đức (QHD) tạm ứng cổ tức năm 2026, 2.000 đồng mỗi cổ phiếu",
+      "excerpt": "CTCP Que hàn điện Việt Đức (HNX: QHD) tạm ứng cổ tức năm 2026 bằng tiền, tỷ lệ 20%",
+      "cover": "images/news/que-han-dien-viet-duc-qhd-tam-ung-co-tuc-nam-2026-2-000-dong-moi-co-phieu/cover.jpg",
+      "cover_alt": "Que hàn điện Việt Đức (QHD) tạm ứng cổ tức năm 2026, 2.000 đồng mỗi cổ phiếu",
+      "seo_title": "Que hàn điện Việt Đức (QHD) tạm ứng cổ tức năm 2026, 2.000 đồng mỗi cổ phiếu | Đầu tư cùng Vũ",
+      "updated_at": "2026-11-28T02:44:08Z"
     }
   ],
   "brokers": [
