@@ -9807,6 +9807,25 @@ window.APP_DATA = {
       "cover_alt": "Công nghiệp Á Mỹ (AMY) tạm ứng cổ tức năm 2026, 2.000 đồng mỗi cổ phiếu",
       "seo_title": "Công nghiệp Á Mỹ (AMY) tạm ứng cổ tức năm 2026, 2.000 đồng mỗi cổ phiếu | Đầu tư cùng Vũ",
       "updated_at": "2026-11-26T09:39:17Z"
+    },
+    {
+      "id": 22,
+      "slug": "cfm-private-equity-cfm-tam-ung-co-tuc-nam-2026-200-dong-moi-co-phieu",
+      "date": "2026-11-28 09:24",
+      "tags": [
+        "CFM",
+        "thi-truong",
+        "doanh-nghiep",
+        "co-tuc"
+      ],
+      "access": "public",
+      "art": "chart",
+      "title": "CFM Private Equity (CFM) tạm ứng cổ tức năm 2026, 200 đồng mỗi cổ phiếu",
+      "excerpt": "CTCP CFM Private Equity (UPCoM: CFM) tạm ứng cổ tức năm 2026 bằng tiền, tỷ lệ 2%",
+      "cover": "images/news/cfm-private-equity-cfm-tam-ung-co-tuc-nam-2026-200-dong-moi-co-phieu/cover.jpg",
+      "cover_alt": "CFM Private Equity (CFM) tạm ứng cổ tức năm 2026, 200 đồng mỗi cổ phiếu",
+      "seo_title": "CFM Private Equity (CFM) tạm ứng cổ tức năm 2026, 200 đồng mỗi cổ phiếu | Đầu tư cùng Vũ",
+      "updated_at": "2026-11-28T02:33:01Z"
     }
   ],
   "brokers": [
